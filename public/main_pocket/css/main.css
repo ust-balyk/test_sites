@@ -751,7 +751,7 @@ img.brand_footer {
     display: none;
     position: fixed;
     bottom: 74px;
-    right: 45px;
+    right: 3.5%;
     z-index: 2;
     width: 62px;
     height: 34px;
@@ -790,14 +790,15 @@ i.fa-solid.fa-chevron-up:hover {
     bottom: 20px;
     right: 45px;
 }
+*/
 
 input#input.form-control {
     position: fixed;
-    margin-right: 20px;
-    width: 88%;
-    height: 34px;
-    bottom: 20px;
-    left: 42px;
+    z-index: 2;
+    right: 3.5%;
+    bottom: 3%;
+    width: 77.5%;
+    height: 33.5px;
     font-size: 16px;
     font-weight: 500;
     padding: 0px 80px;
@@ -808,41 +809,38 @@ input#input.form-control {
     transition: all .3ms;
 }
 
-input#input.hide {
-    display: none;
-    width: 0;
-}
-
-button#submit {
+button#submit.btn.btn-sm {
     position: fixed;
-    bottom: 20px;
-    right: 45px;
+    z-index: 3;
+    right: 3.5%;
+    bottom: 3%;
+    width: 62px;
     height: 34px;
-    background-color: var(--nav-color);
+    background-color: var(--light-blue-color); /* var(--nav-color);*/
     font-size: 19px;
     font-weight: 500;
     color: var(--grey-color);
-    padding: 0px 25px;
+    padding: 0px 4px 0px 6px;
     border-color: #454f5b;
     border-radius: 3px;
     box-shadow: 0 2px 5px #454f5b;
     transition: all .3ms;
 }
-
-button#submit:hover {
+button#submit.btn.btn-sm:hover {
     box-shadow: none;
-    background-color: white;
+    background-color: #e1fae8; /*white;*/
     color: black;
+}
+
+input#input.hide {
+    display: none;
+    width: 0;
 }
 
 input#input.form-control:focus+button#submit.btn.btn-sm {
     color: black;
     background-color: white;
 }
-*/
-
-
-
 
 
 /* ===================Search Form================ */
@@ -967,7 +965,7 @@ a#selector_link.activate_filters:hover {
 
 h6#selector_text {
     font-size: 28px;
-    color: var(--grey-color);
+    color: #ffa500; /*var(--grey-color);*/
     cursor: text;
     margin: 0;
 }

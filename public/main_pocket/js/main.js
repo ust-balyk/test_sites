@@ -5,7 +5,7 @@ $(document).ready(function() {
     top_btn = document.getElementById("top_btn");
     window.onscroll = function() { scrollFunction() };
     function scrollFunction() {
-        if (document.body.scrollTop > 1300 || document.documentElement.scrollTop > 1300) {
+        if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
             top_btn.style.display = "block";
         } else {
             top_btn.style.display = "none";
@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 
     // развернуть форму поиска 
+    
     $('#submit').on('click', function(e) {
         e.preventDefault();        
         let form = $(this).parent();
@@ -51,7 +52,7 @@ $(document).ready(function() {
                 showCounter = false;
                 counterItem.css('opacity', 1);
                 counterItem.spincrement({
-                    duration: 500,
+                    duration: 1,
                     fade: true
                 });
             }
