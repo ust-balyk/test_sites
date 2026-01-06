@@ -1,0 +1,206 @@
+<?php
+namespace Master;
+use PDO;
+
+class Database
+{
+
+    protected \PDO $connection;
+    protected \PDOStatement $stmt;
+
+    public function __construct()
+    {
+        $dsn = "mysql:host=" . DB_SETTINGS['host'] .
+                  ";dbname=" . DB_SETTINGS['database'] .
+                 ";charset=" . DB_SETTINGS['charset'];
+        try 
+        {
+            $this->connection = new \PDO(
+                $dsn,
+                DB_SETTINGS['username'],
+                DB_SETTINGS['password'],
+                DB_SETTINGS['options']);
+        }
+        catch (\PDOException $e)
+        {
+            error_log("[" . date('Y-m-d H:i:s') .
+                "] DB Error: {$e->getMessage()}" .
+                PHP_EOL, 3, ERROR_LOGS);
+            echo "<pre><br>  DB Error!</pre>";
+            Application::$app->abort->error(500);
+        }
+        return $this;
+    
+    }
+    
+    public function query(string $query, array $params = []): static
+    {
+        try
+        {
+            $this->stmt = $this->connection->prepare($query);
+            $this->stmt->execute($params);
+        }
+        catch (\PDOException $e)
+        {
+            error_log("[" . date('Y-m-d H:i:s') .
+                "] Table not found. Error: {$e->getMessage()}" .
+                PHP_EOL, 3, ERROR_LOGS);
+        }
+        return $this;
+    
+    }
+
+    public function get(): array|false
+    {
+        return $this->stmt->fetchAll();
+    
+    }
+
+    public function getAssoc($key='id'): array
+    {
+        $data = [];
+        while ($row = $this->stmt->fetch()) {
+            $data[$row[$key]] = $row;
+        
+        }
+        return $data;
+    
+    }
+
+    public function getOne()
+    {
+        return $this->stmt->fetch();
+    
+    }
+
+    public function getColumn($tbl) // получить количество записей
+    {
+        $this->query("SELECT COUNT(*) FROM {$tbl}");
+        return $this->stmt->fetchColumn();
+    
+    }
+
+    public function findAll($tbl): array|false
+    {
+        $this->query("select * from {$tbl}");
+        return $this->stmt->fetchAll();
+    
+    }
+
+    public function findOne($tbl, $value, $key = 'id')
+    {
+        $this->query("select * from {$tbl} where $key = ? LIMIT 1", [$value]);
+        return $this->stmt->fetch();
+    
+    }
+
+    public function emailExists($email): bool
+    {
+        if ($email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
+            $this->query("select * from users where email = ? LIMIT 1", [$email]);
+            
+            if ($this->stmt->fetch()) {
+                return true;
+
+            }
+            return false;
+        }
+        return false;
+    
+    }
+
+    /*
+    public function realUser($email, $password): bool
+    {
+        $email = Application::$app->request->post('email');
+        $password = Application::$app->request->post('password');
+        
+        $this->query("select * from users where email = ? LIMIT 1", [$email]);
+        
+        if ($user = $this->stmt->fetch()) {
+
+            if (password_verify($password, $user['password'])) {
+                Application::$app->session->set('email', $user['email']);
+                Application::$app->session->set('name', $user['name']);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    
+    }
+    */
+
+    public function realUser($email, $password): bool
+    {
+        $email = Application::$app->request->post('email');
+        $password = Application::$app->request->post('password');
+        
+        $this->query("select * from users where email = ? LIMIT 1", [$email]);
+        
+        if ($user = $this->stmt->fetch()) {
+
+            if ($this->emailExists($email)) {
+                Application::$app->session->set('email', $user['email']);
+                Application::$app->session->set('form_data', $user['email']);  
+                
+                if ($user['email'] && password_verify($password, $user['password'])) { 
+                    Application::$app->session->set('name', $user['name']);
+                    return true;
+
+                }
+                return false;                
+            }
+            return false;
+        }
+        return false;
+    
+    }
+
+
+
+
+    public function findOrFail($tbl, $value, $key = 'id')
+    {
+        $res = $this->findOne($tbl, $value, $key);
+        
+        if (!$res) {
+            
+            Application::$app->abort->error();
+        
+        }
+        return $res;
+    
+    }
+
+    public function getInsertId(): false|string
+    {
+        return $this->connection->lastInsertId();
+    
+    }
+
+    public function rowCount(): int
+    {
+        return $this->stmt->rowCount();
+    
+    }
+
+    public function beginTransaction(): bool
+    {
+        return $this->connection->beginTransaction();
+    
+    }
+
+    public function commit(): bool
+    {
+        return $this->connection->commit();
+    
+    }
+
+    public function rollBack(): bool
+    {
+        return $this->connection->rollBack();
+    
+    }
+
+}

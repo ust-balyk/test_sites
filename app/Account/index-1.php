@@ -1,0 +1,5 @@
+<?php
+echo 'id: '    . $user['id']   . '<br>' .
+     'name: '  . $user['name'] . '<br>' .
+     'email: ' . $user['email'];
+?>

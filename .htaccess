@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>   
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    DirectoryIndex /public/index.php
+    RewriteRule (.*) /public/$1
+    
+</IfModule>
+<IfModule mod_headers.c>
+
+    Header set Content-Security-Policy "script-src 'self'"
+    Header set Content-Security-Policy "default-src 'self'"
+
+</IfModule>
+

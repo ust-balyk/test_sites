@@ -1,0 +1,758 @@
+@media all and (min-width:992px) {
+    /* стили каталога */
+    .has-megamenu {
+        position: static;
+    }
+
+    /* стили окна каталога */
+    .container .dropdown-menu.megamenu {
+        top: 70px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    
+    /* показать каталог без click */
+    .navbar-nav .dropdown-menu {
+        display: block;
+        transform: translateY(10px);
+        transition: all 350ms;
+        opacity: 0;
+        visibility: hidden;
+        transition-delay: .2s;
+    }
+    .navbar-nav .dropdown:hover>.dropdown-menu {
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+}
+
+/*************************************/
+
+@media all and (min-width: 1024) and (max-width: 1280px) {
+
+    /*
+    .owl-carousel .owl-item img {
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    */
+
+    div.owl-carousel#slider-1 {
+        position: relative;
+        height: 560px;
+        width: 100%;
+
+        /* test */
+        /*
+        border: 2px solid orange;
+        border-radius: 4px;
+        background-color: orange;
+        */
+    
+    }
+
+    div.carousel-image {
+        height: 556px; /*79.5vh;*/
+    }
+    div.carousel-image img {
+        height: 100%;
+        width: auto;
+    }
+
+    div.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+    }
+    div.carousel-text a {
+        text-decoration: none;
+    }
+
+    h5.carousel-title {
+        font-size: 24px;
+        line-height: 30px;
+        color: var(--black-color);
+        max-width: 90%;
+        margin-top: 80px; /*11.5vh;*/
+        padding: 0px 0px 0px 20px;
+    }
+
+    div.carousel-description {
+        height: 160px; /*20vh;*/
+        color: var(--grey-color);
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        line-height: 20px;
+        margin-top: 5px;
+        padding: 20px 20px 20px 20px;
+        border-radius: 3px;
+        background-color: var(--description-color);
+        /*box-shadow: 0px 0px 3px 0px var(--description-color);*/
+    }
+
+    div.carousel-price {
+        margin-top: 166px; /*29vh;*/
+        padding: 0px 20px;
+    }
+
+    div.carousel-price strong {
+        color: var(--black-color);
+        font-size: 20px;
+    }
+    div.carousel-price del {
+        color: var(--grey-color);
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    a.btn {
+        margin-top: 15px;
+        margin-left: 1px;
+        padding: 3px 40px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 3px;
+    }
+
+    a.btn-primary {
+        color: var(--grey-color);
+        border-color: #a8f32f; /*#ADFF2F;*/ /*var(--blue-color);*/
+        background-color: #a8f32f; /*#ADFF2F;*/ /*var(--blue-color);*/
+    }
+
+    a.btn-primary:hover {
+        color: green;
+        border: 1px solid green;
+        background-color: #fff;
+    }
+    
+    section.carousel div.owl-nav {
+        display: none;
+    }
+
+    /* кпопки карусели */
+    a.add-to-favorites {
+        margin-top: 4px;
+        margin-right: 12px;
+        width: 33px;
+        height: 33px;
+        padding: 5px 8px 5px 5px;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    i.fa-solid.fa-heart {
+        color: orange;
+    }
+
+    a.add-to-favorites:hover {
+        /*border-color: white;*/
+        background-color: white;
+        i.fa-solid.fa-heart {
+            color: red;
+        }
+    }
+
+    a.add-to-cart {
+        margin-top: 4px;
+        margin-right: 12px;
+        width: 33px;
+        height: 33px;
+        padding: 5px 5px 5px 6px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    a.add-to-cart:hover {
+        /*border: white;*/
+        background-color: white;
+        i.fa-solid.fa-cart-shopping {
+            color: blue;
+        }
+    }
+
+    /* контакты */
+    .contact,
+    .address,
+    .payment_delivery {
+        padding-left: 30px;
+    }
+}
+
+/****************************************/
+
+/*
+@media all and (max-width: 1025px) {
+
+    .d-lg-flex {
+        display: block !important;
+        /*flex-direction: column;*//*
+    }
+    
+    div.owl-carousel#slider-1 {
+        height: 90vh;
+    }
+
+    .slider .img-fluid {
+        display: block;
+        margin-top: 20%;
+    }
+    
+    div.carousel-image {
+        height: 50vh;
+    }
+    
+    /* скрыть элемент .hide для планшета *//*
+    .nav-item.hide {
+        display: none;
+    }
+
+    /* поднять ценник *//*
+    div#first-price.carousel-price {
+        margin-top: 62%;
+    }
+    div#second-price.carousel-price {
+        margin-top: 10%;
+    }
+    div#third-price.carousel-price {
+        margin-top: 37%;
+    } 
+}
+
+/* скрыть элемент .hide для планшета */
+@media all and (max-width: 1200px) {
+    .nav-item .hide {
+        display: none;
+    }
+}
+
+/* убрать border вокруг гамбургера меню */
+@media all and (max-width: 991.98px) {
+    button.navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    button.navbar-toggler:active {
+        outline: none;
+        box-shadow: none;
+    }
+    button.navbar-toggler-icon:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    button.navbar-toggler {
+        border: none;
+    }
+    button.navbar-toggler {
+        margin-top: 2px;
+    }
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    /* подчеркнуть пункты меню */
+    .navbar-nav.nav-item {
+        border-bottom: 1px solid var(--underline-color);
+    }
+}
+
+@media all and (max-width: 834px) {
+    /* уменьшить изображение слайдера */
+    .slider .img-fluid {
+        display: block;
+        margin-top: 20%;
+    }
+
+    div#first-text.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 15px 0px 15px;
+    }
+    div#second-text.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 15px 0px 15px;
+    }
+    div#third-text.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 15px 0px 15px;
+    }
+
+    /* поднять ценник */
+    div#first-price.carousel-price {
+        margin-top: 13%;
+    }
+    div#second-price.carousel-price {
+        margin-top: 3%;
+    }
+    div#third-price.carousel-price {
+        margin-top: 16%;
+    }
+    
+    /* шрифт достижений */
+    .achievements {
+        margin-top: 5px;
+    }
+    
+}
+
+@media all and (max-width: 768px) {
+
+    /* уменьшить изображение слайдера */
+    .slider .img-fluid {
+        display: block;
+        margin-top: 20%;
+    }
+
+    div#first-text.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 15px 0px 15px;
+    }
+    div#second-text.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 15px 0px 15px;
+    }
+    div#third-text.carousel-text {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 15px 0px 15px;
+    }
+
+    /* поднять ценник */
+    div#first-price.carousel-price {
+        margin-top: 5%;
+    }
+    div#second-price.carousel-price {
+        margin-top: 5%;
+    }
+    div#third-price.carousel-price {
+        margin-top: 5%;
+    }
+
+    /* шрифт достижений */
+    .achievements {
+        margin-top: 5px;
+    }
+    .achievements h4 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .achievements span{
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    /* настройки о превосходстве */
+    .superiority {
+        margin-top: 20px;
+    }
+
+    .superiority h1 {
+        margin-top: 15px;
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 25px;
+    }
+
+    div.high_quality {
+        /*
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #c4cdd5;
+        border-bottom: 1px solid #c4cdd5;
+        */
+    }
+
+    .superiority h5 {
+        /*padding-bottom: 10px;*/
+        color: var(--black-color);
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 22px;
+    }
+
+}
+
+@media all and (width: 480px) {
+    nav.navbar: {
+        display: flex;
+        flex-grow: 1;
+    }
+    
+    img.brand {
+        height: 42px;
+        margin-right: 3px;
+        margin-left: 5px;
+        flex-grow: 1;
+    }
+
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+        margin-bottom: 3px;
+        flex-grow: 1;
+    }
+
+    .navbar-icon {
+        flex-grow: 1;
+    }
+    .navbar-icon>ul {
+        padding: 0px 0px 0px 48px;
+        margin-left: 6px;
+        gap: 20px;
+    }
+    .ico {
+        width: 26px;
+        height: 26px;
+    }
+
+    /* уменьшить изображение слайдера */
+    .slider .img-fluid {
+        max-height: 250px;
+        margin: auto;
+        display: block;
+    }
+
+    .search-form button {
+        font-size: 14px;
+    }
+    .search-form input:focus + button {
+        font-size: 12px;
+    }
+}
+
+@media all and (max-width: 428px) {
+    nav.navbar: {
+        display: flex;
+        flex-grow: 1;
+    }
+    
+    img.brand {
+        height: 39px;
+    }
+    
+    a.navbar-brand {
+        margin-right: 10px;
+        flex-grow: 1;
+    }
+
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+        margin-bottom: 3px;
+        flex-grow: 1;
+    }
+
+    .navbar-icon {
+        /*padding: 0px 0px 0px 48px;*/
+        flex-grow: 1;
+    }
+    
+    .navbar-icon>ul {
+        padding-left: 65px;
+        gap: 15px;
+    }
+
+    .ico {
+        width: 23px;
+        height: 23px;
+    }
+
+   /* поднять ценник */
+    .slider.carousel-price {
+        margin-top: 20px;
+    }
+
+    .search-form button {
+        font-size: 14px;
+    }
+    .search-form input:focus + button {
+        font-size: 12px;
+    }
+
+}
+
+@media all and (max-width: 414px) {
+    nav.navbar: {
+        display: flex;
+        flex-grow: 1;
+    }
+    img.brand {
+        height: 38px;
+    }
+    a.navbar-brand {
+        margin-right: 9px;
+        flex-grow: 1;
+    }
+
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+        margin-bottom: 3px;
+        flex-grow: 1;
+    }
+
+    .navbar-icon {
+        /*padding: 0px 0px 0px 48px;*/
+        flex-grow: 1;
+    }
+
+    .navbar-icon>ul {
+        padding-left: 63px;
+        gap: 15px;
+    }
+
+    .ico {
+        width: 22px;
+        height: 22px;
+    }
+
+   /* поднять ценник */
+    .slider.carousel-price {
+        margin-top: 20px;
+    }
+
+    .search-form button {
+        font-size: 14px;
+    }
+    .search-form input:focus + button {
+        font-size: 12px;
+    }
+
+}
+
+@media all and (max-width: 393px) {
+    nav.navbar: {
+        display: flex;
+    }
+    
+    img.brand {
+        height: 33px;
+        margin: 0;
+        padding: 0px 5px 0px 10px;
+    }
+
+    button.navbar-toggler {
+        margin: 0;
+    }
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 0.8em;
+        height: 0.8em;
+    }
+
+    .navbar-icon {
+        /*padding: 0px 0px 0px 48px;*/
+        flex-grow: 1;
+    }
+    .navbar-icon>ul {
+        padding-left: 40px;
+        gap: 15px;
+    }
+    .ico {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* поднять ценник */
+    div#first-price.carousel-price {
+        margin-top: 5%;
+    }
+    div#second-price.carousel-price {
+        margin-top: 5%;
+    }
+    div#third-price.carousel-price {
+        margin-top: 5%;
+    }
+
+    .search-form button {
+        font-size: 14px;
+    }
+}
+
+@media all and (width: 375px) {
+    nav.navbar {
+        display: flex;
+        flex-grow: 1;
+    }
+    
+    img.brand {
+        height: 28px;
+        margin-right: 15px;
+        flex-grow: 1;
+    }
+
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 0.8em;
+        height: 0.8em;
+        flex-grow: 1;
+        margin-bottom: 3px;
+    }
+
+    .navbar-icon {
+        flex-grow: 1;
+    }
+    .navbar-icon>ul {
+        padding: 0px 0px 0px 45px;
+        gap: 14px;
+    }
+    .ico {
+        width: 18px;
+        height: 18px;
+    }
+
+    .search-form button {
+        font-size: 13px;
+    }
+}
+
+@media all and (width: 360px) {
+    nav.navbar {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    img.brand {
+        height: 25px;
+        margin-right: 10px;
+        flex-grow: 1;
+    }
+
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 0.8em;
+        height: 0.8em;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 4px;
+        flex-grow: 1;
+    }
+
+    .navbar-icon {
+        flex-grow: 1;
+    }
+    .navbar-icon>ul {
+        padding: 0px 0px 0px 45px;
+        gap: 15px;
+    }
+    .ico {
+        width: 18px;
+        height: 18px;
+    }
+
+    h5.carousel-title {
+        padding-top: 10px;
+    }
+
+    div.carousel-description {
+        padding-top: 10px;
+    }
+    /* изменить изображение слайдера */
+    /*
+    .slider .img-fluid {
+        max-height: 200px;
+        margin: auto;
+        display: block;
+    }
+
+    .search-form button {
+        font-size: 12px;
+    }
+    */
+}
+
+@media all and (width: 320px) {
+    nav.navbar {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    img.brand {
+        height: 22px;
+        margin-right: 0px;
+        flex-grow: 1;
+    }
+
+    /* изменить размер гамбургера */
+    .navbar-toggler-icon {
+        width: 0.7em;
+        height: 0.7em;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 4px;
+        flex-grow: 1;
+    }
+
+    .navbar-icon {
+        flex-grow: 1;
+    }
+    .navbar-icon>ul {
+        padding: 0px 0px 0px 40px;
+        margin-top: 1px;
+        gap: 10px;
+    }
+    .ico {
+        width: 15px;
+        height: 15px;
+    }
+
+    h5.carousel-title {
+        padding-top: 10px;
+    }
+
+    div.carousel-description {
+        padding-top: 10px;
+    }
+
+    /*
+    .slider .img-fluid {
+        max-height: 160px;
+        margin: auto;
+        display: block;
+    }
+
+    .slider .carousel-text.title {
+        font-size: 20px;
+        line-height: 20px;
+    }
+    */
+
+    /* поднять ценник */
+    div#first-price.carousel-price {
+        margin-top: 3%;
+    }
+    div#second-price.carousel-price {
+        margin-top: 3%;
+    }
+    div#third-price.carousel-price {
+        margin-top: 3%;
+    }
+
+    /*
+    .search-form input:focus + button {
+       color: none; 
+    }
+    .search-form button {
+        color: none;
+    }*/
+    
+    .achievements {
+        display: none;
+    }
+
+
+}
