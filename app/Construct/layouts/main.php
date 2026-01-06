@@ -108,11 +108,11 @@
           <button id="top_btn" title="Перейти к началу"> 
             <i class="fa-solid fa-chevron-up"></i>
           </button>
-          <form id="search" class="search-form" action="">
+          <!--form id="search" class="search-form" action="">
             <input id="input" class="form-control form-control-sm hide"
                   type="search" placeholder="" aria-label="Поиск">
             <button id="submit" class="btn btn-sm" type="submit">?</button>
-          </form>
+          </form-->
         </div><!--container-->
       </main>
 

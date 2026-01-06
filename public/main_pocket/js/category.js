@@ -48,14 +48,14 @@ $(document).ready(function() {
         for ( let entry of entries ) {
             const { width, height } = entry.contentRect;
             if ( block_filters.height() > filters_block_height ) {
-                block_ukiyo_e.fadeOut(400); //hide();
+                block_ukiyo_e.hide();
                 selector_link.setAttribute('href', 'http://localhost:8888');
                 selector_link.setAttribute('class', 'btn btn-outline-primary activate_filters');
                 selector_text.setAttribute('class', 'activate_filters');
                 selector_text.textContent = 'применить фильтры';
 
             } else {
-                block_ukiyo_e.fadeIn(400); //show();
+                block_ukiyo_e.fadeIn(500);
                 selector_link.setAttribute('class', '');
                 selector_text.setAttribute('class', '');
                 selector_text.textContent = 'Фильтры';

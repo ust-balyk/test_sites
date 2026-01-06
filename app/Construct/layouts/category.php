@@ -108,13 +108,13 @@
                   type="search" placeholder="" aria-label="Поиск">
             <button id="submit" class="btn btn-sm" type="submit">?</button>
           </form-->
-          <form id="search" class="search-form" action="">
+          <!--form id="search" class="search-form" action="">
             <input id="input" class="form-control form-control-sm hide"
               type="search" placeholder="" aria-label="Поиск">
             <button id="submit" class="btn btn-sm" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-          </form>
+          </form-->
         </div><!--container-->
       </main>
 

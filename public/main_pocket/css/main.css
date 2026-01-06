@@ -319,6 +319,10 @@ div.container .promo {
     padding: 0px !important;
 }
 
+div.slider-header { /* наследуется в carousel popular */
+    padding: 0px 10px;
+}
+
 .carousel-promo {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -338,7 +342,6 @@ a.btn.btn-outline-secondary.promo { /* дублирую системный вн�
 a.btn.promo {
     height: 34px;
     margin-top: 15px;
-    padding: 2px 8px 6px 8px;
     color: var(--grey-color);
     border: 1px solid var(--border-color);
     background-color: white;
@@ -348,6 +351,9 @@ a.btn.promo:hover {
     color: black; /*var(--black-color);*/
     border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+a.btn.btn-outline-secondary.promo h5 {
+    padding: 2px 15px 6px 15px;
 }
 
 .slider-btn-control {
@@ -616,11 +622,14 @@ div.container .popular {
 a.btn.popular {
     height: 34px;
     margin-top: 15px;
-    padding: 3px 8px 5px 8px;
     color: var(--grey-color);
     border: 1px solid #989ea4;
     background-color: white; /*var(--bg-color);*/
     transition: all .350s;
+}
+
+a.btn.popular h5 {
+    padding: 2px 15px 6px 15px;
 }
 
 a.btn.popular:hover {
@@ -772,8 +781,9 @@ i.fa-solid.fa-chevron-up:hover {
 
 /* ===================Search Form================ */
 
+/*
 #search.search-form {
-    z-index: 2; /* наследуется */
+    z-index: 2; /* наследуется *//*
     position: fixed;
     width: 0;
     height: 34px;
@@ -829,6 +839,11 @@ input#input.form-control:focus+button#submit.btn.btn-sm {
     color: black;
     background-color: white;
 }
+*/
+
+
+
+
 
 /* ===================Search Form================ */
 
@@ -935,7 +950,7 @@ div.filters {
 /* кнопка "применить фильтры" */
 div#btn_activate_filters {
     padding: 0;
-    margin: 21px 0px;
+    margin: 20px 0px 22px 0px;
 }
 
 a#selector_link {
@@ -951,8 +966,7 @@ a#selector_link.activate_filters:hover {
 }
 
 h6#selector_text {
-    font-size: 24px;
-    /*margin-top: 2px !important;*/
+    font-size: 28px;
     color: var(--grey-color);
     cursor: text;
     margin: 0;
