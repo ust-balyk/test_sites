@@ -1,6 +1,6 @@
   <?php //dump(session()->get('csrf_token')); ?>
   <section class="superiority">
-    <div class="container">
+    <div class="container superiority">
       <div class="row">
         
         <h1>ВЫБЕРИ  JAPAN-IN.RU!</h1>
@@ -66,7 +66,7 @@
   </section><!--achievements-->
 
   <section class="carouse-promo">
-    <div class="container">
+    <div class="container promo">
       <div class="slider-header">
         <a href="#" class="btn btn-sm btn-outline-secondary promo">
           <h5>товары по акции</h5>
@@ -385,7 +385,7 @@
   </section><!--categories-->
 
   <section class="carousel-promo popular">
-    <div class="container">
+    <div class="container popular">
       <div class="slider-header">
         <a href="#" class="btn btn-sm btn-outline-secondary popular">
           <h5>популярные товары</h5>

@@ -212,6 +212,10 @@ section.superiority {
     text-align: center;
 }
 
+div.container .superiority {
+    padding: 0px 5px; /*!important;*/
+}
+
 .superiority h1 {
     color: var(--grey-color);
     margin-top: 58px;
@@ -310,6 +314,10 @@ section.achievements {
 /* ===================Achievements=============== */
 
 /* ===================Carousel Promo============= */
+
+div.container .promo {
+    padding: 0px !important;
+}
 
 .carousel-promo {
     margin-top: 50px;
@@ -492,6 +500,10 @@ section.categories {
     margin: 90px 0px;
 }
 
+div.container .categories {
+    padding: 0px 10px; /*!important;*/
+}
+
 @media all and (max-width: 768px) {
     section.categories div.categories { /* отступы для гравюры */
         padding-left: 18px;
@@ -596,6 +608,10 @@ div.writer a {
 /* ===================Categories================= */
 
 /* ===================Carousel Popular=========== */
+
+div.container .popular {
+    padding: 0px !important;
+}
 
 a.btn.popular {
     height: 34px;
