@@ -16,22 +16,21 @@ class HomeController
         //cache()->set('users', $users);
         //shuffle($users);
         
-        $data = db()->query("select * from users")->get();
-        return app()->view->full_view (
+        //if ($data = db()->query("select * from users")->get()) {
+        if (true) {
+            return app()->view->full_view (
             
-            HOME_LAYOUT,  # layout
-
-            HOME_VIEW,    # view
+                HOME_LAYOUT,  # layout
+                HOME_VIEW,    # view
             
-            [             # data
-                
-                'title' => 'japan-in.ru',
-                'users' => $data,
-                //'pagination' => $pagination,
-            
-            ]
-        );
-    
+                [             # data
+                    
+                    'title' => 'japan-in.ru',
+                    //'users' => $data,
+                    //'pagination' => $pagination,
+                ]
+            );
+        }
     }
     
 }

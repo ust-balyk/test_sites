@@ -17,6 +17,7 @@ $app->router->get('/', [HomeController::class]);
 
 $app->router->get('/home', [AdminController::class])->closed_for(['all']);
 $app->router->get('/category', [PageController::class]);
+//$app->router->get('/category', [HomeController::class]);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['friend']);
 $app->router->post('/register', [UserController::class, 'record']);

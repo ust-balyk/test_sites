@@ -132,7 +132,7 @@
         <div class="container content">
           <div id="category_content" class="row">
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card" style="">
+            <div class="col-lg-3 col-md-4 product-card" style="">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
@@ -160,7 +160,7 @@
           <!--/div--><!--row-->
         <!--/div--><!--container-->
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card" style="">
+            <div class="col-lg-3 col-md-4 product-card" style="">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -186,7 +186,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 flex-md-grow-1 col-md-4 product-card" style="">
+            <div class="col-lg-3 col-md-4 product-card" style="">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -212,7 +212,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card" style="">
+            <div class="col-lg-3 col-md-4 product-card" style="">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -238,7 +238,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card">
+            <div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -264,7 +264,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card">
+            <div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -290,7 +290,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card">
+            <div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
@@ -316,7 +316,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card">
+            <div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -342,7 +342,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 flex-md-grow-1 product-card">
+            <div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">

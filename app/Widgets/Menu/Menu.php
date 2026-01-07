@@ -33,10 +33,12 @@ class Menu
             echo $menu_html;
             return;
         }
-        $this->data = db()->query("select * from {$this->table}")->getAssoc();
-        $this->tree = $this->getTree();
-        $this->menuHtml = $this->getMenuHtml($this->tree);
-        $this->output();
+        if ($this->data = db()->query("select * from {$this->table}")->getAssoc()) {
+            $this->tree = $this->getTree();
+            $this->menuHtml = $this->getMenuHtml($this->tree);
+            $this->output();
+        }
+        return $this;
     
     }
 

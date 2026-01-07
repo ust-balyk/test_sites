@@ -21,7 +21,7 @@ const DEF_VIEW    = APP  .'/Construct/views/main.php';
 
 const DB_SETTINGS = [
    'host'         => 'localhost',   
-   'database'     => 'japan_in_ru',
+   'database'     => 'japan_in.ru',
    'username'     => 'root',
    'password'     => 'root',
    'charset'      => 'utf8mb4',
@@ -57,16 +57,16 @@ if ( $POCKET_STYLE == false || $POCKET_STYLE === 'main' ) {
    $POCKET_STYLE = '/public/start_pocket';
 }
 define( 'POCKET_STYLE', $POCKET_STYLE );
-
 if ( $MENU_STYLE == false || $MENU_STYLE === 'main' ) {
    $MENU_FOR_TABLE = 'categories';
    $MENU_TEMPLATE  = 'categories_menu';
    $MENU_CACHE_KEY = 'categories_menu';
 } else {
+   $MENU_STYLE === 'cosmetics';
    $MENU_FOR_TABLE = 'cosmetics';
    $MENU_TEMPLATE  = 'cosmetics_menu';
    $MENU_CACHE_KEY = 'cosmetics_menu';
-}
+} 
 define( 'MENU_FOR_TABLE', $MENU_FOR_TABLE );
 define( 'MENU_TEMPLATE',   $MENU_TEMPLATE );
 define( 'MENU_CACHE_TIME',              0 );

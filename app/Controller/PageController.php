@@ -16,6 +16,7 @@ class PageController
          */
         //cache()->set('users', $users);   
         //shuffle($users);
+        
         return app()->view->full_view (
             
             PAGE_LAYOUT,    # layout
