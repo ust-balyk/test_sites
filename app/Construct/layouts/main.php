@@ -20,10 +20,10 @@
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
   </head>
-
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
     <div class="wrapper">
+      <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
           <div class="container">
@@ -37,7 +37,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            
                 <li class="nav-item dropdown has-megamenu">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,7 +51,6 @@
                       'attrs'     => ['role' => 'menu',],
                     ]);
                   ?>
-            
                 <li class="nav-item">
                   <div class="hide">
                     <a class="nav-link" href="<?= base_url('/page'); ?>">О нас</a>
@@ -64,10 +62,8 @@
                 <li class="nav-item">
                   <a class="nav-link" href="<?= base_url('/data'); ?>">Условия доставки</a>
                 </li>
-          
               </ul>
-            </div><!--collapse navbar-collapse-->
-
+            </div><!--navbar-collapse-->
             <div class="navbar-icon">
               <ul>
                 <li>
@@ -91,7 +87,6 @@
                 </li>
               </ul>
             </div><!--navbar-icon-->
-
           </div><!--container-->
         </nav>
         <div class="banner">
@@ -101,8 +96,8 @@
             alt="изображение горы Фудзияма"-->
         </div><!--banner-->
       </header>
-  
-      <main> 
+      <!---------------- MAIN ---------------->
+      <main>
         <div class="container">
           <?= $view_file; ?>
           <button id="top_btn" title="Перейти к началу"> 
@@ -110,14 +105,14 @@
           </button>
           <form id="search" class="search-form" action="">
             <input id="input" class="form-control form-control-sm hide"
-                  type="search" placeholder="" aria-label="Поиск">
+                  type="search" placeholder="и с к а т ь" aria-label="поиск">
             <button id="submit" class="btn btn-sm" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
-        </div><!--container-->
+        </div>
       </main>
-
+      <!---------------- FOOTER ---------------->
       <footer>
         <section class="call-back">
           <div class="col-md-8 offset-md-2 call-back">
@@ -138,11 +133,9 @@
             </form>        
           </div><!--col-md-8 offset-md-2-->
         </section><!--call-back-->
-      
         <section class="info">
           <div class="info col-md-8 offset-md-2">
             <div class="row">
-
               <div class="col-md-4 mt-3">
                 <h6>связаться с нами</h6>
                 <div class="contact">
@@ -153,8 +146,7 @@
                     <li><a href="https://t.me/satomi_jap" target="_blank">Telegram</a></li>
                   </ul>
                 </div>
-              </div>
-
+              </div><!--+-->
               <div class="col-md-4 mt-3">
                 <h6>наш адрес</h6>
                 <div class="address">
@@ -168,8 +160,7 @@
                     </p>
                   </a>
                 </div>
-              </div>
-
+              </div><!--+-->
               <div class="col-md-4 mt-3">
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
@@ -180,11 +171,9 @@
                   </ul>
                 </div>
               </div>
-
-            <div>
+            <div><!--row-->
           </div>
-        </section>
-
+        </section><!--info-->
         <section class="copyright">
           <div class="copyright">
             <a  href="<?= base_url('/'); ?>">
@@ -195,13 +184,11 @@
         </section>
       </footer>
     </div><!--wrapper-->
-
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
     <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
-    
   </body>
 </html>

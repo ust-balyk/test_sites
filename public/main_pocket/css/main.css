@@ -842,6 +842,17 @@ input#input.form-control:focus+button#submit.btn.btn-sm {
     background-color: white;
 }
 
+input#input.form-control::placeholder { /* Firefox */
+    color: var(--light-grey-color);
+    opacity: 1;
+}
+input#input.form-control::-ms-input-placeholder { /* Edge 12–18 */ 
+    color: var(--light-grey-color);
+}
+input#input.form-control:-ms-input-placeholder {
+    color: var(--light-grey-color);
+}
+
 
 /* ===================Search Form================ */
 
