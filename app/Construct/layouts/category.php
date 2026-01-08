@@ -100,7 +100,7 @@
           </button>
           <form id="search" class="search-form" action="">
             <input id="input" class="form-control form-control-sm hide"
-              type="search" placeholder="и с к а т ь" aria-label="поиск">
+              type="search" placeholder="&nbsp; и с к а т ь" aria-label="поиск">
             <button id="submit" class="btn btn-sm" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>

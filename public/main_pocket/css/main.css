@@ -846,6 +846,8 @@ input#input.form-control:-ms-input-placeholder {
     color: var(--light-grey-color);
 }
 
+input:focus { caret-color: #fff; }
+
 
 /* ===================Search Form================ */
 

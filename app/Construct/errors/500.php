@@ -2,27 +2,34 @@
 <style>
 /**/
 :root {
-  --main-color: #99d2ff; /*#77c3ff;*/ /*#88cbff;*/ /*#77c3ff;*/ /*#bbe1ff;*/
-  --stroke-color: white;
+  --main-color: #CFCFCF; /*#555555; /*#8D8D8D; /*#A5A5A5; /*#909090; /*#CAC4B0; /*#99d2ff; */
+  --stroke-color: #ABABAB; /* #4D4D4D; /* калёсы */
   
 }
 /**/
 body {
   background: var(--main-color);
 }
+/*
 h1 {
   margin: 100px auto 0 auto;
   color: var(--stroke-color);
   font-family: 'Encode Sans Semi Condensed', Verdana, sans-serif;
-  font-size: 10rem; line-height: 10rem;
+  font-size: 9rem; line-height: 9rem;
   font-weight: 200;
   text-align: center;
+}*/
+div.h {
+  margin: 0 auto 0 auto;
+  height: 10%;
 }
+
 h2 {
-  margin: 20px auto 30px auto;
+  margin: 20px auto 58px auto;
   font-family: 'Encode Sans Semi Condensed', Verdana, sans-serif;
   font-size: 1.5rem;
   font-weight: 200;
+  color: #8D8D8D; /* text */
   text-align: center;
 }
 h1, h2 {
@@ -96,6 +103,7 @@ h1, h2 {
   transform: rotate(120deg);
   -webkit-transform: rotate(120deg);
 }
+
 @-webkit-keyframes clockwise {
   0% { -webkit-transform: rotate(0deg);}
   100% { -webkit-transform: rotate(360deg);}
@@ -125,25 +133,26 @@ h1, h2 {
   100% { -webkit-transform: rotate(0deg);}
 }
 .gear.one {
-  -webkit-animation: anticlockwiseErrorStop 2s linear infinite;
+  -webkit-animation: anticlockwiseErrorStop 1s linear infinite;
 }
 .gear.two {
-  -webkit-animation: anticlockwiseError 2s linear infinite;
+  -webkit-animation: anticlockwiseError 1s linear infinite;
 }
 .gear.three {
-  -webkit-animation: clockwiseError 2s linear infinite;
+  -webkit-animation: clockwiseError 1s linear infinite;
 }
 .loading .gear.one, .loading .gear.three {
-  -webkit-animation: clockwise 3s linear infinite;
+  -webkit-animation: clockwise 2s linear infinite;
 }
 .loading .gear.two {
-  -webkit-animation: anticlockwise 3s linear infinite;
+  -webkit-animation: anticlockwise 2s linear infinite;
 }
 </style>
 
 <body class="loading">
-  <h1>500</h1>
-  <h2>извините, сервер временно не доступен.</h2>
+  <!--h1>500</h1-->
+  <div class="h"></div>
+  <h2>извините, в данный момент мы ускоряем серверы для вас.</h2>
   <div class="gears">
     <div class="gear one">
       <div class="bar"></div>
@@ -166,7 +175,7 @@ h1, h2 {
     $(function() {
       setTimeout(function(){
         $('body').removeClass('loading');
-      }, 1000);
+      }, 3000);
     });
   </script>
 </body>

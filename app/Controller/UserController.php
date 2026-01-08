@@ -137,6 +137,7 @@ class UserController
                 
                 if (db()->realUser($email, $password)) {
                     echo "<script>window.history.go(-2)</script>";
+                    return true;
 
                 } else {
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');

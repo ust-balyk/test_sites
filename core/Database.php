@@ -15,18 +15,37 @@ class Database
                  ";charset=" . DB_SETTINGS['charset'];
         try 
         {
-            $this->connection = new \PDO(
-                $dsn,
+            $this->connection = new \PDO( $dsn,
                 DB_SETTINGS['username'],
                 DB_SETTINGS['password'],
-                DB_SETTINGS['options']);
+                DB_SETTINGS['options']
+            
+            );
+
+            //$pass = password_hash("02021976", PASSWORD_DEFAULT);
+            
+            $sql ="CREATE TABLE IF NOT EXISTS `users`
+                (
+                    `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+                    `name` varchar(55) NOT NULL,
+                    `email` varchar(155) UNIQUE NOT NULL,
+                    `password` varchar(255) NOT NULL,
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL
+                )
+                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+            /*
+                INSERT IGNORE INTO `users` (id, name, email, password, created_at, updated_at)
+                    VALUES (1,'test','79124174818@mail.ru',".$pass.",0.0);";
+            */  
+            $this->connection->exec($sql);
+
         }
         catch (\PDOException $e)
         {
-            error_log("[" . date('Y-m-d H:i:s') .
-                "] DB Error: {$e->getMessage()}" .
+            error_log("[" . date('Y-m-d H:i:s') . "] DB Error: {$e->getMessage()}" .
                 PHP_EOL, 3, ERROR_LOGS);
-            echo "<p>f</p>";
+            echo "<p style='color:white'>f</p>";
             Application::$app->abort->error(500);
         }
         return $this;
@@ -42,8 +61,7 @@ class Database
         }
         catch (\PDOException $e)
         {
-            error_log("[" . date('Y-m-d H:i:s') .
-                "]  02 {$e->getMessage()}" .
+            error_log("[" .date('Y-m-d H:i:s'). "] {$e->getMessage()}" .
                 PHP_EOL, 3, ERROR_LOGS);
         }
         return $this;
