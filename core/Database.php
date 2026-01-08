@@ -26,7 +26,7 @@ class Database
             error_log("[" . date('Y-m-d H:i:s') .
                 "] DB Error: {$e->getMessage()}" .
                 PHP_EOL, 3, ERROR_LOGS);
-            echo "<pre><br>  DB Error!</pre>";
+            echo "<p>f</p>";
             Application::$app->abort->error(500);
         }
         return $this;
@@ -43,7 +43,7 @@ class Database
         catch (\PDOException $e)
         {
             error_log("[" . date('Y-m-d H:i:s') .
-                "] Table not found. Error: {$e->getMessage()}" .
+                "]  02 {$e->getMessage()}" .
                 PHP_EOL, 3, ERROR_LOGS);
         }
         return $this;

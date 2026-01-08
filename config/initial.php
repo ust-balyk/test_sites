@@ -21,7 +21,7 @@ const DEF_VIEW    = APP  .'/Construct/views/main.php';
 
 const DB_SETTINGS = [
    'host'         => 'localhost',   
-   'database'     => 'japan_in.ru',
+   'database'     => 'japan_in_ru',
    'username'     => 'root',
    'password'     => 'root',
    'charset'      => 'utf8mb4',

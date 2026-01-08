@@ -33,11 +33,10 @@ class Menu
             echo $menu_html;
             return;
         }
-        if ($this->data = db()->query("select * from {$this->table}")->getAssoc()) {
-            $this->tree = $this->getTree();
-            $this->menuHtml = $this->getMenuHtml($this->tree);
-            $this->output();
-        }
+        $this->data = db()->query("select * from {$this->table}")->getAssoc();
+        $this->tree = $this->getTree();
+        $this->menuHtml = $this->getMenuHtml($this->tree);
+        $this->output();
         return $this;
     
     }
@@ -45,7 +44,6 @@ class Menu
     protected function output()
     {
         $attrs = '';
-
         if (! empty($this->attrs)) {
             
             foreach ($this->attrs as $k => $v) {
@@ -55,23 +53,18 @@ class Menu
         }
 
         $menu_html = '';
-
         if ($this->container) {
             $menu_html .= "<{$this->container} class=\"{$this->class}\" $attrs>";
 
         }
         
         $menu_html .= $this->prepend;
-
         $menu_html .= $this->menuHtml;
-
         $menu_html .= $this->append;
-
         if ($this->container) {
             $menu_html .= "</{$this->container}>";
 
         }
-
         cache()->set($this->cacheKey, $menu_html, $this->cacheTime);
         echo $menu_html;
     
@@ -80,8 +73,7 @@ class Menu
 
     protected function getOptions($options)
     {
-        foreach ($options as $key => $value) {
-            
+        foreach ($options as $key => $value) {   
             if (property_exists($this, $key)) {
                 $this->$key = $value;
             
@@ -103,7 +95,6 @@ class Menu
                 $data[$node['parent_id']]['children'][$id] = &$node;
             }
         }
-        
         return $tree;
     
     }
@@ -111,11 +102,10 @@ class Menu
     protected function getMenuHtml($tree, $tab = '')
     {
         $str = '';
-        
         foreach ($tree as $id => $item) {
             $str .= $this->catToTemplate($item, $tab, $id);
-        }
         
+        }
         return $str;
     
     }

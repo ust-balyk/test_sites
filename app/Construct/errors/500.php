@@ -1,9 +1,9 @@
-<!--link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:100,200,300,400" rel="stylesheet"-->
+<html>
 <style>
 /**/
 :root {
-  --main-color: white; /*rgba(39, 221, 245, 0.94);*/
-  --stroke-color: black;
+  --main-color: #99d2ff; /*#77c3ff;*/ /*#88cbff;*/ /*#77c3ff;*/ /*#bbe1ff;*/
+  --stroke-color: white;
   
 }
 /**/
@@ -161,9 +161,7 @@ h1, h2 {
       <div class="bar"></div>
     </div>
   </div>
-  <script src="<?= base_url('/assets/js/jquery-3.7.1.min.js'); ?>"></script>
-  <script src="<?= base_url('/assets/js/main.js'); ?>"
-          type="text/javascript"></script>
+  <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
   <script>
     $(function() {
       setTimeout(function(){
@@ -172,3 +170,4 @@ h1, h2 {
     });
   </script>
 </body>
+</html>
