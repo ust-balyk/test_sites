@@ -21,8 +21,6 @@ class Database
                 DB_SETTINGS['options']
             
             );
-
-            //$pass = password_hash("02021976", PASSWORD_DEFAULT);
             
             $sql ="CREATE TABLE IF NOT EXISTS `users`
                 (
@@ -34,10 +32,7 @@ class Database
                     `updated_at` timestamp NULL DEFAULT NULL
                 )
                 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-            /*
-                INSERT IGNORE INTO `users` (id, name, email, password, created_at, updated_at)
-                    VALUES (1,'test','79124174818@mail.ru',".$pass.",0.0);";
-            */  
+  
             $this->connection->exec($sql);
 
         }
