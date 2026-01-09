@@ -5,33 +5,30 @@ use Master\Pagination;
 class PageController
 {
     static function index()
-    { 
+    {
         /*
-        $pagination = new Pagination();
-        
-        $limit = PAGINATION_SETTINGS['linesOnPage'];
-        
-        $data = db()->query("select * from users limit $limit
-                        offset {$pagination->getOffset()}")->get();
-         */
-        //cache()->set('users', $users);   
-        //shuffle($users);
-        
-        return app()->view->full_view (
-            
-            PAGE_LAYOUT,    # layout
+        if ( ! $data = db()->query("select * from category")->get() ) {
+            return app()->view->full_view ( "", "", [] );
 
-            PAGE_VIEW,      # view
+        } else {
+            /* 
+            $pagination = new Pagination();
+                $limit = PAGINATION_SETTINGS['linesOnPage'];
+                $data = db()->query("select * from categories limit $limit
+                                        offset {$pagination->getOffset()}")->get();
+            cache()->set('category', $category);   
+            shuffle(products);
+        */
+            return app()->view->full_view (
             
-            [               # data
-                
-                'title' => 'page',
-                //'users' => $data,
-                //'pagination' => $pagination,
-            
-            ]
-        );
-
+                PAGE_LAYOUT,    # layout
+                PAGE_VIEW,      # view
+                [               # data
+                    //'title' => 'page',
+                    //'category' => $data,
+                    //'pagination' => $pagination,
+                ],
+            );
+        //}
     }
-    
 }

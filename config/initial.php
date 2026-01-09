@@ -13,9 +13,9 @@ const ERROR_LOGS  = ROOT .'/log/errors/error.log';
 const CACHE       = ROOT .'/log/cache';
 const ACCOUNT     = APP  .'/Account';
 const CONSTRUCT   = APP  .'/Construct';
-const LAYOUTS     = APP  .'/Construct/layouts';
+const LAYOUT      = APP  .'/Construct/layouts';
 const DEF_LAYOUT  = APP  .'/Construct/layouts/main.php';
-const VIEWS       = APP  .'/Construct/views';
+const VIEW        = APP  .'/Construct/views';
 const DEF_VIEW    = APP  .'/Construct/views/main.php';
 ########
 
@@ -43,20 +43,22 @@ const ADMIN_A = [
    'test@test.ru',
 ];
 
-######## 
-const HOME_LAYOUT = '';
-const HOME_VIEW   = '';
-const PAGE_LAYOUT = 'category';
-const PAGE_VIEW   = 'category';
-$POCKET_STYLE     = '';
-$MENU_STYLE       = '';
-
+########
+const HOME_LAYOUT = "";
+const HOME_VIEW   = "";
+const PAGE_LAYOUT = "category";
+const PAGE_VIEW   = "category";
+##
+$POCKET_STYLE     = "";
+$MENU_STYLE       = "";
+####
 if ( $POCKET_STYLE == false || $POCKET_STYLE === 'main' ) {
    $POCKET_STYLE = '/public/main_pocket';
 } else { 
    $POCKET_STYLE = '/public/start_pocket';
 }
 define( 'POCKET_STYLE', $POCKET_STYLE );
+##
 if ( $MENU_STYLE == false || $MENU_STYLE === 'main' ) {
    $MENU_FOR_TABLE = 'categories';
    $MENU_TEMPLATE  = 'categories_menu';
@@ -66,7 +68,7 @@ if ( $MENU_STYLE == false || $MENU_STYLE === 'main' ) {
    $MENU_FOR_TABLE = 'cosmetics';
    $MENU_TEMPLATE  = 'cosmetics_menu';
    $MENU_CACHE_KEY = 'cosmetics_menu';
-} 
+}
 define( 'MENU_FOR_TABLE', $MENU_FOR_TABLE );
 define( 'MENU_TEMPLATE',   $MENU_TEMPLATE );
 define( 'MENU_CACHE_TIME',              0 );

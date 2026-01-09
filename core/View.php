@@ -8,7 +8,7 @@ class View
    {  
       extract($data);
         
-      $view_file = VIEWS . "/{$view}.php";
+      $view_file = VIEW . "/{$view}.php";
       if (!is_file($view_file)) $view_file = DEF_VIEW;
       
       if (is_file($view_file)) {
@@ -24,7 +24,7 @@ class View
       
       ob_start();
       
-      $layout_file = LAYOUTS . "/{$layout}.php";
+      $layout_file = LAYOUT . "/{$layout}.php";
       if (!is_file($layout_file)) $layout_file = DEF_LAYOUT;
       
       if (is_file($layout_file)) {
