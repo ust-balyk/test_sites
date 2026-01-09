@@ -6,11 +6,7 @@ class PageController
 {
     static function index()
     {
-        /*
-        if ( ! $data = db()->query("select * from category")->get() ) {
-            return app()->view->full_view ( "", "", [] );
-
-        } else {
+        if ( $data = db()->query("select * from category")->get() ) {
             /* 
             $pagination = new Pagination();
                 $limit = PAGINATION_SETTINGS['linesOnPage'];
@@ -18,9 +14,8 @@ class PageController
                                         offset {$pagination->getOffset()}")->get();
             cache()->set('category', $category);   
             shuffle(products);
-        */
-            return app()->view->full_view (
-            
+            */
+            return app()->view->full_view (   
                 PAGE_LAYOUT,    # layout
                 PAGE_VIEW,      # view
                 [               # data
@@ -28,7 +23,8 @@ class PageController
                     //'category' => $data,
                     //'pagination' => $pagination,
                 ],
-            );
-        //}
+            );        
+        }
+        return app()->view->full_view ( PAGE_LAYOUT, PAGE_VIEW, [] );
     }
 }

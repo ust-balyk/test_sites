@@ -6,11 +6,7 @@ class HomeController
 {
     static function index()
     {
-        /*
-        if ( ! $data = db()->query("select * from categories")->get() ) {
-            return app()->view->full_view( "", "", [] );
-
-        } else {
+        if ( $data = db()->query("select * from categories")->get() ) {
             /*
             $pagination = new Pagination();
                 $limit = PAGINATION_SETTINGS['linesOnPage'];
@@ -22,12 +18,13 @@ class HomeController
                 HOME_LAYOUT,  # layout
                 HOME_VIEW,    # view
                 [             # data    
-                    //'title'      => 'home::japan-in.ru',
+                    'title'      => 'home::japan-in.ru',
                     //'categories' => $data,
                     //'cache'      => $categories,
                     //'pagination' => $pagination,
                 ],
             );
-        //}
+        }
+        return app()->view->full_view ( HOME_LAYOUT, HOME_VIEW, [] );
     }
 }

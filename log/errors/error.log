@@ -1,21 +1,10 @@
-[2026-01-09 19:23:48] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:28:35] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:28:35] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:29:02] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:29:02] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:49:35] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:49:35] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:49:41] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:49:41] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:50:46] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:50:46] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:51:39] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:51:39] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:53:33] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:53:34] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:57:10] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:57:10] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:57:26] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 19:57:26] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.categories' doesn't exist
-[2026-01-09 20:30:40] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.category' doesn't exist
-[2026-01-09 20:50:16] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.category' doesn't exist
+[2026-01-09 22:45:18] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:45:24] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:46:04] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:46:08] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:47:22] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:50:27] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:50:34] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:50:42] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1068 Multiple primary key defined
+[2026-01-09 22:58:14] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.category' doesn't exist
+[2026-01-09 22:59:12] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.category' doesn't exist
