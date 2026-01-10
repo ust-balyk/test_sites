@@ -381,6 +381,7 @@ a.btn.btn-outline-secondary.promo h5 {
 
 /* превью карточка продукта */
 div .product-card {
+    position: relative;
     flex: 1 1 auto;
     height: auto; /*470px;*/
     margin: 8px 6px 15px 6px; /* для тени */
@@ -401,6 +402,21 @@ div .product-card:hover {
         color: black;
     }
     */
+}
+
+.product-card .product_card_offer {
+    position: absolute;
+    left: 0;
+    top: 4%;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: var(--light-blue-color);
+    color: var(--grey-color);
+}
+.product-card .product_card_offer p {
+    letter-spacing: 1px;
+    margin: 2px 12px;
+    padding: 0;
 }
 
 div .product-card-img {

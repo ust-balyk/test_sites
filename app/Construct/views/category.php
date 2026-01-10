@@ -18,7 +18,8 @@
 
     <h1 class="text-center title_category">Категория</h1>
 
-    <div class="row">
+    <div class="row category">
+
       <div class="col-md-2 d-none d-md-block sidebar" style="height: 100%;">
 
         <div class="d-grid">
@@ -133,6 +134,13 @@
           <div id="category_content" class="row">
 
             <div class="col-lg-3 col-md-4 product-card" style="">
+
+              <div class="product_card_offer">
+                <div class="not_in_stock">
+                  <p>ожидается</p>
+                </div>
+              </div>
+
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
@@ -161,6 +169,11 @@
         <!--/div--><!--container-->
 
             <div class="col-lg-3 col-md-4 product-card" style="">
+              <div class="product_card_offer">
+                <div class="not_in_stock">
+                  <p>ожидается</p>
+                </div>
+              </div>
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -371,6 +384,7 @@
         </div><!--удалить-->
 
       </div><!--content-->
-    </div><!--row-->
-  </div><!--container-->
+    </div><!--row category-->
+
+  </div><!--container category-->
 </section>
