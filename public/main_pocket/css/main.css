@@ -419,7 +419,7 @@ div .product-card:hover {
 .product-card .product_card_offer p {
     letter-spacing: 1px;
     margin: 2px 12px;
-    padding: 0;
+    padding: 0px 0px 2px 0px;
 }
 
 div .product-card-img {
@@ -1254,6 +1254,15 @@ div.product-card {
     border-radius: 3px;
     color: var(--grey-color);
 }
+
+a.page-link.active {
+    background-color: var(--light-blue-color);
+    color: black;
+}
+a.page-link.disabled {
+    background-color: var(--description-color);
+}
+
 .pagination .page-link:hover {
     border: 1px solid var(--light-grey-color);
     border-radius: 3px;

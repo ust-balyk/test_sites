@@ -99,7 +99,6 @@
       <!---------------- MAIN ---------------->
       <main>
         <div class="container">
-          <?= "main"; ?>
           <?= $view_file; ?>
           <button id="top_btn" title="Перейти к началу"> 
             <i class="fa-solid fa-chevron-up"></i>
