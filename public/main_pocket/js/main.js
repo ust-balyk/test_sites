@@ -48,11 +48,11 @@ $(document).ready(function() {
             let windowHeight = window.innerHeight;
             let windowTop = $(window).scrollTop();
 
-            if (showCounter && (counterBoxTop + 2 < windowTop + windowHeight)) {
+            if (showCounter && (counterBoxTop + 5 < windowTop + windowHeight)) {
                 showCounter = false;
                 counterItem.css('opacity', 1);
                 counterItem.spincrement({
-                    duration: 1,
+                    duration: 2500,
                     fade: true
                 });
             }
