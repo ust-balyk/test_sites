@@ -404,12 +404,15 @@ div .product-card:hover {
     */
 }
 
+/* нет в наличии  */
 .product-card .product_card_offer {
     position: absolute;
     left: 0;
     top: 4%;
+    /*
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    */
     background-color: var(--light-blue-color);
     color: var(--grey-color);
 }
@@ -1245,5 +1248,45 @@ div.product-card {
         width: 33.3%;
     }
 }*/
+
+.pagination .page-link {
+    border: 1px solid var(--light-grey-color);
+    border-radius: 3px;
+    color: var(--grey-color);
+}
+.pagination .page-link:hover {
+    border: 1px solid var(--light-grey-color);
+    border-radius: 3px;
+    background-color: var(--light-blue-color);
+    color: black;
+}
+.pagination .page-link:focus {
+    box-shadow: none;
+    background-color: var(--light-blue-color);
+    color: black;
+}
+
+.pagination .page-item {
+    width: 40px;
+    height: 40px;
+    margin: 12px 11px;
+    text-align: center;
+}
+.page-item:first-child .page-link {
+    border-radius: 3px;
+}
+.page-item:last-child .page-link {
+    border-radius: 3px;
+}
+
+.pagination i.fa-solid.fa-chevron-left {
+    font-size: 14px;
+    padding-right: 3px;
+}
+.pagination i.fa-solid.fa-chevron-right {
+    font-size: 14px;
+    padding-left: 0px;
+}
+
 
 /* ===================Category=================== */

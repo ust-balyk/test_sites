@@ -23,7 +23,7 @@ $(document).ready(function() {
     /******* скрыть гравюры и показать кнопку *******/
 
     // глобальная переменная для хранения высоты блока фильтров
-    window.filters_block_height = 0;
+    window.filters_block_height = true;
     // получение и сохранение высоты
     function update_block_height() {
         // .height() - без padding/border, .outerHeight(true) - с margin/padding/border
@@ -47,19 +47,18 @@ $(document).ready(function() {
     const activate_filter = new ResizeObserver(entries => {
         for ( let entry of entries ) {
             const { width, height } = entry.contentRect;
-            if ( block_filters.height() > filters_block_height ) {
+            if ( block_filters.height() < filters_block_height ) {
+                block_ukiyo_e.fadeIn(500);
+                selector_link.setAttribute('class', '');
+                selector_text.setAttribute('class', '');
+                selector_text.textContent = 'фильтры';
+            } else {
                 block_ukiyo_e.hide();
                 selector_link.setAttribute('href', 'http://localhost:8888');
                 selector_link.setAttribute('class', 'btn btn-outline-primary activate_filters');
                 selector_text.setAttribute('class', 'activate_filters');
                 selector_text.textContent = 'применить фильтры';
 
-            } else {
-                block_ukiyo_e.fadeIn(500);
-                selector_link.setAttribute('class', '');
-                selector_text.setAttribute('class', '');
-                selector_text.textContent = 'фильтры';
-            
             }
         }
     });

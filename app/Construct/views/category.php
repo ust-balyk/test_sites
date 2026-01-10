@@ -30,7 +30,7 @@
 
           <div id="btn_activate_filters" class="d-grid">
             <a id="selector_link" href="#" class="">
-              <h6 id="selector_text" class=""></h6>
+              <h6 id="selector_text" class="">фильтры</h6>
             </a>
           </div>
 
@@ -381,10 +381,25 @@
               </div>
             </div><!--product-card-->
           </div>
-        </div><!--удалить-->
-
+        </div><!--row-->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div><!--content-->
     </div><!--row category-->
-
   </div><!--container category-->
 </section>
