@@ -33,20 +33,17 @@ class Database
                 )
                 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
             $this->connection->exec($tbl_users);
-            /*
+            
             $tbl_categories = "CREATE TABLE IF NOT EXISTS `categories`
                 (
-                    `id` int(10) UNSIGNED NOT NULL,
+                    `id` int(10) UNSIGNED NOT NULL PRIMARY KEY,
                     `title` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
-                    `slug` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                    `slug` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
                     `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0'
                 ) 
-                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                ALTER TABLE `categories`
-                    ADD PRIMARY KEY (`id`),
-                    ADD UNIQUE KEY `slug` (`slug`);";
+                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
             $this->connection->exec($tbl_categories);
-             */
+            
         }
         catch (\PDOException $e)
         {

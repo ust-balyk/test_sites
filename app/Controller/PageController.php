@@ -6,7 +6,7 @@ class PageController
 {
     static function index()
     {
-        if ( $data = db()->query("select * from category")->get() ) {
+        if ( $data = db()->query("select * from categories")->get() ) {
             /* 
             $pagination = new Pagination();
                 $limit = PAGINATION_SETTINGS['linesOnPage'];
