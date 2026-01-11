@@ -95,6 +95,15 @@ div.wrapper {
     flex-direction: column;
 }
 
+.note-float-right {
+    float: right;
+    margin-left: 20px;
+}
+.note-float-lest {
+    float: left;
+    margin-right: 20px;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -659,11 +668,10 @@ a.btn.popular:hover {
 /* ===================Call Back================== */
 
 section.call-back {
-    margin-top: 70px; /* отступ от карусели */
+    margin-top: 10px;
     padding-top: 27px;
     text-align: center;
     background-color: var(--description-color);
-    box-shadow: 0px 0px 6px 0px var(--description-color);
 }
 
 div.call-back h6 {
@@ -699,7 +707,7 @@ div.call-back button.btn.btn-primary {
     border: 1px solid #738294;
     border-radius: 3px;
     margin-top: 32px;
-    margin-bottom: -19px
+    margin-bottom: -15px
 }
 
 /* ===================Call Back================== */
@@ -708,8 +716,9 @@ div.call-back button.btn.btn-primary {
 
 section.info {
     height: 100%;
-    padding-top: 40px;
+    padding-top: 60px;
     background-color: white; /*var(--nav-color);*/
+    box-shadow: 0px 0px 4px 6px white;
     border-bottom: 1px dotted var(--light-grey-color);
 }
 .info h6 {
@@ -720,7 +729,8 @@ section.info {
     margin-bottom: 10px;
 }
 
-div.col-md-4.mt-3 { /* колонки с адресами */
+div.col-md-4 .address { /* колонки с адресами */
+    margin-top: 40px;
     margin-bottom: 70px;
 }
 
@@ -875,7 +885,7 @@ input:focus { caret-color: #fff; }
 section.category  {
     min-height: 1500px;
     margin-top: 90px;
-    padding-bottom: 170px;
+    padding-bottom: 4px;
     border-bottom: solid 2px rgba(255,140,0,0.1)
 }
 
@@ -1295,6 +1305,42 @@ a.page-link.disabled {
 .pagination i.fa-solid.fa-chevron-right {
     font-size: 14px;
     padding-left: 0px;
+}
+
+/* ==== info block ==== */
+
+div.container .description {
+    margin-top: 100px;
+}
+
+div.category_description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--black-color);
+}
+
+.category_description h4 {
+    text-align: center;
+}
+
+.category_description ul {
+    list-style: none;
+    padding-left: 0;
+}
+.category_description ul li::before {
+    /*content: '\f14a';
+    font: var(--fa-font-solid);*/
+    content: '\f058';
+    font: var(--fa-font-regular);
+    font-size: 15px;
+    color: var(--blue-color); /* #ffa500;*/ /*var(--grey-color);*/
+    margin: 0px 10px;
+}
+
+.description .note-float-right {
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 

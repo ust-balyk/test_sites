@@ -136,7 +136,7 @@
         <section class="info">
           <div class="info col-md-8 offset-md-2">
             <div class="row">
-              <div class="col-md-4 mt-3">
+              <div class="col-md-4 address">
                 <h6>связаться с нами</h6>
                 <div class="contact">
                   <ul>
@@ -147,7 +147,7 @@
                   </ul>
                 </div>
               </div><!--+-->
-              <div class="col-md-4 mt-3">
+              <div class="col-md-4 address">
                 <h6>наш адрес</h6>
                 <div class="address">
                   <!--a href="https://www.google.com/maps/search/?api=1&query=45.011728,39.123093"
@@ -161,7 +161,7 @@
                   </a>
                 </div>
               </div><!--+-->
-              <div class="col-md-4 mt-3">
+              <div class="col-md-4 address">
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
                   <ul>
