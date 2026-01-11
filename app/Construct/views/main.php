@@ -508,8 +508,8 @@
     <div class="container description">
       <div class="category_description clearfix">
         <h4>Что такое японская система ухода за кожей и как она работает?</h4>
-        <p><img src="<?= base_url('/images/post/face.png'); ?>" class="note-float-right"
-              style="width: 35%;" alt=""></p>
+        <p><img src="<?= base_url('/images/post/face.jpg'); ?>" class="note-float-left"
+              style="width: 40%;" alt=""></p>
         <p>Русские и европейские потребители не понимают, зачем японцы производят так много бьюти-продуктов,
           что именно им нужно купить и в какой последовательности пользоваться. Что такое японская система ухода
           за кожей, в чем ее секрет?</p>

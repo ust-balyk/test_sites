@@ -402,7 +402,7 @@
       </div><!--content-->
     </div><!--row category-->
   </div><!--container category-->
-  <div class="container description">
+  <!--div class="container description">
     <div class="category_description clearfix">
       <h4>Что такое японская система ухода за кожей и как она работает?</h4>
       <p><img src="<?= base_url('/images/post/face.png'); ?>" class="note-float-right"
@@ -425,5 +425,5 @@
       </ul>
       <p>Подтверждаем: японская система ухода за кожей существует. И она действительно работает!</p>
     </div>
-  </div>
+  </div-->
 </section>

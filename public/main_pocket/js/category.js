@@ -23,19 +23,13 @@ $(document).ready(function() {
     /******* скрыть гравюры и показать кнопку *******/
 
     // глобальная переменная для хранения высоты блока фильтров
-    window.filters_block_height = 20;
+    window.filters_block_height = 1;
     // получение и сохранение высоты
     function update_block_height() {
         // .height() - без padding/border, .outerHeight(true) - с margin/padding/border
-        //window.filters_block_height += $('.filters').height();
         window.filters_block_height += $('.filters').outerHeight(true);
-    
     }
-    // вызываем при загрузке страницы
-    $(function() {
-        update_block_height();
-    
-    });
+    update_block_height();
 
     const filters        = $('.filters');
     const btn_filters    = document.getElementById('btn_activate_filters');

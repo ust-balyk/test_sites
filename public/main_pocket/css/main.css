@@ -103,7 +103,7 @@ div.wrapper {
     float: right;
     margin-left: 20px;
 }
-.note-float-lest {
+.note-float-left {
     float: left;
     margin-right: 20px;
 }
@@ -672,7 +672,7 @@ a.btn.popular:hover {
 /* ===================Call Back================== */
 
 section.call-back {
-    margin-top: 10px;
+    margin-top: 90px;
     padding-top: 27px;
     text-align: center;
     background-color: var(--description-color);
@@ -1264,6 +1264,12 @@ div.product-card {
     }
 }*/
 
+/*====  pagination ====*/
+
+ul.pagination {
+    margin-bottom: 6px;
+}
+
 .pagination .page-link {
     border: 1px solid var(--light-grey-color);
     border-radius: 3px;
@@ -1344,13 +1350,12 @@ div.category_description {
     content: '\f058';
     font: var(--fa-font-regular);
     font-size: 15px;
-    color: #77c2ff; /* #ffa500;*/ /*var(--grey-color);*/
-    margin: 0px 10px;
+    color: #154f84; /*#77c2ff;*/ /* #ffa500;*/ /*var(--grey-color);*/
+    margin: 0px 10px 0px 0px;
 }
 
-.description .note-float-right {
-    margin-right: 5px;
-    margin-bottom: 5px;
+.description .note-float-left {
+    margin: 20px 20px 0px 0px !important;
 }
 
 
