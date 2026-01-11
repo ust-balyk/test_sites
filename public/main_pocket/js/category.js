@@ -23,7 +23,7 @@ $(document).ready(function() {
     /******* скрыть гравюры и показать кнопку *******/
 
     // глобальная переменная для хранения высоты блока фильтров
-    window.filters_block_height = true;
+    window.filters_block_height = 20;
     // получение и сохранение высоты
     function update_block_height() {
         // .height() - без padding/border, .outerHeight(true) - с margin/padding/border

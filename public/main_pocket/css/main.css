@@ -1344,7 +1344,7 @@ div.category_description {
     content: '\f058';
     font: var(--fa-font-regular);
     font-size: 15px;
-    color: var(--blue-color); /* #ffa500;*/ /*var(--grey-color);*/
+    color: #77c2ff; /* #ffa500;*/ /*var(--grey-color);*/
     margin: 0px 10px;
 }
 
