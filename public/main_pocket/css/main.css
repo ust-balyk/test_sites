@@ -89,6 +89,10 @@ body {
     color: var(--grey-color);
 }
 
+::selection {
+    background-color: var(--description-color);
+}
+
 div.wrapper {
     min-height: 100%;
     display: flex;
@@ -1319,6 +1323,11 @@ div.category_description {
     font-weight: 400;
     line-height: 24px;
     color: var(--black-color);
+    
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none; /* Стандартный синтаксис */
 }
 
 .category_description h4 {
