@@ -47,6 +47,7 @@ class Database
         }
         catch (\PDOException $e)
         {
+            date_default_timezone_set('Asia/Yekaterinburg');
             error_log("[" . date('Y-m-d H:i:s') . "] DB Error: {$e->getMessage()}" .
                 PHP_EOL, 3, ERROR_LOGS);
             echo "<p style='color:white'>b</p>";
@@ -65,6 +66,7 @@ class Database
         }
         catch (\PDOException $e)
         {
+            date_default_timezone_set('Asia/Yekaterinburg');
             error_log("[" .date('Y-m-d H:i:s'). "] {$e->getMessage()}" .
                 PHP_EOL, 3, ERROR_LOGS);
         }

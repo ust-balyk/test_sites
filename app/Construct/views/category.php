@@ -1,4 +1,4 @@
-<?= session_save_path(); ?>
+<?//= session_save_path(); ?>
 <section class="category">
   <div class="container category">
 

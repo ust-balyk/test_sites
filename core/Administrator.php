@@ -59,7 +59,6 @@ class AdminController
          if (Application::$app->session->get("pass", $this->pass())) {
 
             session_regenerate_id(true);
-            Application::$app->session->generateCsrfToken();
             file_put_contents($filename, $content);
 
          }
@@ -70,7 +69,6 @@ class AdminController
          if ( Application::$app->session->get("pass", $this->pass()) ) {
 
             session_regenerate_id(true);
-            Application::$app->session->generateCsrfToken();
             file_put_contents($filename, $content);
 
          }
@@ -80,6 +78,7 @@ class AdminController
          Application::$app->response->redirect("/");
 
       }
+   
    }
 
 }

@@ -98,7 +98,7 @@ class UserController
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
-                                session()->session->generateCsrfToken();
+                                //app()->session->generateCsrfToken();
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
                                 //app()->response->redirect('/');
@@ -137,7 +137,7 @@ class UserController
                 $password =  htmlentities($password);
                 
                 if (db()->realUser($email, $password)) {
-                    session()->generateCsrfToken();
+                    //app()->session->generateCsrfToken();
                     echo "<script>window.history.go(-2)</script>";
 
                 } else {
