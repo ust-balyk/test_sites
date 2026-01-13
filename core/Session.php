@@ -4,12 +4,13 @@ namespace Master;
 class Session
 {
    public function __construct()
-   { 
-      session_start();
-      /*([
-         'cookie_lifetime' => 86400, // 24 часа
-      ]);*/
-      
+   {
+      session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/Master/session')); 
+      session_start([
+         'cookie_lifetime' => 31536000, // год
+      ]);
+      date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
+      $_SESSION['start'] = date(DATE_RSS);
       $this->generateCsrfToken();
       
    }
