@@ -329,7 +329,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 product-card">
+            <!--div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -355,7 +355,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 product-card">
+            <!--div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -379,7 +379,7 @@
                   </a>
                 </div>
               </div>
-            </div><!--product-card-->
+            </div--><!--product-card-->
           </div>
         </div><!--row-->
         <nav aria-label="Page navigation example">

@@ -410,6 +410,9 @@ div .product-card:hover {
     .product-card-title a {
         color: var(--black-color);
     }
+    .product_card_offer {
+        left: -0.3%
+    }
     /*
     .product-card-price {
         color: black;
@@ -420,7 +423,7 @@ div .product-card:hover {
 /* нет в наличии  */
 .product-card .product_card_offer {
     position: absolute;
-    left: 0;
+    left: -2.5%;
     top: 4%;
     /*
     border-top-right-radius: 3px;
