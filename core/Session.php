@@ -4,7 +4,7 @@ namespace Master;
 class Session
 {
    public function __construct()
-   {
+   { 
       session_start();
       /*([
          'cookie_lifetime' => 86400, // 24 часа
@@ -14,7 +14,7 @@ class Session
       
    }
    
-   private function generateCsrfToken()
+   public function generateCsrfToken()
    {
       if (! isset($_SESSION['csrf_token'])) {
          $_SESSION['csrf_token'] = bin2hex(random_bytes(32));

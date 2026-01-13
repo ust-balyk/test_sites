@@ -131,7 +131,7 @@ class Database
     
     }
 
-    /*
+    
     public function realUser($email, $password): bool
     {
         $email = Application::$app->request->post('email');
@@ -151,8 +151,8 @@ class Database
         return false;
     
     }
-    */
-
+    
+    /* если пароль не правильный поле email не затерается *//* 
     public function realUser($email, $password): bool
     {
         $email = Application::$app->request->post('email');
@@ -177,7 +177,7 @@ class Database
         }
         return false;
     
-    }
+    }*/
 
 
 

@@ -55,15 +55,25 @@ class AdminController
 
       if (array_intersect(array(Application::$app->session->get("email")), $administrator)) {
 
-         Application::$app->session->set("role", "admin") &&
-            Application::$app->session->set("pass", $this->pass());
-         file_put_contents($filename, $content);
+         Application::$app->session->set("role", "admin");
+         if (Application::$app->session->get("pass", $this->pass())) {
+
+            session_regenerate_id(true);
+            Application::$app->session->generateCsrfToken();
+            file_put_contents($filename, $content);
+
+         }
 
       } else if (array_intersect(array(Application::$app->session->get("email")), ADMIN_A)) {
 
-         Application::$app->session->set("role", "assistant") &&
-            Application::$app->session->set("pass", $this->pass());
-         file_put_contents($filename, $content);
+         Application::$app->session->set("role", "assistant");
+         if ( Application::$app->session->get("pass", $this->pass()) ) {
+
+            session_regenerate_id(true);
+            Application::$app->session->generateCsrfToken();
+            file_put_contents($filename, $content);
+
+         }
 
       } else {
 

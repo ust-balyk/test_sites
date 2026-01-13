@@ -87,7 +87,7 @@ $(document).ready(function() {
     const width = (firstItem.offsetWidth+20);
 
     // 3. Создаем два новых блока
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
         const invisibleBlock = document.createElement('div');
     // 4. Устанавливаем стили: ширина как у первого, невидимость и отсутствие влияния на поток
         invisibleBlock.style.width = `${width}px`;

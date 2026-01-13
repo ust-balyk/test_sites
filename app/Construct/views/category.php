@@ -329,7 +329,7 @@
               </div>
             </div>
 
-            <!--div class="col-lg-3 col-md-4 product-card">
+            <div class="col-lg-3 col-md-4 product-card">
               <a href="#">
                 <div class="product-card-img">
                   <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
