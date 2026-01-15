@@ -49,7 +49,7 @@ class Session
 --------------------------------------------------------\n", FILE_APPEND|LOCK_EX);
       
       }
-      $_SESSION['info'] = 'stop';
+      $_SESSION['info'] = 'created';
 
    }
    
