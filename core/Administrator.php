@@ -39,6 +39,8 @@ class AdminController
 
          if ($_SESSION["pass"] === $pass) {
 
+            app()->session->remove($_SESSION["csrf_token"]);
+            $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
             $entry = password_hash($pass, PASSWORD_DEFAULT);
             define("PROTECTED_ACCESS", $entry);
             @include "../entry/index.php";

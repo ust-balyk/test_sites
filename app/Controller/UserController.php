@@ -97,7 +97,7 @@ class UserController
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
-                                session_regenerate_id(true);
+                                //session_regenerate_id(true);
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
                                 echo "<script>window.history.go(-3)</script>";
