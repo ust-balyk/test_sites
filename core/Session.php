@@ -27,6 +27,20 @@ class Session
 
       $this->generateCsrfToken();
 
+      $data = [
+         date(DATE_RSS),
+         $_SERVER['REMOTE_ADDR'],
+         $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+         $_SERVER['HTTP_USER_AGENT'],
+         $_SERVER['REQUEST_URI'], 
+      ];
+      if (!isset($_SESSION['info'])) {
+         $info = implode("\n", $data);
+         file_put_contents('../log/enter.txt', $info . "\n\n", FILE_APPEND|LOCK_EX);
+      
+      }
+      $_SESSION['info'] = 'stop';
+
    }
    
    public function set($key, $value)
