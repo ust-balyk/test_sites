@@ -22,7 +22,6 @@ class Session
       date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
       $_SESSION['DATE']                 = date(DATE_RSS);
       $_SESSION['REMOTE_ADDR']          = $_SERVER['REMOTE_ADDR'];
-      $_SESSION['HTTP_ACCEPT_LANGUAGE'] = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
       $_SESSION['HTTP_USER_AGENT']      = $_SERVER['HTTP_USER_AGENT'];
 
       $this->generateCsrfToken();
