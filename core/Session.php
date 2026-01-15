@@ -3,24 +3,30 @@ namespace Master;
 
 class Session
 {
-   public function __construct()
-   {
-      session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/Master/session')); 
-      session_start([
-         'cookie_lifetime' => 31536000, // год
-      ]);
-      date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
-      $_SESSION['start'] = date(DATE_RSS);
-      $this->generateCsrfToken();
-      
-   }
-   
-   public function generateCsrfToken()
+
+   private function generateCsrfToken()
    {
       if (! isset($_SESSION['csrf_token'])) {
          $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
       
       }
+   
+   }
+   
+   public function __construct()
+   {
+      session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session')); 
+      session_start([
+         'cookie_lifetime' => 0, //31536000, // год
+      ]);
+      date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
+      $_SESSION['DATE']                 = date(DATE_RSS);
+      $_SESSION['REMOTE_ADDR']          = $_SERVER['REMOTE_ADDR'];
+      $_SESSION['HTTP_ACCEPT_LANGUAGE'] = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+      $_SESSION['HTTP_USER_AGENT']      = $_SERVER['HTTP_USER_AGENT'];
+
+      $this->generateCsrfToken();
+
    }
    
    public function set($key, $value)
@@ -46,6 +52,7 @@ class Session
          return true;
 
       }
+   
    }  
 
    public function remove($key): void
@@ -54,6 +61,7 @@ class Session
          unset($_SESSION[$key]);
       
       }
+   
    }
 
    public function setFlash($key, $value): void

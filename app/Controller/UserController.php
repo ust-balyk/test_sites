@@ -36,7 +36,6 @@ class UserController
                    '<', '>', '?', '[', ']', ';', '=', '--', '~', '/', '#', ',' ];
         $test = str_replace($dross, '', $test);
         
-        $test = preg_replace('#[0-1]#','', $test); // удалить любой один символ
         $test = preg_replace('#<.*>#', '', $test); // удалить все HTML-теги из строки $test 
         $test = preg_replace('#\s\s+#',' ',$test); // убрать двойные пробелы
         
@@ -98,10 +97,9 @@ class UserController
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
-                                //app()->session->generateCsrfToken();
+                                session_regenerate_id(true);
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
-                                //app()->response->redirect('/');
                                 echo "<script>window.history.go(-3)</script>";
                             }
 
@@ -137,7 +135,6 @@ class UserController
                 $password =  htmlentities($password);
                 
                 if (db()->realUser($email, $password)) {
-                    //app()->session->generateCsrfToken();
                     echo "<script>window.history.go(-2)</script>";
 
                 } else {

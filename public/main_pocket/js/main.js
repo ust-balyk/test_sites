@@ -153,6 +153,15 @@ $(document).ready(function() {
         lazyLoad: true
     }); 
     */
+   
+    /*
+    var counter = 0;
+    window.onblur = function(event) {
+        counter++;
+        console.log('Пользователь покинул вкладку: ' + counter);
+    };*/
+
+    
 
 
 });

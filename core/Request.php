@@ -7,7 +7,8 @@ class Request
 
    public function __construct($uri)
    {
-      $this->formatted_uri = strtolower(trim($uri, '/'));
+      $sanitized_uri = filter_var($uri, FILTER_SANITIZE_URL);
+      $this->formatted_uri = strtolower(trim($sanitized_uri, '/'));
       
    }
 

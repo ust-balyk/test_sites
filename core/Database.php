@@ -144,6 +144,7 @@ class Database
         if ($user = $this->stmt->fetch()) {
 
             if (password_verify($password, $user['password'])) {
+                session_regenerate_id(true);
                 Application::$app->session->set('email', $user['email']);
                 Application::$app->session->set('name', $user['name']);
                 return true;

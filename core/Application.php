@@ -4,7 +4,6 @@ namespace Master;
 class Application
 {   
    protected string $uri;
-
    public View             $view;
    public Abort            $abort;
    public Session          $session;
@@ -14,7 +13,7 @@ class Application
    public Database         $db;
    public Cache            $cache;
    public Administrator    $admin;
-   
+
    public static Application $app;
 
    public function __construct()
