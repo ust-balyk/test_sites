@@ -60,8 +60,6 @@ class AdminController
          Application::$app->session->set("role", "admin");
          if (Application::$app->session->get("pass", $this->pass())) {
 
-            //Application::$app->session->remove($_SESSION["csrf_token"]);
-            //$_SESSION["csrf_token"] = bin2hex(random_bytes(32));
             session_regenerate_id(true);
             file_put_contents($filename, $content);
 
@@ -72,8 +70,6 @@ class AdminController
          Application::$app->session->set("role", "assistant");
          if ( Application::$app->session->get("pass", $this->pass()) ) {
 
-            //Application::$app->session->remove($_SESSION["csrf_token"]);
-            //$_SESSION["csrf_token"] = bin2hex(random_bytes(32));
             session_regenerate_id(true);
             file_put_contents($filename, $content);
 

@@ -97,8 +97,7 @@ class UserController
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
-                                //session_regenerate_id(true);
-                                Application::$app->session->remove($_SESSION["csrf_token"]);
+                                app()->session->remove($_SESSION["csrf_token"]);
                                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));    
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
@@ -134,7 +133,7 @@ class UserController
             if ($email = request()->post('email') && $password = request()->post('password')) {
               
                 $email = filter_var($email, FILTER_SANITIZE_EMAIL); 
-                $password =  htmlentities($password);
+                $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 
                 if (db()->realUser($email, $password)) {
                     echo "<script>window.history.go(-2)</script>";

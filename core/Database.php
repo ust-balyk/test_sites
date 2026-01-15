@@ -144,7 +144,6 @@ class Database
         if ($user = $this->stmt->fetch()) {
 
             if (password_verify($password, $user['password'])) {
-                //session_regenerate_id(true);
                 Application::$app->session->remove($_SESSION["csrf_token"]);
                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
                 Application::$app->session->set('email', $user['email']);

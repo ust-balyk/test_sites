@@ -4,10 +4,10 @@ namespace Master;
 class Session
 {
 
-   private function generateCsrfToken($length = 32)
+   private function generateCsrfToken()
    {
       if (! isset($_SESSION['csrf_token'])) {
-         $_SESSION['csrf_token'] = bin2hex(random_bytes($length));
+         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
       
       }
    
@@ -17,16 +17,17 @@ class Session
    {
       session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
       session_set_cookie_params( [ 
-         'lifetime' => 0,
-         'secure' => true, // заставляет браузер отправлять cookie только по HTTPS
-         'httponly' => true, // запрещает доступ к cookie из JavaScript через document.cookie.
-         'samesite' => 'Lax', //'Strict' будут ли cookies отправляться при межсайтовых запросах
+         'lifetime' => 0,     // до закрытия браузера
+         'path'     => '/',   // для всех путей в домене 
+         'secure'   => true,  // заставляет браузер отправлять cookie только по HTTPS
+         'httponly' => true,  // запрещает доступ к cookie из JavaScript через document.cookie.
+         'samesite' => 'Strict', // 'Lax' будут ли cookies отправляться при межсайтовых запросах
       ] );
       session_start( [ 
-         'name' => 'JapanInRu',
-         'sid_length' => 96,
+         'name'                   => 'JapanInRu',
+         'sid_length'             => 96,
          'sid_bits_per_character' => 6,
-         'use_strict_mode' => true, //  является обязательным для общей безопасности сессии
+         'use_strict_mode'        => true, // является обязательным для общей безопасности сессии
       ] );
       
       date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
