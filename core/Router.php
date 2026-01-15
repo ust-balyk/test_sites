@@ -135,9 +135,19 @@ class Router
    
    public function validateCsrfToken(): bool
    {
+      /*
       return Application::$app->request->post('csrf_token') &&
-         (Application::$app->request->post('csrf_token') ==
+         (Application::$app->request->post('csrf_token') ===
       Application::$app->session->get('csrf_token'));
+      */
+
+      // hash_equals — Сравнивает строки без риска атаки по времени
+      if (isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+
+            return true;
+      
+      }
+      return false;
    
    }
 

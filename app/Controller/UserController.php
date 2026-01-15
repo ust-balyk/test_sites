@@ -98,6 +98,8 @@ class UserController
 
                             if ($user->save()) {
                                 //session_regenerate_id(true);
+                                Application::$app->session->remove($_SESSION["csrf_token"]);
+                                $_SESSION["csrf_token"] = bin2hex(random_bytes(32));    
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
                                 echo "<script>window.history.go(-3)</script>";

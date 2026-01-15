@@ -4,10 +4,10 @@ namespace Master;
 class Session
 {
 
-   private function generateCsrfToken()
+   private function generateCsrfToken($length = 32)
    {
       if (! isset($_SESSION['csrf_token'])) {
-         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+         $_SESSION['csrf_token'] = bin2hex(random_bytes($length));
       
       }
    
@@ -15,10 +15,20 @@ class Session
    
    public function __construct()
    {
-      session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session')); 
-      session_start([
-         'cookie_lifetime' => 0, //31536000, // год
-      ]);
+      session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
+      session_set_cookie_params( [ 
+         'lifetime' => 0,
+         'secure' => true, // заставляет браузер отправлять cookie только по HTTPS
+         'httponly' => true, // запрещает доступ к cookie из JavaScript через document.cookie.
+         'samesite' => 'Lax', //'Strict' будут ли cookies отправляться при межсайтовых запросах
+      ] );
+      session_start( [ 
+         'name' => 'JapanInRu',
+         'sid_length' => 96,
+         'sid_bits_per_character' => 6,
+         'use_strict_mode' => true, //  является обязательным для общей безопасности сессии
+      ] );
+      
       date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
       $_SESSION['DATE']                 = date(DATE_RSS);
       $_SESSION['REMOTE_ADDR']          = $_SERVER['REMOTE_ADDR'];
@@ -35,7 +45,8 @@ class Session
       ];
       if (!isset($_SESSION['info'])) {
          $info = implode("\n", $data);
-         file_put_contents('../log/enter.txt', $info . "\n\n", FILE_APPEND|LOCK_EX);
+         file_put_contents('../log/enter.txt', $info . "\n
+--------------------------------------------------------\n", FILE_APPEND|LOCK_EX);
       
       }
       $_SESSION['info'] = 'stop';
