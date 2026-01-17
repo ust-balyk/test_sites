@@ -766,7 +766,7 @@ div.col-md-4 .address { /* колонки с адресами */
 /* ===================Footer===================== */
 
 div.copyright {
-    height: 90px;
+    height: 92px;
     background-color: white;
     text-align: center;
 }
@@ -900,6 +900,10 @@ section.category  {
 div.container.category {
     margin: 0px;
     padding: 0px 15px 0px 13px;
+}
+
+div.row.category {
+    margin-bottom: 90px;
 }
 
 div.breadcrumb {
