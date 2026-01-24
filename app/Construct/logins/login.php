@@ -39,7 +39,7 @@
                             <a style="font-weight:bold; color:#198754; text-decoration:none"
                                 href="<?= base_url('/register'); ?>">Создать аккаунт,</a>
                             <a style="font-weight:bold; color:#198754; text-decoration:none"
-                                href="#" onclick="window.history.back(); return false;"> или Отказаться.</a>
+                                href="#" onclick="window.history.go(-2); return false;"> или Отказаться.</a>
                         </p> 
                     </form>
 

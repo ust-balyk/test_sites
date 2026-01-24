@@ -125,7 +125,6 @@ class Database
             
             if ($this->stmt->fetch()) {
                 return true;
-
             }
             return false;
         }
@@ -134,15 +133,15 @@ class Database
     }
 
     
-    public function realUser($email, $password): bool
+    public function realUser($email, $password)
     {
-        $email = Application::$app->request->post('email');
-        $password = Application::$app->request->post('password');
-        
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
         $this->query("select * from users where email = ? LIMIT 1", [$email]);
         
         if ($user = $this->stmt->fetch()) {
-
+            
             if (password_verify($password, $user['password'])) {
                 Application::$app->session->remove($_SESSION["csrf_token"]);
                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));

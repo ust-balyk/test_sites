@@ -130,11 +130,9 @@ class UserController
         
         } else {
 
-            if ($email = request()->post('email') && $password = request()->post('password')) {
-              
-                $email = filter_var($email, FILTER_SANITIZE_EMAIL); 
-                $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                
+            if ($email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) && 
+                $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
+
                 if (db()->realUser($email, $password)) {
                     echo "<script>window.history.go(-1);window.location.reload();</script>";
 

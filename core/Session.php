@@ -15,7 +15,7 @@ class Session
    
    public function __construct()
    {
-      session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
+      //session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
       session_set_cookie_params( [ 
          'lifetime' => 0,     // до закрытия браузера
          'path'     => '/',   // для всех путей в домене 
@@ -29,14 +29,14 @@ class Session
          'sid_bits_per_character' => 6,
          'use_strict_mode'        => true, // является обязательным для общей безопасности сессии
       ] );
-      
+      /*
       date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
       $_SESSION['date']                 = date(DATE_RSS);
       $_SESSION['remote_addr']          = $_SERVER['REMOTE_ADDR'];
       $_SESSION['http_user_agent']      = $_SERVER['HTTP_USER_AGENT'];
-
+      */
       $this->generateCsrfToken();
-
+      /*
       $data = [
          date(DATE_RSS),
          $_SERVER['REMOTE_ADDR'],
@@ -51,7 +51,7 @@ class Session
       
       }
       $_SESSION['info'] = 'created';
-
+      */
    }
    
    public function set($key, $value)
