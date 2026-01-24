@@ -23,7 +23,7 @@
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
           <div class="container">
-            <a class="navbar-brand" href="<?= base_url('/home'); ?>">
+            <a class="navbar-brand" href="<?= base_url('/'); ?>">
               <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -47,6 +47,7 @@
                       'attrs'     => ['role' => 'menu',],
                     ]);
                   ?>
+                </li>
                 <li class="nav-item">
                   <div class="hide">
                     <a class="nav-link" href="<?= base_url('/page'); ?>">О нас</a>
@@ -62,7 +63,7 @@
             </div><!--navbar-collapse-->
             <div class="navbar-icon">
               <ul>
-                <li>
+                <!--li>
                   <a href="#">
                     <img class="ico"
                         src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
@@ -74,23 +75,21 @@
                         src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
                   </a>
                 </li>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/account'); ?>">
-                      <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
-                    </a>
-                  <?php } else { echo user_icon(); } ?>
+                <li-->
+                  <a href="<?= base_url('/logout'); ?>">выход
+                    <!--img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_out.png');?>"/-->
+                  </a>
                 </li>
               </ul>
             </div><!--navbar-icon-->
           </div><!--container-->
         </nav>
-        <div class="banner">
+        <!--div class="banner">
           <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.jpg'); ?>"
               alt="изображение горы Фудзияма">
           <!--img src="<?//= base_url(POCKET_STYLE .'/assets/banner/banner.svg'); ?>"
             alt="изображение горы Фудзияма"-->
-        </div><!--banner-->
+        <!--/div><!--banner-->
       </header>
   
       <main>

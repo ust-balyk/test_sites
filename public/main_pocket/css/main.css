@@ -7,7 +7,7 @@
     --light-grey-color:  #818f9f;
     --black-color:       #161c24;
     --blue-color:        #4295e4;
-    --light-blue-color:  #cce8ff; /*#bbe0ff;*/ /*#aad9ff;*/ /*#56a9f8;*/
+    --light-blue-color:  #cce8ff;*/ /*#bbe0ff;*/ /*#aad9ff;*/ /*#56a9f8;*/
     --underline-color:   #d1d1d1;
     --btn-color:         #a8f32f;
     --border-color:      #989ea4;
@@ -411,7 +411,11 @@ div .product-card:hover {
         color: var(--black-color);
     }
     .product_card_offer {
-        left: -0.3%
+        left: -0.3%;
+        border-color: var(--light-blue-color);
+        border-left: none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
     /*
     .product-card-price {
@@ -425,10 +429,8 @@ div .product-card:hover {
     position: absolute;
     left: -2.5%;
     top: 4%;
-    /*
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    */
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
     background-color: var(--light-blue-color);
     color: var(--grey-color);
 }
@@ -532,7 +534,7 @@ a.add-to-cart:hover {
 
 /* ===================Carousel Promo============= */
 
-/* ===================Categories================= */
+/* ===================All Categories================= */
 
 section.categories {
     margin: 90px 0px;
@@ -643,7 +645,7 @@ div.writer a {
     color: var(--light-grey-color);
 }
 
-/* ===================Categories================= */
+/* ===================All Categories================= */
 
 /* ===================Carousel Popular=========== */
 
@@ -856,9 +858,10 @@ button#submit.btn.btn-sm {
     box-shadow: 0 2px 5px #454f5b;
     transition: all .3ms;
 }
-button#submit.btn.btn-sm:hover {
+button#submit.btn.btn-sm:hover,
+ button#submit.btn.btn-sm:focus {
     box-shadow: none;
-    background-color: #e1fae8; /*white;*/
+    background-color: #e1fae8;
     color: black;
 }
 
@@ -869,7 +872,7 @@ input#input.hide {
 
 input#input.form-control:focus+button#submit.btn.btn-sm {
     color: black;
-    background-color: white;
+    background-color: #e1fae8;
 }
 
 input#input.form-control::placeholder { /* Firefox */
@@ -888,7 +891,7 @@ input:focus { caret-color: #fff; }
 
 /* ===================Search Form================ */
 
-/* ===================Category=================== */
+/* ===================Page Category=================== */
 
 section.category  {
     min-height: 1500px;
@@ -960,12 +963,17 @@ a.btn.btn-outline-primary {
     margin: 0;
 }
 .btn.btn-outline-primary:hover {
+    /*
     border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    */
+    background-color: var(--light-blue-color);
+    box-shadow: none;
 }
+/*
 .btn.btn-outline-primary h6:hover {
     color: black;
-}
+}*/
 
 
 /* filters */
@@ -1366,4 +1374,4 @@ div.category_description {
 }
 
 
-/* ===================Category=================== */
+/* ===================Page Category=================== */

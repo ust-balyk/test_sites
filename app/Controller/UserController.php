@@ -31,7 +31,7 @@ class UserController
         $name_taken = ['vadim islamov','islamov vadim','исламов вадим','вадим исламов'];
         $test = str_replace($name_taken, '', $test);
         
-        $dross = [ "‘", "`", "'", '"', '!', '@', '#', '$', '%', '\\','^', '&', '-',
+        $dross = [ "‘", "`", "'", '"', '!', '@', '#', '$', '%', '\\','^', '&',
                    "’", '“', '*', '(', ')', '_', '+', '{', '}', '|', ':', '.', "´",
                    '<', '>', '?', '[', ']', ';', '=', '--', '~', '/', '#', ',' ];
         $test = str_replace($dross, '', $test);
@@ -101,8 +101,7 @@ class UserController
                                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));    
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
-                                echo "<script>window.history.go(-3);
-                                        setTimeout(function(){location.reload();},300);</script>";
+                                echo "<script>window.history.go(-1);window.location.reload();</script>";
                             }
 
                         } else {
@@ -137,8 +136,7 @@ class UserController
                 $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 
                 if (db()->realUser($email, $password)) {
-                    echo "<script>window.history.go(-2);
-                            setTimeout(function(){location.reload();},100);</script>";
+                    echo "<script>window.history.go(-1);window.location.reload();</script>";
 
                 } else {
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');

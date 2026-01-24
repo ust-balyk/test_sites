@@ -1,5 +1,3 @@
-  <?php dump(session()->get('csrf_token')); ?> 
-  
   <section class="superiority">
     <div class="container">
       <div class="row">

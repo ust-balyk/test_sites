@@ -24,6 +24,9 @@
   <body>
     <div style="height:1px;border-bottom:1px dotted #744474;clear:both"></div>
     <div class="wrapper">
+      <!--video controls="false" loop="true" autoplay="true" name="media" preload="auto" hidden>
+        <source src="<?= base_url(POCKET_STYLE.'/assets/audio/audio.mp3');?>" type="audio/mp3">
+      </video>
       <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
@@ -81,7 +84,7 @@
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/account'); ?>">
+                    <a href="<?= base_url('/login'); ?>">
                       <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
                     </a>
                   <?php } else { echo user_icon(); } ?>

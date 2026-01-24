@@ -21,7 +21,7 @@ class Database
                 DB_SETTINGS['options']
             
             );
-                        
+
             $tbl_users = "CREATE TABLE IF NOT EXISTS `users`
                 (
                     `id` int(11) AUTO_INCREMENT PRIMARY KEY,

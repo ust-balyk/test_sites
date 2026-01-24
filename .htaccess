@@ -1,6 +1,3 @@
-# закрыть всё
-#Require all denied
-# 
 <IfModule mod_rewrite.c>   
 
     RewriteEngine On
@@ -9,11 +6,3 @@
     RewriteRule (.*) /public/$1
     
 </IfModule>
-#
-<IfModule mod_headers.c>
-
-    Header set Content-Security-Policy "script-src 'self'"
-    Header set Content-Security-Policy "default-src 'self'"
-
-</IfModule>
-

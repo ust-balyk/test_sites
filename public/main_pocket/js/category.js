@@ -60,25 +60,6 @@ $(document).ready(function() {
 
 
     /* одиночные карточки */       
-    /*
-    var cards_array = [];
-    $('.product-card').each(function(index) {
-        var value = index;
-        cards_array.push(value);
-
-        if ( cards_array.length < 3 ) {
-            var i = 3;
-            while ( i > cards_array.length ) {
-                //console.log('test-');
-                $('.product-card').attr('class', 'col-lg-3 col-md-4 product-card');
-                $('.product-card').attr('style', 'width:31%;');
-                i-- ;   
-            }
-        }
-    });
-    */
-
-    
     // 1. Находим контейнер и первый элемент (эталон ширины)
     const container = document.querySelector('#category_content');
     const firstItem = container.firstElementChild;
