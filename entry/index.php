@@ -84,24 +84,11 @@
             </div><!--navbar-icon-->
           </div><!--container-->
         </nav>
-        <!--div class="banner">
-          <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.jpg'); ?>"
-              alt="изображение горы Фудзияма">
-          <!--img src="<?//= base_url(POCKET_STYLE .'/assets/banner/banner.svg'); ?>"
-            alt="изображение горы Фудзияма"-->
-        <!--/div><!--banner-->
       </header>
   
       <main>
         <div class="container">
           <?= $view_file; ?>
-          <form id="search" class="search-form" action="">
-            <input id="input" class="form-control form-control-sm hide"
-                  type="search" placeholder="&nbsp; и с к а т ь" aria-label="поиск">
-            <button id="submit" class="btn btn-sm" type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </form>
         </div>
       </main>
 
