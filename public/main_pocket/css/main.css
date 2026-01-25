@@ -396,7 +396,7 @@ a.btn.btn-outline-secondary.promo h5 {
 div .product-card {
     position: relative;
     flex: 1 1 auto;
-    height: auto; /*470px;*/
+    height: auto;
     margin: 8px 6px 15px 6px; /* для тени */
     padding: 10px 20px;
     border: 1px solid #989ea4; /*#a7acb1;*/
@@ -444,7 +444,7 @@ div .product-card-img {
     text-align: center;
 }
 .product-card .product-card-img img {
-    height: 250px;
+    height: 290px;
     aspect-ratio: 16 / 9;
     background-color: white;
     width: auto !important;
@@ -1264,10 +1264,12 @@ div.content {
 
 div#category_content.row {
     margin: 0;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /*test*/
 }
 
 div.product-card {
     margin: 10px;
+    grid-template-rows: subgrid; /*test*/
     a.add-to-favorites {
         padding: 5px 5px 5px 5px;
     }
