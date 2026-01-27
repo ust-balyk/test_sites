@@ -44,10 +44,12 @@ const ADMIN_A = [
 ];
 
 ########
-const HOME_LAYOUT = "";
-const HOME_VIEW   = "";
-const PAGE_LAYOUT = "category";
-const PAGE_VIEW   = "category";
+const HOME_LAYOUT     = "";
+const HOME_VIEW       = "";
+const CATEGORY_LAYOUT = "category";
+const CATEGORY_VIEW   = "category";
+const PRODUCT_LAYOUT  = 'category';
+const PRODUCT_VIEW    = 'product';
 ##
 $POCKET_STYLE     = "";
 $MENU_STYLE       = "";

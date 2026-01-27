@@ -18,7 +18,7 @@ class HomeController
                 HOME_LAYOUT,  # layout
                 HOME_VIEW,    # view
                 [             # data    
-                    'title'      => 'home::japan-in.ru',
+                    //'title'      => 'home::japan-in.ru',
                     //'categories' => $data,
                     //'cache'      => $categories,
                     //'pagination' => $pagination,

@@ -161,7 +161,14 @@ $(document).ready(function() {
         console.log('Пользователь покинул вкладку: ' + counter);
     };*/
 
-    
+
+    /* =========== tooltip =========== */
+
+    $(function() {
+        $(".add-to-favorites").tooltip();
+        $(".add-to-cart").tooltip();
+    });
+   
 
 
 });

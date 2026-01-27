@@ -4,8 +4,10 @@ use Master\Pagination;
 
 class PageController
 {
-    static function index()
+
+    static function category()
     {
+
         if ( $data = db()->query("select * from categories")->get() ) {
             /* 
             $pagination = new Pagination();
@@ -16,15 +18,35 @@ class PageController
             shuffle(products);
             */
             return app()->view->full_view (   
-                PAGE_LAYOUT,    # layout
-                PAGE_VIEW,      # view
+                CATEGORY_LAYOUT,    # layout
+                CAYEGORY_VIEW,      # view
                 [               # data
                     //'title' => 'page',
                     //'category' => $data,
                     //'pagination' => $pagination,
                 ],
             );        
+        
         }
-        return app()->view->full_view ( PAGE_LAYOUT, PAGE_VIEW, [] );
+        return app()->view->full_view ( CATEGORY_LAYOUT, CATEGORY_VIEW, [] );
+    
     }
+
+    static function product()
+    {
+
+        if ( $data = db()->query("select * from categories")->get() ) {
+
+            return app()->view->full_view (
+                PRODUCT_LAYOUT,
+                PRODUCT_VIEW,
+                [],
+            );
+        
+        }
+        return app()->view->full_view ( PRODUCT_LAYOUT, PRODUCT_VIEW, [] );
+
+    }
+
+
 }

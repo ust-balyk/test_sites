@@ -15,6 +15,7 @@
     <link rel="preload" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>" as="style">
     <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('/library/jquery-ui/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
@@ -189,6 +190,7 @@
     </div><!--wrapper-->
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
+    <script src="<?= base_url('/library/jquery-ui/jquery-ui.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>

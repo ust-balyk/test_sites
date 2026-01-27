@@ -503,7 +503,7 @@ i.fa-solid.fa-heart {
 }
 
 a.add-to-favorites:hover {
-    /*border-color: white;*/
+    border-color: blue;
     background-color: white;
     i.fa-solid.fa-heart {
         color: red;
@@ -520,11 +520,19 @@ a.add-to-cart {
     border-radius: 50%;
 }
 a.add-to-cart:hover {
-    /*border: white;*/
+    border-color: green;
     background-color: white;
     i.fa-solid.fa-cart-shopping {
         color: blue;
     }
+}
+
+/* стили подсказки */
+div.tooltip-inner {
+    background-color: grey !important;
+}
+div.tooltip-arrow::before {
+    border-top-color: grey !important;
 }
 
 @media all and (max-width: 500px) {
