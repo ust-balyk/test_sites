@@ -154,10 +154,10 @@
                     33 000р<del>35 000р</del>
                   </div>
                   <div class="product-card-btns">
-                    <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="ДОБАВИТЬ В ИЗБРАННОЕ">
+                    <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">
                       <i class="fa-solid fa-heart"></i>
                     </a>
-                    <a href="#" class="btn btn-outline-secondary add-to-cart" title="ДОБАВИТЬ В КОРЗИНУ">
+                    <a href="#" class="btn btn-outline-secondary add-to-cart" title="добавить в корзину">
                       <i class="fa-solid fa-cart-shopping"></i>
                     </a>
                   </div>
