@@ -685,9 +685,9 @@ a.btn.popular:hover {
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
-/* ===================Carousel Popular=========== */
+/* =================== /Carousel Popular =========== */
 
-/* ===================Call Back================== */
+/* =================== Call Back ================== */
 
 section.call-back {
     margin-top: 90px;
@@ -733,7 +733,7 @@ div.call-back button.btn.btn-primary {
     margin-bottom: -19px
 }
 
-/* ===================Call Back================== */
+/* =================== /Call Back ================== */
 
 /* =================== INFO ===================== */
 
@@ -780,9 +780,22 @@ div.contact {
     color: var(--grey-color);
 }
 
-/* ===================Info ====================== */
+/* =================== /Info ====================== */
 
-/* ===================Footer===================== */
+/* =================== Post ====================== */
+
+section.post {
+    ol {
+        list-style-type: square; /*disclosure-closed;*/
+    }
+    ul>li {
+        list-style-type: disc;
+    }
+}
+
+/* =================== /Post ====================== */
+
+/* =================== Footer ===================== */
 
 div.copyright {
     height: 92px;
