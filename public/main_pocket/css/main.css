@@ -739,7 +739,7 @@ div.call-back button.btn.btn-primary {
 
 section.info {
     height: 100%;
-    padding-top: 60px;
+    padding: 40px 0px 40px 0px;
     background-color: white; /*var(--nav-color);*/
     /*box-shadow: 0px 0px 4px 6px white;*/
     border-bottom: 1px dotted var(--light-grey-color);
@@ -752,16 +752,19 @@ section.info {
     margin-bottom: 10px;
 }
 
-div.col-md-4 .address { /* колонки с адресами */
-    margin-top: 40px;
-    margin-bottom: 70px;
+div.col-md-4 .info { /* колонки с адресами */
+    margin-top: 30px;
+    margin-bottom: 120px;
+}
+
+div.contact {
+    padding-top: 3px;
 }
 
 .contact,
 .address,
 .payment_delivery {
-    padding-left: 35px;
-    /*text-align: center;*/
+    padding-left: 40px;
 }
 
 .contact ul,
@@ -769,6 +772,7 @@ div.col-md-4 .address { /* колонки с адресами */
     list-style-type: none; /* Убирает маркеры */
     padding-left: 0;      /* Убирает отступ */
 }
+
 .contact a,
 .address a,
 .payment_delivery a {
