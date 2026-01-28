@@ -70,20 +70,22 @@
             <div class="navbar-icon">
               <ul>
                 <li>
-                  <a href="#">
-                    <img class="ico"
-                        src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img class="ico"
-                        src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
-                  </a>
+                  <?php if (! isset($_SESSION['name'])) { ?>
+                    <a href="<?= base_url('/account'); ?>">
+                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
+                    </a>
+                  <?php } else { echo user_heart(); } ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
                     <a href="<?= base_url('/account'); ?>">
+                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
+                    </a>
+                  <?php } else { echo user_cart(); } ?>
+                </li>
+                <li>
+                  <?php if (! isset($_SESSION['name'])) { ?>
+                    <a href="<?= base_url('/login'); ?>">
                       <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
                     </a>
                   <?php } else { echo user_icon(); } ?>
@@ -138,7 +140,7 @@
           <div class="info col-md-8 offset-md-2">
             <div class="row">
 
-              <div class="col-md-4 mt-3">
+              <div class="col-md-4 info">
                 <h6>связаться с нами</h6>
                 <div class="contact">
                   <ul>
@@ -150,7 +152,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 mt-3">
+              <div class="col-md-4 info">
                 <h6>наш адрес</h6>
                 <div class="address">
                   <!--a href="https://www.google.com/maps/search/?api=1&query=45.011728,39.123093"
@@ -165,7 +167,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 mt-3">
+              <div class="col-md-4 info">
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
                   <ul>

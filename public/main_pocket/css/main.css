@@ -527,16 +527,18 @@ a.add-to-cart:hover {
     }
 }
 
-/* стили подсказок */
+/* стили подсказок TOOLTIP */
+
 div.tooltip-inner {
     border-radius: 3px !important;
-    background-color: var(--grey-color) !important;
+    background-color: var(--light-grey-color) !important;
     font-size: 17px !important;
     /* высота блока уменьшается
     padding: 0px 10px !important;*/
 }
 div.tooltip-arrow::before {
-    border-top-color: var(--grey-color) !important;
+    border-top-color: var(--light-grey-color) !important;
+    border-bottom-color: var(--light-grey-color) !important;
 }
 
 @media all and (max-width: 500px) {

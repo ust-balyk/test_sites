@@ -167,6 +167,7 @@ $(document).ready(function() {
     $(function() {
         $(".add-to-favorites").tooltip();
         $(".add-to-cart").tooltip();
+        $(".user_out").tooltip();
     });
    
 

@@ -24,9 +24,9 @@
   <body>
     <div style="height:1px;border-bottom:1px dotted #744474;clear:both"></div>
     <div class="wrapper">
-      <!--video controls="false" loop="true" autoplay="true" name="media" preload="auto" hidden>
+      <!--audio controls="false" loop="true" autoplay="true" name="media" preload="auto" hidden>
         <source src="<?= base_url(POCKET_STYLE.'/assets/audio/audio.mp3');?>" type="audio/mp3">
-      </video>
+      </audio-->
       <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
@@ -71,16 +71,18 @@
             <div class="navbar-icon">
               <ul>
                 <li>
-                  <a href="#">
-                    <img class="ico"
-                        src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
-                  </a>
+                  <?php if (! isset($_SESSION['name'])) { ?>
+                    <a href="<?= base_url('/account'); ?>">
+                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
+                    </a>
+                  <?php } else { echo user_heart(); } ?>
                 </li>
                 <li>
-                  <a href="#">
-                    <img class="ico"
-                        src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
-                  </a>
+                  <?php if (! isset($_SESSION['name'])) { ?>
+                    <a href="<?= base_url('/account'); ?>">
+                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
+                    </a>
+                  <?php } else { echo user_cart(); } ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>

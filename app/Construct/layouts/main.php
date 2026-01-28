@@ -2,7 +2,8 @@
 <html lang="ru" class="notranslate">
   <head>
     <meta charset="UTF-8">
-    <title>Здоровье из Японии</title>
+    <title><?php if(!isset($_SESSION['name'])){?>Здоровье из Японии
+          <?php }else{ echo "hello ". $_SESSION['name']; } ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Японские витамины - покупайте по доступной цене на Japan-in.Ru!">
     <meta name="keywords" content="japan-in.ru, satomi-japan.com, японские витамины, японская косметика,
@@ -71,16 +72,18 @@
             <div class="navbar-icon">
               <ul>
                 <li>
-                  <a href="#">
-                    <img class="ico"
-                        src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
-                  </a>
+                  <?php if (! isset($_SESSION['name'])) { ?>
+                    <a href="<?= base_url('/account'); ?>">
+                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
+                    </a>
+                  <?php } else { echo user_heart(); } ?>
                 </li>
                 <li>
-                  <a href="#">
-                    <img class="ico"
-                        src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
-                  </a>
+                  <?php if (! isset($_SESSION['name'])) { ?>
+                    <a href="<?= base_url('/account'); ?>">
+                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
+                    </a>
+                  <?php } else { echo user_cart(); } ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>

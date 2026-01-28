@@ -50,7 +50,7 @@ const CATEGORY_LAYOUT = "category";
 const CATEGORY_VIEW   = "category";
 const PRODUCT_LAYOUT  = 'category';
 const PRODUCT_VIEW    = 'product';
-##
+## при шаблоне start одноименный стиль обязателен!
 $POCKET_STYLE     = "";
 $MENU_STYLE       = "";
 ####

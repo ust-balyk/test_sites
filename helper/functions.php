@@ -62,8 +62,20 @@ function p_view($view='', $data=[])
 
 function user_icon()
 {
-   return '<a href="' . base_url('/logout') . '">
-            <img class="ico" src="' . base_url(POCKET_STYLE .'/favicon/user_out.png') . '"/>
+   return '<a class="user_out" title="выход" href="'. base_url('/logout') .'">
+            <img class="ico" src="'. base_url(POCKET_STYLE .'/favicon/user_out.png') .'"/>
+           </a>';
+}
+function user_heart()
+{
+   return '<a href="'. base_url('/account') .'">
+            <img class="ico" src="'. base_url(POCKET_STYLE .'/favicon/user_heart.png') .'"/>
+           </a>';
+}
+function user_cart()
+{
+   return '<a href="'. base_url('/account') .'">
+            <img class="ico" src="'. base_url(POCKET_STYLE .'/favicon/user_cart.png') .'"/>
            </a>';
 }
 
