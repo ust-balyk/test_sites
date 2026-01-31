@@ -1,24 +1,17 @@
 <html>
+<meta charset="utf8">
 <style>
 /**/
 :root {
-  --main-color: #CFCFCF; /*#555555; /*#8D8D8D; /*#A5A5A5; /*#909090; /*#CAC4B0; /*#99d2ff; */
-  --stroke-color: #ABABAB; /* #4D4D4D; /* калёсы */
+  --main-color: #99d2ff;
+  --stroke-color: black; /* калёсы */
   
 }
 /**/
 body {
-  background: var(--main-color);
+  background-color: var(--main-color);
 }
-/*
-h1 {
-  margin: 100px auto 0 auto;
-  color: var(--stroke-color);
-  font-family: 'Encode Sans Semi Condensed', Verdana, sans-serif;
-  font-size: 9rem; line-height: 9rem;
-  font-weight: 200;
-  text-align: center;
-}*/
+
 div.h {
   margin: 0 auto 0 auto;
   height: 10%;
@@ -29,22 +22,26 @@ h2 {
   font-family: 'Encode Sans Semi Condensed', Verdana, sans-serif;
   font-size: 1.5rem;
   font-weight: 200;
-  color: #8D8D8D; /* text */
+  color: black; /*#8D8D8D;*/ /* text */
   text-align: center;
 }
-h1, h2 {
+
+h2 {
   -webkit-transition: opacity 0.5s linear, margin-top 0.5s linear; /* Safari */
   transition: opacity 0.5s linear, margin-top 0.5s linear;
 }
-.loading h1, .loading h2 {
+
+.loading h2 {
   margin-top: 0px;
   opacity: 0;  
 }
+
 .gears {
   position: relative;
   margin: 0 auto;
   width: auto; height: 0;
 }
+
 .gear {
   position: relative;
   z-index: 0;
@@ -53,6 +50,7 @@ h1, h2 {
   border-radius: 50%;
   background: var(--stroke-color);
 }
+
 .gear:before{
   position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;
   z-index: 2;
@@ -60,6 +58,7 @@ h1, h2 {
   border-radius: 50%;
   background: var(--main-color);
 }
+
 .gear:after {
   position: absolute; left: 25px; top: 25px;
   z-index: 3;
@@ -70,16 +69,20 @@ h1, h2 {
   box-sizing: border-box;
   background: var(--main-color);
 }
+
 .gear.one {
   left: -130px;
 }
+
 .gear.two {
   top: -75px;
 }
+
 .gear.three {
   top: -235px;
   left: 130px;
 }
+
 .gear .bar {
   position: absolute; left: -15px; top: 50%;
   z-index: 0;
@@ -88,6 +91,7 @@ h1, h2 {
   border-radius: 5px;
   background: var(--stroke-color);
 }
+
 .gear .bar:before {
   position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;
   z-index: 1;
@@ -95,10 +99,12 @@ h1, h2 {
   border-radius: 2px;
   background: var(--main-color);
 }
+
 .gear .bar:nth-child(2) {
   transform: rotate(60deg);
   -webkit-transform: rotate(60deg);
 }
+
 .gear .bar:nth-child(3) {
   transform: rotate(120deg);
   -webkit-transform: rotate(120deg);
@@ -108,10 +114,12 @@ h1, h2 {
   0% { -webkit-transform: rotate(0deg);}
   100% { -webkit-transform: rotate(360deg);}
 }
+
 @-webkit-keyframes anticlockwise {
   0% { -webkit-transform: rotate(360deg);}
   100% { -webkit-transform: rotate(0deg);}
 }
+
 @-webkit-keyframes clockwiseError {
   0% { -webkit-transform: rotate(0deg);}
   20% { -webkit-transform: rotate(30deg);}
@@ -119,12 +127,14 @@ h1, h2 {
   60% { -webkit-transform: rotate(30deg);}
   100% { -webkit-transform: rotate(0deg);}
 }
+
 @-webkit-keyframes anticlockwiseErrorStop {
   0% { -webkit-transform: rotate(0deg);}
   20% { -webkit-transform: rotate(-30deg);}
   60% { -webkit-transform: rotate(-30deg);}
   100% { -webkit-transform: rotate(0deg);}
 }
+
 @-webkit-keyframes anticlockwiseError {
   0% { -webkit-transform: rotate(0deg);}
   20% { -webkit-transform: rotate(-30deg);}
@@ -132,25 +142,29 @@ h1, h2 {
   60% { -webkit-transform: rotate(-30deg);}
   100% { -webkit-transform: rotate(0deg);}
 }
+
 .gear.one {
   -webkit-animation: anticlockwiseErrorStop 1s linear infinite;
 }
+
 .gear.two {
   -webkit-animation: anticlockwiseError 1s linear infinite;
 }
+
 .gear.three {
   -webkit-animation: clockwiseError 1s linear infinite;
 }
+
 .loading .gear.one, .loading .gear.three {
   -webkit-animation: clockwise 2s linear infinite;
 }
+
 .loading .gear.two {
   -webkit-animation: anticlockwise 2s linear infinite;
 }
 </style>
 
 <body class="loading">
-  <!--h1>500</h1-->
   <div class="h"></div>
   <h2>извините, в данный момент мы ускоряем серверы для вас.</h2>
   <div class="gears">

@@ -43,16 +43,16 @@ const ADMIN_A = [
    'test@test.ru',
 ];
 
-########
-const HOME_LAYOUT     = "";
+######## при шаблоне start одноименный стиль обязателен!
+const HOME_LAYOUT     = "main";
 const HOME_VIEW       = "";
 const CATEGORY_LAYOUT = "category";
 const CATEGORY_VIEW   = "category";
 const PRODUCT_LAYOUT  = 'category';
 const PRODUCT_VIEW    = 'product';
-## при шаблоне start одноименный стиль обязателен!
-$POCKET_STYLE     = "";
-$MENU_STYLE       = "";
+##
+$POCKET_STYLE = "";
+$MENU_STYLE   = "";
 ####
 if ( $POCKET_STYLE == false || $POCKET_STYLE === 'main' ) {
    $POCKET_STYLE = '/public/main_pocket';

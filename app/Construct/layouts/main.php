@@ -9,7 +9,7 @@
     <meta name="keywords" content="japan-in.ru, satomi-japan.com, японские витамины, японская косметика,
       витамины из японии, витамины и минералы, японские витамины в наличии, витамины для глаз, антиоксиданты,
       коллаген, сквален, наттокиназа, пробиотики, средства для суставов, высшее качетво добавок,
-      японские витамины для мужского здоровья, витамины для женского здоровья, витамины для детей">
+      японские витамины для мужчин, витамины для женщин, витамины для детей">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
@@ -20,14 +20,11 @@
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>"> 
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
     <div class="wrapper">
-      <!--video controls="false" loop="true" autoplay="true" name="media" preload="auto" hidden>
-        <source src="<?= base_url(POCKET_STYLE.'/assets/audio/audio.mp3');?>" type="audio/mp3">
-      </video>
       <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
@@ -73,14 +70,14 @@
               <ul>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/account'); ?>">
+                    <a href="#">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
                     </a>
                   <?php } else { echo user_heart(); } ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/account'); ?>">
+                    <a href="#">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
                     </a>
                   <?php } else { echo user_cart(); } ?>

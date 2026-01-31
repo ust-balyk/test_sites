@@ -62,7 +62,7 @@ class AdminController
          Application::$app->session->set("role", "admin");
          if (Application::$app->session->get("pass", $this->pass())) {
 
-            session_regenerate_id(true);
+            session_regenerate_id(true); // закрытый вид
             file_put_contents($filename, $content);
 
          }

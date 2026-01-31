@@ -86,7 +86,7 @@ function abort($code=404)
    exit();
 }
 
-function base_url($path=""): string
+function base_url($path="/"): string
 {
    return PATH . $path;
 }

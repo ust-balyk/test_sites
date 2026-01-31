@@ -169,7 +169,6 @@ $(document).ready(function() {
         $(".add-to-cart").tooltip();
         $(".user_out").tooltip();
     });
-   
 
 
 });

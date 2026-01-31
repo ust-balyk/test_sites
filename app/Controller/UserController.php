@@ -43,7 +43,7 @@ class UserController
         if ($Name > 0) {
             return mb_convert_case($Name, MB_CASE_TITLE, "UTF-8");
         } else {
-            return false; //return "Richard Roe";
+            return false;
         }
     }
 
@@ -82,7 +82,7 @@ class UserController
                         
                         if ( ! db()->emailExists($user->attributes['email']) ) {
                             
-                            $timeTarget = 0.500;     // Целевое время
+                            $timeTarget = 0.300;     // Целевое время
                             $cost = 10;          // Минимальный порог
                             $password = $user->attributes['password'];
 

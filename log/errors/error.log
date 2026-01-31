@@ -7,3 +7,65 @@
 [2026-01-19 22:58:03] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
 [2026-01-19 23:04:35] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
 [2026-01-19 23:05:50] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:05:13] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:06:47] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:07:43] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:08:17] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:09:00] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:09:47] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:14:03] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:17:24] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:17:24] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:17:43] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:17:44] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:21:15] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:21:15] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:21:15] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:22:37] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:22:37] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:22:37] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:22:40] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:22:40] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:22:40] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:25:09] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:25:10] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:25:10] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:26:35] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:26:35] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:26:35] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:27:26] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:27:27] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:31:30] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:31:31] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:31:48] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:31:49] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:32:29] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:32:30] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:37:01] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 22:58:01] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 23:05:15] DB Error: SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+[2026-01-28 23:05:34] DB Error: SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+[2026-01-28 23:16:46] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:17:04] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:19:31] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:19:34] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:19:46] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:19:49] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:23:41] DB Error: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 'localhost' failed: nodename nor servname provided, or not known
+[2026-01-28 23:23:45] DB Error: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 'localhost' failed: nodename nor servname provided, or not known
+[2026-01-28 23:24:31] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:30:08] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-28 23:34:32] DB Error: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[2026-01-28 23:38:04] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:38:30] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:39:27] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:39:51] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:40:47] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:41:12] DB Error: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+[2026-01-28 23:48:50] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-29 00:36:04] DB Error: SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+[2026-01-29 00:50:16] DB Error: SQLSTATE[HY000] [1049] Unknown database ''''
+[2026-01-29 00:50:26] DB Error: SQLSTATE[HY000] [1049] Unknown database ''''
+[2026-01-29 00:50:45] DB Error: SQLSTATE[HY000] [1049] Unknown database ''''
+[2026-01-29 00:52:06] DB Error: SQLSTATE[HY000] [1049] Unknown database 'japan_in_ru'
+[2026-01-29 01:06:35] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@test.ru = 'email' LIMIT 1' at line 1

@@ -531,14 +531,14 @@ a.add-to-cart:hover {
 
 div.tooltip-inner {
     border-radius: 3px !important;
-    background-color: var(--light-grey-color) !important;
+    background-color: var(--grey-color) !important;
     font-size: 17px !important;
     /* высота блока уменьшается
     padding: 0px 10px !important;*/
 }
 div.tooltip-arrow::before {
-    border-top-color: var(--light-grey-color) !important;
-    border-bottom-color: var(--light-grey-color) !important;
+    border-top-color: var(--grey-color) !important;
+    border-bottom-color: var(--grey-color) !important;
 }
 
 @media all and (max-width: 500px) {
@@ -811,9 +811,9 @@ img.brand_footer {
     background-color: white;
 }
 
-/* ===================Footer===================== */
+/* =================== /Footer ===================== */
 
-/* ===================Button Top================= */
+/* =================== Button Top ================= */
 
 #top_btn {
     display: none;
@@ -845,9 +845,9 @@ i.fa-solid.fa-chevron-up:hover {
     color: black;
 }
 
-/* ===================Button Top================= */
+/* =================== /Button Top ================= */
 
-/* ===================Search Form================ */
+/* =================== Search Form ================= */
 
 
 #search.search-form {
@@ -921,9 +921,9 @@ input#input.form-control:-ms-input-placeholder {
 input:focus { caret-color: #fff; }
 
 
-/* ===================Search Form================ */
+/* =================== /Search Form =================== */
 
-/* ===================Page Category=================== */
+/* =================== Page Category =================== */
 
 section.category  {
     min-height: 1500px;
@@ -1031,8 +1031,8 @@ div.filters {
     border-bottom-left-radius: 2px;
 }
 
-
 /* кнопка "применить фильтры" */
+
 div#btn_activate_filters {
     padding: 0;
     margin: 20px 0px 22px 0px;
@@ -1069,8 +1069,8 @@ h6#selector_text.activate_filters:hover {
     color: black;
 }
 
-
 /* кнопки фильтров */
+
 div.accordion-item {
     border: 1px solid var(--light-grey-color);
 }
@@ -1092,12 +1092,14 @@ button.accordion-button:focus {
 }
 
 /* переопределение стилей, когда аккордеон открыт */
+
 .accordion-button:not(.collapsed) {
   background-color: var(--light-blue-color) !important;
   border-bottom: 1px solid var(--light-grey-color) !important;
 }
 
 /* стилизовать иконку (стрелку) */
+
 .accordion-button.collapsed::after {
     background-image: url("../favicon/filter.svg");
     background-size: cover;
@@ -1171,7 +1173,9 @@ input#min_price.form-control:focus,
 input#max_price.form-control:focus {
     box-shadow: none;
 }
+
 /* убрать "переключатели" (стрелки/спиннеры) */
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -1220,6 +1224,7 @@ ul.filters_list {
 }
 
 /* индикатор выбора фильтра */
+
 .form-check-input {
     border-color: var(--light-grey-color);
 }
@@ -1238,6 +1243,7 @@ ul.filters_list {
 }
 
 /* строка метки */
+
 label.form-check-label {
     /* строка переносится */
     word-break: break-word;
@@ -1407,5 +1413,10 @@ div.category_description {
     margin: 20px 20px 0px 0px !important;
 }
 
+/* =================== /Page Category =================== */
 
-/* ===================Page Category=================== */
+/* =================== Product =================== */
+
+
+
+/* =================== /Product =================== */

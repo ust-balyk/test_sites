@@ -71,14 +71,14 @@
               <ul>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/account'); ?>">
+                    <a href="">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
                     </a>
                   <?php } else { echo user_heart(); } ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/account'); ?>">
+                    <a href="">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
                     </a>
                   <?php } else { echo user_cart(); } ?>

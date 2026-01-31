@@ -504,7 +504,7 @@
       </div><!--slider-popular-->
     </div><!--container-->
   </section><!--favorite-promo-->
-  <!--section>
+  <section>
     <div class="container description">
       <div class="category_description clearfix">
         <h4>Что такое японская система ухода за кожей и как она работает?</h4>
@@ -530,8 +530,8 @@
         <p>Подтверждаем: японская система ухода за кожей существует. И она действительно работает!</p>
       </div>
     </div>
-  </section-->
-  <section class="post">
+  </section>
+  <!--section class="post">
     <div class="container d-none d-md-block">
       <div class="mt-5 mb-5" style="text-align:center">
         <img style="object-fit:cover;" src="<?= base_url('/images/post/face-2.png'); ?>"></img>
@@ -555,5 +555,5 @@
       </ol>
       <p>Спрос на японскую косметику формируется многолетней репутацией конкретных продуктов, которые стали неотъемлемым атрибутом миллионов людей по всему миру. Это те средства, которые покупают снова и снова, рекомендуют друзьям и везут из Японии в качестве идеального подарка.</p>
     </div>
-  </section>
+  </section-->
 

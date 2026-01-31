@@ -10,16 +10,16 @@ class Database
 
     public function __construct()
     {
-        $dsn = "mysql:host=" . DB_SETTINGS['host'] .
-                  ";dbname=" . DB_SETTINGS['database'] .
-                 ";charset=" . DB_SETTINGS['charset'];
-        try 
-        {
+        $dsn = "mysql:host=". DB_SETTINGS['host'] .
+                   ";dbname=".DB_SETTINGS['database'] .
+                 ";charset=". DB_SETTINGS['charset'];
+
+        try
+        { 
             $this->connection = new \PDO( $dsn,
                 DB_SETTINGS['username'],
                 DB_SETTINGS['password'],
-                DB_SETTINGS['options']
-            
+                DB_SETTINGS['options' ],
             );
 
             $tbl_users = "CREATE TABLE IF NOT EXISTS `users`
@@ -111,7 +111,7 @@ class Database
     
     }
 
-    public function findOne($tbl, $value, $key = 'id')
+    public function findOne($tbl, $key = 'id', $value = null)
     {
         $this->query("select * from {$tbl} where $key = ? LIMIT 1", [$value]);
         return $this->stmt->fetch();

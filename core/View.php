@@ -5,7 +5,9 @@ class View
 {
 
    public function full_view($layout, $view, $data=[])
-   {  
+   { 
+      // extract() рассматривает ключи массива в качестве имён переменных,
+      // а их значения — в качестве значений этих переменных 
       extract($data);
         
       $view_file = VIEW . "/{$view}.php";
