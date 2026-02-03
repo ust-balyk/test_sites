@@ -21,7 +21,16 @@
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>"> 
+    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <meta property="og:locale" content="ru_RU" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Всё для Твоей Красоты и Здоровья!" />
+    <meta property="og:description" content="Инновационные достижения косметологии и традиционные системы оздоровления из Страны восходящего солнца!" />
+	<meta property="og:url" content="https://japan-in.ru" />
+	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
+	<meta property="og:image:width" content="1630" />
+	<meta property="og:image:height" content="1136" />
+	<meta property="og:image:type" content="image/png" />
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
