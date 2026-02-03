@@ -101,7 +101,7 @@ class UserController
                                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));    
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
-                                echo "<script>window.history.go(-3);window.location.reload();</script>";
+                                echo "<script>window.history.go(-2);window.location.reload();</script>";
                             }
 
                         } else {
@@ -134,7 +134,7 @@ class UserController
                 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
 
                 if (db()->realUser($email, $password)) {
-                    echo "<script>window.history.go(-2);window.location.reload();</script>";
+                    echo "<script>window.history.go(-1);window.location.reload();</script>";
 
                 } else {
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');

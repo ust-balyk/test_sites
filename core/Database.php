@@ -151,6 +151,11 @@ class Database
                 Application::$app->session->set('email', $user['email']);
                 Application::$app->session->set('name', $user['name']);
 
+                if (!$this->verify_auth_token()) {
+
+                    $this->set_auth_token();
+
+                }
                 return true;
 
             }
@@ -216,9 +221,11 @@ class Database
 
     private function verify_auth_token()
     {
-        if ($hash_token = $_COOKIE['0960']) {
+        if (isset($_COOKIE['0960'])) {
 
-            if (password_verify($this->auth_token(), $hash_token)) {
+            $hash_token = $_COOKIE['0960'];
+
+            if (password_verify($this->set_auth_token(), $hash_token)) {
 
                 return true;
 
