@@ -167,21 +167,25 @@ function old($fieldname): string
    return '';
 }
 
+function get_auth_token(): string
+{
+   return '<input type="hidden" name="auth_token" value="'. db()->set_auth_token() .'">';
+}
+
 function get_csrf_field(): string
 {
-   return '<input type="hidden" name="csrf_token" value="' .
-            session()->get('csrf_token') . '">';
+   return '<input type="hidden" name="csrf_token" value="'. session()->get('csrf_token') .'">';
 }
 
 function get_csrf_meta(): string
 {
-   return '<meta name="csrf-token" content="' .
-            session()->get('csrf_token') . '">';
+   return '<meta name="csrf-token" content="'. session()->get('csrf_token') .'">';
 }
 
 function check_csrf_token(): bool
 {
    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+
       return false;
 
    }

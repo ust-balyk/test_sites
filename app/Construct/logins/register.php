@@ -5,13 +5,15 @@
         <title>Регистрация</title>
         <link rel="icon" href="<?= base_url('/library/favicon/icon.png'); ?>" type="image/png">
         <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
-    </head><?php //dump(session()->get('csrf_token')); ?>
+    </head>
     <body style="background-color: #eaeaea">
         <div class="container" style="height: 90vh"><br>
             <div class="row">
                 <div class="col-md-12">
                     <h5 class="text-primary"><i>Заполните все поля, чтобы создать личное пространство</i></h5>
                     <form action="<?= base_url('/register'); ?>" method="post">
+
+                      <?= get_csrf_field(); ?>
 
                       <div class="form-group">
                         <label></label>
@@ -52,7 +54,7 @@
                                value="     р е г и с т р а ц и я     ">
                       </div><br>
 
-                      <?= get_csrf_field(); ?>
+                      <?= get_auth_token(); ?>
 
                       <p>Уже зарегистрированы?
                         <a style="font-weight:bold; color:#198754; text-decoration:none"

@@ -7,7 +7,7 @@ class Session
    private function generateCsrfToken()
    {
       if (! isset($_SESSION['csrf_token'])) {
-         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+         $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
       
       }
    
@@ -17,10 +17,10 @@ class Session
    {
       //session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
       session_set_cookie_params( [ 
-         'lifetime' => 0,     // до закрытия браузера
-         'path'     => '/',   // для всех путей в домене 
-         'secure'   => true,  // заставляет браузер отправлять cookie только по HTTPS
-         'httponly' => true,  // запрещает доступ к cookie из JavaScript через document.cookie.
+         'lifetime' => 3600,            // 31536000 год
+         'path'     => '/',         // для всех путей в домене 
+         'secure'   => true,       // заставляет браузер отправлять cookie только по HTTPS
+         'httponly' => true,      // запрещает доступ к cookie из JavaScript через document.cookie.
          'samesite' => 'Strict', // 'Lax' будут ли cookies отправляться при межсайтовых запросах
       ] );
       session_start( [ 

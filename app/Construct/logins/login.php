@@ -5,7 +5,7 @@
         <title>Вход</title>
         <link rel="icon" href="<?= base_url('/default_pocket/favicon/icon.png'); ?>" type="image/png">
         <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
-    </head><?php //dump(session()->get('csrf_token')); ?>
+    </head>
     <body style="background-color: #eaeaea">        
         <div class="container" style="height: 97vh"><br><br>
             <div class="row">
@@ -13,7 +13,9 @@
                     <h5 class="text-primary">
                         <i>Правильно укажите свои данные, чтобы войти в личное пространство</i></h5>
                     <form action="<?= base_url('/login'); ?>" method="post">
-                        
+
+                        <?= get_csrf_field(); ?>
+
                         <div class="form-group">
                             <label></label>
                             <input type="email" name="email" placeholder="Электронная почта"
@@ -28,12 +30,10 @@
                         </div><br><br>
                         
                         <div class="form-group">
-                            <input type="submit" name="submit"
+                            <input type="submit" name="submit" id="login_button"
                                    class="btn btn-primary"
                                    value="     а у т е н т и ф и к а ц и я     ">
                         </div><br>
-
-                        <?= get_csrf_field(); ?>
 
                         <p>Нет аккаунта?
                             <a style="font-weight:bold; color:#198754; text-decoration:none"

@@ -3,8 +3,8 @@
 <div class="terminal">
   <h1>Error <span class="errorcode">419</span></h1>
   <p class="output">The access period has expired...</p>
-  <p class="output">Please try to <a href="http://localhost:8888/login">log in</a>
-                    or <a href="http://localhost:8888">return to the homepage</a>.</p>
+  <p class="output">Please try to <a href="http://localhost:8888/login"> log in </a>
+                    or <a href="http://localhost:8888"> return to the home page </a>.</p>
   <p class="output">Good luck.</p>
 </div>
 <!--style>

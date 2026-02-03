@@ -5,11 +5,12 @@
     <title><?php if(!isset($_SESSION['name'])){?>Здоровье из Японии
           <?php }else{ echo "hello ". $_SESSION['name']; } ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Японские витамины - покупайте по доступной цене на Japan-in.Ru!">
-    <meta name="keywords" content="japan-in.ru, satomi-japan.com, японские витамины, японская косметика,
+    <meta name="description" content="Japan-in.Ru - японская косметика и витамины по доступной цене!">
+    <meta name="keywords" content="satomi-japan.com, купить японские витамины со скидкой, витамины для женщин,
+      купить японскую косметику со скидкой, купить японские витамины, купить японскую косметику,
       витамины из японии, витамины и минералы, японские витамины в наличии, витамины для глаз, антиоксиданты,
-      коллаген, сквален, наттокиназа, пробиотики, средства для суставов, высшее качетво добавок,
-      японские витамины для мужчин, витамины для женщин, витамины для детей">
+      коллаген, сквален, наттокиназа, пробиотики, средства для суставов, японские БАДы,
+      японские витамины для мужчин, витамины для детей">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">

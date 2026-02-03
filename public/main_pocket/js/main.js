@@ -171,4 +171,13 @@ $(document).ready(function() {
     });
 
 
+    /* =========== enter =========== */
+
+    /*
+    $('#login_button').click(function() {
+        $('.navbar-icon').load(window.location.href + ' .navbar-icon');
+    });*/
+
+
+
 });

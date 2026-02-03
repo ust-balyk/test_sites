@@ -1,3 +1,5 @@
+<?php dump($_SESSION['csrf_token']); ?>
+<?php dump($_COOKIE); ?>
   <section class="superiority">
     <div class="container superiority">
       <div class="row">
@@ -505,7 +507,7 @@
     </div><!--container-->
   </section><!--favorite-promo-->
   <section>
-    <div class="container description">
+    <div class="container d-none d-md-block description">
       <div class="category_description clearfix">
         <h4>Что такое японская система ухода за кожей и как она работает?</h4>
         <p><img src="<?= base_url('/images/post/face.jpg'); ?>" class="note-float-left"
