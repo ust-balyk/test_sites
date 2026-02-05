@@ -150,12 +150,12 @@ class Database
                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
                 Application::$app->session->set('email', $user['email']);
                 Application::$app->session->set('name', $user['name']);
-
+                /*
                 if (!$this->verify_auth_token()) {
 
                     $this->set_auth_token();
 
-                }
+                }*/
                 return true;
 
             }
@@ -202,9 +202,25 @@ class Database
 
     /* авторизация cookie */
 
+    public function generate_token($length = LENGTH_AUTH_TOKEN)
+    {
+        /* '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' */
+        $start = 'aNGERUwODQqiFhYv9JAg5IMTBuxyXect6VZ8zp7lodW0n3SbHs41PmkKjrL2fC';
+        $stop_length = strlen($start);
+        $token = '';
+
+        for ($i = 0; $i < $length; $i++) {
+        
+            $token .= $start[random_int(0, $stop_length - 1)];
+        
+        }
+        return $token;
+
+    }
+
     public function set_auth_token()
     {
-        $token = bin2hex(random_bytes(32));
+        $token = $this->generate_token();
         $hash_token = password_hash($token, PASSWORD_DEFAULT);
 
         $options = array (
@@ -219,18 +235,15 @@ class Database
 
     }
 
+    
     private function verify_auth_token()
     {
-        if (isset($_COOKIE['0960'])) {
+        $hash_token = $_COOKIE['0960'];
 
-            $hash_token = $_COOKIE['0960'];
+        if (password_verify($this->generate_token(), $hash_token)) {
+                
+            return true;
 
-            if (password_verify($this->set_auth_token(), $hash_token)) {
-
-                return true;
-
-            }
-            return false;
         }
         return false;
     
@@ -238,7 +251,7 @@ class Database
 
     private function user_back()
     {
-        if (isset($_SESSION['name'])) {
+        if (!isset($_SESSION['name']) && isset($_COOKIE['0960'])) {
 
             $auth_token = $this->set_auth_token();
             $this->query("select * from users where auth_token = ? LIMIT 1", [$auth_token]);
@@ -263,6 +276,7 @@ class Database
 
     }
 
+    /*
     public function up_auth_token()
     {
         $token = $this->auth_token();
@@ -270,6 +284,7 @@ class Database
         $this->query("INSERT INTO users ON DUPLICATE KEY UPDATE auth_token = VALUES($token)");
     }
 
+    */
     /* авторизация cookie END */
 
 

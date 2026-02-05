@@ -43,6 +43,9 @@ const ADMIN_A = [
    'test@test.ru',
 ];
 
+########
+const LENGTH_AUTH_TOKEN = 8;
+
 ######## при шаблоне start одноименный стиль обязателен!
 const HOME_LAYOUT     = "main";
 const HOME_VIEW       = "";
