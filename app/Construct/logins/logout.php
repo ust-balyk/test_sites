@@ -1,8 +1,7 @@
 <?php
+
 session_unset();           
 session_destroy();
-
-setcookie("0960", "", time() - 3600);
 
 $filename = '../app/Controller/AdminController.php';
 $content = '';

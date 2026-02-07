@@ -134,14 +134,29 @@ class UserController
                 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
 
                 if (db()->realUser($email, $password)) {
+
+                    $token = db()->generate_token();
+                    $email = session()->get('email');
+                    db()->query("UPDATE users SET `auth_token`=? WHERE `email`=?", [$token, $email]);
+                    $hash_token = password_hash($token, PASSWORD_DEFAULT);
+                    $options = array (
+                        'expires'  => time() + 31536000,
+                        'path'     => '/',
+                        'secure'   => true,      
+                        'httponly' => true,     
+                        'samesite' => 'Strict'
+                    );
+                    setcookie('0960', $hash_token, $options);
                     echo "<script>window.history.go(-1);window.location.reload();</script>";
 
                 } else {
+
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                     app()->response->redirect('/login');
+                
                 }
-            
             } else {
+
                 session()->setFlash('error', 'Пожалуйста, заполните все поля');
                 app()->response->redirect('/login');
             

@@ -58,7 +58,7 @@
     font-display: swap;
 }
 
-/* ==================General==================== */
+/* ================== General ==================== */
 
 * {
   box-sizing: border-box;
@@ -113,9 +113,9 @@ img {
     height: auto;
 }
 
-/* ==================General==================== */
+/* ================== /General ==================== */
 
-/* ==================Header===================== */
+/* ================== Header ===================== */
 
 nav {
     background: var(--nav-color);
@@ -212,11 +212,29 @@ div.banner {
     width: 100%;
 }
 
-/* ===================Header===================== */
+/* =================== /Header ===================== */
 
-/* ===================Superiority================ */
+/* =================== Post_Header ===================== */
+
+div.post_header {
+    margin: 5px 0px 45px 0px;
+    text-indent: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    
+    /*overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto; /* Safari */
+    -ms-hyphens: auto;    /* IE/Edge */
+}
+
+
+/* =================== /Post_Header ================= */
+
+/* =================== Superiority ================ */
 
 section.superiority {
+    margin: 20px 0px 50px 0px;
     background: var(--bg-color);
     text-align: center;
 }
@@ -227,12 +245,13 @@ div.container .superiority {
 
 .superiority h1 {
     color: var(--grey-color);
-    margin-top: 58px;
-    margin-bottom: 42px;
+    margin: 30px 0px 118px 0px;
     font-size: 26px;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
     font-weight: 600;
 }
+
+.superiority p { color: rgba(0,0,0,0.6); }
 
 img.high_quality {
     margin-top: 10px;
@@ -787,12 +806,14 @@ div.contact {
 /* =================== Post ====================== */
 
 section.post {
+    text-indent: 40px;
     ol {
         list-style-type: square; /*disclosure-closed;*/
     }
     ul>li {
         list-style-type: disc;
     }
+    p { color: rgba(0,0,0,0.6); }
 }
 
 /* =================== /Post ====================== */
@@ -819,7 +840,7 @@ img.brand_footer {
     display: none;
     position: fixed;
     bottom: 75px;
-    right: 3.5%;
+    right: 3.3%;
     z-index: 2;
     width: 62px;
     height: 34px;
@@ -857,7 +878,7 @@ i.fa-solid.fa-chevron-up:hover {
 input#input.form-control {
     z-index: 2;
     position: fixed;
-    right: 3.5%;
+    right: 3.3%;
     bottom: 3%;
     width: 77.5%;
     height: 33.5px;
@@ -875,7 +896,7 @@ input#input.form-control {
 button#submit.btn.btn-sm {
     z-index: 3;
     position: fixed;
-    right: 3.5%;
+    right: 3.3%;
     bottom: 3%;
     width: 62px;
     height: 34px;

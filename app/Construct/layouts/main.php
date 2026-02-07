@@ -25,7 +25,8 @@
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Всё для Твоей Красоты и Здоровья!" />
-    <meta property="og:description" content="Инновационные достижения косметологии и традиционные системы оздоровления из Страны восходящего солнца!" />
+    <meta property="og:description" content="Инновационные достижения косметологии 
+                    и традиционные системы оздоровления из Страны восходящего солнца!" />
 	<meta property="og:url" content="https://japan-in.ru" />
 	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
 	<meta property="og:image:width" content="1630" />

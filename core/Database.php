@@ -45,8 +45,6 @@ class Database
                 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
             $this->connection->exec($tbl_categories);
 
-            $this->user_back();
-
         }
         catch (\PDOException $e)
         {
@@ -114,9 +112,9 @@ class Database
     
     }
 
-    public function findOne($tbl, $key = 'id', $value = null)
+    public function findOne($tbl, $key= 'id', $value= null)
     {
-        $this->query("select * from {$tbl} where $key = ? LIMIT 1", [$value]);
+        $this->query("select * from {$tbl} where $key=? LIMIT 1", [$value]);
         return $this->stmt->fetch();
     
     }
@@ -124,7 +122,7 @@ class Database
     public function emailExists($email): bool
     {
         if ($email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
-            $this->query("select * from users where email = ? LIMIT 1", [$email]);
+            $this->query("select * from users where email=? LIMIT 1", [$email]);
             
             if ($this->stmt->fetch()) {
                 return true;
@@ -140,7 +138,7 @@ class Database
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $this->query("select * from users where email = ? LIMIT 1", [$email]);
+        $this->query("select * from users where email=? LIMIT 1", [$email]);
         
         if ($user = $this->stmt->fetch()) {
             
@@ -150,12 +148,7 @@ class Database
                 $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
                 Application::$app->session->set('email', $user['email']);
                 Application::$app->session->set('name', $user['name']);
-                /*
-                if (!$this->verify_auth_token()) {
 
-                    $this->set_auth_token();
-
-                }*/
                 return true;
 
             }
@@ -165,46 +158,11 @@ class Database
     
     }
     
-    /* авторизация с сохранением поля email *//*
-    
-    public function realUser($email, $password): bool
-    {
-        $email = Application::$app->request->post('email');
-        $password = Application::$app->request->post('password');
-        
-        $this->query("select * from users where email = ? LIMIT 1", [$email]);
-        
-        if ($user = $this->stmt->fetch()) {
-
-            if ($this->emailExists($email)) {
-
-                Application::$app->session->set('email', $user['email']);
-                Application::$app->session->set('form_data', $user['email']);  
-                
-                if (password_verify($password, $user['password'])) {
-
-                    Application::$app->session->remove($_SESSION["csrf_token"]);
-                    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
-                    Application::$app->session->set('name', $user['name']);
-
-                    return true;
-
-                }
-                return false;                
-            }
-            return false;
-        }
-        return false;
-    
-    }
-
-    /* авторизация с сохранением поля email END */
-
     /* авторизация cookie */
-
-    public function generate_token($length = LENGTH_AUTH_TOKEN)
+    
+    public function generate_token($length= LENGTH_AUTH_TOKEN)
     {
-        /* '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' */
+        // '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'    
         $start = 'aNGERUwODQqiFhYv9JAg5IMTBuxyXect6VZ8zp7lodW0n3SbHs41PmkKjrL2fC';
         $stop_length = strlen($start);
         $token = '';
@@ -217,7 +175,7 @@ class Database
         return $token;
 
     }
-
+     
     public function set_auth_token()
     {
         $token = $this->generate_token();
@@ -230,61 +188,40 @@ class Database
             'httponly' => true,     // or false
             'samesite' => 'Strict' // None || Lax || Strict
         );
+
         setcookie('0960', $hash_token, $options);
         return $token;
 
     }
-
     
-    private function verify_auth_token()
+    public function user_back()
     {
-        $hash_token = $_COOKIE['0960'];
+        if (! isset($_SESSION['name']) && isset($_COOKIE['0960'])) {
 
-        if (password_verify($this->generate_token(), $hash_token)) {
+            $hash_token = $_COOKIE['0960'];
+
+            $this->query("SELECT * FROM `users`");
+
+            while($user = $this->stmt->fetch()){
                 
-            return true;
-
-        }
-        return false;
-    
-    }
-
-    private function user_back()
-    {
-        if (!isset($_SESSION['name']) && isset($_COOKIE['0960'])) {
-
-            $auth_token = $this->set_auth_token();
-            $this->query("select * from users where auth_token = ? LIMIT 1", [$auth_token]);
-            
-            if ($user = $this->stmt->fetch()) {
+                if (password_verify($user["auth_token"], $hash_token)) {
                 
-                if ($this->verify_auth_token()) {
-
                     Application::$app->session->remove($_SESSION["csrf_token"]);
                     $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
                     Application::$app->session->set('email', $user['email']);
                     Application::$app->session->set('name', $user['name']);
-                
-                    return true;
 
+                } else {
+                
+                    setcookie("0960", "", time() - 3600);
+                
                 }
-                return false;
             }
-            return false;
         }
         return false;
 
     }
 
-    /*
-    public function up_auth_token()
-    {
-        $token = $this->auth_token();
-        //$this->query("insert into users auth_token values ($token)"
-        $this->query("INSERT INTO users ON DUPLICATE KEY UPDATE auth_token = VALUES($token)");
-    }
-
-    */
     /* авторизация cookie END */
 
 
