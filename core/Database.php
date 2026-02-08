@@ -160,22 +160,25 @@ class Database
     
     public function generate_token($length= LENGTH_AUTH_TOKEN)
     {
-        $start = 'CX7"Rtg0Z^@EQ(c15uSF3WUqio.M-hJ9a,x8z?v[ArldbwjpH]#sNG4eP)BVf_&KT6<DknmYyL>O2I';
+        $start = str_shuffle(
+            '+\C:X7"Rtg0Z^@EQ(c1&5uSF=3W/Uq|io.M-hJ9a,x8z?v[ArldbwjpH]#sNG4eP)BVf_&KT6<Dkn~mYyL>O2I'
+        );
         $stop_length = strlen($start);
-        $token = '';
+        $auth_token = " ";
+
         for ($i = 0; $i < $length; $i++) {
         
-            $token .= $start[random_int(0, $stop_length - 1)];
+            $auth_token .= $start[random_int(0, $stop_length - 1)];
         
         }
-        return $token;
+        return $auth_token;
 
     }
      
     public function set_auth_token()
     {
-        $token = $this->generate_token();
-        $hash_token = password_hash($token, PASSWORD_DEFAULT);
+        $auth_token = $this->generate_token();
+        $hash_token = password_hash($auth_token, PASSWORD_DEFAULT);
 
         $options = array (
             'expires'  => time() + 31536000,
@@ -186,7 +189,7 @@ class Database
         );
 
         setcookie('0960', $hash_token, $options);
-        return $token;
+        return $auth_token;
 
     }
     

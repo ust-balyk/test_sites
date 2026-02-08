@@ -805,15 +805,14 @@ div.contact {
 
 /* =================== Post ====================== */
 
-section.post {
-    text-indent: 40px;
+section.post_footer {
     ol {
         list-style-type: square; /*disclosure-closed;*/
     }
     ul>li {
         list-style-type: disc;
     }
-    p { color: rgba(0,0,0,0.6); }
+    p>strong { color: rgba(0,0,0,0.6); }
 }
 
 /* =================== /Post ====================== */

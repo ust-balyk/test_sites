@@ -1,5 +1,5 @@
-<?php dump($_SESSION);?>  
-<?php dump($_COOKIE);?>
+<?php //dump($_SESSION);?>  
+<?php //dump($_COOKIE);?>
 
 <section class="superiority">
     <div class="container superiority">
@@ -503,7 +503,7 @@
       </div><!--slider-popular-->
     </div><!--container-->
   </section><!--favorite-promo-->
-  <section class="post">
+  <section class="post_footer">
     <div class="container d-none d-md-block">
       <p><strong>Японская философия красоты основана на бережном отношении к коже 
         и профилактике возрастных изменений. Косметика из Японии отличается:</strong></p>
