@@ -188,7 +188,7 @@ class Database
             'samesite' => 'Strict' // None || Lax || Strict
         );
 
-        setcookie('0960', $hash_token, $options);
+        setcookie('2508', $hash_token, $options);
         return $auth_token;
 
     }
@@ -197,22 +197,22 @@ class Database
     {
         if (! isset($_SESSION['name']) && isset($_COOKIE['0960'])) {
 
-            $hash_token = $_COOKIE['0960'];
+            $hash_token = $_COOKIE['2508'];
 
-            $this->query("SELECT * FROM `users`");
+            $this->query('SELECT * FROM `users`');
 
             while($user = $this->stmt->fetch()){
                 
-                if (password_verify($user["auth_token"], $hash_token)) {
+                if (password_verify($user['auth_token'], $hash_token)) {
                 
-                    Application::$app->session->remove($_SESSION["csrf_token"]);
-                    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+                    Application::$app->session->remove($_SESSION['csrf_token']);
+                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                     Application::$app->session->set('email', $user['email']);
                     Application::$app->session->set('name', $user['name']);
 
                 } else {
                 
-                    setcookie("0960", "", time() - 3600);
+                    setcookie('2508', '', time() - 3600);
                 
                 }
             }
