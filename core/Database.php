@@ -160,11 +160,9 @@ class Database
     
     public function generate_token($length= LENGTH_AUTH_TOKEN)
     {
-        // '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'    
-        $start = 'aNGERUwODQqiFhYv9JAg5IMTBuxyXect6VZ8zp7lodW0n3SbHs41PmkKjrL2fC';
+        $start = 'CX7"Rtg0Z^@EQ(c15uSF3WUqio.M-hJ9a,x8z?v[ArldbwjpH]#sNG4eP)BVf_&KT6<DknmYyL>O2I';
         $stop_length = strlen($start);
         $token = '';
-
         for ($i = 0; $i < $length; $i++) {
         
             $token .= $start[random_int(0, $stop_length - 1)];
@@ -176,7 +174,7 @@ class Database
      
     public function set_auth_token()
     {
-        $token = bin2hex(random_bytes(32)); //$this->generate_token();
+        $token = $this->generate_token();
         $hash_token = password_hash($token, PASSWORD_DEFAULT);
 
         $options = array (

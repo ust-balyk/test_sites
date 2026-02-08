@@ -82,7 +82,7 @@ class UserController
                         
                         if ( ! db()->emailExists($user->attributes['email']) ) {
                             
-                            $timeTarget = HASH_COST;     // Целевое время
+                            $time_cost = TIME_COST;     // Целевое время
                             $cost = 10;                 // Минимальный порог
                             $password = $user->attributes['password'];
 
@@ -91,7 +91,7 @@ class UserController
                                 $start = microtime(true);
                                 password_hash($password, PASSWORD_BCRYPT, ["cost" => $cost]);
                                 $end = microtime(true);
-                            } while (($end - $start) < $timeTarget);
+                            } while (($end - $start) < $time_cost);
                             $cost = ($cost - 1);
                             $options = ['cost' => $cost]; // устанавливаем сложность 10-15
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);

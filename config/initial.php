@@ -43,8 +43,8 @@ const ADMIN_A = [
    'test@test.ru',
 ];
 
-########
-const HASH_COST = 0.300;
+######## перемешать password 
+const TIME_COST = 0.300;
 
 ########
 const LENGTH_AUTH_TOKEN = 10;
