@@ -217,9 +217,12 @@ div.banner {
 /* =================== Post_Header ===================== */
 
 div.post_header {
-    margin: 5px 0px 45px 0px;
+    margin: 5px 0px 40px 0px;
+}
+p>strong {
+    padding: 0;
     text-indent: 40px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     
     /*overflow-wrap: break-word;
@@ -245,7 +248,7 @@ div.container .superiority {
 
 .superiority h1 {
     color: var(--grey-color);
-    margin: 30px 0px 128px 0px;
+    margin: 20px 0px 110px 0px;
     font-size: 26px;
     letter-spacing: 3px;
     font-weight: 600;
