@@ -4,7 +4,7 @@
 <section class="superiority">
     <div class="container superiority">
       <div class="row">
-        <p><strong>В нашем магазине вы найдете тщательно отобранные продукты от проверенных 
+        <p class="header_post"><strong>В нашем магазине вы найдете тщательно отобранные продукты от проверенных 
         японских производителей. Мы гарантируем оригинальность товаров и предлагаем подробные консультации 
         по выбору средств, идеально подходящих именно вам.<br>
         Желаем полезных и выгодных приобретений!</strong></p>
@@ -503,7 +503,7 @@
       </div><!--slider-popular-->
     </div><!--container-->
   </section><!--favorite-promo-->
-  <section class="post_footer">
+  <section class="footer_post">
     <div class="container d-none d-md-block">
       <p><strong>Японская философия красоты основана на бережном отношении к коже 
         и профилактике возрастных изменений. Косметика из Японии отличается:</strong></p>
