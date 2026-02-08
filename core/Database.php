@@ -144,8 +144,6 @@ class Database
             
             if (password_verify($password, $user['password'])) {
 
-                Application::$app->session->remove($_SESSION["csrf_token"]);
-                $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
                 Application::$app->session->set('email', $user['email']);
                 Application::$app->session->set('name', $user['name']);
 
@@ -178,7 +176,7 @@ class Database
      
     public function set_auth_token()
     {
-        $token = $this->generate_token();
+        $token = bin2hex(random_bytes(32)); //$this->generate_token();
         $hash_token = password_hash($token, PASSWORD_DEFAULT);
 
         $options = array (

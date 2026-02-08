@@ -82,8 +82,8 @@ class UserController
                         
                         if ( ! db()->emailExists($user->attributes['email']) ) {
                             
-                            $timeTarget = 0.300;     // Целевое время
-                            $cost = 10;          // Минимальный порог
+                            $timeTarget = HASH_COST;     // Целевое время
+                            $cost = 10;                 // Минимальный порог
                             $password = $user->attributes['password'];
 
                             do {
@@ -97,8 +97,7 @@ class UserController
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
-                                app()->session->remove($_SESSION["csrf_token"]);
-                                $_SESSION["csrf_token"] = bin2hex(random_bytes(32));    
+                                
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
                                 echo "<script>window.history.go(-2);window.location.reload();</script>";
