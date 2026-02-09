@@ -1,7 +1,4 @@
-<?php dump($_SESSION);?>  
-<?php dump($_COOKIE);?>
-
-<section class="superiority">
+  <section class="superiority">
     <div class="container superiority">
       <div class="row">
         <p class="header_post"><strong>В нашем магазине вы найдете тщательно отобранные продукты от проверенных 
