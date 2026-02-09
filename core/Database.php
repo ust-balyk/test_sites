@@ -190,7 +190,7 @@ class Database
             'samesite' => 'Strict' // None || Lax || Strict
         );
 
-        setcookie("2508", $hash_token, $options);
+        setcookie('0960', $hash_token, $options);
         return $auth_token;
 
     }
@@ -212,11 +212,8 @@ class Database
                     Application::$app->session->set('email', $user['email']);
                     Application::$app->session->set('name', $user['name']);
 
-                } else {
-                
-                    setcookie('0960', '', time() - 3600);
-                
                 }
+                return false;
             }
         }
         return false;
