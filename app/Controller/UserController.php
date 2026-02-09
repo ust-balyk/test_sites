@@ -97,7 +97,9 @@ class UserController
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
-                                
+
+                                session()->remove($_SESSION['csrf_token']);
+                                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                                 session()->set('email', $user->attributes['email']);
                                 session()->set('name', $user->attributes['name']);
                                 echo "<script>window.history.go(-2);window.location.reload();</script>";
@@ -145,7 +147,7 @@ class UserController
                         'httponly' => true,     
                         'samesite' => 'Strict'
                     );
-                    setcookie('2508', $hash_token, $options);
+                    setcookie('0960', $hash_token, $options);
                     echo "<script>window.history.go(-1);window.location.reload();</script>";
 
                 } else {

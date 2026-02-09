@@ -1,5 +1,5 @@
-<?php //dump($_SESSION);?>  
-<?php //dump($_COOKIE);?>
+<?php dump($_SESSION);?>  
+<?php dump($_COOKIE);?>
 
 <section class="superiority">
     <div class="container superiority">
