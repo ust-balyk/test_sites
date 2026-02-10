@@ -11,8 +11,8 @@
           <div class="high_quality">
             <div class="high_quality_top">
               <img class="high_quality" src="<?= base_url(POCKET_STYLE .'/assets/quality/quality.png'); ?>"
-                alt="high quality">
-              <h5>Оригинальный товар!</h5>
+                alt="Оригинальный товар!">
+              <h2 style="font-size:18px;">Оригинальный товар!</h2>
             </div>
           </div>
         </div>
@@ -20,8 +20,8 @@
           <div class="high_quality">
             <div class="high_quality_top">
               <img class="high_quality" src="<?= base_url(POCKET_STYLE .'/assets/quality/quality.png'); ?>"
-                alt="high quality">
-              <h5>Лучший срок годности!</h5>
+                alt="Лучший срок годности!">
+              <h2 style="font-size:18px;">Лучший срок годности!</h2>
             </div>
           </div> 
         </div>
@@ -29,8 +29,8 @@
           <div class="high_quality">
             <div class="high_quality_top">
               <img class="high_quality" src="<?= base_url(POCKET_STYLE .'/assets/quality/quality.png'); ?>"
-                alt="high quality">
-              <h5>Качественная логистика!</h5>
+                alt="Качественная логистика!">
+              <h2 style="font-size:18px;">Качественная логистика!</h2>
             </div>
           </div> 
         </div>
@@ -191,9 +191,9 @@
     
     <h2 class="text-center categories-title">Категории</h2>
     
-    <!--a href="https://ru.wikipedia.org/wiki/%D0%A1%D1%83%D0%B4%D0%B7%D1%83%D0%BA%D0%B8_%D0%A5%D0%B0%D1%80%D1%83%D0%BD%D0%BE%D0%B1%D1%83" target="_blank">
+    <noindex><a ref="nofollow" href="https://ru.wikipedia.org/wiki/%D0%A1%D1%83%D0%B4%D0%B7%D1%83%D0%BA%D0%B8_%D0%A5%D0%B0%D1%80%D1%83%D0%BD%D0%BE%D0%B1%D1%83" target="_blank">
       <p class="mb-0">Хризантема в японской культуре является символом долголетия, счастья и мудрости.</p>
-    </a-->
+    </a></noindex>
     <div class="row">
       <div class="col-md-4 category">
         <div class="image-container">
@@ -372,9 +372,9 @@
     </div><!--row-->
       
     <div class="writer">
-      <a href="https://ru.wikipedia.org/wiki/%D0%A1%D1%83%D0%B4%D0%B7%D1%83%D0%BA%D0%B8_%D0%A5%D0%B0%D1%80%D1%83%D0%BD%D0%BE%D0%B1%D1%83" target="_blank">
+      <noindex><a ref="nofollow" href="https://ru.wikipedia.org/wiki/%D0%A1%D1%83%D0%B4%D0%B7%D1%83%D0%BA%D0%B8_%D0%A5%D0%B0%D1%80%D1%83%D0%BD%D0%BE%D0%B1%D1%83" target="_blank">
         <h5>鈴木春信</h5>
-      </a>
+      </a></noindex>
  
     </div>
     </div>
@@ -516,8 +516,9 @@
       <p><strong>В нашем магазине вы найдете тщательно отобранные продукты от проверенных 
         японских производителей. 
         Мы гарантируем оригинальность товаров и предлагаем подробные консультации по выбору средств, 
-        идеально подходящих именно вам. Желаем приятных и полезных приобретений!</strong></p>
-      <h5 style="text-align:center;">Откройте для себя секреты японской красоты и долголетия!</h5>
+        идеально подходящих именно вам. Желаем полезных и выгодных приобретений!</strong></p>
+      <h3 style="font-size:22px;text-align:center;">
+        Откройте для себя секреты японской красоты и долголетия!</h3>
     </div>
   </section>
 

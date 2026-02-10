@@ -2,15 +2,12 @@
 <html lang="ru" class="notranslate">
   <head>
     <meta charset="UTF-8">
-    <title><?php if(!isset($_SESSION['name'])){?>Здоровье из Японии
-          <?php }else{ echo "hello ". $_SESSION['name']; } ?></title>
+    <meta name="robots" content="index, follow">
+    <!--title>Japan-in.Ru &mdash; японская косметика и витамины по доступной цене!</title-->
+    <title>Всё для Твоей красоты и здоровья из Японии!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Japan-in.Ru - японская косметика и витамины по доступной цене!">
-    <meta name="keywords" content="satomi-japan.com, купить японские витамины со скидкой, витамины для женщин,
-      купить японскую косметику со скидкой, купить японские витамины, купить японскую косметику,
-      витамины из японии, витамины и минералы, японские витамины в наличии, витамины для глаз, антиоксиданты,
-      коллаген, сквален, наттокиназа, пробиотики, средства для суставов, японские БАДы,
-      японские витамины для мужчин, витамины для детей">
+    <meta name="keywords" content="витамины, косметика, япония, здоровье, красота">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
@@ -31,7 +28,7 @@
 	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
 	<meta property="og:image:width" content="1630" />
 	<meta property="og:image:height" content="1136" />
-	<meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/png" />
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
