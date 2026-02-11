@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Всё для Твоей Красоты и Здоровья!" />
+	<meta property="og:title" content="Japan in Ru — всё для Твоей красоты и здоровья!" />
     <meta property="og:description" content="Инновационные достижения косметологии 
                     и традиционные системы оздоровления из Страны восходящего солнца!" />
 	<meta property="og:url" content="https://japan-in.ru" />
@@ -29,6 +29,57 @@
 	<meta property="og:image:width" content="1630" />
 	<meta property="og:image:height" content="1136" />
     <meta property="og:image:type" content="image/png" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "name": "Japan in Ru — Магазин японских БАД и косметики.",
+      "url": "https://japan-in.ru",
+      "logo": "https://japan-in.ru/public/japan-in-ru.png",
+      "description": "Официальный поставщик японских биодобавок (коллаген, наттокиназа, омега-3) и премиальной косметики из Японии. Всё для Твоей красоты и здоровья!",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "RU",
+        "addressLocality": "Краснодар"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+7-912-417-48-18",
+        "contactType": "customer service",
+        "availableLanguage": "Russian",
+        "sameAs": [
+          "https://wa.me",
+          "https://t.me",
+          "https://vk.com"
+        ]
+      },
+      "knowsAbout": [
+        {
+          "@type": "MedicalIndication",
+          "name": "Профилактика дефицита витаминов",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "E56.9",
+            "codingSystem": "ICD-10"
+          }
+        },
+        {
+          "@type": "MedicalIndication",
+          "name": "Укрепление иммунитета",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "Z29.1",
+            "codingSystem": "ICD-10"
+          }
+        }
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://japan-in.ru{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>

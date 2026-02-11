@@ -393,19 +393,20 @@
       </div><!--slider-header-->
 
       <div class="owl-carousel owl-theme" id="slider-popular">
-        <div class="product-card"><!--popular-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--popular-card-->
           <a href="#">
             <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" loading="lazy" alt="">
+              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
+                loading="lazy" alt="изображение продукта" itemprop="image">
             </div>
           </a>
           <div class="product-card-details">
-            <h6 class="product-card-title">
+            <h6 class="product-card-title" itemprop="name">
               <a href="#">
                 Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
               </a>
             </h6>
-            <div class="product-card-price">
+            <div class="product-card-price" itemprop="price">
                 33000р<del>35000р</del>
             </div>
             <div class="product-card-btns">
@@ -417,9 +418,9 @@
               </a>
             </div>
           </div>
-        </div><!--product-card-->
+        </div><!--popular-card-->
 
-        <div class="product-card"><!--favorite-card-->
+        <div class="product-card"><!--popular-card-->
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" loading="lazy" alt="">
@@ -443,7 +444,7 @@
               </a>
             </div>
           </div>
-        </div><!--product-card-->
+        </div><!--popular-card-->
 
         <div class="product-card"><!--favorite-card-->
           <a href="#">
