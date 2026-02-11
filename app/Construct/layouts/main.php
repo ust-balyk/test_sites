@@ -6,7 +6,7 @@
     <!--title>Japan-in.Ru &mdash; японская косметика и витамины по доступной цене!</title-->
     <title>Всё для Твоей красоты и здоровья из Японии!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Japan-in.Ru - японская косметика и витамины по доступной цене!">
+    <meta name="description" content="Japan in Ru - японская косметика и витамины по доступной цене!">
     <meta name="keywords" content="витамины, косметика, япония, здоровье, красота">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
@@ -22,8 +22,7 @@
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Japan in Ru — всё для Твоей красоты и здоровья!" />
-    <meta property="og:description" content="Инновационные достижения косметологии 
-                    и традиционные системы оздоровления из Страны восходящего солнца!" />
+    <meta property="og:description" content="Инновационные достижения косметологии и традиционные системы оздоровления из Страны восходящего солнца!" />
 	<meta property="og:url" content="https://japan-in.ru" />
 	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
 	<meta property="og:image:width" content="1630" />
