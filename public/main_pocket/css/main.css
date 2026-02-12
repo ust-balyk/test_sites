@@ -406,6 +406,7 @@ a.btn.btn-outline-secondary.promo h5 {
 }
 
 /* превью карточка продукта */
+
 div .product-card {
     position: relative;
     flex: 1 1 auto;
@@ -418,6 +419,7 @@ div .product-card {
     transition: all .3s;
 }
 div .product-card:hover {
+    transform: translateY(-2px);
     border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     .product-card-title a {
@@ -560,7 +562,7 @@ div.tooltip-arrow::before {
     }
 }
 
-/* ===================Carousel Promo============= */
+/* =================== /Carousel_Promo============= */
 
 /* ===================All Categories================= */
 
@@ -1431,6 +1433,8 @@ div.category_description {
 
 /* =================== Product =================== */
 
-
+section.product {
+    margin-top: 90px;
+}
 
 /* =================== /Product =================== */

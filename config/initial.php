@@ -50,11 +50,11 @@ const TIME_COST = 0.100;
 const LENGTH_AUTH_TOKEN = 8;
 
 ######## при шаблоне start одноименный стиль обязателен!
-const HOME_LAYOUT     = "main";
-const HOME_VIEW       = "";
-const CATEGORY_LAYOUT = "category";
-const CATEGORY_VIEW   = "category";
-const PRODUCT_LAYOUT  = 'category';
+const HOME_LAYOUT     = 'main';
+const HOME_VIEW       = '';
+const CATEGORY_LAYOUT = 'category';
+const CATEGORY_VIEW   = 'category';
+const PRODUCT_LAYOUT  = 'product';
 const PRODUCT_VIEW    = 'product';
 ##
 $POCKET_STYLE = "";

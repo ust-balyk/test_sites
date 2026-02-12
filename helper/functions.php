@@ -25,7 +25,7 @@ function get_route_param($key, $default=''): string
    return app()->router->route_params[$key] ?? $default;
 }
 
-function array_value_search($arr, $index, $value): int|string|null
+function array_value_search($arr, $index, $value)
 {
    foreach ($arr as $k => $v) {
       if ($v[$index] == $value) {
@@ -63,6 +63,12 @@ function p_view($view='', $data=[])
 function user_icon()
 {
    return '<a class="user_out" title="выход" href="'. base_url('/logout') .'">
+            <img class="ico" src="'. base_url(POCKET_STYLE .'/favicon/user_out.png') .'"/>
+           </a>';
+}
+function user_icon_product()
+{
+   return '<a class="user_out" title="выход" href="'. base_url('/category') .'">
             <img class="ico" src="'. base_url(POCKET_STYLE .'/favicon/user_out.png') .'"/>
            </a>';
 }

@@ -1,3 +1,6 @@
+  <?php dump($_SESSION);?>
+  <?php dump($_COOKIE);?> 
+
   <section class="superiority">
     <div class="container superiority">
       <div class="row">
@@ -406,8 +409,8 @@
                 Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
               </a>
             </h6>
-            <div class="product-card-price" itemprop="price">
-                33000р<del>35000р</del>
+            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
             </div>
             <div class="product-card-btns">
               <a href="#" class="btn btn btn-outline-secondary add-to-favorites">

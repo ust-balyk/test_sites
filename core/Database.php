@@ -145,7 +145,7 @@ class Database
             if (password_verify($password, $user['password'])) {
 
                 Application::$app->session->remove($_SESSION['csrf_token']);
-                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(64));
                 Application::$app->session->set('email', $user['email']);
                 Application::$app->session->set('name', $user['name']);
 
@@ -208,7 +208,7 @@ class Database
                 if (password_verify($user['auth_token'], $hash_token)) {
                 
                     Application::$app->session->remove($_SESSION['csrf_token']);
-                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+                    $_SESSION['csrf_token'] = bin2hex(random_bytes(64));
                     Application::$app->session->set('email', $user['email']);
                     Application::$app->session->set('name', $user['name']);
 
