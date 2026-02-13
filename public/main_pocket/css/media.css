@@ -1,10 +1,10 @@
 @media all and (min-width:992px) {
+
     /* стили каталога */
     .has-megamenu {
         position: static;
     }
 
-    /* стили окна каталога */
     .container .dropdown-menu.megamenu {
         top: 70px;
         left: 0;
@@ -22,6 +22,40 @@
         transition-delay: .2s;
     }
     .navbar-nav .dropdown:hover>.dropdown-menu {
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+}
+
+@media all and (min-width:992px) {
+
+    /* стили окна delivery */
+    
+    .delivery_and_payment {
+        position: static;
+    }
+
+    .container .dropdown-menu.delivery_payment {
+        top: 70px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        padding: 0px 40px;
+    }
+    
+    /* показать каталог без click */
+    .navbar-nav .dropdown-menu.delivery_payment {
+        display: block;
+        transform: translateY(10px);
+        transition: all 350ms;
+        opacity: 0;
+        visibility: hidden;
+        transition-delay: .2s;
+    }
+    .navbar-nav .dropdown:hover>.dropdown-menu.delivery_payment {
         display: block;
         transform: translateY(0);
         opacity: 1;
