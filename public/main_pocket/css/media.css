@@ -49,6 +49,7 @@
     /* показать каталог без click */
     .navbar-nav .dropdown-menu.delivery_payment {
         display: block;
+        /*text-wrap: balance;*/
         transform: translateY(10px);
         transition: all 350ms;
         opacity: 0;

@@ -110,9 +110,10 @@
                     ]);
                   ?>
                 <li class="nav-item">
-                  <div class="hide">
+                  <a class="nav-link" href="#about_us">О нас</a>
+                  <!--div class="hide">
                     <a class="nav-link" href="<?= base_url('/page'); ?>">О нас</a>
-                  </div>
+                  </div-->
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
@@ -231,7 +232,7 @@
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
                   <ul>
-                    <li><a href="">Условия доставки</a></li>
+                    <li><a href="<?= base_url('/delivery'); ?>">Условия доставки</a></li>
                     <li><a href="">Безопасность оплаты</a></li>
                     <li><a href="">Возврат товара</a></li>
                   </ul>
@@ -248,6 +249,7 @@
             <!--p>&copy; ~ 2.3</p-->
           </div>
         </section>
+        <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>

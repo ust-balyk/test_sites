@@ -48,5 +48,9 @@ class PageController
 
     }
 
+    static function delivery()
+    {
+        return app()->view->partial_view('views/delivery');
+    }
 
 }
