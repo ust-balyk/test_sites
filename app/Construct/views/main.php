@@ -1,6 +1,3 @@
-  <?php dump($_SESSION);?>
-  <?php dump($_COOKIE);?> 
-
   <section class="superiority">
     <div class="container superiority">
       <div class="row">
@@ -70,7 +67,7 @@
     </div><!--container-->
   </section><!--achievements-->
 
-  <!--section class="carouse-promo">
+  <section class="carouse-promo">
     <div class="container promo">
       <div class="slider-header">
         <a href="#" class="btn btn-sm btn-outline-secondary promo">
@@ -83,6 +80,34 @@
       </div>
       
       <div class="owl-carousel owl-theme" id="slider-promo">
+
+        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+          <a href="#">
+            <div class="product-card-img">
+              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
+                loading="lazy" alt="изображение продукта" itemprop="image">
+            </div>
+          </a>
+          <div class="product-card-details">
+            <h6 class="product-card-title" itemprop="name">
+              <a href="#">
+                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
+              </a>
+            </h6>
+            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
+            </div>
+            <div class="product-card-btns">
+              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
+                <i class="fa-solid fa-heart"></i>
+              </a>
+              <a href="#" class="btn btn-outline-secondary add-to-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </a>
+            </div>
+          </div>
+        </div><!--product-card-->
+
         <div class="product-card">
           <a href="#">
             <div class="product-card-img">
@@ -111,7 +136,7 @@
           </div>
         </div><!--product-card-->
 
-        <!--div class="product-card">
+        <div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -135,7 +160,7 @@
           </div>
         </div><!--product-card-->
 
-        <!--div class="product-card">
+        <div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -159,7 +184,7 @@
           </div>
         </div><!--product-card-->
 
-        <!--div class="product-card">
+        <div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/sets-gift/11856.jpeg'); ?>" alt="">
@@ -187,7 +212,7 @@
 
       </div>
     </div>
-  </section-->
+  </section>
 
   <section class="categories">
     <div class="container categories">
@@ -396,6 +421,7 @@
       </div><!--slider-header-->
 
       <div class="owl-carousel owl-theme" id="slider-popular">
+
         <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--popular-card-->
           <a href="#">
             <div class="product-card-img">

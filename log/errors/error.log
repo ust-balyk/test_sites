@@ -1,0 +1,5 @@
+[2026-02-12 22:54:16] SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xB1f"@@\xC2...' for column 'auth_token' at row 1
+[2026-02-12 23:00:41] SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xA7fqzR%' for column 'auth_token' at row 1
+[2026-02-12 23:01:14] SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xA7S' for column 'auth_token' at row 1
+[2026-02-12 23:01:56] SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC2H55' for column 'auth_token' at row 1
+[2026-02-12 23:18:31] SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC2E10\5' for column 'auth_token' at row 1

@@ -117,8 +117,16 @@
                 <li class="nav-item">
                   <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="<?= base_url('/data'); ?>">Условия доставки</a>
+                <li class="nav-item dropdown show">
+                  <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Условия доставки
+                  </a>
+                  <div class="dropdown-menu delivery_payment" aria-labelledby="delivery_payment"> 
+                    <?php
+                      new App\Widgets\Contact\Contact();
+                    ?>
+                  </div>
                 </li>
               </ul>
             </div><!--navbar-collapse-->

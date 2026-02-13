@@ -62,8 +62,8 @@ $(document).ready(function() {
     /* =========Slider Promo========== */
 
     //$("#slider-promo, #slider-popular").owlCarousel({
-    //$("#slider-promo").owlCarousel({
-    $("#slider-popular").owlCarousel({
+    $("#slider-promo").owlCarousel({
+    //$("#slider-popular").owlCarousel({
         autoplay: true,
         loop: true,
         slideTransition: 'linear', // эффект бегущей строки (autoplayTimeout===autoplaySpeed)
@@ -108,7 +108,6 @@ $(document).ready(function() {
     
     /* ==========Slider Popular========== */
 
-    /*
     $("#slider-popular").owlCarousel({
         autoplay: true,
         loop: true,
@@ -137,7 +136,7 @@ $(document).ready(function() {
             },
         }
     });
-    */
+    
     /* ===========Slider Popular=========== */
 
     /* ===========Call Back================ */

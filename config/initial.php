@@ -47,7 +47,7 @@ const ADMIN_A = [
 const TIME_COST = 0.100;
 
 ########
-const LENGTH_AUTH_TOKEN = 8;
+const LENGTH_AUTH_TOKEN = 10;
 
 ######## при шаблоне start одноименный стиль обязателен!
 const HOME_LAYOUT     = 'main';

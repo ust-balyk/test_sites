@@ -147,7 +147,7 @@ class UserController
                         'httponly' => true,     
                         'samesite' => 'Strict'
                     );
-                    setcookie('0960', $hash_token, $options);
+                    setcookie('-*-', $hash_token, $options);
                     echo "<script>window.history.go(-1);window.location.reload();</script>";
 
                 } else {

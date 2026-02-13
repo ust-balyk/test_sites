@@ -163,10 +163,11 @@ class Database
     public function generate_token($length= LENGTH_AUTH_TOKEN)
     {
         $start = str_shuffle(
-            '+\C:X7"Rtg0Z^@EQ(c1&5uSF=3W/Uq|io.M-hJ9a,x8z?v[ArldbwjpH]#sNG4eP)BVf_&KT6<Dkn~mYyL>O2I'
+            '%{C:X7"Rtg0Z^@EQ(c1&5uSF=3W/Uq|io.M-hJ9a,x8z?v[Ar}ld\bw+jpH]#sNG±4eP)B§Vf_&KT6<Dkn~mY;yL>O2$I'
+            . bin2hex(random_bytes(32))
         );
         $stop_length = strlen($start);
-        $auth_token = " ";
+        $auth_token = '';
 
         for ($i = 0; $i < $length; $i++) {
         
@@ -190,16 +191,16 @@ class Database
             'samesite' => 'Strict' // None || Lax || Strict
         );
 
-        setcookie('0960', $hash_token, $options);
+        setcookie('-*-', $hash_token, $options);
         return $auth_token;
 
     }
     
     public function user_back()
     {
-        if (! isset($_SESSION['name']) && isset($_COOKIE['0960'])) {
+        if (! isset($_SESSION['name']) && isset($_COOKIE['-*-'])) {
 
-            $hash_token = $_COOKIE['0960'];
+            $hash_token = $_COOKIE['-*-'];
 
             $this->query('SELECT * FROM `users`');
 
