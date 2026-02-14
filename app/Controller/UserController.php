@@ -93,7 +93,7 @@ class UserController
                                 $end = microtime(true);
                             } while (($end - $start) < $time_cost);
                             $cost = ($cost - 1);
-                            $options = ['cost' => $cost]; // устанавливаем сложность 10-15
+                            $options = ['cost' => $cost]; // выпадает 10 до 15
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
