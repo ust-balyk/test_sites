@@ -44,10 +44,7 @@ const ADMIN_A = [
 ];
 
 ######## перемешать password 
-const TIME_COST = 0.100;
-
-########
-//const LENGTH_AUTH_TOKEN = 50;
+const TIME_COST = 0.200;
 
 ######## при шаблоне start одноименный стиль обязателен!
 const HOME_LAYOUT     = 'main';
