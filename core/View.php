@@ -20,7 +20,7 @@ class View
       
       } else {
          echo "не найден файл --> " . basename($view_file);
-         Application::$app->abort->error(500);
+         Application::$app->abort->error();
       
       }
       
@@ -36,7 +36,7 @@ class View
 
       } else {
          echo "не найден файл --> " . basename($layout_file);
-         Application::$app->abort->error(500);
+         Application::$app->abort->error();
 
       }
    
@@ -54,7 +54,7 @@ class View
       } else {
          echo "<pre><br>  не найден файл -> " .
             basename($view_file) . "</pre>";
-         Application::$app->abort->error(500);
+         Application::$app->abort->error();
       
       }
    }
@@ -84,26 +84,10 @@ class View
       } else {
          echo "<pre><br>  не найден файл -> " .
             basename($view_file) . "</pre>";
-         Application::$app->abort->error(500);
+         Application::$app->abort->error();
       
       }
    }
 
-   public function admin($view, $data=[])
-   {
-      extract($data);
-      
-      if (is_file($view_file = ADMIN . "/{$view}.php")) {
-         ob_start();
-         include $view_file;
-         return ob_get_clean();
-      
-      } else {
-         echo "<pre><br>  не найден файл -> " .
-            basename($view_file) . "</pre>";
-         Application::$app->abort->error(500);
-      
-      }
-   }
 
 }

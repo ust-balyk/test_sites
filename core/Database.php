@@ -160,20 +160,9 @@ class Database
     
     /* авторизация cookie */
     
-    public function generate_token($length= LENGTH_AUTH_TOKEN)
+    public function generate_token()
     {
-        $start = str_shuffle(
-            '%{C:X7"Rtg0Z^@EQ(c1&5uSF=3W/Uq|io.M-hJ9a,x8z?v[Ar}ld\bw+jpH]#sNG±4eP)B§Vf_&KT6<Dkn~mY;yL>O2$I'
-            . bin2hex(random_bytes(32))
-        );
-        $stop_length = strlen($start);
-        $auth_token = '';
-
-        for ($i = 0; $i < $length; $i++) {
-        
-            $auth_token .= $start[random_int(0, $stop_length - 1)];
-        
-        }
+        $auth_token = str_shuffle('+_@=&:<`/-|~.>;\"$;#'. bin2hex(random_bytes(16)));
         return $auth_token;
 
     }
@@ -191,16 +180,16 @@ class Database
             'samesite' => 'Strict' // None || Lax || Strict
         );
 
-        setcookie('-*-', $hash_token, $options);
+        setcookie('~23~', $hash_token, $options);
         return $auth_token;
 
     }
     
     public function user_back()
     {
-        if (! isset($_SESSION['name']) && isset($_COOKIE['-*-'])) {
+        if (! isset($_SESSION['name']) && isset($_COOKIE['~23~'])) {
 
-            $hash_token = $_COOKIE['-*-'];
+            $hash_token = $_COOKIE['~23~'];
 
             $this->query('SELECT * FROM `users`');
 

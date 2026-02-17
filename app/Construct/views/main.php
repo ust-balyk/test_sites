@@ -1,3 +1,7 @@
+<?php dump($_COOKIE);
+print_r(isset($_SESSION['name-']));
+?>
+
   <section class="superiority">
     <div class="container superiority">
       <div class="row">
@@ -223,12 +227,13 @@
       <p class="mb-0">Хризантема в японской культуре является символом долголетия, счастья и мудрости.</p>
     </a></noindex>
     <div class="row">
-      <div class="col-md-4 category">
-        <div class="image-container">
+
+      <div class="col-md-4 category" >
+        <div class="image-container" itemscope itemtype="https://schema.org/Product">
           <a href="<?= base_url('/category'); ?>">
             <picture>
               <source media="(min-width: 768px)" 
-                    srcset="<?= base_url(POCKET_STYLE .'/assets/categories/1.jpg'); ?>" alt="">
+                    srcset="<?= base_url(POCKET_STYLE .'/assets/categories/1.jpg'); ?>" alt="категория продукта - в наличии">
                 <div class="category_name">
                   <h5>в наличии</h5>
                 </div>
@@ -238,12 +243,12 @@
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
             <picture>
               <source media="(min-width: 768px)"
-                    srcset="<?= base_url(POCKET_STYLE .'/assets/categories/2.jpg'); ?>" alt="">
+                    srcset="<?= base_url(POCKET_STYLE .'/assets/categories/2.jpg'); ?>" alt="категория продукта - для женщин">
                 <div class="category_name">
                   <h5>для женщин</h5>
                 </div>
@@ -253,145 +258,145 @@
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/3.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/3.jpg'); ?>" alt="категория продукта - для детей">
               <div class="category_name"><h5>для детей</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/4.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/4.jpg'); ?>" alt="категория продукта - для мужчин">
               <div class="category_name"><h5>для мужчин</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/5.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/5.jpg'); ?>" alt="категория продукта - для тела">
               <div class="category_name"><h5>для тела</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/6.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/6.jpg'); ?>" alt="категория продукта - для лица">
               <div class="category_name"><h5>для лица</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/7.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/7.jpg'); ?>" alt="категория продукта - для полости рта">
               <div class="category_name"><h5>для полости рта</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/8.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/8.jpg'); ?>" alt="категория продукта - для волос">
               <div class="category_name"><h5>для волос</h5></div>
           </a>
         </div>
       </div>
   
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/9.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/9.jpg'); ?>" alt="категория продукта - для ног">
               <div class="category_name"><h5>для рук</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/10.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/10.jpg'); ?>" alt="категория продукта - для ног">
               <div class="category_name"><h5>для ног</h5></div>
           </a>
         </div>
       </div>
  
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/11.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/11.jpg'); ?>" alt="категория продукта - декоративная косметика">
               <div class="category_name"><h5>декоративная косметика</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/12.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/12.jpg'); ?>" alt="категория продукта - подарочные наборы">
               <div class="category_name"><h5>подарочные наборы</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/13.jpg'); ?>" alt="">
-              <div class="category_name"><h5>приборы и массажеры</h5></div>
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/13.jpg'); ?>" alt="категория продукта - приборы и массажёры">
+              <div class="category_name"><h5>приборы и массажёры</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/14.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/14.jpg'); ?>" alt="категория продукта - товары для дома">
               <div class="category_name"><h5>товары для дома</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/15.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/15.jpg'); ?>" alt="категория продукта - продукты питания">
               <div class="category_name"><h5>продукты питания</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/16.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/16.jpg'); ?>" alt="категория продукта - ароматерапия">
               <div class="category_name"><h5>ароматерапия</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/17.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/17.jpg'); ?>" alt="категория продукта - аксессуары">
               <div class="category_name"><h5>аксессуары</h5></div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4 category">
+      <div class="col-md-4 category" itemscope itemtype="https://schema.org/Product">
         <div class="image-container">
           <a href="#">
-            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/18.jpg'); ?>" alt="">
+            <img src="<?= base_url(POCKET_STYLE .'/assets/categories/18.jpg'); ?>" alt="категория продукта - зоотовары">
               <div class="category_name"><h5>зоотовары</h5></div>
           </a>
         </div>
