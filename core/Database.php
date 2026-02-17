@@ -162,7 +162,7 @@ class Database
     
     public function generate_token()
     {
-        $auth_token = str_shuffle('+_@=&:<`/-|~.>;\"$;#'. bin2hex(random_bytes(16)));
+        $auth_token = str_shuffle('?+_@=&:<`/-|.>;\"$~#¿'. bin2hex(random_bytes(16)));
         return $auth_token;
 
     }
