@@ -162,7 +162,7 @@ class Database
     
     public function generate_token()
     {
-        $auth_token = str_shuffle('?+_@=&:<`/-|.>;\"$~#¿'. bin2hex(random_bytes(16)));
+        $auth_token = strval(bin2hex(random_bytes(32)));
         return $auth_token;
 
     }
@@ -180,16 +180,16 @@ class Database
             'samesite' => 'Strict' // None || Lax || Strict
         );
 
-        setcookie('~23~', $hash_token, $options);
+        setcookie('~23', $hash_token, $options);
         return $auth_token;
 
     }
     
     public function user_back()
     {
-        if (! isset($_SESSION['name']) && isset($_COOKIE['~23~'])) {
+        if (! isset($_SESSION['name']) && isset($_COOKIE['~23'])) {
 
-            $hash_token = $_COOKIE['~23~'];
+            $hash_token = $_COOKIE['~23'];
 
             $this->query('SELECT * FROM `users`');
 

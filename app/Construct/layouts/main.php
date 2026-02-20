@@ -7,7 +7,7 @@
     <title>Всё для Твоей красоты и здоровья из Японии!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Japan-in.Ru - японская косметика и витамины по доступной цене!">
-    <meta name="keywords" content="витамины, косметика, япония, здоровье, красота">
+    <meta name="keywords" content="косметика, япония, витамины, здоровье, красота">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
@@ -35,7 +35,7 @@
       "name": "Japan-in.Ru — Магазин японских БАД и косметики.",
       "url": "https://japan-in.ru",
       "logo": "https://japan-in.ru/public/japan-in-ru.png",
-      "description": "Официальный поставщик японских биодобавок (коллаген, наттокиназа, омега-3) и премиальной косметики из Японии. Всё для Твоей красоты и здоровья!",
+      "description": "Официальный поставщик японских биодобавок (коллаген, наттокиназа, омега-3) и премиальной косметики из Японии.\nВсё для Твоей красоты и здоровья!",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "RU"

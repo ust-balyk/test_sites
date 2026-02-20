@@ -17,9 +17,9 @@ final class Administrator
    final function lock()
    {
       $administrator = [
-         "ust.balyk@mail.ru",
-         "ust.balyk@gmail.com",
-         "vadim.islamov@gmail.com",
+
+         "ust.balyk@gmail.com"
+
       ];
 
       $filename = '../app/Controller/AdminController.php';
