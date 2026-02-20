@@ -137,7 +137,7 @@ class Router
    {
       if (isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
 
-            return true;
+         return true;
       
       }
       return false;

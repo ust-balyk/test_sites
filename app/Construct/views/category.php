@@ -139,14 +139,14 @@
                     <p>ожидается</p>
                   </div>
                 </div>
-                <a href="<?=base_url('/product');?>">
+                <a href="<?=base_url('/category/product');?>">
                   <div class="product-card-img">
                     <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
                   </div>
                 </a>
                 <div class="product-card-details">
                   <h6 class="product-card-title">
-                    <a href="<?=base_url('/product');?>">
+                    <a href="<?=base_url('/category/product');?>">
                       Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
                     </a>
                   </h6>
