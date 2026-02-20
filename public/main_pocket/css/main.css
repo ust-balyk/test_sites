@@ -1438,3 +1438,33 @@ section.product {
 }
 
 /* =================== /Product =================== */
+
+/* =================== Delivery =================== */
+
+.delivery {
+    h6, p, ul, li {
+            padding: 0px 40px;
+    }
+    p, li {
+            font-weight: 500;
+    }
+    ul {
+        list-style: none; /* Убираем стандартные маркеры */
+                /*padding-left: 20px;*/
+    }
+
+    ul > li::before {
+        content: "*"; /* Задаем символ маркера */
+        color: orange; /*var(--blue-color); /* Цвет маркера */
+        font-size: 20px;
+        display: inline-block;
+        /*width: 1em; /* Дистанция до текста */
+        margin-left: -1em;
+    }
+    .block {
+        border: 1px solid var(--light-grey-color);
+        border-radius: 4px;
+    }
+}
+
+/* =================== /Delivery =================== */

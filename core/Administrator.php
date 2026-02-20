@@ -5,11 +5,10 @@ final class Administrator
 {  
    public function pass()
    {
-      $pass = $_SESSION['pass'] = password_hash (
-
-         bin2hex(random_bytes(32)), PASSWORD_DEFAULT
+      static $pass = bin2hex(random_bytes(32)); 
       
-      );
+      $_SESSION['pass'] = password_hash($pass, PASSWORD_DEFAULT);
+
       return $pass;
 
    }
@@ -26,30 +25,46 @@ final class Administrator
 
       $content = '<?php
 namespace App\Controller;
-use Master\Administrator;
                   
 class AdminController
 {
    static function index() {
 
       $role = $_SESSION["role"];
-      $pass = app()->admin->pass();
                      
       if ($role == "admin" || $role == "assistant") {
 
-         if ($_SESSION["pass"] === $pass) {
+         if (isset($_SESSION["pass"])) {
+            
+            $pass = app()->admin->pass();
+            
+            if (password_verify($pass, $_SESSION["pass"])) {
 
-            $entry = password_hash($pass, PASSWORD_DEFAULT);
-            define("PROTECTED_ACCESS", $entry);
-            @include "../entry/index.php";
+               $entry = bin2hex(random_bytes(32));
+               define("PROTECTED_ACCESS", $entry);
+               @include "../entry/index.php";
+            
+            } else {
+            
+               echo  "<div style=\"text-align:center;background-color:red\"><br>
+                        <h2>&emsp;Доступ запрещен.</h2><br>
+                      </div>";
 
+            }
+
+         } else {
+            
+            echo  "<div style=\"text-align:center;background-color:red\"><br>
+                     <h2>&emsp;Доступ запрещен.</h2><br>
+                   </div>";
+         
          }
       
       } else {
 
-         echo \'<div style="text-align:center;background-color:red"><br>
+         echo  "<div style=\"text-align:center;background-color:red\"><br>
                   <h2>&emsp;Доступ запрещен.</h2><br>
-                </div>\';
+                </div>";
 
       }
 
@@ -60,9 +75,9 @@ class AdminController
       if (array_intersect(array(Application::$app->session->get("email")), $administrator)) {
 
          Application::$app->session->set("role", "admin");
-         if (Application::$app->session->get("pass", $this->pass())) {
+         if ($this->pass()) {
 
-            session_regenerate_id(true); // закрытый вид
+            session_regenerate_id(true);
             file_put_contents($filename, $content);
 
          }
@@ -70,7 +85,7 @@ class AdminController
       } else if (array_intersect(array(Application::$app->session->get("email")), ADMIN_A)) {
 
          Application::$app->session->set("role", "assistant");
-         if ( Application::$app->session->get("pass", $this->pass()) ) {
+         if ($this->pass()) {
 
             session_regenerate_id(true);
             file_put_contents($filename, $content);
