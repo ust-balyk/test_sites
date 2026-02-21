@@ -141,7 +141,7 @@
                 </div>
                 <a href="<?=base_url('/category/product');?>">
                   <div class="product-card-img">
-                    <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
+                    <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="косметическое средство">
                   </div>
                 </a>
                 <div class="product-card-details">
