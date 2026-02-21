@@ -1,20 +1,37 @@
-<?php defined('PROTECTED_ACCESS') && PROTECTED_ACCESS === $entry; ?>
+<?php 
+if(defined('PROTECTED_ACCESS') && PROTECTED_ACCESS === $entry) {
+  
+  $icon         = base_url(POCKET_STYLE.'/favicon/icon.png');
+  $font         = base_url('/library/fontawesome/css/all.min.css');
+  $font_2       = base_url('/library/fontawesome/css/all.min.css');
+  $bootstrap    = base_url('/library/bootstrap/css/bootstrap.min.css');
+  $bootstrap_js = base_url('/library/bootstrap/js/bootstrap.bundle.min.js');
+  $jquery       = base_url('/library/js/jquery.min.js');
+  $jquery_2     = base_url('/library/js/jquery.spincrement.min.js');
+  $gquery_3     = base_url('/library/js/jquery.maskedinput.min.js');
+  $js           = base_url(POCKET_STYLE .'/js/main.js');
+  $main_css     = base_url(POCKET_STYLE.'/css/main.css');
+  $media_css    = base_url(POCKET_STYLE.'/css/media.css');
+  $home         = base_url('/');
+  $home_brand   = base_url(POCKET_STYLE .'/favicon/home.png');
+  $out          = base_url('/logout');
+
+  echo <<<part_one
+
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>
     <meta charset="UTF-8">
-    <title>Здоровье из Японии</title>
+    <title>Панель управления</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
-    <link rel="preload" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>" as="style">
-    <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <link rel="icon" href="$icon" type="image/png">
+    <link rel="preload" href="$font" as="style">
+    <link rel="stylesheet" href="$font_2">
+    <link rel="stylesheet" href="$bootstrap">
+    <link rel="stylesheet" href="$main_css">
+    <link rel="stylesheet" href="$media_css">
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
@@ -23,8 +40,8 @@
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
           <div class="container">
-            <a class="navbar-brand" href="<?= base_url('/'); ?>">
-              <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
+            <a class="navbar-brand" href="$home">
+              <img class="brand" src="$home_brand">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -38,15 +55,19 @@
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Каталог
                   </a>
-                  <?php
-                    new App\Widgets\Menu\Menu([
-                      'container' => 'div',
-                      'class'     => 'container dropdown-menu megamenu',
-                      'prepend'   => '<div class="row g-3">',
-                      'append'    => '</div>',
-                      'attrs'     => ['role' => 'menu',],
-                    ]);
-                  ?>
+
+part_one;
+
+                   new App\Widgets\Menu\Menu([
+                     'container' => 'div',
+                     'class'     => 'container dropdown-menu megamenu',
+                     'prepend'   => '<div class="row g-3">',
+                     'append'    => '</div>',
+                     'attrs'     => ['role' => 'menu',],
+                   ]);
+  
+  echo <<<part_two
+
                 </li>
                 <li class="nav-item">
                   <div class="hide">
@@ -76,8 +97,8 @@
                   </a>
                 </li>
                 <li-->
-                  <a href="<?= base_url('/logout'); ?>">выход
-                    <!--img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_out.png');?>"/-->
+                  <a href="$out">
+                    выход
                   </a>
                 </li>
               </ul>
@@ -93,11 +114,20 @@
       </main>
 
     </div><!--wrapper-->
-    <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
-    <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
-    <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
-    <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
-    <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
-    <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
+    <script src="$bootstrap_js"></script>
+    <script src="$jquery"></script>
+    <script src="$jquery_2"></script>
+    <script src="$jquery_3base_url"></script>
+    <script src="$js"></script>
   </body>
 </html>
+
+part_two;
+
+} else {
+
+  echo  "<div style=\"text-align:center;background-color:red\"><br>
+          <h2>&emsp;Доступ запрещен.</h2><br>
+         </div>";
+
+}

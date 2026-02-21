@@ -1,5 +1,6 @@
-<?php dump($_COOKIE);
-print_r(isset($_SESSION['name-']));
+<?php 
+dump($_COOKIE);
+dump($_SESSION);
 ?>
 
   <section class="superiority">
