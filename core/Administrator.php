@@ -29,53 +29,43 @@ class AdminController
 {
    static function index() {
 
-      $role = $_SESSION["role"];
+      if (isset($_SESSION["role"])) {          
+         $role = $_SESSION["role"];
                      
-      if ($role == "admin" || $role == "assistant") {
+         if ($role === "admin" || $role === "assistant") {
 
-         if (isset($_SESSION["pass"])) {
+            if (isset($_SESSION["pass"])) {            
+               $pass = app()->admin->pass();
             
-            $pass = app()->admin->pass();
+               if (password_verify($pass, $_SESSION["pass"])) {
+                  $entry = bin2hex(random_bytes(32));
+                  define("PROTECTED_ACCESS", $entry);
+                  include_once "../entry/index.php";
             
-            if (password_verify($pass, $_SESSION["pass"])) {
+               } else {
+                  app()->response->redirect("/");
 
-               $entry = bin2hex(random_bytes(32));
-               define("PROTECTED_ACCESS", $entry);
-               include_once "../entry/index.php";
-            
+               }
             } else {
-            
-               echo  "<div style=\"text-align:center;background-color:red\"><br>
-                        <h2>&emsp;Доступ запрещен.</h2><br>
-                      </div>";
-
-            }
-
-         } else {
-            
-            echo  "<div style=\"text-align:center;background-color:red\"><br>
-                     <h2>&emsp;Доступ запрещен.</h2><br>
-                   </div>";
+               app()->response->redirect("/");
          
+            }
+         } else {
+            app()->response->redirect("/");
+
          }
-      
       } else {
-
-         echo  "<div style=\"text-align:center;background-color:red\"><br>
-                  <h2>&emsp;Доступ запрещен.</h2><br>
-                </div>";
-
+         app()->response->redirect("/");
+      
       }
-
    }
-
 }';
 
       if (array_intersect(array(Application::$app->session->get("email")), $administrator)) {
 
          Application::$app->session->set("role", "admin");
-         if ($this->pass()) {
 
+         if ($this->pass()) {
             session_regenerate_id(true);
             file_put_contents($filename, $content);
 
@@ -84,8 +74,8 @@ class AdminController
       } else if (array_intersect(array(Application::$app->session->get("email")), ADMIN_A)) {
 
          Application::$app->session->set("role", "assistant");
-         if ($this->pass()) {
 
+         if ($this->pass()) {
             session_regenerate_id(true);
             file_put_contents($filename, $content);
 
@@ -96,7 +86,6 @@ class AdminController
          Application::$app->response->redirect("/");
 
       }
-   
    }
 
 }

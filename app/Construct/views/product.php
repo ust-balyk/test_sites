@@ -12,7 +12,12 @@
                 </img>
               </a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Категория / Продукт</li>
+            <li class="breadcrumb-item">
+              <a href="<?= base_url('/category'); ?>">
+                Категория
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Продукт</li>
           </ol>
         </nav>
       </div>
@@ -52,7 +57,7 @@
     </div><!--container product-->
   </section>
   <section class="delivery">
-    <div class="container delivery" style="margin-top: 60px">
+    <div class="container delivery">
       <div class="block">
         <h6 style="color: #4295e4; margin-top: 20px">ДОСТАВКА</h6>
         <p>
