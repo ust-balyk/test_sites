@@ -8,7 +8,7 @@ if(defined('PROTECTED_ACCESS') && PROTECTED_ACCESS === $entry) {
   $bootstrap_js = base_url('/library/bootstrap/js/bootstrap.bundle.min.js');
   $jquery       = base_url('/library/js/jquery.min.js');
   $jquery_2     = base_url('/library/js/jquery.spincrement.min.js');
-  $gquery_3     = base_url('/library/js/jquery.maskedinput.min.js');
+  $jquery_3     = base_url('/library/js/jquery.maskedinput.min.js');
   $js           = base_url(POCKET_STYLE .'/js/main.js');
   $main_css     = base_url(POCKET_STYLE.'/css/main.css');
   $media_css    = base_url(POCKET_STYLE.'/css/media.css');
@@ -108,16 +108,14 @@ part_one;
       </header>
   
       <main>
-        <div class="container">
-          <?= $view_file; ?>
-        </div>
+        <div class="container"></div>
       </main>
 
     </div><!--wrapper-->
     <script src="$bootstrap_js"></script>
     <script src="$jquery"></script>
     <script src="$jquery_2"></script>
-    <script src="$jquery_3base_url"></script>
+    <script src="$jquery_3"></script>
     <script src="$js"></script>
   </body>
 </html>
@@ -126,8 +124,11 @@ part_two;
 
 } else {
 
+  app()->response->redirect("/");
+  /*
   echo  "<div style=\"text-align:center;background-color:red\"><br>
           <h2>&emsp;Доступ запрещен.</h2><br>
          </div>";
+  */
 
 }

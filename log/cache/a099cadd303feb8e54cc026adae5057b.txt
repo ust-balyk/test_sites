@@ -1,1 +1,1 @@
-a:2:{s:15:"categories_menu";s:93:"<div class="container dropdown-menu megamenu"  role="menu" ><div class="row g-3"></div></div>";s:4:"time";i:1771643547;}
+a:2:{s:15:"categories_menu";s:93:"<div class="container dropdown-menu megamenu"  role="menu" ><div class="row g-3"></div></div>";s:4:"time";i:1771645275;}

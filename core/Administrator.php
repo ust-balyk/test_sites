@@ -5,8 +5,7 @@ final class Administrator
 {  
    public function pass()
    {
-      static $pass = bin2hex(random_bytes(32)); 
-      
+      static $pass = bin2hex(random_bytes(32));       
       $_SESSION['pass'] = password_hash($pass, PASSWORD_DEFAULT);
 
       return $pass;
@@ -42,7 +41,7 @@ class AdminController
 
                $entry = bin2hex(random_bytes(32));
                define("PROTECTED_ACCESS", $entry);
-               @include "../entry/index.php";
+               include_once "../entry/index.php";
             
             } else {
             
