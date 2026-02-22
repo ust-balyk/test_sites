@@ -52,16 +52,21 @@
                       'attrs'     => ['role' => 'menu',],
                     ]);
                   ?>
+                </li>
                 <li class="nav-item">
-                  <div class="hide">
-                    <a class="nav-link" href="<?= base_url('/page'); ?>">О нас</a>
-                  </div>
+                  <a class="nav-link" href="#about_us">О нас</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="<?= base_url('/data'); ?>">Условия доставки</a>
+                <li class="nav-item dropdown show delivery_and_payment">
+                  <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Условия доставки
+                  </a>
+                  <?php
+                    new App\Widgets\Delivery\Delivery();
+                  ?>
                 </li>
               </ul>
             </div><!--navbar-collapse-->
@@ -143,9 +148,9 @@
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
                   <ul>
-                    <li><a href="">Условия доставки</a></li>
-                    <li><a href="">Безопасность оплаты</a></li>
-                    <li><a href="">Возврат товара</a></li>
+                    <li><a href="<?= base_url('/delivery'); ?>">Условия доставки</a></li>
+                    <li><a href="<?= base_url('/delivery'); ?>">Безопасность оплаты</a></li>
+                    <li><a href="<?= base_url('/delivery'); ?>">Возврат товара</a></li>
                   </ul>
                 </div>
               </div>
@@ -160,6 +165,7 @@
             <!--p>&copy; ~ 2.3</p-->
           </div>
         </section>
+        <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>

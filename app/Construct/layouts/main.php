@@ -109,6 +109,7 @@
                       'attrs'     => ['role' => 'menu',],
                     ]);
                   ?>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#about_us">О нас</a>
                   <!--div class="hide">
@@ -233,8 +234,8 @@
                 <div class="payment_delivery">
                   <ul>
                     <li><a href="<?= base_url('/delivery'); ?>">Условия доставки</a></li>
-                    <li><a href="">Безопасность оплаты</a></li>
-                    <li><a href="">Возврат товара</a></li>
+                    <li><a href="<?= base_url('/delivery'); ?>">Безопасность оплаты</a></li>
+                    <li><a href="<?= base_url('/delivery'); ?>">Возврат товара</a></li>
                   </ul>
                 </div>
               </div>

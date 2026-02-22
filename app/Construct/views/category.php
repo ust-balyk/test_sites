@@ -1,6 +1,69 @@
   <section class="category">
     <div class="container category">
 
+      <!--div class="container d-flex justify-content-center flex-wrap category_link">
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары по акции</h5></a>
+        </div>
+        <div class="cat_link">        
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>в наличии</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для женщин</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для детей</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для мужчин</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для тела</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для лица</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для полости рта</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для рук</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для ног</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для волос</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>декоративная косметика</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>подарочные наборы</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>приборы и массажёры</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары для дома</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>продукты питания</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>аксессуары</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>ароматерапия</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>зоотовары</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>популярные товары</h5></a>
+        </div>
+      </div-->
+
       <div class="container breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -399,29 +462,67 @@
           </nav>
         </div><!--content-->
       </div><!--row category-->
+      <!--div class="container d-flex justify-content-center flex-wrap category_link">
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары по акции</h5></a>
+        </div>
+        <div class="cat_link">        
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>в наличии</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для женщин</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для детей</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для мужчин</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для тела</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для лица</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для полости рта</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для рук</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для ног</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для волос</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>декоративная косметика</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>подарочные наборы</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>приборы и массажёры</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары для дома</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>продукты питания</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>аксессуары</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>ароматерапия</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>зоотовары</h5></a>
+        </div>
+        <div class="cat_link">
+          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>популярные товары</h5></a>
+        </div>
+      </div-->
     </div><!--container category-->
-    <!--div class="container description">
-      <div class="category_description clearfix">
-        <h4>Что такое японская система ухода за кожей и как она работает?</h4>
-        <p><img src="<?= base_url('/images/post/face.png'); ?>" class="note-float-right"
-              style="width: 35%;" alt=""></p>
-        <p>Русские и европейские потребители не понимают, зачем японцы производят так много бьюти-продуктов,
-          что именно им нужно купить и в какой последовательности пользоваться. Что такое японская система ухода
-          за кожей, в чем ее секрет?</p>
-        <p>Средняя продолжительность жизни в Японии — более 90 лет. А встретив на улице пожилую японку,
-          вы никогда не дадите ей больше 50 лет, хотя на самом деле ей уже хорошо за 70. Как это возможно?
-          Здоровая пища, занятия спортом и, конечно, правильный уход за своим телом. Японская
-          система ухода за кожей состоит из следующих этапов:</p>
-        <ul>
-          <li>очищение кожи от макияжа и загрязнений;</li>
-          <li>пилинг кожи лица — в зависимости от типа кожи и возраста — от 1 до 3 раз в неделю;</li>
-          <li>тонизирование кожи с помощью лосьона, который успокаивает и нормализует PH-баланс;</li>
-          <li>сыворотка для лица;</li>
-          <li>маска для лица;</li>
-          <li>массаж лица с косметическим маслом;</li>
-          <li>крем для кожи.</li>
-        </ul>
-        <p>Подтверждаем: японская система ухода за кожей существует. И она действительно работает!</p>
-      </div>
-    </div-->
   </section>

@@ -377,12 +377,14 @@ a.btn.promo {
     transition: all .350s;
 }
 a.btn.promo:hover {
-    color: black; /*var(--black-color);*/
     border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 a.btn.btn-outline-secondary.promo h5 {
     padding: 2px 15px 6px 15px;
+}
+a.btn.btn-outline-secondary.promo h5:hover {
+    color: black;
 }
 
 .slider-btn-control {
@@ -759,7 +761,7 @@ div.call-back button.btn.btn-primary {
 
 /* =================== /Call Back ================== */
 
-/* =================== INFO ===================== */
+/* =================== section INFO ===================== */
 
 section.info {
     height: 100%;
@@ -952,7 +954,7 @@ section.category  {
     min-height: 1500px;
     margin-top: 90px;
     padding-bottom: 4px;
-    border-bottom: solid 2px rgba(255,140,0,0.1)
+    border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
 div.container.category {
@@ -964,11 +966,45 @@ div.row.category {
     margin-bottom: 90px;
 }
 
+/* ======= link_category ======== */
+
+div.category_link {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+a.btn.cat_link {
+    height: 30px;
+    padding: 0;
+    margin: 2px;
+    /*border: 1px solid var(--grey-color);*/
+    border: 1px solid rgb(152, 158, 164);
+    background-color: white;
+    transition: all .350s;
+}
+a.btn.cat_link:hover {
+    border: 1px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+a.btn.btn-outline-secondary.cat_link h5 {
+    color: var(--grey-color);
+    padding: 0px 20px 5px 20px;
+    margin: 0;
+}
+a.btn.btn-outline-secondary.cat_link h5:hover {
+    color: black;
+}
+    
+/* ======= хлебные крошки ======= */
+
 div.breadcrumb {
+    margin: 20px 0px 0px 0px;
     background-color: var(--bg-color);
 }
 
 nav.breadcrumb {
+    margin: 0;
     background-color: var(--bg-color);
 }
 
@@ -1442,13 +1478,17 @@ div.category_description {
 
 section.product {
     margin-top: 90px;
+    
 }
 
 /* =================== /Product =================== */
 
 /* =================== Delivery =================== */
 
-section.delivery { margin: 90px 0px 20px 0px; }
+section.delivery { 
+    padding: 90px 0px 30px 0px;
+    border-bottom: solid 2px rgba(255,140,0,0.1);
+}
 
 div.delivery {
 
@@ -1472,7 +1512,7 @@ div.delivery {
 
     div.block {
         background-color: white;
-        border: 1px solid var(--light-grey-color);
+        border: 1px solid var(--border-color);
         border-radius: 4px;
     }
 }
