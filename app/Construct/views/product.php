@@ -58,8 +58,8 @@
       </div><!--row product-->
 
       <div class="row description">
-        <div class="col-12">
 
+        <div class="col-12">
           <ul class="nav nav-pills flex-column flex-sm-row product-desc-tabs" id="product-desc-tabs" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="flex-sm-fill text-sm-center nav-link active" id="description-tab" data-bs-toggle="tab"
@@ -128,160 +128,83 @@
 
             <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
               <div class="row">
-                <div class="col-lg-4 order-lg-2 mb-lg-0 mb-4">
-                  <button class="btn btn-primary d-block d-lg-none w-100" type="button"
-                      data-bs-toggle="collapse" data-bs-target="#reply-form" aria-expanded="false"
-                      aria-controls="reply-form">
-                      Оставить отзыв
-                  </button>
-                  <div class="reply-form collapse" id="reply-form">
-                    <form action="">
-                      <div class="star-rating">
-                        <p>Ваша оценка</p>
-                        <input type="radio" id="star-5" name="rating" value="5">
-                        <label for="star-5"></label>
-
-                        <input type="radio" id="star-4" name="rating" value="4">
-                        <label for="star-4"></label>
-
-                        <input type="radio" id="star-3" name="rating" value="3">
-                        <label for="star-3"></label>
-
-                        <input type="radio" id="star-2" name="rating" value="2">
-                        <label for="star-2"></label>
-
-                        <input type="radio" id="star-1" name="rating" value="1">
-                        <label for="star-1"></label>
+                <!-- Секция чтения отзывов -->
+                <div class="col-md-8">
+                    
+                  <!-- Отзыв 1 -->
+                  <div class="card mb-3">  <!-- shadow-sm"-->
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Иван Иванов</h5>
+                        <div class="star-rating">★★★★★</div>
                       </div>
+                      <small class="text-muted">10 февраля 2026</small>
+                      <p class="card-text mt-2">Отличный товар! Качество превзошло ожидания. Очень доволен покупкой.</p>
+                    </div>
+                  </div>
+
+                  <!-- Отзыв 2 -->
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Елена Петрова</h5>
+                        <div class="star-rating">★★★★☆</div>
+                      </div>
+                      <small class="text-muted">05 февраля 2026</small>
+                      <p class="card-text mt-2">Хорошее соотношение цена/качество. Доставка быстрая.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Елена Петрова</h5>
+                        <div class="star-rating">★★★★☆</div>
+                      </div>
+                      <small class="text-muted">05 февраля 2026</small>
+                      <p class="card-text mt-2">Хорошее соотношение цена/качество. Доставка быстрая.</p>
+                    </div>
+                  </div>
+
+                </div><!--col-md-8-->
+
+                <!-- Секция формы создания отзыва -->
+                <div class="col-md-4 mt-0">
+                  <div class="card p-3">
+                    <h4 class="mb-3">оставить отзыв</h4>
+                    <form>
                       <div class="mb-3">
-                        <label for="name" class="form-label">Ваше имя</label>
-                        <input type="text" class="form-control" id="name"  placeholder="Введите Ваше имя">
+                        <label for="userName" class="form-label">Ваше имя</label>
+                        <input type="text" class="form-control" id="userName" placeholder="Иван">
                       </div>
+                            
                       <div class="mb-3">
-                        <label for="email" class="form-label">Ваш Email</label>
-                        <input type="email" class="form-control" id="email"  placeholder="Введите Ваш Email">
+                        <label for="userRating" class="form-label">Рейтинг</label>
+                        <select class="form-select" id="userRating">
+                          <option selected>Выберите оценку</option>
+                          <option value="5">★★★★★ (Отлично)</option>
+                          <option value="4">★★★★☆ (Хорошо)</option>
+                          <option value="3">★★★☆☆ (Нормально)</option>
+                          <option value="2">★★☆☆☆ (Плохо)</option>
+                          <option value="1">★☆☆☆☆ (Ужасно)</option>
+                        </select>
                       </div>
+
                       <div class="mb-3">
-                        <label for="comment" class="form-label">Ваш комментарий</label>
-                        <textarea class="form-control" id="comment"  placeholder="Введите Ваш комментарий" rows="4"  style="resize: none;"></textarea>
+                        <label for="reviewText" class="form-label">Комментарий</label>
+                        <textarea class="form-control" id="reviewText" rows="4" placeholder="Ваш отзыв..."></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary w-100">Оставить  отзыв</button>
+                
+                      <button type="submit" class="btn btn-primary w-100">сохранить</button>
                     </form>
                   </div>
                 </div>
-
-                <div class="col-lg-8 reviews order-lg-1">
-                  <div class="card review-card">
-                    <div class="card-header">
-                      <div class="review-author">Андрей Попенко</div>
-                      <div class="review-created">20 августа, 2021</div>
-                      <div class="review-rating">
-                        <span class="product-rating">
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">Et feugiat eu scelerisque nulla mattis. At et enim
-                          dui mauris. Nisi, hendrerit dictum consequat tristique sed. Est
-                          ultrices etiam in lorem nulla a.Et feugiat eu scelerisque nulla
-                          mattis. At et enim dui mauris. Nisi</p>
-                      <div>
-                        <a href="#" class="review-card-reply">
-                          <i class="fa-regular fa-share-from-square"></i>
-                          Ответить
-                        </a>
-                        <a href="#" class="review-card-answers">
-                          <i class="fa-regular fa-message"></i>
-                          1 комментарий
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 reviews order-lg-1">
-
-                  <div class="card review-card">
-                    <div class="card-header">
-                      <div class="review-author">Андрей Попенко</div>
-                      <div class="review-created">20 августа, 2021</div>
-                      <div class="review-rating">
-                        <span class="product-rating">
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">Et feugiat eu scelerisque nulla mattis. At et enim
-                          dui mauris. Nisi, hendrerit dictum consequat tristique sed. Est
-                          ultrices etiam in lorem nulla a.Et feugiat eu scelerisque nulla
-                          mattis. At et enim dui mauris. Nisi</p>
-                      <div>
-                        <a href="#" class="review-card-reply">
-                          <i class="fa-regular fa-share-from-square"></i>
-                          Ответить
-                        </a>
-                        <a href="#" class="review-card-answers">
-                          <i class="fa-regular fa-message"></i>
-                          1 комментарий
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="card review-card">
-                    <div class="card-header">
-                      <div class="review-author">Андрей Попенко</div>
-                      <div class="review-created">20 августа, 2021</div>
-                      <div class="review-rating">
-                        <span class="product-rating">
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star active"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">Et feugiat eu scelerisque nulla mattis. At et enim
-                          dui mauris. Nisi, hendrerit dictum consequat tristique sed. Est
-                          ultrices etiam in lorem nulla a.Et feugiat eu scelerisque nulla
-                          mattis. At et enim dui mauris. Nisi</p>
-                      <div>
-                        <a href="#" class="review-card-reply">
-                          <i class="fa-regular fa-share-from-square"></i>
-                          Ответить
-                        </a>
-                        <a href="#" class="review-card-answers">
-                          <i class="fa-regular fa-message"></i>
-                          1 комментарий
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p class="text-center">
-                    <a href="#" class="reply-load-more">
-                      <i class="fa-solid fa-rotate-right"></i>
-                      Показать еще
-                    </a>
-                  </p>
-                </div>
               </div>
             </div>
-
-          </div>
+          </div> 
         </div>
-      </div>
-          
+      </div><!--description-->
+
     </div><!--container product-->
   </section>
 

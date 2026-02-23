@@ -864,7 +864,7 @@ img.brand_footer {
     position: fixed;
     bottom: 75px;
     right: 3.3%;
-    z-index: 2;
+    z-index: 9999;
     width: 62px;
     height: 34px;
     outline: none; /* Удалить контур на focus */
@@ -899,7 +899,7 @@ i.fa-solid.fa-chevron-up:hover {
 }
 
 input#input.form-control {
-    z-index: 2;
+    z-index: 9998;
     position: fixed;
     right: 3.3%;
     bottom: 3%;
@@ -917,7 +917,7 @@ input#input.form-control {
 }
 
 button#submit.btn.btn-sm {
-    z-index: 3;
+    z-index: 9999;
     position: fixed;
     right: 3.3%;
     bottom: 3%;
@@ -1018,7 +1018,7 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
 /* ======= хлебные крошки ======= */
 
 div.breadcrumb {
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0px 15px 0px;
     background-color: var(--bg-color);
 
     nav.breadcrumb {
@@ -1375,7 +1375,6 @@ div.ukiyo_e {
     background-size: contain;
 }
 
-
 /* content */
 
 div.content {
@@ -1524,8 +1523,9 @@ section.product {
 /* ==== deskription ==== */
 
 div.row .description {
+    height: auto;
     padding: 0px 0px 30px 0px;
-    margin: 60px 0px 5px 0px;
+    margin: 50px 0px 5px 0px;
     border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
@@ -1617,7 +1617,10 @@ button#reviews-tab {
     border: 1px solid var(--stroke-color);
     padding: 25px;
 }
-
+/*----------*/
+.star-rating { color: #ffc107; } /* Цвет звезд */
+/*----------*/
+/*
 .star-rating {
     position: relative;
     direction: rtl;
@@ -1626,7 +1629,7 @@ button#reviews-tab {
 
 .star-rating input {
     /* position: absolute; */
-    /* top: 25px; */
+    /* top: 25px; *//*
     display: none;
 }
 
