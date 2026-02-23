@@ -109,7 +109,7 @@
                       'attrs'     => ['role' => 'menu',],
                     ]);
                   ?>
-                </li>
+                </li> 
                 <li class="nav-item">
                   <a class="nav-link" href="#about_us">О нас</a>
                   <!--div class="hide">

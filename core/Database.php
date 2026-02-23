@@ -24,7 +24,7 @@ class Database
 
             $tbl_users = "CREATE TABLE IF NOT EXISTS `users`
                 (
-                    `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+                    `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     `name` varchar(55) NOT NULL,
                     `email` varchar(155) UNIQUE NOT NULL,
                     `password` varchar(255) NOT NULL,
@@ -37,13 +37,28 @@ class Database
             
             $tbl_categories = "CREATE TABLE IF NOT EXISTS `categories`
                 (
-                    `id` int(10) UNSIGNED NOT NULL PRIMARY KEY,
+                    `id` int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     `title` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
                     `slug` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
                     `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0'
                 ) 
                 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
             $this->connection->exec($tbl_categories);
+
+            $tbl_cosmetics = "CREATE TABLE IF NOT EXISTS `cosmetics`
+                (
+                    `id` int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    `category` text,
+                    `parent_id` varchar(1),
+                    `slug` text,
+                    `outer_id` int UNIQUE KEY,
+                    `title` text,
+                    `description` text,
+                    `image` text,
+                    `price` text
+                )
+                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+            $this->connection->exec($tbl_cosmetics);
 
         }
         catch (\PDOException $e)

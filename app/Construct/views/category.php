@@ -1,69 +1,6 @@
   <section class="category">
     <div class="container category">
-
-      <!--div class="container d-flex justify-content-center flex-wrap category_link">
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары по акции</h5></a>
-        </div>
-        <div class="cat_link">        
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>в наличии</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для женщин</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для детей</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для мужчин</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для тела</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для лица</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для полости рта</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для рук</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для ног</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для волос</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>декоративная косметика</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>подарочные наборы</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>приборы и массажёры</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары для дома</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>продукты питания</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>аксессуары</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>ароматерапия</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>зоотовары</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>популярные товары</h5></a>
-        </div>
-      </div-->
-
+      
       <div class="container breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -197,10 +134,8 @@
             <div id="category_content" class="row">
 
               <div class="col-lg-3 col-md-4 product-card" style="">
-                <div class="product_card_offer">
-                  <div class="not_in_stock">
-                    <p>ожидается</p>
-                  </div>
+                <div class="product_expected">
+                  <p>ожидается</p>
                 </div>
                 <a href="<?=base_url('/category/product');?>">
                   <div class="product-card-img">
@@ -230,10 +165,8 @@
           <!--/div--><!--container-->
 
               <div class="col-lg-3 col-md-4 product-card" style="">
-                <div class="product_card_offer">
-                  <div class="not_in_stock">
-                    <p>ожидается</p>
-                  </div>
+                <div class="popular_product">
+                  <p>рекомендуется</p>
                 </div>
                 <a href="#">
                   <div class="product-card-img">
@@ -390,7 +323,7 @@
                 </div>
               </div>
 
-              <!--div class="col-lg-3 col-md-4 product-card">
+              <div class="col-lg-3 col-md-4 product-card">
                 <a href="#">
                   <div class="product-card-img">
                     <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -462,67 +395,6 @@
           </nav>
         </div><!--content-->
       </div><!--row category-->
-      <!--div class="container d-flex justify-content-center flex-wrap category_link">
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары по акции</h5></a>
-        </div>
-        <div class="cat_link">        
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>в наличии</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для женщин</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для детей</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для мужчин</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для тела</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для лица</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для полости рта</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для рук</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для ног</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>для волос</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>декоративная косметика</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>подарочные наборы</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>приборы и массажёры</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>товары для дома</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>продукты питания</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>аксессуары</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>ароматерапия</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>зоотовары</h5></a>
-        </div>
-        <div class="cat_link">
-          <a href="#" class="btn btn-sm btn-outline-secondary cat_link"><h5>популярные товары</h5></a>
-        </div>
-      </div-->
+
     </div><!--container category-->
   </section>

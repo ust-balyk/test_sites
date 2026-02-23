@@ -1,0 +1,9 @@
+a:2:{s:0:"";s:453:"<div class="container dropdown-menu megamenu"  role="menu" ><div class="row g-3"><div class="col-lg-4 col-md-6 col-sm-1">
+            <h6>
+                <a href=http://localhost:8888/category/>декоративная косметика</a>
+            </h6>
+        </div><div class="col-lg-4 col-md-6 col-sm-1">
+            <h6>
+                <a href=http://localhost:8888/category/>для лица</a>
+            </h6>
+        </div></div></div>";s:4:"time";i:1771854655;}

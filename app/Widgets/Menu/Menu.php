@@ -7,10 +7,10 @@ class Menu
     protected array  $tree;
     protected string $menuHtml;
 
-    protected $table     = MENU_FOR_TABLE;
-    protected $template  = MENU_TEMPLATE;
-    protected $cacheTime = MENU_CACHE_TIME;
-    protected $cacheKey  = MENU_CACHE_KEY;
+    protected $table     = 'cosmetics'; //MENU_FOR_TABLE;
+    protected $template  = 'categories_menu'; //'cosmetics_menu'; //MENU_TEMPLATE;
+    protected $cacheTime = 0; //MENU_CACHE_TIME;
+    protected $cacheKey  = ''; //MENU_CACHE_KEY;
     protected $container = 'ul';
     protected $class     = 'menu';
     protected $attrs     = [];

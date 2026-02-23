@@ -68,8 +68,7 @@ if ( $MENU_STYLE == false || $MENU_STYLE === 'main' ) {
    $MENU_FOR_TABLE = 'categories';
    $MENU_TEMPLATE  = 'categories_menu';
    $MENU_CACHE_KEY = 'categories_menu';
-} else {
-   $MENU_STYLE === 'cosmetics';
+} else if ( $MENU_STYLE === 'cosmetics' ) {
    $MENU_FOR_TABLE = 'cosmetics';
    $MENU_TEMPLATE  = 'cosmetics_menu';
    $MENU_CACHE_KEY = 'cosmetics_menu';
