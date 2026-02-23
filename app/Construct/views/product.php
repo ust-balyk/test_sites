@@ -132,7 +132,7 @@
                 <div class="col-md-8">
                     
                   <!-- Отзыв 1 -->
-                  <div class="card mb-3">  <!-- shadow-sm"-->
+                  <div class="mb-3 my_card review">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">Иван Иванов</h5>
@@ -144,7 +144,7 @@
                   </div>
 
                   <!-- Отзыв 2 -->
-                  <div class="card mb-3">
+                  <div class="mb-3 my_card review">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">Елена Петрова</h5>
@@ -154,8 +154,8 @@
                       <p class="card-text mt-2">Хорошее соотношение цена/качество. Доставка быстрая.</p>
                     </div>
                   </div>
-                  
-                  <div class="card mb-3">
+
+                  <div class="mb-3 my_card review">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">Елена Петрова</h5>
@@ -170,12 +170,12 @@
 
                 <!-- Секция формы создания отзыва -->
                 <div class="col-md-4 mt-0">
-                  <div class="card p-3">
-                    <h4 class="mb-3">оставить отзыв</h4>
+                  <div class="my_card"> <!--card p-3"-->
+                    <h5 class="mb-3">оставить отзыв</h5>
                     <form>
                       <div class="mb-3">
                         <label for="userName" class="form-label">Ваше имя</label>
-                        <input type="text" class="form-control" id="userName" placeholder="Иван">
+                        <input type="text" class="form-control" id="userName" placeholder="">
                       </div>
                             
                       <div class="mb-3">
@@ -192,7 +192,7 @@
 
                       <div class="mb-3">
                         <label for="reviewText" class="form-label">Комментарий</label>
-                        <textarea class="form-control" id="reviewText" rows="4" placeholder="Ваш отзыв..."></textarea>
+                        <textarea class="form-control" id="reviewText" rows="4" placeholder=""></textarea>
                       </div>
                 
                       <button type="submit" class="btn btn-primary w-100">сохранить</button>

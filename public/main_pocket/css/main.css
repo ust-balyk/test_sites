@@ -1517,15 +1517,17 @@ div.category_description {
 
 section.product {
     margin-top: 95px;
-    
+    .row.product {
+        margin-bottom: 0;
+    }
 }
 
-/* ==== deskription ==== */
+/* ==== description ==== */
 
 div.row .description {
     height: auto;
-    padding: 0px 0px 30px 0px;
-    margin: 50px 0px 5px 0px;
+    padding: 0px 0px 50px 0px;
+    margin: 18px 0px 5px 0px; /* 20px от блока с описанием до картинки */
     border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
@@ -1535,7 +1537,7 @@ div.row .description {
 }
 
 .product-desc-tabs .nav-link {
-    height: 32px;
+    height: 34px;
     margin: 0px 20px 20px 0px;
     border: 1px solid var(--light-grey-color);
     border-radius: 3px;
@@ -1544,13 +1546,13 @@ div.row .description {
     font-weight: 500;
 }
 button#description-tab {
-    padding: 0px 30px 1px 30px;
+    padding: 0px 30px 2px 30px;
     h5 {
         margin: 0;
     }
 }
 button#reviews-tab {
-    padding: 0px 40px 1px 40px;
+    padding: 0px 40px 2px 40px;
     h5 {
         margin: 0;
     }
@@ -1617,69 +1619,41 @@ button#reviews-tab {
     border: 1px solid var(--stroke-color);
     padding: 25px;
 }
-/*----------*/
-.star-rating { color: #ffc107; } /* Цвет звезд */
-/*----------*/
-/*
-.star-rating {
-    position: relative;
-    direction: rtl;
-    text-align: left;
+
+/* ====== оставить отзыв ====== */
+
+div.my_card.review {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 10px 15px 13px 15px;
 }
 
-.star-rating input {
-    /* position: absolute; */
-    /* top: 25px; *//*
-    display: none;
+div.my_card {
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 10px 15px 13px 15px;
+    .star-rating { color: #ffc107; } /* Цвет звезд */
 }
 
-.star-rating label {
-    cursor: pointer;
-    position: relative;
+input#userName.form-control,
+select#userRating.form-select,
+textarea#reviewText.form-control {
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
 }
 
-.star-rating label::before {
-    content: "\f005";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    color: var(--stroke-color);
-    font-size: 20px;
-}
-
-.star-rating label::after {
-    content: "\f005";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    color: #f6ab3a;
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-
-.star-rating label:hover::after,
-.star-rating label:hover~label::after,
-.star-rating input:checked~label::after {
-    opacity: 1;
-}
-
-.reply-form .form-label,
-.reply-form p {
-    margin-bottom: 0.5rem;
-    color: var(--black-color);
+button.btn.btn-primary {
+    background-color: var(--light-blue-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 3px;
+    color: var(--black-color) !important;
     font-weight: 500;
-    font-size: 14px;
+    letter-spacing: 2px;
 }
-
-.reply-form .form-control {
-    border-radius: 0;
-    padding: 0.8rem 1rem;
-}
-
-.reply-form .form-control::placeholder {
-    font-size: 14px;
-    color: #adadad;
+button.btn.btn-primary:hover {
+    background-color: #e1fae8 !important;
+    color: black;
 }
 
 
