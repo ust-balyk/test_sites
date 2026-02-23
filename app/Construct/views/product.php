@@ -2,7 +2,7 @@
   <section class="product">
     <div class="container product">
 
-      <div class="container breadcrumb">
+      <div class="container justify-content-between breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -20,9 +20,12 @@
             <li class="breadcrumb-item active" aria-current="page">Продукт</li>
           </ol>
         </nav>
+        <div class="d-none d-md-block">
+          <a href="#" class="btn btn-sm btn-outline-secondary back_link" onclick="history.back(); return false;">
+            <h5>вернуться в категорию</h5></a>
+        </div>
       </div>
 
-      <h1 class="text-center title_category">Продукт</h1>
       <div class="row product">
 
         <div class="col-md-6 image" style="">
@@ -58,68 +61,21 @@
         <div class="col-12">
 
           <ul class="nav nav-pills flex-column flex-sm-row product-desc-tabs" id="product-desc-tabs" role="tablist">
-            <!--li class="nav-item" role="presentation">
-              <button class="flex-sm-fill text-sm-center nav-link active" id="features-tab" data-bs-toggle="tab"
-                      data-bs-target="#features-tab-pane" type="button" role="tab"
-                      aria-controls="features-tab-pane" aria-selected="true">Характеристики
-              </button>
-            </li-->
             <li class="nav-item" role="presentation">
               <button class="flex-sm-fill text-sm-center nav-link active" id="description-tab" data-bs-toggle="tab"
                       data-bs-target="#description-tab-pane" type="button" role="tab"
-                      aria-controls="description-tab-pane" aria-selected="true">Описание
+                      aria-controls="description-tab-pane" aria-selected="true"><h5>описание</h5>
               </button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="flex-sm-fill text-sm-center nav-link" id="reviews-tab" data-bs-toggle="tab"
                       data-bs-target="#reviews-tab-pane" type="button" role="tab"
-                      aria-controls="reviews-tab-pane" aria-selected="false">Отзывы
+                      aria-controls="reviews-tab-pane" aria-selected="false"><h5>отзывы</h5>
               </button>
             </li>
           </ul>
 
           <div class="tab-content product-desc-tabs-content" id="product-desc-tabs-content">
-            <!--div class="tab-pane fade show active" id="features-tab-pane" role="tabpanel"
-                  aria-labelledby="features-tab" tabindex="0">
-              <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                  <tbody>
-                    <tr>
-                      <th>Память на количество карт</th>
-                      <td>2033</td>
-                    </tr>
-                    <tr>
-                      <th>Приложение</th>
-                      <td>Нет</td>
-                    </tr>
-                    <tr>
-                      <th>Материал</th>
-                      <td>Сталь, силиконовые вставки</td>
-                    </tr>
-                    <tr>
-                      <th>Цвет</th>
-                      <td>Черный, хром</td>
-                    </tr>
-                    <tr>
-                      <th>Питание</th>
-                      <td>DC 6V, 4 AAA</td>
-                    </tr>
-                    <tr>
-                      <th>Разблокировка</th>
-                      <td>2033</td>
-                    </tr>
-                    <tr>
-                      <th>Память на количество карт</th>
-                      <td>Пин-код, карта или браслет Mifaire, ключ, приложение, отпечаток пальца</td>
-                    </tr>
-                    <tr>
-                      <th>Тип двери</th>
-                      <td>Деревянная, металлическая</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div-->
 
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                   aria-labelledby="description-tab" tabindex="0">

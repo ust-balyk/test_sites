@@ -971,7 +971,7 @@ input:focus { caret-color: #fff; }
 
 section.category  {
     min-height: 1500px;
-    margin-top: 90px;
+    margin-top: 95px;
     padding-bottom: 4px;
     border-bottom: solid 2px rgba(255,140,0,0.1);
 }
@@ -1020,22 +1020,44 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
 div.breadcrumb {
     margin: 20px 0px 0px 0px;
     background-color: var(--bg-color);
+
+    nav.breadcrumb {
+        margin: 0;
+        background-color: var(--bg-color);
+    }
+    ol.breadcrumb {
+        background-color: var(--bg-color);
+    }
+    .link_to_home {
+        height: 18px;
+        width: 18px;
+        margin-bottom: 2px;
+    }
 }
 
-nav.breadcrumb {
-    margin: 0;
-    background-color: var(--bg-color);
+a.btn.back_link {
+    height: 34px;
+    margin: 0px 0px 15px 0px;
+    color: var(--grey-color);
+    border: 1px solid var(--border-color);
+    background-color: none;
+    transition: all .350s;
+}
+a.btn.btn-outline-secondary.back_link h5 {
+    font-size: 18px;
+    font-weight: 300; 
+    padding: 0px 15px;
+    margin-bottom: 5px;
+}
+a.btn.back_link:hover {
+    background-color: white;
+    border: 1px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    h5 {
+        color: black;
+    }
 }
 
-ol.breadcrumb {
-    background-color: var(--bg-color);
-}
-
-.link_to_home {
-    height: 18px;
-    width: 18px;
-    margin-bottom: 2px;
-}
 
 /* текущая директория */
 li.breadcrumb-item.active {
@@ -1495,7 +1517,7 @@ div.category_description {
 /* =================== Product =================== */
 
 section.product {
-    margin-top: 90px;
+    margin-top: 95px;
     
 }
 
@@ -1523,9 +1545,15 @@ div.row .description {
 }
 button#description-tab {
     padding: 0px 30px 1px 30px;
+    h5 {
+        margin: 0;
+    }
 }
 button#reviews-tab {
     padding: 0px 40px 1px 40px;
+    h5 {
+        margin: 0;
+    }
 }
 
 .product-desc-tabs .nav-item.show .nav-link,
