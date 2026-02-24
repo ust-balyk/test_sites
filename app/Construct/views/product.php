@@ -21,7 +21,7 @@
           </ol>
         </nav>
         <div class="d-none d-md-block">
-          <a href="#" class="btn btn-sm btn-outline-secondary back_link" onclick="history.back(); return false;">
+          <a href="<?= base_url('/category'); ?>" class="btn btn-sm btn-outline-secondary back_link">
             <h5>вернуться в категорию</h5></a>
         </div>
       </div>
