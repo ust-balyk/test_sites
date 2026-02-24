@@ -69,13 +69,13 @@ $(document).ready(function() {
         autoplaySpeed: 3000,     // скорость анимации
         smartSpeed: 1000,       // скорость при свайпе
         navSpeed: 1000,        // скорость при использовании стрелок
-        dots: false,
 		lazyLoad: true,
         mouseDrag: true,
         touchDrag: true,
         autoplayHoverPause: true,
         margin: 8,
         nav: false,
+        dots: false,
         responsive:{
             0: {
                 items: 1
@@ -119,6 +119,7 @@ $(document).ready(function() {
         autoplayHoverPause: true,
         margin: 8,
         nav: false,
+        dots: false,
         responsive:{
             0: {
                 items: 1
