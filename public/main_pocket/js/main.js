@@ -61,9 +61,7 @@ $(document).ready(function() {
 
     /* =========Slider Promo========== */
 
-    //$("#slider-promo, #slider-popular").owlCarousel({
     $("#slider-promo").owlCarousel({
-    //$("#slider-popular").owlCarousel({
         autoplay: true,
         loop: true,
         slideTransition: 'linear', // эффект бегущей строки (autoplayTimeout===autoplaySpeed)
@@ -106,9 +104,9 @@ $(document).ready(function() {
     
     });
     
-    /* ==========Slider Popular========== */
+    /* ========== Slider-Popular & Slider-Product ========== */
 
-    $("#slider-popular").owlCarousel({
+    $("#slider-popular, #slider-product").owlCarousel({
         autoplay: true,
         loop: true,
         autoplayTimeout: 5000,
@@ -139,11 +137,11 @@ $(document).ready(function() {
     
     /* ===========Slider Popular=========== */
 
-    /* ===========Call Back================ */
+    /* =========== Call Back ================ */
 
     $("#phone").mask("+7(999)999-9999");
 
-    /* ===========Call Back================ */
+    /* =========== Call Back ================ */
 
     /* видео owl carousel *//*
     
@@ -182,7 +180,6 @@ $(document).ready(function() {
 
     /* =========== ссылка на сайт при копировании =========== */
 
-    /*
     function wpguruLink() {
         var istS = 'Источник:'; // Слово должно находится в кавычках!
         //var copyR = '© japan-in.ru'; // Слово должно находится в кавычках!
@@ -201,6 +198,6 @@ $(document).ready(function() {
             body_element.removeChild(addDiv);
         },0);
     }
-    document.oncopy = wpguruLink;*/
+    document.oncopy = wpguruLink;
 
 });

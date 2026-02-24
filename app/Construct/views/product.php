@@ -126,7 +126,8 @@
               </div>
             </div>
 
-            <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+            <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" 
+                  aria-labelledby="reviews-tab" tabindex="0">
               <div class="row">
                 <!-- Секция чтения отзывов -->
                 <div class="col-md-8">
@@ -139,7 +140,8 @@
                         <div class="star-rating">★★★★★</div>
                       </div>
                       <small class="text-muted">10 февраля 2026</small>
-                      <p class="card-text mt-2">Отличный товар! Качество превзошло ожидания. Очень доволен покупкой.</p>
+                      <p class="card-text mt-2">Отличный товар! Качество превзошло ожидания. 
+                        Очень доволен покупкой.</p>
                     </div>
                   </div>
 
@@ -220,9 +222,9 @@
         </div>
       </div>
       
-      <div class="owl-carousel owl-theme" id="slider-promo">
+      <div class="owl-carousel owl-theme" id="slider-product">
 
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
@@ -248,7 +250,7 @@
             </div>
           </div>
         </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
@@ -274,7 +276,7 @@
             </div>
           </div>
         </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
@@ -300,7 +302,7 @@
             </div>
           </div>
         </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
@@ -326,7 +328,7 @@
             </div>
           </div>
         </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
@@ -352,7 +354,7 @@
             </div>
           </div>
         </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
