@@ -1526,8 +1526,8 @@ section.product {
 
 div.row .description {
     height: auto;
-    padding: 0px 0px 50px 0px;
-    margin: 18px 0px 5px 0px; /* 20px от блока с описанием до картинки */
+    padding: 0px 0px 45px 0px;
+    margin: 18px 0px 3px 0px; /* 20px от блока с описанием до картинки */
     border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
