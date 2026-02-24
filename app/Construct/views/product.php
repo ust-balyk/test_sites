@@ -181,7 +181,7 @@
                       <div class="mb-3">
                         <label for="userRating" class="form-label">Рейтинг</label>
                         <select class="form-select" id="userRating">
-                          <option selected>Выберите оценку</option>
+                          <option selected>выберите оценку</option>
                           <option value="5">★★★★★ (Отлично)</option>
                           <option value="4">★★★★☆ (Хорошо)</option>
                           <option value="3">★★★☆☆ (Нормально)</option>

@@ -1526,7 +1526,7 @@ section.product {
 div.row .description {
     height: auto;
     padding: 0px 0px 45px 0px;
-    margin: 18px 0px 3px 0px; /* 20px от блока с описанием до картинки */
+    margin: 18px 0px 5px 0px; /* 20px от блока с описанием до картинки */
     border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
@@ -1631,7 +1631,7 @@ div.my_card.review {
 div.my_card {
     border: 1px solid var(--border-color);
     border-radius: 3px;
-    padding: 10px 15px 13px 15px;
+    padding: 10px 15px 15px 15px;
     .star-rating { color: #ffc107; } /* Цвет звезд */
 }
 
