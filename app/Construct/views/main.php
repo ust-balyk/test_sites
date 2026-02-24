@@ -128,7 +128,7 @@
               </a>
             </h6>
             <div class="product-card-price">
-              33 000р<del>35 000р</del>
+              33000р<del>35000р</del>
             </div>
             <div class="product-card-btns">
               <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">
@@ -152,7 +152,7 @@
               <a href="#">Премиум арома-стик для дома</a>
             </h6>
             <div class="product-card-price">
-              33 000р<del>35 000р</del>
+              33000р<del>35000р</del>
             </div>
             <div class="product-card-btns">
               <a href="#" class="btn btn-outline-secondary add-to-favorites">
@@ -176,7 +176,7 @@
               <a href="#">товар со скидкой!товар со скидкой!товар со скидкой!товар со скидкой!</a>
             </h6>
             <div class="product-card-price">
-              33 000р<del>35 000р</del>
+              33000р<del>35000р</del>
             </div>
             <div class="product-card-btns">
               <a href="#" class="btn btn-outline-secondary add-to-favorites">
@@ -202,7 +202,7 @@
               </a>
             </h6>
             <div class="product-card-price">
-              33 000р<del>35 000р</del>
+              33000р<del>35000р</del>
             </div>
             <div class="product-card-btns">
               <a href="#" class="btn btn-outline-secondary add-to-favorites">

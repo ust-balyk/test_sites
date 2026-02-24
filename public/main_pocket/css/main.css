@@ -444,9 +444,8 @@ div .product-card:hover {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }
-    
     .product-card-price {
-        color: green;
+        color: var(--black-color);
     }
     
 }
@@ -517,7 +516,7 @@ h6.product-card-title {
 
 .product-card-price {
     text-align: center;
-    color: var(--black-color);
+    color: var(--grey-color);
     font-size: 20px;
     font-weight: 500;
 }
