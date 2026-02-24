@@ -195,7 +195,7 @@
                         <textarea class="form-control" id="reviewText" rows="4" placeholder=""></textarea>
                       </div>
                 
-                      <button type="submit" class="btn btn-primary w-100">сохранить</button>
+                      <button type="submit" class="btn btn-primary w-100 recording">сохранить</button>
                     </form>
                   </div>
                 </div>

@@ -1643,7 +1643,7 @@ textarea#reviewText.form-control {
     border-radius: 3px;
 }
 
-button.btn.btn-primary {
+button.btn.btn-primary.recording {
     background-color: var(--light-blue-color) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 3px;
@@ -1651,7 +1651,7 @@ button.btn.btn-primary {
     font-weight: 500;
     letter-spacing: 2px;
 }
-button.btn.btn-primary:hover {
+button.btn.btn-primary.recording:hover {
     background-color: #e1fae8 !important;
     color: black;
 }
