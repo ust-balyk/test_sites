@@ -11,7 +11,7 @@ class Database
     public function __construct()
     {
         $dsn = "mysql:host=". DB_SETTINGS['host'] .
-                   ";dbname=".DB_SETTINGS['database'] .
+                   //";dbname=".DB_SETTINGS['database'] .
                  ";charset=". DB_SETTINGS['charset'];
 
         try
@@ -21,45 +21,52 @@ class Database
                 DB_SETTINGS['password'],
                 DB_SETTINGS['options' ],
             );
-
-            $tbl_users = "CREATE TABLE IF NOT EXISTS `users`
-                (
-                    `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    `name` varchar(55) NOT NULL,
-                    `email` varchar(155) UNIQUE NOT NULL,
-                    `password` varchar(255) NOT NULL,
-                    `created_at` timestamp NULL DEFAULT NULL,
-                    `updated_at` timestamp NULL DEFAULT NULL,
-                    `auth_token` varchar(255) DEFAULT NULL
-                )
-                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-            $this->connection->exec($tbl_users);
             
-            $tbl_categories = "CREATE TABLE IF NOT EXISTS `categories`
-                (
-                    `id` int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    `title` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
-                    `slug` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
-                    `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0'
-                ) 
-                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-            $this->connection->exec($tbl_categories);
+            if ($japan_in_ru = "CREATE DATABASE IF NOT EXISTS `japan_in_ru`
+                                CHARACTER SET utf8mb4
+                                COLLATE utf8mb4_unicode_ci;") 
+            {
+                $this->connection->exec($japan_in_ru);
+                $this->connection->exec("USE japan_in_ru");
 
-            $tbl_cosmetics = "CREATE TABLE IF NOT EXISTS `cosmetics`
-                (
-                    `id` int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    `category` text,
-                    `parent_id` varchar(1),
-                    `slug` text,
-                    `outer_id` int UNIQUE KEY,
-                    `title` text,
-                    `description` text,
-                    `image` text,
-                    `price` text
-                )
-                ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-            $this->connection->exec($tbl_cosmetics);
+                $tbl_users = "CREATE TABLE IF NOT EXISTS `users`
+                    (
+                        `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        `name` varchar(55) NOT NULL,
+                        `email` varchar(155) UNIQUE NOT NULL,
+                        `password` varchar(255) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        `auth_token` varchar(255) DEFAULT NULL
+                    )
+                    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $this->connection->exec($tbl_users);
+            
+                $tbl_categories = "CREATE TABLE IF NOT EXISTS `categories`
+                    (
+                        `id` int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        `title` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `slug` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
+                        `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0'
+                    ) 
+                    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $this->connection->exec($tbl_categories);
 
+                $tbl_cosmetics = "CREATE TABLE IF NOT EXISTS `cosmetics`
+                    (
+                        `id` int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        `category` text,
+                        `parent_id` varchar(1),
+                        `slug` text,
+                        `outer_id` int UNIQUE KEY,
+                        `title` text,
+                        `description` text,
+                        `image` text,
+                        `price` text
+                    )
+                    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $this->connection->exec($tbl_cosmetics);
+            }
         }
         catch (\PDOException $e)
         {
