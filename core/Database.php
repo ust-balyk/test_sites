@@ -10,9 +10,7 @@ class Database
 
     public function __construct()
     {
-        $dsn = "mysql:host=". DB_SETTINGS['host'] .
-                   //";dbname=".DB_SETTINGS['database'] .
-                 ";charset=". DB_SETTINGS['charset'];
+        $dsn = "mysql:host=". DB_SETTINGS['host'] .";charset=". DB_SETTINGS['charset'];
 
         try
         { 
@@ -24,57 +22,94 @@ class Database
             
             if ($japan_in_ru = "CREATE DATABASE IF NOT EXISTS `japan_in_ru`
                                 CHARACTER SET utf8mb4
-                                COLLATE utf8mb4_unicode_ci;") 
+                                COLLATE utf8mb4_unicode_ci;")
             {
                 $this->connection->exec($japan_in_ru);
                 $this->connection->exec("USE japan_in_ru");
-
-                $tbl_users = "CREATE TABLE IF NOT EXISTS `users`
-                    (
-                        `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                        `name` varchar(55) NOT NULL,
-                        `email` varchar(155) UNIQUE NOT NULL,
-                        `password` varchar(255) NOT NULL,
+            
+                $tbl_users = "CREATE TABLE IF NOT EXISTS `users` (
+                        `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        `name` VARCHAR(55) NULL DEFAULT NULL,
+                        `email` VARCHAR(105) UNIQUE NOT NULL,
+                        `password` VARCHAR(255) NOT NULL,
                         `created_at` timestamp NULL DEFAULT NULL,
                         `updated_at` timestamp NULL DEFAULT NULL,
-                        `auth_token` varchar(255) DEFAULT NULL
-                    )
-                    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                        `auth_token` VARCHAR(255) DEFAULT NULL
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 $this->connection->exec($tbl_users);
             
-                $tbl_categories = "CREATE TABLE IF NOT EXISTS `categories`
-                    (
-                        `id` int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                        `title` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `slug` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
-                        `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0'
-                    ) 
-                    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $tbl_categories = "CREATE TABLE IF NOT EXISTS `categories` (
+                    `id` INT PRIMARY KEY,
+                    `name` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL,
+                    `slug` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
+                    `parent_id` INT NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    INSERT IGNORE INTO categories (`id`, `name`, `slug`, `parent_id`) VALUES
+                    (1, 'В наличии', 'in-stock', 0),
+                    (2, 'Новинки', 'new', 0),
+                    (3, 'Популярные товары', 'hit-sales', 0),
+                    (4, 'Товары по акции', 'promo', 0),
+                    (5, 'Твоё здоровье', 'bless-you', 0),
+                    (6, 'Японская косметика', 'cosmetics', 0),
+                    (7, 'Для мужчин', 'for-men', 0),
+                    (8, 'Для детей', 'for-children', 0),
+                    (9, 'Продукты питания', 'foodstuffs', 0),
+                    (10, 'Товары для дома', 'household-goods', 0),
+                    (11, 'Приборы и массажеры', 'devices', 0),
+                    (12, 'Зоотовары', 'pet-supplies', 0);";
                 $this->connection->exec($tbl_categories);
 
-                $tbl_cosmetics = "CREATE TABLE IF NOT EXISTS `cosmetics`
-                    (
-                        `id` int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                        `category` text,
-                        `parent_id` varchar(1),
-                        `slug` text,
-                        `outer_id` int UNIQUE KEY,
-                        `title` text,
-                        `description` text,
-                        `image` text,
-                        `price` text
-                    )
-                    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $tbl_start = "CREATE TABLE IF NOT EXISTS `start` (
+                    `id` INT PRIMARY KEY,
+                    `name` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL,
+                    `slug` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
+                    `parent_id` INT NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    INSERT IGNORE INTO start (`id`, `name`, `slug`, `parent_id`) VALUES
+                    (1, 'декоративная косметика', 'makeup', 0),
+                    (2, 'для лица', 'for-face', 0),
+                    (3, 'для полости рта', 'for-oral-cavity', 0),
+                    (4, 'для волос', 'for-hair', 0),
+                    (5, 'для тела', 'for-body', 0),
+                    (6, 'для рук', 'for-hands', 0),
+                    (7, 'для ног', 'for-feet', 0),
+                    (8, 'ароматерапия', 'aromatherapy', 0),
+                    (9, 'подарочные наборы', 'sets-gift', 0),
+                    (10, 'аксессуары', 'accessories', 0);";
+                $this->connection->exec($tbl_start);
+
+                $tbl_products = "CREATE TABLE IF NOT EXISTS `products` (
+                    `id` INT AUTO_INCREMENT PRIMARY KEY,
+                    `slug` VARCHAR(50) NOT NULL,
+                    `outer_id` INT NOT NULL UNIQUE KEY,
+                    `name` TEXT NOT NULL,
+                    `description` TEXT DEFAULT NULL,
+                    `image` VARCHAR(50) DEFAULT NULL,
+                    `price` TEXT DEFAULT NULL,
+                    `category_id` INT
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                $this->connection->exec($tbl_products);
+
+                $tbl_cosmetics = "CREATE TABLE IF NOT EXISTS `cosmetics` (
+                    `id` INT AUTO_INCREMENT PRIMARY KEY,
+                    `slug` VARCHAR(50) NOT NULL,
+                    `outer_id` INT NOT NULL UNIQUE KEY,
+                    `name` TEXT NOT NULL,
+                    `description` TEXT DEFAULT NULL,
+                    `image` VARCHAR(50) DEFAULT NULL,
+                    `price` TEXT DEFAULT NULL,
+                    `category_id` INT
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 $this->connection->exec($tbl_cosmetics);
             }
         }
         catch (\PDOException $e)
         {
             date_default_timezone_set('Asia/Yekaterinburg');
-            error_log("[" . date('Y-m-d H:i:s') . "] DB Error: {$e->getMessage()}" .
-                PHP_EOL, 3, ERROR_LOGS);
+            $err = error_log("[". date('Y-m-d H:i:s') ."] DB Error: {$e->getMessage()}". PHP_EOL, 3, ERROR_LOGS);
             echo "<p style='color:white'>b</p>";
             Application::$app->abort->error(500);
+            file_put_contents(ERROR_LOGS, $err, FILE_APPEND);
         }
         return $this;
     
@@ -90,8 +125,8 @@ class Database
         catch (\PDOException $e)
         {
             date_default_timezone_set('Asia/Yekaterinburg');
-            error_log("[" .date('Y-m-d H:i:s'). "] {$e->getMessage()}" .
-                PHP_EOL, 3, ERROR_LOGS);
+            $err = error_log("[". date('Y-m-d H:i:s') ."] {$e->getMessage()}". PHP_EOL, 3, ERROR_LOGS);
+            file_put_contents(ERROR_LOGS, $err, FILE_APPEND);
         }
         return $this;
     

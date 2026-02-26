@@ -7,10 +7,10 @@ class Menu
     protected array  $tree;
     protected string $menuHtml;
 
-    protected $table     = 'cosmetics'; //MENU_FOR_TABLE;
-    protected $template  = 'categories_menu'; //'cosmetics_menu'; //MENU_TEMPLATE;
-    protected $cacheTime = 0; //MENU_CACHE_TIME;
-    protected $cacheKey  = ''; //MENU_CACHE_KEY;
+    protected $table     = MENU_FOR_TABLE;
+    protected $template  = MENU_TEMPLATE;
+    protected $cacheTime = MENU_CACHE_TIME;
+    protected $cacheKey  = MENU_CACHE_KEY;
     protected $container = 'ul';
     protected $class     = 'menu';
     protected $attrs     = [];
@@ -86,13 +86,20 @@ class Menu
     protected function getTree(): array
     {
         $tree = [];
+        $tbl  = $this->table;
         $data = $this->data;
 
         foreach ($data as $id => &$node) {
-            if (!$node['parent_id']) {
-                $tree[$id] = &$node;
-            } else {
-                $data[$node['parent_id']]['children'][$id] = &$node;
+
+            if ($tbl != 'cosmetics') {
+            
+                if (!$node['parent_id']) {
+                    $tree[$id] = &$node;
+
+                } else {
+                    $data[$node['parent_id']]['children'][$id] = &$node;
+            
+                }
             }
         }
         return $tree;

@@ -8,7 +8,7 @@ class PageController
     static function category()
     {
 
-        if ( $data = db()->query("select * from categories")->get() ) {
+        if ( $data = db()->query("select * from products")->get() ) {
             /* 
             $pagination = new Pagination();
                 $limit = PAGINATION_SETTINGS['linesOnPage'];
@@ -19,7 +19,7 @@ class PageController
             */
             return app()->view->full_view (   
                 CATEGORY_LAYOUT,    # layout
-                CAYEGORY_VIEW,      # view
+                CATEGORY_VIEW,      # view
                 [               # data
                     //'title' => 'page',
                     //'category' => $data,
@@ -35,7 +35,7 @@ class PageController
     static function product()
     {
 
-        if ( $data = db()->query("select * from categories")->get() ) {
+        if ( $data = db()->query("select * from products")->get() ) {
 
             return app()->view->full_view (
                 PRODUCT_LAYOUT,

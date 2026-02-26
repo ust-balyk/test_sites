@@ -1,12 +1,12 @@
 <?php
 
 if ($item['parent_id'] == 0) {
-    echo "<div class=\"col-lg-4 col-md-6 col-sm-1\">
-            <h5 class=\"title\">". $item['category']. "</h5>";
+    echo "<div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>". $item['name']. "</h5>";
 } else {
-    $item['title'] = mb_strtolower($item['title']);
+    $item['name'] = mb_strtolower($item['name']);
     echo "<li>
-            <a style='font-size:16px' href=". base_url("/category/{$item['slug']}") .">". $item['title'] ."</a>
+            <a style='font-size:16px' href=". base_url("/category/{$item['slug']}") .">". $item['name'] ."</a>
         </li>";
 
 }

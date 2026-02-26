@@ -47,7 +47,7 @@ const ADMIN_A = [
 const TIME_COST = 0.200;
 
 ######## при шаблоне start одноименный стиль обязателен!
-const HOME_LAYOUT     = 'main';
+const HOME_LAYOUT     = '';
 const HOME_VIEW       = '';
 const CATEGORY_LAYOUT = 'category';
 const CATEGORY_VIEW   = 'category';
@@ -55,8 +55,6 @@ const PRODUCT_LAYOUT  = 'product';
 const PRODUCT_VIEW    = 'product';
 ##
 $POCKET_STYLE = "";
-$MENU_STYLE   = "";
-####
 if ( $POCKET_STYLE == false || $POCKET_STYLE === 'main' ) {
    $POCKET_STYLE = '/public/main_pocket';
 } else { 
@@ -64,14 +62,15 @@ if ( $POCKET_STYLE == false || $POCKET_STYLE === 'main' ) {
 }
 define( 'POCKET_STYLE', $POCKET_STYLE );
 ##
-if ( $MENU_STYLE == false || $MENU_STYLE === 'main' ) {
+$MENU_STYLE = "cosmetics";
+if ( $MENU_STYLE == false || $MENU_STYLE === 'full' ) {
    $MENU_FOR_TABLE = 'categories';
-   $MENU_TEMPLATE  = 'categories_menu';
-   $MENU_CACHE_KEY = 'categories_menu';
+   $MENU_TEMPLATE  = 'full_menu';
+   $MENU_CACHE_KEY = 'full_menu';
 } else if ( $MENU_STYLE === 'cosmetics' ) {
-   $MENU_FOR_TABLE = 'cosmetics';
-   $MENU_TEMPLATE  = 'cosmetics_menu';
-   $MENU_CACHE_KEY = 'cosmetics_menu';
+   $MENU_FOR_TABLE = 'start';
+   $MENU_TEMPLATE  = 'partial_menu';
+   $MENU_CACHE_KEY = 'partial_menu';
 }
 define( 'MENU_FOR_TABLE', $MENU_FOR_TABLE );
 define( 'MENU_TEMPLATE',   $MENU_TEMPLATE );

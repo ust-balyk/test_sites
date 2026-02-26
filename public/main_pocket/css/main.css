@@ -1652,7 +1652,7 @@ button.btn.btn-primary.recording {
 }
 button.btn.btn-primary.recording:hover {
     background-color: #e1fae8 !important;
-    color: black;
+    color: var(--black-color);
 }
 
 

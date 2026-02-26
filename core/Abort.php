@@ -7,7 +7,7 @@ class Abort
    {
       Application::$app->response->set_response_code($code);
       Application::$app->view->resource_files("/errors/{$code}");
-
+      
       exit();
    
    }

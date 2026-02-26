@@ -2,7 +2,6 @@
 //dump($_COOKIE);
 //dump($_SESSION);
 ?>
-
   <section class="superiority">
     <div class="container superiority">
       <div class="row">
@@ -72,7 +71,7 @@
     </div><!--container-->
   </section><!--achievements-->
 
-  <section class="carouse-promo">
+  <!--section class="carouse-promo">
     <div class="container promo">
       <div class="slider-header">
         <a href="#" class="btn btn-sm btn-outline-secondary promo">
@@ -86,7 +85,7 @@
       
       <div class="owl-carousel owl-theme" id="slider-promo">
 
-        <div class="product-card" itemscope itemtype="https://schema.org/Product"><!--product-card-->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
@@ -113,7 +112,7 @@
           </div>
         </div><!--product-card-->
 
-        <div class="product-card">
+        <!--div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
@@ -141,7 +140,7 @@
           </div>
         </div><!--product-card-->
 
-        <div class="product-card">
+        <!--div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
@@ -165,7 +164,7 @@
           </div>
         </div><!--product-card-->
 
-        <div class="product-card">
+        <!--div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt="">
@@ -189,7 +188,7 @@
           </div>
         </div><!--product-card-->
 
-        <div class="product-card">
+        <!--div class="product-card">
           <a href="#">
             <div class="product-card-img">
               <img src="<?= base_url('/images/sets-gift/11856.jpeg'); ?>" alt="">
@@ -214,10 +213,9 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
-  </section>
+  </section-->
 
   <section class="categories">
     <div class="container categories">
