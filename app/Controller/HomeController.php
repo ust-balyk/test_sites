@@ -6,7 +6,8 @@ class HomeController
 {
     static function index()
     {
-        if ( $data = db()->query("select * from products")->get() ) {
+        if ( $data = db()->query("select * from products")->get() ||
+                $data = db()->query("select * from cosmetics")->get() ) {
             
             return app()->view->full_view (
 

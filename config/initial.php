@@ -43,31 +43,33 @@ const ADMIN_A = [
    'test@test.ru',
 ];
 
-######## перемешать password 
-const TIME_COST = 0.200;
+######## сложность password 
+const TIME_COST = 0.350;
 
-######## при шаблоне start одноименный стиль обязателен!
-const HOME_LAYOUT     = '';
-const HOME_VIEW       = '';
+########
+const HOME_LAYOUT     = 'start';
+const HOME_VIEW       = 'start';
 const CATEGORY_LAYOUT = 'category';
 const CATEGORY_VIEW   = 'category';
 const PRODUCT_LAYOUT  = 'product';
 const PRODUCT_VIEW    = 'product';
 ##
-$POCKET_STYLE = "";
-if ( $POCKET_STYLE == false || $POCKET_STYLE === 'main' ) {
+
+$POCKET_STYLE = 'start';
+if ( $POCKET_STYLE === 'main' ) {
    $POCKET_STYLE = '/public/main_pocket';
 } else { 
    $POCKET_STYLE = '/public/start_pocket';
 }
 define( 'POCKET_STYLE', $POCKET_STYLE );
-##
-$MENU_STYLE = "cosmetics";
+
+#########
+$MENU_STYLE = 'cosmetics';
 if ( $MENU_STYLE == false || $MENU_STYLE === 'full' ) {
    $MENU_FOR_TABLE = 'categories';
    $MENU_TEMPLATE  = 'full_menu';
    $MENU_CACHE_KEY = 'full_menu';
-} else if ( $MENU_STYLE === 'cosmetics' ) {
+} else {
    $MENU_FOR_TABLE = 'start';
    $MENU_TEMPLATE  = 'partial_menu';
    $MENU_CACHE_KEY = 'partial_menu';

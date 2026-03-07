@@ -1,30 +1,26 @@
 <html>
 <meta charset="utf=8">
 <style>
-.delivery_payment {
-        h6, p, ul, li {
-                padding: 0px 40px;
+        div.container.dropdown-menu.delivery_payment {
+                padding: 0px 60px;
+                p, li {
+                        font-weight: 500;
+                }
+                ul {
+                        list-style: none; /* Убираем стандартные маркеры */
+                        /*padding-left: 20px;*/
+                }
+                ul > li::before {
+                        content: "*"; /* Задаем символ маркера */
+                        color: var(--blue-color); /* Цвет маркера */
+                        font-size: 20px;
+                        display: inline-block;
+                        /*width: 1em; /* Дистанция до текста */
+                        margin-left: -1em;
+                }
         }
-        p, li {
-                font-weight: 500;
-        }
-        ul {
-                list-style: none; /* Убираем стандартные маркеры */
-                /*padding-left: 20px;*/
-        }
-
-        ul > li::before {
-                content: "*"; /* Задаем символ маркера */
-                color: var(--blue-color); /* Цвет маркера */
-                font-size: 20px;
-                display: inline-block;
-                /*width: 1em; /* Дистанция до текста */
-                margin-left: -1em;
-        }
-}
 </style>
 <div class="container dropdown-menu delivery_payment" aria-labelledby="delivery_payment">
-
         <h6 style="color: #4295e4; margin-top: 40px">ДОСТАВКА</h6>
         <p>
         Мы сотрудничаем с логистической компанией «Служба Доставки Экспресс-Курьер».<br> 
@@ -56,9 +52,8 @@
         <strong>
         без комиссии картой любого банка.
         </strong>
-        <p style="margin-bottom: 36px;color: var(--blue-color);">
+        <p style="margin-bottom: 38px;color: var(--blue-color);">
         Мы не получаем и не сохраняем данные вашей карты, равно как и не несём ответственности 
         за несоблюдение сроков доставки по вине перевозчика.
         </p>
-
 </div>

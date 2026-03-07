@@ -14,11 +14,11 @@
     <link rel="preload" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>" as="style">
     <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/jquery-ui/jquery-ui.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты и здоровья!" />
@@ -218,10 +218,10 @@
               <div class="col-md-4 info">
                 <h6>наш адрес</h6>
                 <div class="address">
-                  <!--a href="https://www.google.com/maps/search/?api=1&query=45.011728,39.123093"
-                      target="_blank"-->
-                  <a href="https://yandex.ru/maps/?pt=39.123093,45.011728&z=15&
-                        l=map&sll=39.123093,45.011728" target="_blank">
+                  <a href="https://www.google.com/maps/search/?api=1&query=45.011728,39.123093"
+                      target="_blank">
+                  <!--a href="https://yandex.ru/maps/?pt=39.123093,45.011728&z=15&
+                        l=map&sll=39.123093,45.011728" target="_blank"-->
                     <p>Краснодар, Крылатая 2<br>
                        Пн-Пт:&nbsp;10:00-18:00<br><!--&nbsp; (от «non-breaking space»)-->
                        Сб:&nbsp;12:00-18:00<!--&emsp;(широкий пробел)-->
@@ -255,7 +255,7 @@
     </div><!--wrapper-->
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
-    <script src="<?= base_url('/library/jquery-ui/jquery-ui.min.js'); ?>"></script>
+    <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>

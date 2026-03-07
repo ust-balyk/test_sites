@@ -80,6 +80,7 @@ class Database
 
                 $tbl_products = "CREATE TABLE IF NOT EXISTS `products` (
                     `id` INT AUTO_INCREMENT PRIMARY KEY,
+                    `category` TEXT NOT NULL,
                     `slug` VARCHAR(50) NOT NULL,
                     `outer_id` INT NOT NULL UNIQUE KEY,
                     `name` TEXT NOT NULL,
@@ -92,6 +93,7 @@ class Database
 
                 $tbl_cosmetics = "CREATE TABLE IF NOT EXISTS `cosmetics` (
                     `id` INT AUTO_INCREMENT PRIMARY KEY,
+                    `category` TEXT NOT NULL,
                     `slug` VARCHAR(50) NOT NULL,
                     `outer_id` INT NOT NULL UNIQUE KEY,
                     `name` TEXT NOT NULL,

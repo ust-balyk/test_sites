@@ -5,7 +5,7 @@ class Delivery
 {
     public function __construct()
     {
-        @include "delivery.html";
+        include "delivery.html";
 
     }
 

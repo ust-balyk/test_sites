@@ -28,34 +28,37 @@
 
       <div class="row product">
 
-        <div class="col-md-6 image" style="">
-          <a id="" href="#" class="">
-            <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
-          </a>
+        <div class="col-md-6">
+          <div class="product_image">
+            <img src="<?= base_url('/images/test.png'); ?>" alt="">
+            <!--img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
+            <!--img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt=""-->
+            <!--img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt=""-->
+          </div>
         </div>
 
-        <div class="col-md-6 content">
-          <div class="container content">
+        <div class="col-md-6">
+          <div class="product_content">
             <div class="product-card-details">
               <h6 class="product-card-title">
-                <a href="#">
-                  Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-                </a>
+                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
               </h6>
             <div class="product-card-price">
               33 000р<del>35 000р</del>
             </div>
-            <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
+              <div class="product-card-btns">
+                <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
+                  <i class="fa-solid fa-heart"></i>
+                </a>
+                <a href="#" class="btn btn-outline-secondary add-to-cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+              </div>
             </div>
-          </div><!--container-->
-        </div><!--col-6-->
-      </div><!--row product-->
+          </div><!-- /pdoduct_content -->
+        </div>
+
+      </div><!-- /row product -->
 
       <div class="row description">
 
@@ -81,7 +84,7 @@
                   aria-labelledby="description-tab" tabindex="0">
               <div class="category-description clearfix">
                 <h2>Lorem ipsum dolor sit amet.</h2>
-                <p><img src="assets/img/categories/category-desc-1.jpg" class="note-float-right"
+                <p><img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" class="note-float-right"
                         style="width: 25%;" alt=""></p>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor maxime illo rem
                     accusamus nulla
@@ -106,7 +109,7 @@
                     minus cum aliquid quis perferendis exercitationem?</p>
 
                 <h2>Lorem ipsum dolor sit amet.</h2>
-                <p><img src="assets/img/categories/category-desc-2.jpg" class="note-float-left"
+                <p><img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" class="note-float-left"
                         style="width: 25%;" alt=""></p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae vitae accusamus
                     quasi quos

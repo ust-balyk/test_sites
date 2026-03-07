@@ -1,25 +1,13 @@
-a:2:{s:9:"full_menu";s:2156:"<div class="container dropdown-menu megamenu"  role="menu" ><div class="row g-3"><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/in-stock>В наличии</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/new>Новинки</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/hit-sales>Популярные товары</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/promo>Товары по акции</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/bless-you>Твоё здоровье</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/cosmetics>Японская косметика</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/for-men>Для мужчин</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/for-children>Для детей</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/foodstuffs>Продукты питания</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/household-goods>Товары для дома</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/devices>Приборы и массажеры</a>
-            </h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
-            <h5 class='name'><a href=http://localhost:8888/category/pet-supplies>Зоотовары</a>
-            </h5></div></div></div>";s:4:"time";i:1772094955;}
+a:2:{s:9:"full_menu";s:1366:"<div class="container dropdown-menu megamenu"  role="menu" ><div class="row g-3"><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>В наличии</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Новинки</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Популярные товары</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Товары по акции</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Твоё здоровье</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Японская косметика</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Для мужчин</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Для детей</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Продукты питания</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Товары для дома</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Приборы и массажеры</h5></div><div class='col-lg-4 col-md-6 col-sm-1'>
+            <h5 class='name'>Зоотовары</h5></div></div></div>";s:4:"time";i:1772202435;}

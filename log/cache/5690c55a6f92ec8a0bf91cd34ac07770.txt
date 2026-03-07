@@ -1,0 +1,31 @@
+a:2:{s:12:"partial_menu";s:2008:"<div class="container dropdown-menu megamenu"  role="menu" ><div class="row g-3"><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/makeup>декоративная косметика</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/for-face>для лица</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/for-oral-cavity>для полости рта</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/for-hair>для волос</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/for-body>для тела</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/for-hands>для рук</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/for-feet>для ног</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/aromatherapy>ароматерапия</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/sets-gift>подарочные наборы</a>
+            </h5>
+        </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
+            <h5><a href=http://localhost:8888/category/accessories>аксессуары</a>
+            </h5>
+        </div></div></div>";s:4:"time";i:1772882463;}

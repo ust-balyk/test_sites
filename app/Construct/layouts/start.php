@@ -2,27 +2,86 @@
 <html lang="ru" class="notranslate">
   <head>
     <meta charset="UTF-8">
-    <title>Японская косметика</title>
+    <meta name="robots" content="index, follow">
+    <!--title>Japan-in.Ru &mdash; японская косметика и витамины по доступной цене!</title-->
+    <title>Всё для Твоей красоты и здоровья из Японии!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Японские витамины - покупайте по доступной цене на Japan-in.Ru!">
-    <meta name="keywords" content="japan-in.ru, satomi-japan.com, японские витамины, японская косметика,
-      витамины из японии, витамины и минералы, японские витамины в наличии, японские витамины для глаз,
-      антиоксиданты, коллаген, сквален, наттокиназа, пробиотики, витамины для суставов,
-      высшее качетво добавок, японские витамины для мужского здоровья,япоqнские витамины для женского здоровья,
-      японские витамины для детей">
+    <meta name="description" content="Japan-in.Ru - японская косметика и витамины по доступной цене!">
+    <meta name="keywords" content="косметика, япония, витамины, здоровье, красота">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="<?= base_url(POCKET_STYLE .'/favicon/icon.png'); ?>" type="image/png">
-    <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
+    <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
+    <link rel="preload" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>" as="style">
     <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE .'/css/main.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE .'/css/media.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
+    <meta property="og:locale" content="ru_RU" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты и здоровья!" />
+    <meta property="og:description" content="Инновационные достижения косметологии и традиционные системы оздоровления из Страны восходящего солнца!" />
+	<meta property="og:url" content="https://japan-in.ru" />
+	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
+	<meta property="og:image:width" content="1630" />
+	<meta property="og:image:height" content="1136" />
+    <meta property="og:image:type" content="image/png" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "name": "Japan-in.Ru — Магазин японских БАД и косметики.",
+      "url": "https://japan-in.ru",
+      "logo": "https://japan-in.ru/public/japan-in-ru.png",
+      "description": "Официальный поставщик японских биодобавок (коллаген, наттокиназа, омега-3) и премиальной косметики из Японии.\nВсё для Твоей красоты и здоровья!",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "RU"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+7-912-417-48-18",
+        "contactType": "customer service",
+        "availableLanguage": "Russian",
+        "sameAs": [
+          "https://wa.me",
+          "https://t.me"
+        ]
+      },
+      "knowsAbout": [
+        {
+          "@type": "MedicalIndication",
+          "name": "Профилактика дефицита витаминов",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "E56.9",
+            "codingSystem": "ICD-10"
+          }
+        },
+        {
+          "@type": "MedicalIndication",
+          "name": "Укрепление иммунитета",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "Z29.1",
+            "codingSystem": "ICD-10"
+          }
+        }
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://japan-in.ru{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </head>
-
   <body>
+    <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
     <div class="wrapper">
+      <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
           <div class="container">
@@ -38,7 +97,7 @@
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown has-megamenu">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Каталог
                   </a>
                   <?php
@@ -50,9 +109,12 @@
                       'attrs'     => ['role' => 'menu',],
                     ]);
                   ?>
-                </li>
+                </li> 
                 <li class="nav-item">
                   <a class="nav-link" href="#about_us">О нас</a>
+                  <!--div class="hide">
+                    <a class="nav-link" href="<?= base_url('/page'); ?>">О нас</a>
+                  </div-->
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
@@ -67,20 +129,19 @@
                   ?>
                 </li>
               </ul>
-            </div><!--collapse navbar-collapse-->
-
+            </div><!--navbar-collapse-->
             <div class="navbar-icon">
               <ul>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="">
+                    <a href="#">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
                     </a>
                   <?php } else { echo user_heart(); } ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="">
+                    <a href="#">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
                     </a>
                   <?php } else { echo user_cart(); } ?>
@@ -94,29 +155,32 @@
                 </li>
               </ul>
             </div><!--navbar-icon-->
-
           </div><!--container-->
         </nav>
         <div class="banner">
           <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.jpg'); ?>"
               alt="изображение горы Фудзияма">
+          <!--img src="<?//= base_url(POCKET_STYLE .'/assets/banner/banner.svg'); ?>"
+            alt="изображение горы Фудзияма"-->
         </div><!--banner-->
       </header>
-  
-      <main> 
+      <!---------------- MAIN ---------------->
+      <main>
         <div class="container">
-          <?= "start"; echo$view_file; ?>
+          <?= $view_file; ?>
           <button id="top_btn" title="Перейти к началу"> 
             <i class="fa-solid fa-chevron-up"></i>
           </button>
           <form id="search" class="search-form" action="">
             <input id="input" class="form-control form-control-sm hide"
-                  type="search" placeholder="" aria-label="Поиск">
-            <button id="submit" class="btn btn-sm" type="submit">?</button>
+                  type="search" placeholder="&nbsp; и с к а т ь" aria-label="поиск">
+            <button id="submit" class="btn btn-sm" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
           </form>
-        </div><!--container-->
+        </div>
       </main>
-
+      <!---------------- FOOTER ---------------->
       <footer>
         <section class="call-back">
           <div class="col-md-8 offset-md-2 call-back">
@@ -137,11 +201,9 @@
             </form>        
           </div><!--col-md-8 offset-md-2-->
         </section><!--call-back-->
-      
         <section class="info">
-          <div class="info col-md-8 offset-md-2">
+          <div class="col-md-8 offset-md-2">
             <div class="row">
-
               <div class="col-md-4 info">
                 <h6>связаться с нами</h6>
                 <div class="contact">
@@ -152,23 +214,21 @@
                     <li><a href="https://t.me/satomi_jap" target="_blank">Telegram</a></li>
                   </ul>
                 </div>
-              </div>
-
+              </div><!--+-->
               <div class="col-md-4 info">
                 <h6>наш адрес</h6>
                 <div class="address">
-                  <!--a href="https://www.google.com/maps/search/?api=1&query=45.011728,39.123093"
-                      target="_blank"-->
-                  <a href="https://yandex.ru/maps/?pt=39.123093,45.011728&z=15&
-                        l=map&sll=39.123093,45.011728" target="_blank">
+                  <a href="https://www.google.com/maps/search/?api=1&query=45.011728,39.123093"
+                      target="_blank">
+                  <!--a href="https://yandex.ru/maps/?pt=39.123093,45.011728&z=15&
+                        l=map&sll=39.123093,45.011728" target="_blank"-->
                     <p>Краснодар, Крылатая 2<br>
                        Пн-Пт:&nbsp;10:00-18:00<br><!--&nbsp; (от «non-breaking space»)-->
                        Сб:&nbsp;12:00-18:00<!--&emsp;(широкий пробел)-->
                     </p>
                   </a>
                 </div>
-              </div>
-
+              </div><!--+-->
               <div class="col-md-4 info">
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
@@ -179,14 +239,12 @@
                   </ul>
                 </div>
               </div>
-
-            <div>
+            <div><!--row-->
           </div>
-        </section>
-
+        </section><!--info-->
         <section class="copyright">
           <div class="copyright">
-            <a  href="<?= base_url('/home'); ?>">
+            <a  href="<?= base_url('/'); ?>">
               <img class="brand_footer" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
             </a>
             <!--p>&copy; ~ 2.3</p-->
@@ -195,13 +253,12 @@
         <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
-
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
+    <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
     <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
-    
   </body>
 </html>

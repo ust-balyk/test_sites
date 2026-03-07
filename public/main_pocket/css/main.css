@@ -490,7 +490,7 @@ div .product-card-img {
     aspect-ratio: 16 / 9;
     background-color: white;
     width: auto !important;
-    object-fit: cover;
+    object-fit: contain; /*cover;*/
     margin: auto;
 }
 
@@ -1190,14 +1190,14 @@ button.accordion-button:focus {
     box-shadow: none;
 }
 
-/* переопределение стилей, когда аккордеон открыт */
+/* --- переопределение стилей, когда аккордеон открыт --- */
 
 .accordion-button:not(.collapsed) {
   background-color: var(--light-blue-color) !important;
   border-bottom: 1px solid var(--light-grey-color) !important;
 }
 
-/* стилизовать иконку (стрелку) */
+/* --- стилизовать иконку (стрелку) --- */
 
 .accordion-button.collapsed::after {
     background-image: url("../favicon/filter.svg");
@@ -1220,7 +1220,7 @@ div.accordion-body {
 }*/
 
 
-/* filter_price */
+/* --- filter_price --- */
 
 .filter_price {
     display: flex;
@@ -1273,7 +1273,7 @@ input#max_price.form-control:focus {
     box-shadow: none;
 }
 
-/* убрать "переключатели" (стрелки/спиннеры) */
+/* --- убрать "переключатели" (стрелки/спиннеры) --- */
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -1286,7 +1286,8 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-/* кнопки фильтра по цене */
+/* --- кнопки фильтра по цене --- */
+
 div#slider-range {
     border-color: var(--light-grey-color);
     /* правый пиксель кажется ровнее */
@@ -1314,7 +1315,7 @@ div#slider-range {
     background-color: var(--description-color);
 }
 
-/* списки выбора фильтра */
+/* --- списки выбора фильтра --- */
 
 ul.filters_list {
   list-style-type: none; /* убирает маркеры */
@@ -1322,7 +1323,7 @@ ul.filters_list {
   margin-bottom: 0;
 }
 
-/* индикатор выбора фильтра */
+/* --- индикатор выбора фильтра --- */
 
 .form-check-input {
     border-color: var(--light-grey-color);
@@ -1341,7 +1342,7 @@ ul.filters_list {
     background-size: contain;*/
 }
 
-/* строка метки */
+/* --- строка метки --- */
 
 label.form-check-label {
     /* строка переносится */
@@ -1358,7 +1359,7 @@ label.form-check-label {
 }
 
 
-/* ukiyo_e */
+/* --- ukiyo_e --- */
 
 div.ukiyo_e {
     height: auto;
@@ -1374,7 +1375,7 @@ div.ukiyo_e {
     background-size: contain;
 }
 
-/* content */
+/* --- content --- */
 
 div.content {
     margin: 0;
@@ -1416,7 +1417,7 @@ div.product-card {
     }
 }*/
 
-/*====  pagination ====*/
+/* --- pagination --- */
 
 ul.pagination {
     margin: 30px 0px 0px 0px;
@@ -1471,23 +1472,81 @@ a.page-link.disabled {
 }
 
 /* ==== info block ==== */
-
+/*
 div.container .description {
-    margin-top: 100px;
+    margin-top: 20px;
 }
-
 div.category_description {
     font-size: 16px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 24px;i
     color: var(--black-color);
     
-    -webkit-user-select: none; /* Chrome/Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE/Edge */
-    user-select: none; /* Стандартный синтаксис */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
+.category_description h4 {
+    text-align: center;
+}
+
+.category_description ul {
+    list-style: none;
+    padding-left: 0;
+}
+.category_description ul li::before {
+    /*content: '\f14a';
+    font: var(--fa-font-solid);*//*
+    content: '\f058';
+    font: var(--fa-font-regular);
+    font-size: 15px;
+    color: #154f84; /*#77c2ff;*/ /* #ffa500;*/ /*var(--grey-color);*//*
+    margin: 0px 10px 0px 0px;
+}
+
+.description .note-float-left {
+    margin: 20px 20px 0px 0px !important;
+}*/
+
+/* =================== /Page Category =================== */
+
+/* =================== Product =================== */
+
+section.product {
+    margin-top: 95px;
+}
+
+/* --- изображение & цена продукта --- */
+
+.row.product {
+    padding: 0;
+    margin: 0px 0px 50px 0px;
+}
+
+/* --- image --- */
+
+div.product_image {
+    text-align: center;
+    background-color: var(--bg-color);
+}
+.product_image img {
+    height: 600px;
+    aspect-ratio: 16 / 9;
+    background-color: var(--bg-color);
+    width: auto !important;
+    object-fit: contain;
+    margin: auto;
+}
+
+/* --- description --- */
+
+div.row.description {
+    height: auto;   
+    padding: 0px 0px 45px 0px;
+    margin: 0px 0px 5px 0px;
+    border-bottom: solid 2px rgba(255,140,0,0.1);
 .category_description h4 {
     text-align: center;
 }
@@ -1508,26 +1567,6 @@ div.category_description {
 
 .description .note-float-left {
     margin: 20px 20px 0px 0px !important;
-}
-
-/* =================== /Page Category =================== */
-
-/* =================== Product =================== */
-
-section.product {
-    margin-top: 95px;
-    .row.product {
-        margin-bottom: 0;
-    }
-}
-
-/* ==== description ==== */
-
-div.row .description {
-    height: auto;
-    padding: 0px 0px 45px 0px;
-    margin: 18px 0px 5px 0px; /* 20px от блока с описанием до картинки */
-    border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
 .product-desc-tabs {
