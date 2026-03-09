@@ -484,6 +484,7 @@ div .product-card:hover {
 
 div .product-card-img {
     text-align: center;
+    background-color: white;
 }
 .product-card .product-card-img img {
     height: 290px;

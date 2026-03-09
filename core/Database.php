@@ -87,6 +87,8 @@ class Database
                     `description` TEXT DEFAULT NULL,
                     `image` VARCHAR(50) DEFAULT NULL,
                     `price` TEXT DEFAULT NULL,
+                    `old_price` TEXT DEFAULT NULL,
+                    `new_price` TEXT DEFAULT NULL,
                     `category_id` INT
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 $this->connection->exec($tbl_products);
@@ -100,6 +102,8 @@ class Database
                     `description` TEXT DEFAULT NULL,
                     `image` VARCHAR(50) DEFAULT NULL,
                     `price` TEXT DEFAULT NULL,
+                    `old_price` TEXT DEFAULT NULL,
+                    `new_price` TEXT DEFAULT NULL,
                     `category_id` INT
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
                 $this->connection->exec($tbl_cosmetics);
