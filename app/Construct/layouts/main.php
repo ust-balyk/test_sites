@@ -253,6 +253,7 @@
         <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
+    <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
