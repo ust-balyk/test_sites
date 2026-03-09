@@ -175,7 +175,7 @@
 
                 <!-- Секция формы создания отзыва -->
                 <div class="col-md-4 mt-0">
-                  <div class="my_card"> <!--card p-3"-->
+                  <div class="my_card">
                     <h5 class="mb-3">оставить отзыв</h5>
                     <form>
                       <div class="mb-3">
@@ -204,8 +204,10 @@
                     </form>
                   </div>
                 </div>
+
               </div>
-            </div>
+            </div><!-- отзывы -->
+
           </div> 
         </div>
       </div><!--description-->

@@ -28,4 +28,4 @@ a:2:{s:12:"partial_menu";s:2008:"<div class="container dropdown-menu megamenu"  
         </div><div class='col-lg-3 col-md-6 col-sm-1' style='text-align:center'>
             <h5><a href=http://localhost:8888/category/accessories>аксессуары</a>
             </h5>
-        </div></div></div>";s:4:"time";i:1773075358;}
+        </div></div></div>";s:4:"time";i:1773081100;}

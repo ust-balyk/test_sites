@@ -93,6 +93,12 @@ body {
     background-color: var(--description-color);
 }
 
+.form-control:focus,
+.form-label:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 div.wrapper {
     min-height: 100%;
     display: flex;
