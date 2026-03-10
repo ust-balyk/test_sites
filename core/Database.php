@@ -26,12 +26,14 @@ class Database
             {
                 $this->connection->exec($japan_in_ru);
                 $this->connection->exec("USE japan_in_ru");
-            
+
+                //1 — пользователь, 2 — модератор, 3 — администратор 
                 $tbl_users = "CREATE TABLE IF NOT EXISTS `users` (
                         `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                         `name` VARCHAR(55) NULL DEFAULT NULL,
                         `email` VARCHAR(105) UNIQUE NOT NULL,
                         `password` VARCHAR(255) NOT NULL,
+                        `role` INT DEFAULT 1,
                         `created_at` timestamp NULL DEFAULT NULL,
                         `updated_at` timestamp NULL DEFAULT NULL,
                         `auth_token` VARCHAR(255) DEFAULT NULL

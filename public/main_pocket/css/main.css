@@ -60,7 +60,7 @@
 
 /* ================== General ==================== */
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -93,8 +93,7 @@ body {
     background-color: var(--description-color);
 }
 
-.form-control:focus,
-.form-label:focus {
+.form-control:focus {
     outline: none;
     box-shadow: none;
 }

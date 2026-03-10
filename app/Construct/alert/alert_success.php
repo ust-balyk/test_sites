@@ -1,7 +1,7 @@
 <div class="container">    
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= $flash_success ?? ''; ?>
+       <?= $flash_success ?? ''; ?>
     </div>
     <script>
         //var timer = setTimeout(function() {

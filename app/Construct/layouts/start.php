@@ -83,8 +83,14 @@
     <div class="wrapper">
       <!---------------- HEADER ---------------->
       <header>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
-          <div class="container">
+        <div class="banner">
+          <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.jpg'); ?>"
+              alt="изображение горы Фудзияма">
+          <!--img src="<?//= base_url(POCKET_STYLE .'/assets/banner/banner.svg'); ?>"
+              alt="изображение горы Фудзияма"-->
+        </div><!--banner-->
+        <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
             <a class="navbar-brand" href="<?= base_url('/home'); ?>">
               <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
             </a>
@@ -155,14 +161,8 @@
                 </li>
               </ul>
             </div><!--navbar-icon-->
-          </div><!--container-->
-        </nav>
-        <div class="banner">
-          <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.jpg'); ?>"
-              alt="изображение горы Фудзияма">
-          <!--img src="<?//= base_url(POCKET_STYLE .'/assets/banner/banner.svg'); ?>"
-            alt="изображение горы Фудзияма"-->
-        </div><!--banner-->
+          </nav>
+        </div><!--container-->
       </header>
       <!---------------- MAIN ---------------->
       <main>
@@ -202,7 +202,7 @@
           </div><!--col-md-8 offset-md-2-->
         </section><!--call-back-->
         <section class="info">
-          <div class="col-md-8 offset-md-2">
+          <div class="container col-md-8 offset-md-2">
             <div class="row">
               <div class="col-md-4 info">
                 <h6>связаться с нами</h6>

@@ -3,15 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>Вход</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<?= base_url('/default_pocket/favicon/icon.png'); ?>" type="image/png">
         <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     </head>
-    <body style="background-color: #eaeaea">        
-        <div class="container" style="height: 97vh"><br><br>
+    <body id="login">
+        <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h5 class="text-primary">
-                        <i>Правильно укажите свои данные, чтобы войти в личное пространство</i></h5>
+                <div class="col-md-12 login">
+                    <div class="text-primary">
+                        <h5>Правильно укажите свои данные, чтобы войти в личное пространство</h5>
+                    </div>
                     <form action="<?= base_url('/login'); ?>" method="post">
 
                         <?= get_csrf_field(); ?>
@@ -35,10 +39,10 @@
                                    value="     а у т е н т и ф и к а ц и я     ">
                         </div><br>
 
-                        <p>Нет аккаунта?
-                            <a style="font-weight:bold; color:#198754; text-decoration:none"
+                        <p>
+                            <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
                                 href="<?= base_url('/register'); ?>">Создать аккаунт,</a>
-                            <a style="font-weight:bold; color:#198754; text-decoration:none"
+                            <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
                                 href="#" onclick="window.history.go(-1);">или Отказаться.
                             </a>
                         </p> 
@@ -47,7 +51,7 @@
                     <?= get_alerts(); ?>
                     <?= session()->remove('form_data'); ?>
 
-                </div>
+                </div><!-- /login -->
             </div>
         </div> 
     </body>
