@@ -24,8 +24,8 @@
 
               <div class="form-group">
                 <label></label>
-                <input type="text" name="name"
-                  placeholder="Имя" class="form-control border-success border-4
+                <input type="text" name="name" placeholder="Имя" 
+                        class="form-control border-0 rounded-1
                   <?= get_validation_class('name'); ?>"
                   value="<?= old('name'); ?>"> <!-- required /-->
                   <?//= get_errors('name'); ?>
@@ -34,7 +34,7 @@
               <div class="form-group">
                 <label></label>
                 <input type="email" name="email" placeholder="Электронная почта"
-                  class="form-control border-success border-4
+                        class="form-control border-0 rounded-1
                   <?= get_validation_class('email'); ?>"
                   value="<?= old('email'); ?>"> <!-- required /-->
                   <?//= get_errors('email'); ?>
@@ -43,7 +43,7 @@
               <div class="form-group">
                 <label></label>
                 <input type="password" name="password" placeholder="Пароль не менее 6 символов"
-                  class="form-control border-success border-4
+                        class="form-control border-0 rounded-1
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('password'); ?>
               </div>
@@ -51,13 +51,13 @@
               <div class="form-group">
                 <label></label>
                 <input type="password" name="confirm_password" placeholder="Повторите пароль" 
-                        class="form-control border-success border-4
+                        class="form-control border-0 rounded-1
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('confirm_password'); ?>
                 </div><br><br>
 
               <div class="form-group">
-                <input type="submit" name="submit" class="btn btn-primary"
+                <input type="submit" name="submit" class="btn btn-primary rounded-1"
                         value="     р е г и с т р а ц и я     ">
               </div><br>
 
@@ -67,8 +67,16 @@
                 <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
                     href="<?= base_url('/login'); ?>">Войти в систему,</a>
                 <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                    href="#" onclick="window.history.go(-2);"> или Отказаться.</a>
+                    href="#" id="go_back" onclick="window.location.href"> или Отказаться.</a>
               </p>
+              <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                  var go_back = document.getElementById("go_back");
+                  go_back.addEventListener("click", function() {
+                    window.location.href = localStorage.getItem('previousPage');
+                  });
+                });
+              </script>
 
             </form>
 

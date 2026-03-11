@@ -1,289 +1,56 @@
-<!--link rel="stylesheet" href="style.css"-->
 <style>
-/*@import url(https://fonts.googleapis.com/css?family=Gilda+Display);*/
-html {
-  background-color: white; /*black*/
-  color: black;
-  overflow: hidden;
-  height: 100%;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-		  font-size: medium;
+html { height: 100%; }
+body {
+    background-image: url("../../images/404.jpg");
+    background-size: cover; /* Масштабирует картинку сохраняя пропорции */
 }
-
-.error {
-  text-align: center;
-  font-family: 'Gilda Display', serif;
-  
-  text-align: center;
-  width: 100%;
-  height: 200px;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -60px;
-  right: 0;
-  -webkit-animation: noise-3 1s linear infinite;
-          animation: noise-3 1s linear infinite;
-  overflow: default;
+.page-404 {
+    background: rgba(0, 0, 0, 0); /* Цвет фона и значение прозрачности */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 0; right: 0; top: 0; bottom: 0; /* Отступы от краев браузера */
 }
-
-body:after {
-  content: 'error 404';
-  font-family: OCR-A;
-  font-size: 130px;
-  
-  text-align: center;
-  width: 550px;
-  margin: auto;
-  position: absolute;
-  top: 25%;
-  bottom: 0;
-  left: 0;
-  right: 35%;
-  opacity: 0;
-  color: red;
-  -webkit-animation: noise-1 .2s linear infinite;
-          animation: noise-1 .2s linear infinite;
+.text {                    
+    top: 35vh;               
+    left: 11vw;
+    text-align: left;        
+    color: rgba(0, 0, 0, 0.7);             
+    text-shadow: 1px 1px 2px rgba(0, 0, 200, 0.6); 
+    font-size: 4.7vh;        
+    position: relative; /* Относительное позиционирование */
+    z-index: 2; /* Порядок наложения элемента по слоям в глубину */
 }
-body:before {
-  content: 'error 404';
-  font-family: OCR-A;
-  font-size: 100px;
-  
-  text-align: center;
-  width: 500px;
-  margin: auto;
-  position: absolute;
-  top: 25%;
-  bottom: 0;
-  left: 0;
-  right: 35%;
-  opacity: 0;
-  color: black;
-  -webkit-animation: noise-2 .2s linear infinite;
-          animation: noise-2 .2s linear infinite;
+.return {
+    color: white;
+    text-decoration: none;
+    text-shadow: 1px 1px 2px blue;
+    font-size: 3.7vh;           
 }
-
-.info {
-  text-align: center;
-  width: 200px;
-  height: 60px;
-  margin: auto;
-  position: absolute;
-  top: 280px;
-  bottom: 0;
-  left: 20px;
-  right: 0;
-  -webkit-animation: noise-3 1s linear infinite;
-          animation: noise-3 1s linear infinite;
+.return:hover {  
+    color: rgba(0, 200, 0, 0.5);
+    text-decoration: none;
 }
-
-.info:before {
-  content: 'file not found';
-  font-family: OCR-A;
-  font-size: 90px;
-  text-align: center;
-  width: 800px; 
-  margin: auto;
-  position: absolute;
-  top: 20px;
-  bottom: 0;
-  left: 40px;
-  right: 100px;
-  opacity: 0;
-  color: black;
-  -webkit-animation: noise-2 .2s linear infinite;
-          animation: noise-2 .2s linear infinite;
-}
-
-.info:after {
-  content: 'file not found';
-  font-family: OCR-A;
-  font-size: 100px;
-  text-align: center;
-  width: 800px;
-  margin: auto;
-  position: absolute;
-  top: 20px;
-  bottom: 0;
-  left: 40px;
-  right: 0;
-  opacity: 0;
-  color: white;
-  -webkit-animation: noise-1 .2s linear infinite;
-          animation: noise-1 .2s linear infinite;
-}
-
-@-webkit-keyframes noise-1 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: -6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: 2px;}
-}
-
-@keyframes noise-1 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: -6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: 2px;}
-}
-
-@-webkit-keyframes noise-2 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: 6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: -2px;}
-}
-
-@keyframes noise-2 {
-  0%, 20%, 40%, 60%, 70%, 90% {opacity: 0;}
-  10% {opacity: .1;}
-  50% {opacity: .5; left: 6px;}
-  80% {opacity: .3;}
-  100% {opacity: .6; left: -2px;}
-}
-
-@-webkit-keyframes noise {
-  0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}  
-  4.3% {opacity: 1; -webkit-transform: scaleY(1.7); transform: scaleY(1.7);}
-  43% {opacity: 1; -webkit-transform: scaleX(1.5); transform: scaleX(1.5);}
-}
-
-@keyframes noise {
-  0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}  
-  4.3% {opacity: 1; -webkit-transform: scaleY(1.7); transform: scaleY(1.7);}
-  43% {opacity: 1; -webkit-transform: scaleX(1.5); transform: scaleX(1.5);}
-}
-
-@-webkit-keyframes noise-3 {
-  0%,3%,5%,42%,44%,100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}
-  4.3% {opacity: 1; -webkit-transform: scaleY(4); transform: scaleY(4);}
-  43% {opacity: 1; -webkit-transform: scaleX(10) rotate(60deg); transform: scaleX(10) rotate(60deg);}
-}
-
-@keyframes noise-3 {
-  0%,3%,5%,42%,44%,100% {opacity: 1; -webkit-transform: scaleY(1); transform: scaleY(1);}
-  4.3% {opacity: 1; -webkit-transform: scaleY(4); transform: scaleY(4);}
-  43% {opacity: 1; -webkit-transform: scaleX(10) rotate(60deg); transform: scaleX(10) rotate(60deg);}
-}
-
-.wrap {
-  top: 30%;
-  left: 25%;
-  
-  height: 200px;
-  
-  margin-top: -100px;
-  position: absolute;
-}
-code {
-  color: white;
-}
-span.blue {
-  color: #48beef;
-}
-span.comment {
-  color: #7f8c8d;
-}
-span.orange {
-  color: #f39c12;
-}
-span.green {
-  color: #33cc33;
-}
-span.red {
-  color: red;
-}
-
-.viewFull {
-  font-family:OCR-A;
-  color:orange;
-  text-decoration:;
-}
-@font-face {
-    font-family: OCR-A;
-} 
-
-@media only screen and (min-height: 500px) {
-
-.viewFull{
-  display:none; 	
-	}
-
-}
-
-.go_back {
-  position: relative;
-  top: 170px; left: 700px; 
-  -webkit-animation: go_back 0.5s linear infinite;
-  animation: go_back 0.5s linear infinite;
-}
-
-@-webkit-keyframes go_back {
-  0% { color: rgba(34, 34, 34, 1); }
-  50% { color: rgba(34, 34, 34, 0); }
-  /*100% { color: rgba(34, 34, 34, 1); }*/
-  100% { color: rgba(34, 255, 34, 1); }
-
-}
-
-@keyframes go_back {
-  0% { color: rgba(34, 34, 34, 1); }
-  50% { color: rgba(34, 34, 34, 0); }
-  /*100% { color: rgba(34, 34, 34, 1); }*/
-  100% { color: rgba(34, 255, 34, 1); }
-}
-
 </style>
-
-<div style="go_back";>
-  <h3><a href="http://localhost:8888" class="go_back"
-      style="font-size: 25px;
-        font-family: 'Consolas','Menlo', monospace;
-        outline: none; text-decoration: none;"
-        target="_parent"> ОБРАТНАЯ ТЯГА * </a></h3>
-</div>
-
-<div class="error">
-  <div class="wrap">
-    <div class="404">
-      <pre><code>
-	  <span class="green">&lt;!</span><span>DOCTYPE html</span><span class="green">&gt;</span>
-      <span class="orange">&lt;html&gt;</span>
-            <span class="orange">&lt;style&gt;</span>
-      * {
-  
-<span class="green">everything</span>:<span class="blue">awesome</span>;
-}
-      <span class="orange">&lt;/style&gt;</span>
-<span class="">&lt;body&gt;</span> 
-                                    ERROR 404!
-		FILE NOT FOUND!</h4>
-            <span class="comment">
-
-  &lt;!-- <span class="red">выбранного пути не существует</span>
-                          the chosen path does not exist --&gt;</span>
-      <span class="orange"></span> 
-			  
-      </div><br />
-      <span class="info"><br />
-
-      <span class="orange">&nbsp;&lt;/body&gt;</span><br/>
-      <span class="orange">&lt;/html&gt;</span>
-    </code></pre>
-  </div>
-</div></span>
-
-<script>
-  setTimeout(function() {
-    window.location='http://localhost:8888'
-  }, 3000);
-</script>
-
+<?php 
+echo <<<_404
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="favicon.ico/s.svg" sizes="any" type="image/svg+xml">
+        <link rel="stylesheet" href="../css/404.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>404</title>
+    </head>
+    <body>
+        <div class="page-404">
+            <div class="text">
+                <h3>4 0 4</h3><br>
+                <p>мелкие капли дождя<br>
+                кружат боятся упасть<br>
+                путают мысли<br>
+                и нет ответа..<br>
+                <a class="return" href="../index.php">japan-in-ru</a></p>
+            </div>
+        </div>
+    </body>
+</html>
+_404;

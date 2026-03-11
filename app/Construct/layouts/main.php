@@ -158,7 +158,7 @@
           </div><!--container-->
         </nav>
         <div class="banner">
-          <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.jpg'); ?>"
+          <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.png'); ?>"
               alt="изображение горы Фудзияма">
           <!--img src="<?//= base_url(POCKET_STYLE .'/assets/banner/banner.svg'); ?>"
             alt="изображение горы Фудзияма"-->
