@@ -539,5 +539,4 @@
       </div><!--slider-popular-->
     </div><!--container-->
   </section><!--favorite-promo-->
-  <script>localStorage.setItem('previousPage', window.location.href);</script>
-  
+  <script>localStorage.setItem('location', window.location.href);</script> 

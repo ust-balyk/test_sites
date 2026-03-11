@@ -398,5 +398,5 @@
 
     </div><!--container category-->
   </section>
-  <script>localStorage.setItem('previous_page', window.location.href);</script>
+  <script>localStorage.setItem('location', window.location.href);</script>
 

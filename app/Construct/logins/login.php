@@ -44,13 +44,13 @@
                             <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
                                 href="<?= base_url('/register'); ?>">Создать аккаунт,</a>
                             <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                                href="#" id="go_back" onclick"window.location.href">или Отказаться.</a>
+                                href="#" id="login_page" onclick"window.location.href">или Отказаться.</a>
                         </p>
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {
-                                var go_back = document.getElementById("go_back");
+                                var go_back = document.getElementById("login_page");
                                 go_back.addEventListener("click", function() {
-                                    window.location.href = localStorage.getItem('previousPage');
+                                    window.location.href = localStorage.getItem('location');
                                 });
                             });
                         </script> 

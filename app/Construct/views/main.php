@@ -560,4 +560,4 @@
         Откройте для себя секреты японской красоты и долголетия!</h3>
     </div>
   </section>
-  <script>localStorage.setItem('previousPage', window.location.href);</script>
+  <script>localStorage.setItem('location', window.location.href);</script>

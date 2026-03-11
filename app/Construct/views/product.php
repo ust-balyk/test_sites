@@ -445,4 +445,4 @@
       </div>
     </div>
   </section>
-  <script>localStorage.setItem('previousPage', window.location.href);</script>
+  <script>localStorage.setItem('location', window.location.href);</script>
