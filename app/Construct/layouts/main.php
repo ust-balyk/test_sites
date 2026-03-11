@@ -12,11 +12,12 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
     <link rel="preload" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>" as="style">
-    <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
+    <!--link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>"-->
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <link rel="preload" href="<?= base_url('/images/login.png'); ?>" as="image">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <meta property="og:locale" content="ru_RU" />

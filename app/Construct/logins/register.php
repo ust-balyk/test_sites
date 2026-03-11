@@ -67,7 +67,7 @@
                 <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
                     href="<?= base_url('/login'); ?>">Войти в систему,</a>
                 <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                    href="#" id="register_page" onclick="window.location.href"> или Отказаться.</a>
+                    href="#" id="register_page"> или Отказаться.</a>
               </p>
               <script>
                 document.addEventListener("DOMContentLoaded", function() {

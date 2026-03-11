@@ -44,7 +44,7 @@
                             <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
                                 href="<?= base_url('/register'); ?>">Создать аккаунт,</a>
                             <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                                href="#" id="login_page" onclick"window.location.href">или Отказаться.</a>
+                                href="#" id="login_page">или Отказаться.</a>
                         </p>
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {
