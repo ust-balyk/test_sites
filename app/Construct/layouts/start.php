@@ -11,15 +11,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
-    <link rel="preload" href="fontawesome/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="fontawesome/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
-    <link rel="preload" href="<?= base_url('/images/login.png'); ?>" as="image">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
+    <link rel="preload" href="<?= base_url('/images/login.png'); ?>" as="image">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты и здоровья!" />
