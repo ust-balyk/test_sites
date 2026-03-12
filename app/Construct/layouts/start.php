@@ -11,6 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?=base_url(POCKET_STYLE.'/favicon/icon.png');?>" type="image/png">
+    <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Regular.woff2');?>" 
+          as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Medium.woff2');?>" 
+          as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">

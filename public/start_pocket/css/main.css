@@ -7,7 +7,7 @@
     --light-grey-color:  #818f9f;
     --black-color:       #161c24;
     --blue-color:        #4295e4;
-    --light-blue-color:  #cce8ff;*/ /*#bbe0ff;*/ /*#aad9ff;*/ /*#56a9f8;*/
+    --light-blue-color:  #cce8ff; /*#bbe0ff;*/ /*#aad9ff;*/ /*#56a9f8;*/
     --underline-color:   #d1d1d1;
     --btn-color:         #a8f32f;
     --border-color:      #989ea4;
@@ -508,8 +508,6 @@ h6.product-card-title {
     text-decoration: none;
     word-break: break-word;
     hyphens: auto;
-    -webkit-hyphens: auto; /* Safari */
-    -ms-hyphens: auto;    /* IE/Edge */
     overflow: scroll;
 }
 
@@ -667,7 +665,7 @@ div.image-container {
   border-radius: 3px;
   bottom: 10px;
   right: 40px;
-  background-color: none; /*var(--nav-color);*/
+  /*background-color: none; /*var(--nav-color);*/
   padding-top: 2px; 
   padding-left: 7px;
   padding-bottom: 2px;
@@ -680,7 +678,7 @@ div.image-container {
     border-radius: 3px;
     bottom: 10px;
     left: 40px;
-    background-color: none; /*var(--nav-color);*/
+    /*background-color: none; /*var(--nav-color);*/
     padding-top: 2px;
     padding-left: 7px;
     padding-bottom: 2px;
@@ -973,15 +971,9 @@ input#input.form-control:focus+button#submit.btn.btn-sm {
     background-color: #e1fae8;
 }
 
-input#input.form-control::placeholder { /* Firefox */
+input#input.form-control::placeholder {
     color: var(--light-grey-color);
     opacity: 1;
-}
-input#input.form-control::-ms-input-placeholder { /* Edge 12–18 */ 
-    color: var(--light-grey-color);
-}
-input#input.form-control:-ms-input-placeholder {
-    color: var(--light-grey-color);
 }
 
 input:focus { caret-color: #fff; }
@@ -1062,7 +1054,7 @@ a.btn.back_link {
     margin: 0px 0px 15px 0px;
     color: var(--grey-color);
     border: 1px solid var(--border-color);
-    background-color: none;
+    /*background-color: none;*/
     transition: all .350s;
 }
 a.btn.btn-outline-secondary.back_link h5 {
@@ -1296,17 +1288,15 @@ input#max_price.form-control:focus {
     box-shadow: none;
 }
 
-/* убрать "переключатели" (стрелки/спиннеры) */
-
-/* Chrome, Safari, Edge, Opera */
+/* убрать стрелки-переключатели цены */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* кнопки фильтра по цене */
@@ -1364,20 +1354,15 @@ ul.filters_list {
     background-size: contain;*/
 }
 
-/* строка метки */
+/* строка описания фильтра */
 
 label.form-check-label {
     /* строка переносится */
     word-break: break-word;
     hyphens: auto;
-    -webkit-hyphens: auto; /* Safari */
-    -ms-hyphens: auto;    /* IE/Edge */
 
     /* строка не копируется */
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
 
@@ -1389,7 +1374,7 @@ div.ukiyo_e {
     padding: 0;
 }
 .ukiyo_e img {
-    border: 1px solid none;
+    border: none;
     border-radius: 3px;
     margin-top: 12px;
     margin-bottom: 10px;
@@ -1402,20 +1387,10 @@ div.ukiyo_e {
 div.content {
     margin: 0;
     padding: 0;
-
-    -ms-box-orient: horizontal;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
+    /*box-orient: horizontal;*/
     display: flex;
-
-    -webkit-justify-content: space-around;
     justify-content: space-around;
-    -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
-    -webkit-align-items: stretch;
     align-items: stretch;
 }
 
@@ -1500,11 +1475,7 @@ div.category_description {
     font-weight: 400;
     line-height: 24px;
     color: var(--black-color);
-    
-    -webkit-user-select: none; /* Chrome/Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE/Edge */
-    user-select: none; /* Стандартный синтаксис */
+    user-select: none;
 }
 
 .category_description h4 {
@@ -1737,9 +1708,6 @@ body#register {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
   text-align: center;
 }
