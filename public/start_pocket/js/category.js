@@ -42,7 +42,7 @@ $(document).ready(function() {
         for ( let entry of entries ) {
             const { width, height } = entry.contentRect;
             if ( block_filters.height() < filters_block_height ) {
-                block_ukiyo_e.fadeIn(500);
+                block_ukiyo_e.fadeIn(350);
                 selector_link.setAttribute('class', '');
                 selector_text.setAttribute('class', '');
                 selector_text.textContent = 'фильтры';

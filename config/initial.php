@@ -39,9 +39,9 @@ const CLOSED_FOR = [
 ];
 
 ########
-const ADMIN_A = [
-   'test@test.ru',
-];
+//const ADMIN_A = [
+  // 'test@test.ru',
+//];
 
 ######## сложность password 
 const TIME_COST = 0.350;
@@ -56,7 +56,7 @@ const PRODUCT_VIEW    = 'product';
 ##
 
 $POCKET_STYLE = 'start';
-if ( $POCKET_STYLE === 'main' ) {
+if ( $POCKET_STYLE  == false || $POCKET_STYLE  === 'main' ) {
    $POCKET_STYLE = '/public/main_pocket';
 } else { 
    $POCKET_STYLE = '/public/start_pocket';

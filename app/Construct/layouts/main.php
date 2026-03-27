@@ -15,14 +15,14 @@
           as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Medium.woff2');?>" 
           as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
-    <link rel="preload" href="<?= base_url('/images/login.png'); ?>" as="image">
+    <link rel="stylesheet" href="<?=base_url('/library/fontawesome/css/all.min.css');?>">
+    <link rel="stylesheet" href="<?=base_url('/library/bootstrap/css/bootstrap.min.css');?>">
+    <link rel="stylesheet" href="<?=base_url('/library/js/jquery-ui.min.css');?>">
+    <link rel="stylesheet" href="<?=base_url('/library/owlcarousel/owl.carousel.min.css');?>">
+    <link rel="stylesheet" href="<?=base_url('/library/owlcarousel/owl.theme.default.min.css');?>">
+    <link rel="stylesheet" href="<?=base_url(POCKET_STYLE.'/css/main.css');?>">
+    <link rel="stylesheet" href="<?=base_url(POCKET_STYLE.'/css/media.css');?>">
+    <link rel="preload" href="<?=base_url('/images/login.png');?>" as="image">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты и здоровья!" />

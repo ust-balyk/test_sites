@@ -10,7 +10,6 @@
     <meta name="keywords" content="косметика, япония, витамины, здоровье, красота">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="<?= base_url(POCKET_STYLE.'/favicon/icon.png'); ?>" type="image/png">
     <link rel="icon" href="<?=base_url(POCKET_STYLE.'/favicon/icon.png');?>" type="image/png">
     <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Regular.woff2');?>" 
           as="font" type="font/woff2" crossorigin="anonymous">
@@ -37,10 +36,10 @@
     {
       "@context": "https://schema.org",
       "@type": "OnlineStore",
-      "name": "Japan-in.Ru — Магазин японских БАД и косметики.",
+      "name": "Japan-in-Ru — магазин японской косметики."
       "url": "https://japan-in.ru",
       "logo": "https://japan-in.ru/public/japan-in-ru.png",
-      "description": "Официальный поставщик японских биодобавок (коллаген, наттокиназа, омега-3) и премиальной косметики из Японии.\nВсё для Твоей красоты и здоровья!",
+      "description": "Официальный поставщик премиальной косметики из Японии.\nВсё для Твоей красоты и здоровья!",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "RU"
@@ -55,31 +54,6 @@
           "https://t.me"
         ]
       },
-      "knowsAbout": [
-        {
-          "@type": "MedicalIndication",
-          "name": "Профилактика дефицита витаминов",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "E56.9",
-            "codingSystem": "ICD-10"
-          }
-        },
-        {
-          "@type": "MedicalIndication",
-          "name": "Укрепление иммунитета",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "Z29.1",
-            "codingSystem": "ICD-10"
-          }
-        }
-      ],
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://japan-in.ru{search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
     }
     </script>
   </head>

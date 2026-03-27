@@ -139,7 +139,7 @@
                 </div>
                 <a href="<?=base_url('/category/product');?>">
                   <div class="product-card-img">
-                    <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="косметическое средство">
+                    <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
                   </div>
                 </a>
                 <div class="product-card-details">
@@ -326,7 +326,7 @@
               <div class="col-lg-3 col-md-4 product-card">
                 <a href="#">
                   <div class="product-card-img">
-                    <img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt="">
+                    <img src="<?= base_url('/images/no_image'); ?>" alt="">
                   </div>
                 </a>
                 <div class="product-card-details">
@@ -376,7 +376,7 @@
               </div--><!--product-card-->
             </div>
           </div><!--row-->
-          <nav aria-label="Page navigation example">
+          <nav aria-label="navigation">
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link disabled" href="#" aria-label="Previous">

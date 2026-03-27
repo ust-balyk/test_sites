@@ -9,7 +9,7 @@ class Friend
       if (session()->get('name')) {
   
          response()->redirect('/');
-  
+
       }
 
    }

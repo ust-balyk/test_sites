@@ -21,8 +21,9 @@
           </ol>
         </nav>
         <div class="d-none d-md-block">
-          <a href="<?= base_url('/category'); ?>" class="btn btn-sm btn-outline-secondary back_link">
-            <h5>вернуться в категорию</h5></a>
+          <a href="<?=base_url('/category');?>" class="btn btn-sm btn-outline-secondary back_link">
+            <h5>вернуться в категорию</h5>
+          </a>
         </div>
       </div>
 
@@ -30,8 +31,7 @@
 
         <div class="col-md-6">
           <div class="product_image">
-            <img src="<?= base_url('/images/test.png'); ?>" alt="">
-            <!--img src="<?= base_url('/images/for-face/11642.jpg'); ?>" alt="">
+            <img src="<?= base_url('/images/for-face/11642.png'); ?>" alt="">
             <!--img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt=""-->
             <!--img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt=""-->
           </div>
@@ -39,31 +39,41 @@
 
         <div class="col-md-6">
           <div class="product_content">
-            <div class="product-card-details">
-              <h6 class="product-card-title">
+            <div class="product-details">
+              <div class="product-rating">
+                <span class="rating">
+                  <i class="fa-solid fa-star active"></i>
+                  <i class="fa-solid fa-star active"></i>
+                  <i class="fa-solid fa-star active"></i>
+                  <i class="fa-solid fa-star active"></i>
+                  <i class="fa-solid fa-star"></i>
+                </span>
+                <a htef="#" class="product_review_count">(12) отзывов</a>
+              </div>
+              <h6 class="product-title">
                 Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
               </h6>
-            <div class="product-card-price">
-              33 000р<del>35 000р</del>
-            </div>
-              <div class="product-card-btns">
-                <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                  <i class="fa-solid fa-heart"></i>
-                </a>
-                <a href="#" class="btn btn-outline-secondary add-to-cart">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                </a>
+              <div class="distance"></div>
+              <div class="product-price">
+                33000&#x20bd;<del>35000&#x20bd;</del>
+              </div>
+              <div class="product-buttons">
+                <button class="btn btn btn-outline-secondary to-favorites">
+                  <h5>отложить</h5>
+                </button>
+                <button class="btn btn-outline-secondary to-cart">
+                  <h5>купить</h5>
+                </button>
               </div>
             </div>
           </div><!-- /pdoduct_content -->
         </div>
-
       </div><!-- /row product -->
 
       <div class="row description">
-
         <div class="col-12">
-          <ul class="nav nav-pills flex-column flex-sm-row product-desc-tabs" id="product-desc-tabs" role="tablist">
+          <ul class="nav nav-pills flex-column flex-sm-row product-desc-tabs" 
+                id="product-desc-tabs" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="flex-sm-fill text-sm-center nav-link active" id="description-tab" data-bs-toggle="tab"
                       data-bs-target="#description-tab-pane" type="button" role="tab"
@@ -133,7 +143,7 @@
                   aria-labelledby="reviews-tab" tabindex="0">
               <div class="row">
                 <!-- Секция чтения отзывов -->
-                <div class="col-md-8">
+                <div class="col-md-7">
                     
                   <!-- Отзыв 1 -->
                   <div class="mb-3 my_card review">
@@ -167,18 +177,22 @@
                         <div class="star-rating">★★★★☆</div>
                       </div>
                       <small class="text-muted">05 февраля 2026</small>
-                      <p class="card-text mt-2">Хорошее соотношение цена/качество. Доставка быстрая.</p>
+                      <p class="card-text mt-2">
+                        Хорошее соотношение цена/качество. Доставка быстрая.
+                        Хорошее соотношение цена/качество. Доставка быстрая.
+                        Хорошее соотношение цена/качество. Доставка быстрая.
+                      </p>
                     </div>
                   </div>
 
                 </div><!--col-md-8-->
 
                 <!-- Секция формы создания отзыва -->
-                <div class="col-md-4 mt-0">
+                <div class="col-md-5 mt-0">
                   <div class="my_card">
-                    <h5 class="mb-3">оставить отзыв</h5>
-                    <form>
-                      <div class="mb-3">
+                    <!--h5 class="mb-3">оставить отзыв</h5-->
+                    <form class="reply_form" action="">
+                      <!--div class="mb-3">
                         <label for="userName" class="form-label">Ваше имя</label>
                         <input type="text" class="form-control" id="userName" placeholder="">
                       </div>
@@ -193,11 +207,25 @@
                           <option value="2">★★☆☆☆ (Плохо)</option>
                           <option value="1">★☆☆☆☆ (Ужасно)</option>
                         </select>
+                      </div--> 
+
+                      <div class="mb-3 stars">
+                        <p class="mb-0">Ваша оценка</p>
+                        <input type="radio" id="star-5" name="rating" value="5">
+                        <label for="star-5"></label>
+                        <input type="radio" id="star-4" name="rating" value="4">
+                        <label for="star-4"></label>
+                        <input type="radio" id="star-3" name="rating" value="3">
+                        <label for="star-3"></label>
+                        <input type="radio" id="star-2" name="rating" value="2">
+                        <label for="star-2"></label>
+                        <input type="radio" id="star-1" name="rating" value="1">
+                        <label for="star-1"></label>
                       </div>
 
                       <div class="mb-3">
-                        <label for="reviewText" class="form-label">Комментарий</label>
-                        <textarea class="form-control" id="reviewText" rows="4" placeholder=""></textarea>
+                        <label for="comment" class="form-label">Комментарий</label>
+                        <textarea class="form-control" id="comment" rows="4" placeholder=""></textarea>
                       </div>
                 
                       <button type="submit" class="btn btn-primary w-100 recording">сохранить</button>
