@@ -86,7 +86,7 @@
                     Каталог
                   </a>
 
-                  <?php new App\Widgets\Menu\Menu(); ?>
+                  <?php dump(new App\Widgets\Menu\Menu()); ?>
 
                 </li> 
                 <li class="nav-item">

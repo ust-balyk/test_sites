@@ -32,9 +32,9 @@
 
         <div class="col-md-6">
           <div class="product_image">
-            <img src="<?= base_url('/images/for-face/11642.png'); ?>" alt="">
+            <!--img src="<?= base_url('/images/for-face/11642.png'); ?>" alt=""-->
             <!--img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" alt=""-->
-            <!--img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" alt=""-->
+            <img src="<?= base_url('/images/aromatherapy/11383.webp'); ?>" alt="">
           </div>
         </div>
 

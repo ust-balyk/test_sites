@@ -15,7 +15,7 @@ class Menu
     protected $class      = 'container dropdown-menu megamenu'; //'menu';
     protected $attrs      = []; // [' role' => 'menu', ' id' => 'menu'];
     protected $prepend    = '<div class="row g-3">'. PHP_EOL;
-    protected $append     = '</div';
+    protected $append     = '</div>';
 
     public function __construct(array $options = [])
     {
@@ -29,13 +29,17 @@ class Menu
     protected function run()
     {
         $menu_html = cache()->get($this->cache_key);
-        $this->data = db()->query("select * from {$this->table}")->getAssoc("id");
-        $this->tree = $this->get_tree();
-        $this->menu_html = $this->get_menu_html($this->tree);
+        if ($menu_html) {
+            echo $menu_html;
+            return;
         
-        $this->output();
-        return $this;
-        
+        } else { 
+            $this->data = db()->query("select * from {$this->table}")->getAssoc("id");
+            $this->tree = $this->get_tree();
+            $this->menu_html = $this->get_menu_html($this->tree);
+            $this->output();
+        }
+
     }
 
     protected function output()

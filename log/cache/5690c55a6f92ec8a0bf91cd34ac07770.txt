@@ -1,4 +1,4 @@
-a:2:{s:12:"partial_menu";s:1384:"<div class="container dropdown-menu megamenu"><div class="row g-3">
+a:2:{s:12:"partial_menu";s:1385:"<div class="container dropdown-menu megamenu"><div class="row g-3">
 <div class='col-lg-3 col-md-6 partial_menu'>
   <a href=http://localhost:8888/makeup><h5>декоративная косметика</h5></a>
 </div>
@@ -29,4 +29,4 @@ a:2:{s:12:"partial_menu";s:1384:"<div class="container dropdown-menu megamenu"><
 <div class='col-lg-3 col-md-6 partial_menu'>
   <a href=http://localhost:8888/accessories><h5>аксессуары</h5></a>
 </div>
-</div</div>";s:4:"time";i:1775113351;}
+</div></div>";s:4:"time";i:1775219106;}
