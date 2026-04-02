@@ -26,14 +26,12 @@ class Router
          $method = [strtoupper($method)];
 
       }
-      $this->routes[] = [
-          
+      $this->routes[] = [          
          'path'            => "/$path",
          'callback'        => $callback,
          'method'          => $method,
          'need_csrf_token' => true,
          'closed_for'      => [],
-
       
       ];
       
@@ -63,7 +61,7 @@ class Router
    {  
       foreach ($this->routes as $route) {
 
-         if (@preg_match("#^{$route['path']}$#i", "/{$path}", $matches)
+         if (@preg_match("~^{$route['path']}$~i", "/{$path}", $matches)
             && in_array($this->request->getMethod(), $route['method'])) {
             
             if ($route['closed_for']) {

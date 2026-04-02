@@ -1,4 +1,5 @@
 <?=db()->user_back();?>
+
   <section class="product">
     <div class="container product">
 
@@ -473,4 +474,5 @@
       </div>
     </div>
   </section>
-  <script>localStorage.setItem('location', window.location.href);</script>
+  
+<script>localStorage.setItem('location', window.location.href);</script>

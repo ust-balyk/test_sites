@@ -12,16 +12,16 @@ class Response
    public function redirect($url='')
    {
       if ($url) {
-         $redirect = $url;
+         $redirect = filter_var($url, FILTER_SANITIZE_URL);
+         //$redirect = $url;
 
       } else {
-         //$redirect = $_SERVER['HTTP_REFERER'] ?? base_url('/');
-         $redirect = base_url('/'); 
+         $redirect = $_SERVER['REQUEST_URI'];
+         //$redirect = base_url('/'); 
 
       }
-      
       header("Location: $redirect");
-      die;
+      exit;
 
    }
 

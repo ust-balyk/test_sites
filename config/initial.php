@@ -33,15 +33,15 @@ const DB_SETTINGS = [
 
 ########
 const CLOSED_FOR = [
-   'friend' => \App\Lock\Friend::class,
-   'guest'  => \App\Lock\Guest::class,
-   'all'    => \Master\Administrator::class,
+   'frend' => \App\Lock\Friend::class,
+   'guest' => \App\Lock\Guest::class,
+   'all'   => \Master\Administrator::class,
 ];
 
 ########
-//const ADMIN_A = [
-  // 'test@test.ru',
-//];
+const ADMIN_A = [
+  'test@test.ru',
+];
 
 ######## сложность password 
 const TIME_COST = 0.350;
@@ -62,21 +62,14 @@ if ( $POCKET_STYLE  == false || $POCKET_STYLE  === 'main' ) {
    $POCKET_STYLE = '/public/start_pocket';
 }
 define( 'POCKET_STYLE', $POCKET_STYLE );
+##
 
-#########
-$MENU_STYLE = 'cosmetics';
-if ( $MENU_STYLE == false || $MENU_STYLE === 'full' ) {
-   $MENU_FOR_TABLE = 'categories';
-   $MENU_TEMPLATE  = 'full_menu';
-   $MENU_CACHE_KEY = 'full_menu';
-} else {
-   $MENU_FOR_TABLE = 'start';
-   $MENU_TEMPLATE  = 'partial_menu';
-   $MENU_CACHE_KEY = 'partial_menu';
-}
-define( 'MENU_FOR_TABLE', $MENU_FOR_TABLE );
-define( 'MENU_TEMPLATE',   $MENU_TEMPLATE );
-define( 'MENU_CACHE_TIME',              0 );
+$MENU_TABLE           = 'start';        //'products';
+$MENU_TEMPLATE        = 'partial_menu'; //'full_menu';
+$MENU_CACHE_KEY       = 'partial_menu'; //'full_menu';
+const MENU_CACHE_TIME = 3600;           //31536000;
+define( 'MENU_TABLE',     $MENU_TABLE );
+define( 'MENU_TEMPLATE',  $MENU_TEMPLATE );
 define( 'MENU_CACHE_KEY', $MENU_CACHE_KEY );
 
 ########

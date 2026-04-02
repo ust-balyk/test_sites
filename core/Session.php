@@ -17,7 +17,7 @@ class Session
    {
       //session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
       session_set_cookie_params( [ 
-         'lifetime' => 0,            // 31536000 год
+         'lifetime' => 0, //31536000,     // год
          'path'     => '/',         // для всех путей в домене 
          'secure'   => true,       // заставляет браузер отправлять cookie только по HTTPS
          'httponly' => true,      // запрещает доступ к cookie из JavaScript через document.cookie.

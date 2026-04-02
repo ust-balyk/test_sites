@@ -11,6 +11,8 @@ use \App\Controller\UserController;
 use \App\Controller\AccountController;
 use \App\Controller\AdminController;
 
+$app->router->get('/test', function() { return '<h3>test page</h3>'; });
+
 //$app->router->add('/', [HomeController::class, 'index'], ['POST', 'GET']);
 $app->router->post('/', [HomeController::class])->withoutCsrfToken();
 $app->router->get('/', [HomeController::class]);
@@ -19,9 +21,9 @@ $app->router->get('/category', [PageController::class, 'category']);
 $app->router->get('/category/product', [PageController::class, 'product']);
 $app->router->get('/delivery', [PageController::class, 'delivery']);
 
-$app->router->get('/register', [UserController::class, 'register'])->closed_for(['friend']);
+$app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);
 $app->router->post('/register', [UserController::class, 'record']);
-$app->router->get('/login', [UserController::class, 'login'])->closed_for(['friend']);
+$app->router->get('/login', [UserController::class, 'login'])->closed_for(['frend']);
 $app->router->post('/login', [UserController::class, 'enter']);
 $app->router->get('/logout', [UserController::class, 'logout']);
 

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>
+    <base href="<?=base_url('/');?>">
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">
-    <!--title>Japan-in.Ru &mdash; японская косметика и витамины по доступной цене!</title-->
-    <title>Всё для Твоей красоты и здоровья из Японии!</title>
+    <title>Japan-in.Ru — Всё для Твоей красоты из Японии!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Japan-in.Ru - японская косметика и витамины по доступной цене!">
-    <meta name="keywords" content="косметика, япония, витамины, здоровье, красота">
+    <meta name="description" content="Japan-in.Ru - японская косметика по доступной цене!">
+    <meta name="keywords" content="косметика, япония, красота">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?=base_url(POCKET_STYLE.'/favicon/icon.png');?>" type="image/png">
@@ -25,8 +25,8 @@
     <link rel="preload" href="<?= base_url('/images/login.png'); ?>" as="image">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты и здоровья!" />
-    <meta property="og:description" content="Инновационные достижения косметологии и традиционные системы оздоровления из Страны восходящего солнца!" />
+	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты!" />
+    <meta property="og:description" content="Инновационные достижения косметологии из Страны восходящего солнца!" />
 	<meta property="og:url" content="https://japan-in.ru" />
 	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
 	<meta property="og:image:width" content="1630" />
@@ -39,7 +39,7 @@
       "name": "Japan-in-Ru — магазин японской косметики."
       "url": "https://japan-in.ru",
       "logo": "https://japan-in.ru/public/japan-in-ru.png",
-      "description": "Официальный поставщик премиальной косметики из Японии.\nВсё для Твоей красоты и здоровья!",
+      "description": "Официальный поставщик премиальной косметики из Японии.\nВсё для Твоей красоты!",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "RU"
@@ -85,15 +85,9 @@
                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Каталог
                   </a>
-                  <?php
-                    new App\Widgets\Menu\Menu([
-                      'container' => 'div',
-                      'class'     => 'container dropdown-menu megamenu',
-                      'prepend'   => '<div class="row g-3">',
-                      'append'    => '</div>',
-                      'attrs'     => ['role' => 'menu',],
-                    ]);
-                  ?>
+
+                  <?php new App\Widgets\Menu\Menu(); ?>
+
                 </li> 
                 <li class="nav-item">
                   <a class="nav-link" href="#about_us">О нас</a>
@@ -109,9 +103,9 @@
                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Условия доставки
                   </a>
-                  <?php
-                    new App\Widgets\Delivery\Delivery();
-                  ?>
+
+                  <?php new App\Widgets\Delivery\Delivery(); ?>
+
                 </li>
               </ul>
             </div><!--navbar-collapse-->

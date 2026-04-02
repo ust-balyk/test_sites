@@ -1,6 +1,6 @@
 <?php 
 //dump($_COOKIE);
-//dump($_SESSION);
+dump($_SESSION);
 ?>
   <section class="superiority">
     <div class="container superiority">

@@ -93,7 +93,7 @@ class UserController
                                 $end = microtime(true);
                             } while (($end - $start) < $time_cost);
                             $cost = ($cost - 1);
-                            $options = ['cost' => $cost]; // выпадает 10 до 15
+                            $options = ['cost' => $cost]; // выпадает 10 ~ 15
                             $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
 
                             if ($user->save()) {
@@ -135,8 +135,7 @@ class UserController
                 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
 
                 if (db()->realUser($email, $password)) {
-
-                    $token = db()->generate_token();
+                    $token = strval(bin2hex(random_bytes(32)));
                     $email = session()->get('email');
                     db()->query("UPDATE users SET `auth_token`=? WHERE `email`=?", [$token, $email]);
                     $hash_token = password_hash($token, PASSWORD_DEFAULT);
@@ -151,13 +150,11 @@ class UserController
                     echo "<script>window.history.go(-1);window.location.reload();</script>";
 
                 } else {
-
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                     app()->response->redirect('/login');
                 
                 }
             } else {
-
                 session()->setFlash('error', 'Пожалуйста, заполните все поля');
                 app()->response->redirect('/login');
             

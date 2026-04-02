@@ -32,7 +32,7 @@ class AdminController
       if (isset($_SESSION["role"])) {          
          $role = $_SESSION["role"];
                      
-         if ($role === "admin" || $role === "assistant") {
+         if ($role === "master" || $role === "assistant") {
 
             if (isset($_SESSION["pass"])) {            
                $pass = app()->admin->pass();
@@ -61,31 +61,20 @@ class AdminController
    }
 }';
 
-      if (array_intersect(array(Application::$app->session->get("email")), $administrator)) {
+      if (array_intersect(array(Application::$app->session->get("email")), $administrator) &&
+         (Application::$app->session->get("role") === "master") && ($this->pass())) 
+      {
+         session_regenerate_id(true);
+         file_put_contents($filename, $content);
 
-         Application::$app->session->set("role", "admin");
+      } else if (array_intersect(array(Application::$app->session->get("email")), ADMIN_A) &&
+         (Application::$app->session->get("role") === "assistant") && ($this->pass())) 
+      {
+         session_regenerate_id(true);
+         file_put_contents($filename, $content);
 
-         if ($this->pass()) {
-            session_regenerate_id(true);
-            file_put_contents($filename, $content);
-
-         }
-
-      } else if (array_intersect(array(Application::$app->session->get("email")), ADMIN_A)) {
-
-         Application::$app->session->set("role", "assistant");
-
-         if ($this->pass()) {
-            session_regenerate_id(true);
-            file_put_contents($filename, $content);
-
-         }
-
-      } else {
-
-         Application::$app->response->redirect("/");
-
-      }
+      } else { Application::$app->response->redirect("/"); }
+ 
    }
 
 }

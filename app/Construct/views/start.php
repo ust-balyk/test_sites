@@ -1,3 +1,7 @@
+<?php 
+//  dump($_COOKIE);          
+//  dump($_SESSION);           
+?>
   <section class="superiority">
     <div class="container">
       <div class="row">

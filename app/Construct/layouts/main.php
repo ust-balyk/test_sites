@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>
+    <base href="<?=base_url('/');?>">
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">
     <!--title>Japan-in.Ru &mdash; японская косметика и витамины по доступной цене!</title-->
