@@ -22,16 +22,16 @@
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
-    <link rel="preload" href="<?= base_url('/images/login.png'); ?>" as="image">
+    <link rel="preload" href="<?= base_url('/images/login.webp'); ?>" as="image">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты!" />
     <meta property="og:description" content="Инновационные достижения косметологии из Страны восходящего солнца!" />
 	<meta property="og:url" content="https://japan-in.ru" />
-	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.png" />
+	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.jpg" />
 	<meta property="og:image:width" content="1630" />
 	<meta property="og:image:height" content="1136" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/jpg" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

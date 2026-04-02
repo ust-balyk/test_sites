@@ -1934,7 +1934,7 @@ div.delivery {
 
 body#login,
 body#register {
-  background-image: url('/../../images/login.png');
+  background-image: url('/../../images/login.webp');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
