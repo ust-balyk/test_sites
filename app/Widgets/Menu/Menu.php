@@ -14,8 +14,10 @@ class Menu
     protected $container  = 'div'; //'ul';
     protected $class      = 'container dropdown-menu megamenu'; //'menu';
     protected $attrs      = []; // [' role' => 'menu', ' id' => 'menu'];
-    protected $prepend    = '<div class="row g-3">'. PHP_EOL;
-    protected $append     = '</div>';
+    protected $class_row  = 'row g-3'; //'';
+    
+    //protected $prepend    = '<div class="row g-3">'. PHP_EOL;
+    //protected $append     = '</div>';
 
     public function __construct(array $options = [])
     {
@@ -29,15 +31,16 @@ class Menu
     protected function run()
     {
         $menu_html = cache()->get($this->cache_key);
+
         if ($menu_html) {
             echo $menu_html;
-            return;
-        
+ 
         } else { 
             $this->data = db()->query("select * from {$this->table}")->getAssoc("id");
             $this->tree = $this->get_tree();
             $this->menu_html = $this->get_menu_html($this->tree);
             $this->output();
+
         }
 
     }
@@ -50,21 +53,32 @@ class Menu
                 $attrs .= "$k=\"$v\"";
             }
         }
-        $menu_html = '';
+
+        /* строим узел меню */
+        $menu_html = PHP_EOL .'';
+        //
         if ($this->container) { // если открываем контейнер
-            $menu_html .= "<{$this->container} class=\"{$this->class}\"$attrs>";
+            $menu_html .= "    <{$this->container} class=\"{$this->class}\"$attrs>". PHP_EOL;
         }
-        $menu_html .= $this->prepend; // если есть ещё обёртка типа row
+        ///
+        if ($this->class_row) {       // если есть обёртка row 
+            $menu_html .= "  <div class=\"{$this->class_row}\">". PHP_EOL;
+        }
+        ////
         $menu_html .= $this->menu_html;
-        $menu_html .= $this->append;
-        if ($this->container) { // закрываем контейнер
-            $menu_html .= "</{$this->container}>";
+        ////
+        if ($this->class_row) {       // закрываем обёртку
+            $menu_html .= "  </div>". PHP_EOL;
         }
+        ///
+        if ($this->container) { // закрываем контейнер
+            $menu_html .= "    </{$this->container}>". PHP_EOL;
+        }
+        //
         cache()->set($this->cache_key, $menu_html, $this->cache_time);
         echo $menu_html;
     
     }
-
 
     protected function get_options($options)
     {
@@ -77,7 +91,6 @@ class Menu
         }
     
     }
-
     
     protected function get_tree(): array
     {
