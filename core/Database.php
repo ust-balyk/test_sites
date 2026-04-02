@@ -19,80 +19,102 @@ class Database
                 DB_SETTINGS['password'],
                 DB_SETTINGS['options' ],
             );
-            
-            if ($japan_in_ru = "CREATE DATABASE IF NOT EXISTS `japan_in_ru`
+
+            $dbname = 'japan_in_ru';
+
+            $sql = "SELECT EXISTS (
+                        SELECT 1 
+                        FROM INFORMATION_SCHEMA.SCHEMATA 
+                        WHERE SCHEMA_NAME = :dbname
+                    ) AS db_exists";
+            $stmt = $this->connection->prepare($sql);
+
+            $stmt->execute(['dbname' => $dbname]);
+
+            $exists = (bool)$stmt->fetchColumn();
+
+            if ($exists == false) {
+
+                $japan_in_ru = "CREATE DATABASE `japan_in_ru`
                                 CHARACTER SET utf8mb4
-                                COLLATE utf8mb4_unicode_ci;")
-            {
-                $this->connection->exec($japan_in_ru);
+                                COLLATE utf8mb4_unicode_ci;";
+            
+                if ($this->connection->exec($japan_in_ru)) {
+
+                    $this->connection->exec("USE japan_in_ru");
+
+                    //frend — пользователь, assistant — модератор
+                    $tbl_users = "CREATE TABLE IF NOT EXISTS `users` (
+                        `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        `name` VARCHAR(55) NULL DEFAULT NULL,
+                        `email` VARCHAR(105) UNIQUE NOT NULL,
+                        `password` VARCHAR(255) NOT NULL,
+                        `role` VARCHAR(10) DEFAULT 'frend',
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        `auth_token` VARCHAR(255) DEFAULT NULL
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                    $this->connection->exec($tbl_users);
+
+                    $tbl_start = "CREATE TABLE IF NOT EXISTS `start` (
+                        `id` INT AUTO_INCREMENT PRIMARY KEY,
+                        `category` TEXT NOT NULL,
+                        `slug` VARCHAR(50) NOT NULL,
+                        `outer_id` INT DEFAULT NULL UNIQUE KEY,
+                        `name` TEXT DEFAULT NULL,
+                        `description` TEXT DEFAULT NULL,
+                        `image` VARCHAR(50) DEFAULT NULL,
+                        `price` TEXT DEFAULT NULL,
+                        `old_price` TEXT DEFAULT NULL,
+                        `new_price` TEXT DEFAULT NULL,
+                        `parent_id` INT
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    INSERT IGNORE INTO start (`id`, `category`, `slug`, `parent_id`) VALUES
+                        (1, 'декоративная косметика', 'makeup', 0),
+                        (2, 'для лица', 'for-face', 0),
+                        (3, 'для полости рта', 'for-oral-cavity', 0),
+                        (4, 'для волос', 'for-hair', 0),
+                        (5, 'для тела', 'for-body', 0),
+                        (6, 'для рук', 'for-hands', 0),
+                        (7, 'для ног', 'for-feet', 0),
+                        (8, 'ароматерапия', 'aromatherapy', 0),
+                        (9, 'подарочные наборы', 'sets-gift', 0),
+                        (10, 'аксессуары', 'accessories', 0);";
+                    $this->connection->exec($tbl_start);
+
+                    $tbl_products = "CREATE TABLE IF NOT EXISTS `products` (
+                        `id` INT AUTO_INCREMENT PRIMARY KEY,
+                        `category` TEXT NOT NULL,
+                        `slug` VARCHAR(50) NOT NULL,
+                        `outer_id` INT DEFAULT NULL UNIQUE KEY,
+                        `name` TEXT NOT NULL,
+                        `description` TEXT DEFAULT NULL,
+                        `image` VARCHAR(50) DEFAULT NULL,
+                        `price` TEXT DEFAULT NULL,
+                        `old_price` TEXT DEFAULT NULL,
+                        `new_price` TEXT DEFAULT NULL,
+                        `parent_id` INT
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    INSERT IGNORE INTO products (`id`, `category`, `slug`, `parent_id`) VALUES
+                        (1, 'В наличии', 'in-stock', 0),
+                        (2, 'Новинки', 'new', 0),
+                        (3, 'Популярные товары', 'hit-sales', 0),
+                        (4, 'Товары по акции', 'promo', 0),
+                        (5, 'Твоё здоровье', 'bless-you', 0),
+                        (6, 'Японская косметика', 'cosmetics', 0),
+                        (7, 'Для мужчин', 'for-men', 0),
+                        (8, 'Для детей', 'for-children', 0),
+                        (9, 'Продукты питания', 'foodstuffs', 0),
+                        (10, 'Товары для дома', 'household-goods', 0),
+                        (11, 'Приборы и массажеры', 'devices', 0),
+                        (12, 'Зоотовары', 'pet-supplies', 0);";
+                    $this->connection->exec($tbl_products);
+                }
+
+            } else {
+
                 $this->connection->exec("USE japan_in_ru");
 
-                //frend — пользователь, assistant — модератор
-                $tbl_users = "CREATE TABLE IF NOT EXISTS `users` (
-                    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    `name` VARCHAR(55) NULL DEFAULT NULL,
-                    `email` VARCHAR(105) UNIQUE NOT NULL,
-                    `password` VARCHAR(255) NOT NULL,
-                    `role` VARCHAR(10) DEFAULT 'frend',
-                    `created_at` timestamp NULL DEFAULT NULL,
-                    `updated_at` timestamp NULL DEFAULT NULL,
-                    `auth_token` VARCHAR(255) DEFAULT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-                $this->connection->exec($tbl_users);
-
-                $tbl_start = "CREATE TABLE IF NOT EXISTS `start` (
-                    `id` INT AUTO_INCREMENT PRIMARY KEY,
-                    `category` TEXT NOT NULL,
-                    `slug` VARCHAR(50) NOT NULL,
-                    `outer_id` INT DEFAULT NULL UNIQUE KEY,
-                    `name` TEXT DEFAULT NULL,
-                    `description` TEXT DEFAULT NULL,
-                    `image` VARCHAR(50) DEFAULT NULL,
-                    `price` TEXT DEFAULT NULL,
-                    `old_price` TEXT DEFAULT NULL,
-                    `new_price` TEXT DEFAULT NULL,
-                    `parent_id` INT
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                INSERT IGNORE INTO start (`id`, `category`, `slug`, `parent_id`) VALUES
-                    (1, 'декоративная косметика', 'makeup', 0),
-                    (2, 'для лица', 'for-face', 0),
-                    (3, 'для полости рта', 'for-oral-cavity', 0),
-                    (4, 'для волос', 'for-hair', 0),
-                    (5, 'для тела', 'for-body', 0),
-                    (6, 'для рук', 'for-hands', 0),
-                    (7, 'для ног', 'for-feet', 0),
-                    (8, 'ароматерапия', 'aromatherapy', 0),
-                    (9, 'подарочные наборы', 'sets-gift', 0),
-                    (10, 'аксессуары', 'accessories', 0);";
-                $this->connection->exec($tbl_start);
-
-                $tbl_products = "CREATE TABLE IF NOT EXISTS `products` (
-                    `id` INT AUTO_INCREMENT PRIMARY KEY,
-                    `category` TEXT NOT NULL,
-                    `slug` VARCHAR(50) NOT NULL,
-                    `outer_id` INT DEFAULT NULL UNIQUE KEY,
-                    `name` TEXT NOT NULL,
-                    `description` TEXT DEFAULT NULL,
-                    `image` VARCHAR(50) DEFAULT NULL,
-                    `price` TEXT DEFAULT NULL,
-                    `old_price` TEXT DEFAULT NULL,
-                    `new_price` TEXT DEFAULT NULL,
-                    `parent_id` INT
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                INSERT IGNORE INTO products (`id`, `category`, `slug`, `parent_id`) VALUES
-                    (1, 'В наличии', 'in-stock', 0),
-                    (2, 'Новинки', 'new', 0),
-                    (3, 'Популярные товары', 'hit-sales', 0),
-                    (4, 'Товары по акции', 'promo', 0),
-                    (5, 'Твоё здоровье', 'bless-you', 0),
-                    (6, 'Японская косметика', 'cosmetics', 0),
-                    (7, 'Для мужчин', 'for-men', 0),
-                    (8, 'Для детей', 'for-children', 0),
-                    (9, 'Продукты питания', 'foodstuffs', 0),
-                    (10, 'Товары для дома', 'household-goods', 0),
-                    (11, 'Приборы и массажеры', 'devices', 0),
-                    (12, 'Зоотовары', 'pet-supplies', 0);";
-                $this->connection->exec($tbl_products);
             }
         }
         catch (\PDOException $e)

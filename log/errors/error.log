@@ -9,4 +9,23 @@
 1[2026-04-01 16:32:31] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.test' doesn't exist
 1[2026-04-01 16:38:34] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.test' doesn't exist
 1[2026-04-01 16:39:01] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'japan_in_ru.test' doesn't exist
+1[2026-04-02 10:27:08] DB Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'japan_in_ru' in 'where clause'
+[2026-04-02 10:32:37] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:32:37] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:32:37] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:35:13] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:35:13] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:35:13] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:35:41] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:35:41] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:35:41] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:36:04] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:36:04] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:36:04] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:52:48] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:52:48] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:52:48] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:55:28] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:55:28] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+1[2026-04-02 10:55:28] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
 1
