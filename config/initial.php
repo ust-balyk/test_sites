@@ -58,10 +58,13 @@ const PRODUCT_VIEW    = 'product';
 $POCKET_STYLE = 'start';
 if ( $POCKET_STYLE  == false || $POCKET_STYLE  === 'main' ) {
    $POCKET_STYLE = '/public/main_pocket';
+   $TABLE_NAME   = 'products';
 } else { 
    $POCKET_STYLE = '/public/start_pocket';
+   $TABLE_NAME   = 'cosmetics';
 }
 define( 'POCKET_STYLE', $POCKET_STYLE );
+define( 'TABLE_NAME',   $TABLE_NAME );
 ##
 
 $MENU_TABLE           = 'start';        //'products';

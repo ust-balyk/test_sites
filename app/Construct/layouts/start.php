@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>
-    <base href="<?=base_url('/');?>">
+    <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">
-    <title>Japan-in.Ru — Всё для Твоей красоты из Японии!</title>
+    <title><?= $title ?? 'Japan-in.Ru'; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Japan-in.Ru - японская косметика по доступной цене!">
     <meta name="keywords" content="косметика, япония, красота">
@@ -86,7 +86,7 @@
                     Каталог
                   </a>
 
-                  <?php dump(new App\Widgets\Menu\Menu()); ?>
+                  <?php new App\Widgets\Menu\Menu(); ?>
 
                 </li> 
                 <li class="nav-item">

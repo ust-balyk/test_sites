@@ -19,6 +19,7 @@ $app->router->get('/', [HomeController::class]);
 
 $app->router->get('/category', [PageController::class, 'category']);
 $app->router->get('/category/product', [PageController::class, 'product']);
+$app->router->get('/discount', [PageController::class, 'discount']);
 $app->router->get('/delivery', [PageController::class, 'delivery']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);

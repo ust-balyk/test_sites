@@ -16,8 +16,7 @@ class Response
          //$redirect = $url;
 
       } else {
-         $redirect = $_SERVER['REQUEST_URI'];
-         //$redirect = base_url('/'); 
+         $redirect = base_url('/'); 
 
       }
       header("Location: $redirect");

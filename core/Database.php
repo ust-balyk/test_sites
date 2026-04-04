@@ -87,7 +87,9 @@ class Database
                         `old_price` TEXT DEFAULT NULL,
                         `new_price` TEXT DEFAULT NULL,
                         `category_id` INT
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    ALTER TABLE `cosmetics` ADD FOREIGN KEY (`category_id`) 
+                        REFERENCES `start`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
                     $this->connection->exec($tbl_cosmetics);
 
                     /* основной пакет */
@@ -123,7 +125,9 @@ class Database
                         `old_price` TEXT DEFAULT NULL,
                         `new_price` TEXT DEFAULT NULL,
                         `category_id` INT
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) 
+                        REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
                     $this->connection->exec($tbl_products);
                 }
 

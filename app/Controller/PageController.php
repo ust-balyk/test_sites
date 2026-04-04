@@ -48,6 +48,23 @@ class PageController
 
     }
 
+    static function discount()
+    {
+        if ($sale_items = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC")->get()) {
+
+            return app()->view->full_view (
+
+                PRODUCT_LAYOUT,
+                'discount',
+                [
+                    'discount'   => 'title',
+                    'sale_items' => $sale_items,
+
+                ],
+            );
+        }
+    }
+
     static function delivery()
     {
         return app()->view->partial_view('views/delivery');

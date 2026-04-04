@@ -431,6 +431,7 @@ div .product-card {
     position: relative;
     flex: 1 1 auto;
     height: auto;
+    max-width: 25vw; 
     margin: 8px 6px 15px 6px; /* для тени */
     padding: 10px 20px;
     border: 1px solid #989ea4; /*#a7acb1;*/
@@ -446,6 +447,13 @@ div .product-card:hover {
     .product-card-title a {
         color: var(--black-color);
     }
+    .discounted_product {
+        left: -0.3%;
+        border-color: #aeffaa; /*var(--light-blue-color);*/
+        border-left: none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
     .product_expected {
         left: -0.3%;
         border-color: var(--light-blue-color);
@@ -455,7 +463,7 @@ div .product-card:hover {
     }
     .popular_product {
         left: -0.3%;
-        border-color: orange; /*(--light-blue-color);*/
+        border-color: #ffdabb; /*(--light-blue-color);*/
         border-left: none;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
@@ -466,6 +474,24 @@ div .product-card:hover {
     
 }
 
+/* товары по акции */
+.product-card .discounted_product {
+    position: absolute;
+    left: -2.5%;
+    top: 4%;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    background-color: #beffbb;/*#aeffaa; /*var(--light-blue-color);*/
+}
+.product-card .discounted_product p {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--grey-color);
+    margin: 2px 12px;
+    padding: 0px 0px 2px 0px;
+}
+
 /* нет в наличии  */
 .product-card .product_expected {
     position: absolute;
@@ -473,11 +499,13 @@ div .product-card:hover {
     top: 4%;
     border: 1px solid var(--border-color);
     border-radius: 3px;
-    background-color: var(--light-blue-color);
-    color: var(--grey-color);
+    background-color: #bbe0ff; /*var(--light-blue-color);*/
 }
 .product-card .product_expected p {
+    font-size: 16px;
+    font-weight: 500;
     letter-spacing: 1px;
+    color: var(--grey-color);
     margin: 2px 12px;
     padding: 0px 0px 2px 0px;
 }
@@ -489,25 +517,27 @@ div .product-card:hover {
     top: 4%;
     border: 1px solid var(--border-color);
     border-radius: 3px;
-    background-color: orange; /*var(--light-blue-color);*/
-    color: white; /*var(--grey-color);*/
+    background-color: #ffdabb; /*var(--light-blue-color);*/
 }
 .product-card .popular_product p {
+    font-size: 16px;
+    font-weight: 500;
     letter-spacing: 1px;
+    color: var(--grey-color);
     margin: 2px 12px;
     padding: 0px 0px 2px 0px;
 }
+/* */
 
 div .product-card-img {
+    height: 300px;
+    width: auto !important;
     text-align: center;
-    background-color: white;
+    background-color: var(--bg-color);
 }
 .product-card .product-card-img img {
-    height: 290px;
-    aspect-ratio: 16 / 9;
-    background-color: white;
-    width: auto !important;
-    object-fit: cover; /*contain*/
+    height: 300px;
+    aspect-ratio: 3 / 4;
     margin: auto;
 }
 
@@ -515,7 +545,7 @@ h6.product-card-title {
     margin-top: 10px;
     margin-bottom: 8px;
     text-align: center;
-    height: 110px;
+    height: 100px;
     text-decoration: none;
     word-break: break-word;
     hyphens: auto;
@@ -605,6 +635,33 @@ div.tooltip-arrow::before {
 }
 
 /* =================== /Carousel_Promo============= */
+
+/* =================== Carousel Popular =========== */
+
+div.container .popular {
+    padding: 0px !important;
+}
+
+a.btn.popular {
+    height: 34px;
+    margin-top: 15px;
+    color: var(--grey-color);
+    border: 1px solid #989ea4;
+    background-color: white; /*var(--bg-color);*/
+    transition: all .350s;
+}
+
+a.btn.popular h5 {
+    padding: 2px 15px 6px 15px;
+}
+
+a.btn.popular:hover {
+    color: black; /*var(--black-color);*/
+    border: 1px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+/* =================== /Carousel Popular =========== */
 
 /* =================== Categories ================= */
 
@@ -735,33 +792,6 @@ div.writer a {
 }
 
 /* =================== /Categories ================= */
-
-/* =================== Carousel Popular =========== */
-
-div.container .popular {
-    padding: 0px !important;
-}
-
-a.btn.popular {
-    height: 34px;
-    margin-top: 15px;
-    color: var(--grey-color);
-    border: 1px solid #989ea4;
-    background-color: white; /*var(--bg-color);*/
-    transition: all .350s;
-}
-
-a.btn.popular h5 {
-    padding: 2px 15px 6px 15px;
-}
-
-a.btn.popular:hover {
-    color: black; /*var(--black-color);*/
-    border: 1px solid white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-
-/* =================== /Carousel Popular =========== */
 
 /* =================== Call Back ================== */
 
