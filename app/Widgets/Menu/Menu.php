@@ -13,7 +13,7 @@ class Menu
     protected $cache_key  = MENU_CACHE_KEY;
     protected $container  = 'div'; //'ul';
     protected $class      = 'container dropdown-menu megamenu'; //'menu';
-    protected $attrs      = [' role' => 'menu',]; // ' id' => 'menu'];
+    protected $attrs      = ['role' => 'menu',]; // ' id' => 'menu'];
     protected $class_row  = 'row g-3'; //'';
     
     //protected $prepend    = '<div class="row g-3">'. PHP_EOL;
@@ -50,7 +50,7 @@ class Menu
         $attrs = '';
         if (! empty($this->attrs)) { // если задаёи атрибуты
             foreach ($this->attrs as $k => $v) {
-                $attrs .= "$k=\"$v\"";
+                $attrs .= " $k=\"$v\"";
             }
         }
 

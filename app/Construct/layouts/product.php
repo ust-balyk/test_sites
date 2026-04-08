@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>
+    <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
     <title>Здоровье из Японии</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

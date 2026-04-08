@@ -7,62 +7,116 @@ class PageController
 
     static function category()
     {
-
-        if ( $data = db()->query("select * from products")->get() ) {
-            /* 
-            $pagination = new Pagination();
-                $limit = PAGINATION_SETTINGS['linesOnPage'];
-                $data = db()->query("select * from categories limit $limit
-                                        offset {$pagination->getOffset()}")->get();
-            cache()->set('category', $category);   
-            shuffle(products);
-            */
-            return app()->view->full_view (   
-                CATEGORY_LAYOUT,    # layout
-                CATEGORY_VIEW,      # view
-                [               # data
-                    //'title' => 'page',
-                    //'category' => $data,
-                    //'pagination' => $pagination,
-                ],
-            );        
+        $slug = request()->get_ID_or_SLUG();
+        $products = [];
+        $title_category = '';
+        $slug_category = '';
+            
+        $products = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get();
         
+        if (empty($products)) {
+
+            $products = db()->query("SELECT * FROM " . TABLE_NAME )->get(); //. " LIMIT 30")->get();
+            shuffle($products);
+            $title_category = 'популярные товары'; 
+            $slug_category  = 'popular_products';
+
+
+        } else {
+            $firstItem = $products[0];         
+            $title_category = $firstItem['category'] ?? null; // 'Категория';
+            $slug_category  = $firstItem['slug'] ?? null; //$slug;
+            shuffle($products);
+
         }
-        return app()->view->full_view ( CATEGORY_LAYOUT, CATEGORY_VIEW, [] );
-    
+        return app()->view->full_view(
+            CATEGORY_LAYOUT,
+            CATEGORY_VIEW,
+            [
+                'products'       => $products,
+                'title_category' => $title_category,
+                'slug_category'  => $slug_category,
+            ]
+        );
+
     }
+
 
     static function product()
     {
+        $id = request()->get_ID_or_SLUG();
 
-        if ( $data = db()->query("select * from products")->get() ) {
+        // Запрос основного товара
+        $product = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ?", [$id])->get();
 
-            return app()->view->full_view (
+        if ($product) {
+            $currentProduct = $product[0]; // Данные текущего товара
+            
+            $title_category = $currentProduct['category'] ?? null;
+            $slug_category  = $currentProduct['slug'] ?? null;
+
+            // Запрос ПОХОЖИХ товаров (из той же категории, исключая текущий)
+            // Мы берем 4 случайных товара (ORDER BY RAND())
+            $relatedProducts = db()->query(
+                "SELECT * FROM ". TABLE_NAME . 
+                " WHERE category = ? AND outer_id != ? ORDER BY RAND() LIMIT 8", [$title_category, $id])->get();
+            /*
+            // Если нашли меньше 8-х(указано в limit), добираем из общего списка
+            if (count($related) < 8) {
+                $needed = 8 - count($related);
+                $extraIds = array_column($related, 'outer_id'); // Чтобы не дублировать уже найденные
+                $extraIds[] = $id; // И чтобы не взять текущий товар
+
+                $placeholders = implode(',', array_fill(0, count($extraIds), '?'));
+                
+                $extra = db()->query(
+                    "SELECT * FROM " . TABLE_NAME . " WHERE outer_id NOT IN ($placeholders) ORDER BY RAND() LIMIT $needed",
+                    $extraIds
+                )->get();
+
+                $related = array_merge($related, $extra);
+
+                .related-products-grid {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    justify-content: center; /* Центрирует товары, если их 1, 2 или 3 *//*
+                }
+            }*/
+
+            return app()->view->full_view(
                 PRODUCT_LAYOUT,
                 PRODUCT_VIEW,
-                [],
+                [
+                    'product'          => $currentProduct,
+                    'related_products' => $relatedProducts, // Массив для блока "Также покупают"
+                    'title_category'   => $title_category,
+                    'slug_category'    => $slug_category,
+                ]
             );
-        
         }
-        return app()->view->full_view ( PRODUCT_LAYOUT, PRODUCT_VIEW, [] );
+        return response()->redirect('/');
 
     }
 
+
     static function discount()
     {
-        if ($sale_items = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC")->get()) {
+        if ($products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC")->get()) {
 
             return app()->view->full_view (
 
                 PRODUCT_LAYOUT,
                 'discount',
                 [
-                    'discount'   => 'title',
-                    'sale_items' => $sale_items,
+                    'discount' => 'title',
+                    'products' => $products,
 
                 ],
             );
         }
+        response()->redirect();
+
     }
 
     static function delivery()

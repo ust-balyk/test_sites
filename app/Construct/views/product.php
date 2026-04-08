@@ -1,8 +1,8 @@
 <?=db()->user_back();?>
-
+<?php if (!empty($product)): ?>
   <section class="product">
     <div class="container product">
-
+    <?php //foreach ($products as $product): ?>
       <div class="container justify-content-between breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -14,31 +14,25 @@
               </a>
             </li>
             <li class="breadcrumb-item">
-              <a href="<?= base_url('/category'); ?>">
-                Категория
-              </a>
+              <a href="/cosmetics/<?= $product['slug'] ?>"><?= $product['category'] ?></a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Продукт</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <?= $product['title'] ?>
+            </li>
           </ol>
         </nav>
-        <div class="d-none d-md-block">
+        <!--div class="d-none d-md-block">
           <a href="<?=base_url('/category');?>" class="btn btn-sm btn-outline-secondary back_link">
             <h5>вернуться в категорию</h5>
           </a>
-        </div>
+        </div-->
       </div>
-
       <div class="row product">
-
         <div class="col-md-6">
           <div class="product_image">
-            <!--img src="<?= base_url('/images/for-face/11642.png'); ?>" alt=""-->
-            <!--img src="<?= base_url('/images/for-body/11302.webp'); ?>" alt=""-->
-            <img src="<?= base_url('/images/aromatherapy/11383.webp'); ?>" alt="">
-            <!--img src="<?= base_url('/images/aromatherapy/11383.jpeg'); ?>" alt=""-->
+            <img src="<?= $product['image'] ?>" alt="">
           </div>
         </div>
-
         <div class="col-md-6">
           <div class="product_content">
             <div class="product-details">
@@ -52,12 +46,15 @@
                 </span>
                 <a htef="#" class="product_review_count">(12) отзывов</a>
               </div>
-              <h6 class="product-title">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </h6>
+              <h3 class="product-title"><?= $product['title'] ?></h3>
               <div class="distance"></div>
               <div class="product-price">
-                33000&#x20bd;<del>35000&#x20bd;</del>
+                <?php if ($product['price'] == '') {
+                        echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
+                      } else {
+                        echo $product['price'];
+                      }
+                ?>
               </div>
               <div class="product-buttons">
                 <button class="btn btn btn-outline-secondary to-favorites">
@@ -95,33 +92,11 @@
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                   aria-labelledby="description-tab" tabindex="0">
               <div class="category-description clearfix">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <p><img src="<?= base_url('/images/for-body/11870.jpeg'); ?>" class="note-float-right"
-                        style="width: 25%;" alt=""></p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor maxime illo rem
-                    accusamus nulla
-                    veritatis, quae assumenda aspernatur quo aperiam. Tenetur itaque dolorem
-                    distinctio architecto
-                    voluptatum nobis earum similique esse!</p>
-                <ul>
-                  <li>Межкомнатую дверь</li>
-                  <li>Деревянную дверь</li>
-                  <li>Межкомнатую дверь</li>
-                  <li>Деревянную дверь</li>
-                </ul>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam perferendis
-                    labore, enim, aut
-                    corporis assumenda veniam natus similique dolore repellat explicabo in corrupti
-                    reprehenderit,
-                    nemo tempore ipsam totam a rerum.</p>
-                <p>Eaque id cumque optio fugit amet. Ullam fugit omnis animi voluptatem quos,
-                    temporibus obcaecati
-                    explicabo minima laboriosam ipsum. Voluptates possimus, incidunt officia
-                    suscipit quibusdam
-                    minus cum aliquid quis perferendis exercitationem?</p>
-
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <p><img src="<?= base_url('/images/aromatherapy/11383.png'); ?>" class="note-float-left"
+                <p><?= $product['description'] ?></p>
+              </div>
+              <!--div>
+                <h2>статья для seo</h2>
+                <p><img src="<?= $product['image'] ?>" class="note-float-left"
                         style="width: 25%;" alt=""></p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae vitae accusamus
                     quasi quos
@@ -138,7 +113,7 @@
                     natus iusto dolore deleniti earum cum labore accusantium quas numquam quo eos
                     saepe fugiat,
                     blanditiis rerum quisquam! Placeat!</p>
-              </div>
+              </div-->
             </div>
 
             <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" 
@@ -241,10 +216,11 @@
           </div> 
         </div>
       </div><!--description-->
-
     </div><!--container product-->
   </section>
+<?php endif; ?>
 
+<?php if (!empty($related_products)): ?>
   <section class="carouse-promo">
     <div class="container promo">
       <div class="slider-header">
@@ -256,24 +232,29 @@
           <span class="next-btn"><i class="fa-solid fa-chevron-right"></i></span>
         </div>
       </div>
-      
-      <div class="owl-carousel owl-theme" id="slider-product">
 
+      <div class="owl-carousel owl-theme" id="slider-product">
+      <?php foreach ($related_products as $product): ?>
         <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <a href="#">
+          <a href="/product/<?= $product['outer_id'] ?>">
             <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
-                loading="lazy" alt="изображение продукта" itemprop="image">
+              <img src="<?= $product['image'] ?>"
+                loading="lazy" alt="натуральная японская косметика и витамины для долголетия" itemprop="image">
             </div>
           </a>
           <div class="product-card-details">
             <h6 class="product-card-title" itemprop="name">
-              <a href="#">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </a>
+              <a href="/product/<?= $product['outer_id'] ?>"><?= $product['title'] ?></a>
             </h6>
             <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
+                <p style="margin:0;padding:0;" itemprop="price">
+                <?php if ($product['price'] == '') {
+                        echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
+                      } else {
+                        echo $product['price'];
+                      }
+                ?>
+                </p>
             </div>
             <div class="product-card-btns">
               <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
@@ -285,139 +266,11 @@
             </div>
           </div>
         </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <a href="#">
-            <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
-                loading="lazy" alt="изображение продукта" itemprop="image">
-            </div>
-          </a>
-          <div class="product-card-details">
-            <h6 class="product-card-title" itemprop="name">
-              <a href="#">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </a>
-            </h6>
-            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
-            </div>
-            <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
-            </div>
-          </div>
-        </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <a href="#">
-            <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
-                loading="lazy" alt="изображение продукта" itemprop="image">
-            </div>
-          </a>
-          <div class="product-card-details">
-            <h6 class="product-card-title" itemprop="name">
-              <a href="#">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </a>
-            </h6>
-            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
-            </div>
-            <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
-            </div>
-          </div>
-        </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <a href="#">
-            <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
-                loading="lazy" alt="изображение продукта" itemprop="image">
-            </div>
-          </a>
-          <div class="product-card-details">
-            <h6 class="product-card-title" itemprop="name">
-              <a href="#">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </a>
-            </h6>
-            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
-            </div>
-            <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
-            </div>
-          </div>
-        </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <a href="#">
-            <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
-                loading="lazy" alt="изображение продукта" itemprop="image">
-            </div>
-          </a>
-          <div class="product-card-details">
-            <h6 class="product-card-title" itemprop="name">
-              <a href="#">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </a>
-            </h6>
-            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
-            </div>
-            <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
-            </div>
-          </div>
-        </div><!--product-card-->
-        <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <a href="#">
-            <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
-                loading="lazy" alt="изображение продукта" itemprop="image">
-            </div>
-          </a>
-          <div class="product-card-details">
-            <h6 class="product-card-title" itemprop="name">
-              <a href="#">
-                Эссенция против старения кожи с астаксантином Astaxanthin Aging Care Essence Re'senza
-              </a>
-            </h6>
-            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">33000р<del>35000р</del></p>
-            </div>
-            <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
-                <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
-            </div>
-          </div>
-        </div><!--product-card-->
+      <?php endforeach; ?>
       </div>
     </div>
   </section>
+<?php endif; ?>
 
   <section class="delivery">
     <div class="container delivery">
@@ -474,6 +327,5 @@
         (<strong>сроки перевода зависят от правил Вашего банка</strong>).
       </div>
     </div>
-  </section>
-  
+  </section>  
 <script>localStorage.setItem('location', window.location.href);</script>

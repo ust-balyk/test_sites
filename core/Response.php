@@ -12,8 +12,7 @@ class Response
    public function redirect($url='')
    {
       if ($url) {
-         $redirect = filter_var($url, FILTER_SANITIZE_URL);
-         //$redirect = $url;
+         $redirect = $url;
 
       } else {
          $redirect = base_url('/'); 

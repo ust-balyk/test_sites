@@ -1,4 +1,4 @@
-<?php if (!empty($sale_items)): ?>
+<?php if (!empty($products)): ?>
   
   <section class="category">
     <div class="container category">
@@ -135,21 +135,21 @@
           <div id="discount" class="container content">
             <div id="category_content" class="row">
 
-              <?php foreach ($sale_items as $item): ?>
+              <?php foreach ($products as $product): ?>
               <div class="col-lg-3 product-card" style="">
                 <a href="<?=base_url('/category/product');?>">
                   <div class="product-card-img">
-                    <img src="<?= base_url($item['image']); ?>" alt="">
+                    <img src="<?= base_url($product['image']) ?>" alt="">
                   </div>
                 </a>
                 <div class="product-card-details">
                   <h6 class="product-card-title">
                     <a href="<?=base_url('/category/product');?>">
-                      <?= $item['title']; ?>
+                      <?= $product['title'] ?>
                     </a>
                   </h6>
                   <div class="product-card-price">
-                    <?= $item['new_price']; ?><del><?= $item['old_price']; ?></del>
+                    <?= $product['new_price'] ?><del><?= $product['old_price'] ?></del>
                   </div>
                   <div class="product-card-btns">
                     <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">

@@ -8,8 +8,10 @@ class HomeController
 
     static function index()
     {
-        if ($sale_items = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC LIMIT 10")->get()) {
-
+        if ($discounted_products = db()->query(
+            "SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC LIMIT 10")->get()
+        
+        ) {
             if (TABLE_NAME == 'cosmetics') {
                 $title = 'Japan-in.Ru — Всё для Твоей красоты из Японии!';
 
@@ -23,13 +25,14 @@ class HomeController
                 HOME_LAYOUT,
                 HOME_VIEW,
                 [
-                    'title'      => $title,
-                    'sale_items' => $sale_items,
+                    'title'               => $title,
+                    'discounted_products' => $discounted_products,
                 ],
-
             );
+
         }
-        return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []); //'title' => 'NO PRODUCTS FOUND',]);
+        return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []); //'title' = Japan-in.Ru',]);
+
 
     }
 

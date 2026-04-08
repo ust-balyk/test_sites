@@ -133,7 +133,8 @@ img {
 
 /* ================== Header ===================== */
 
-nav {
+nav.navbar {
+    height: 8.5vh;
     background: var(--nav-color);
 }
 
@@ -231,7 +232,7 @@ div.banner {
 /* =================== Superiority ================ */
 
 section.superiority {
-    margin: 10px 0px 60px 0px;
+    margin: 10px 0px 38px 0px;
     background: var(--bg-color);
     text-align: center;
 }
@@ -250,7 +251,7 @@ p.header_post > strong {
 
 .superiority h1 {
     color: var(--grey-color);
-    margin: 20px 0px 110px 0px;
+    margin: 20px 0px 40px 0px;
     font-size: 24px;
     letter-spacing: 1px;
     font-weight: 500;
@@ -259,7 +260,7 @@ p.header_post > strong {
 .superiority h3 {
     font-size: 22px;
     font-weight: 400;
-    margin: 0px 0px 176px 0px; 
+    margin: 0px 0px 60px 0px; 
     padding: 0px;
 }
 
@@ -323,7 +324,7 @@ div.high_quality_top {  /* вехний блок */
 /* ===================Achievements=============== */
 
 section.achievements {
-    margin: 40px -33px 70px -33px;
+    margin: 0px -33px 70px -33px;
     padding: 4px 44px;
     background-color: var(--description-color);
     box-shadow: 6px 0px 6px 0px var(--description-color);
@@ -440,6 +441,18 @@ div .product-card {
     transition: all .3s;
     a { text-decoration: none; }
 }
+@media screen and (orientation: portrait) and (max-width: 767.9px) {
+    div .product-card {
+        max-width: 100% !important;
+    }
+}
+/*
+@media screen and (orientation: portrait) and (min-width: 767.9px) and (max-width: 1300px) {
+    div .product-card {
+        min-width: 35% !important;
+    }
+}*/
+
 div .product-card:hover {
     transform: translateY(-2px);
     border: 1px solid white;
@@ -545,7 +558,7 @@ h6.product-card-title {
     margin-top: 10px;
     margin-bottom: 8px;
     text-align: center;
-    height: 100px;
+    height: 120px;
     text-decoration: none;
     word-break: break-word;
     hyphens: auto;
@@ -554,7 +567,7 @@ h6.product-card-title {
 
 .product-card-title a {
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
     color: var(--grey-color);
 }
