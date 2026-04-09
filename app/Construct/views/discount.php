@@ -13,12 +13,14 @@
                 </img>
               </a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Категория</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              товары по акции «тест-драйв качества» <!-- «инвестиция в знакомство с брендом» -->
+            </li>
           </ol>
         </nav>
       </div>
 
-      <h1 class="text-center title_category">Категория</h1>
+      <h1 class="text-center title_category">специальное предложение</h1>
 
       <div class="row category">
 
@@ -137,14 +139,15 @@
 
               <?php foreach ($products as $product): ?>
               <div class="col-lg-3 product-card" style="">
-                <a href="<?=base_url('/category/product');?>">
+                <a href="/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
-                    <img src="<?= base_url($product['image']) ?>" alt="">
+                    <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                        alt="<?= $product['title'] ?>">
                   </div>
                 </a>
                 <div class="product-card-details">
                   <h6 class="product-card-title">
-                    <a href="<?=base_url('/category/product');?>">
+                    <a href="/product/<?= $product['outer_id']; ?>">
                       <?= $product['title'] ?>
                     </a>
                   </h6>
@@ -188,5 +191,4 @@
     </div><!--container category-->
   </section>
 
-<?php else: {response()->redirect('/');} ?>
 <?php endif; ?>

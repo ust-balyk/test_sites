@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-12 login">
                     <div class="text-primary">
-                        <h5>Правильно укажите свои данные, чтобы войти в личное пространство</h5>
+                        <h5>правильно укажите свои данные, чтобы войти в личное пространство</h5>
                     </div>
                     <form action="<?= base_url('/login'); ?>" method="post">
 
@@ -22,16 +22,14 @@
 
                         <div class="form-group">
                             <label></label>
-                            <input type="email" name="email" placeholder="Электронная почта"
-                                   class="form-control border-0 rounded-1"
+                            <input type="email" name="email" placeholder="электронная почта"
+                                class="form-control"
                                    value="<?= session()->get('form_data'); ?>"><!-- required /-->
                         </div>
                         
                         <div class="form-group">
                             <label></label>
-                            <input type="password" name="password" placeholder="Пароль"
-                                   class="form-control border-0 rounded-1"> <!-- required /-->
-                                   <!--class="form-control border-success border-4"-->
+                            <input type="password" name="password" placeholder="пароль" class="form-control">
                         </div><br><br>
                         
                         <div class="form-group">
@@ -40,11 +38,9 @@
                                    value="     а у т е н т и ф и к а ц и я     ">
                         </div><br>
 
-                        <p>
-                            <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                                href="<?= base_url('/register'); ?>">Создать аккаунт,</a>
-                            <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                                href="#" id="login_page">или Отказаться.</a>
+                        <p class="login">
+                            <a href="/register">&#9654; создать аккаунт </a>
+                            <a href="#" id="login_page"> &#9654; отказаться</a>
                         </p>
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {

@@ -124,7 +124,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-          <a href="/cosmetics/makeup">
+            <a href="/cosmetics/makeup">
               <picture>
                 <source media="(min-width: 768px)" 
                       srcset="<?= base_url(POCKET_STYLE .'/assets/categories/1.jpg'); ?>" alt="">
@@ -248,7 +248,9 @@
           </div>
           <a href="/product/<?= $sale['outer_id']; ?>">
             <div class="product-card-img">
-              <img src="<?= $sale['image'] ?>" alt="">
+            <img src="<?= $sale['image'] ?>" 
+              onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                 alt="<?= $sale['title'] ?>">
             </div>
           </a>
           <div class="product-card-details">

@@ -7,7 +7,7 @@
         //var timer = setTimeout(function() {
         setTimeout(function() {
             window.location='http://localhost:8888'
-        }, 2000);
+        }, 3000);
     </script>
 
 </div><!-- container -->

@@ -141,7 +141,8 @@
                 ?>
                 <a href="/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
-                    <img src="<?= $product['image'] ?>" alt="">
+                    <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                        alt="<?= $product['title'] ?>">
                   </div>
                 </a>
                 <div class="product-card-details">

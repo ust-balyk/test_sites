@@ -232,7 +232,7 @@ div.banner {
 /* =================== Superiority ================ */
 
 section.superiority {
-    margin: 10px 0px 38px 0px;
+    margin: 10px 0px 40px 0px;
     background: var(--bg-color);
     text-align: center;
 }
@@ -260,7 +260,7 @@ p.header_post > strong {
 .superiority h3 {
     font-size: 22px;
     font-weight: 400;
-    margin: 0px 0px 60px 0px; 
+    margin: 0px 0px 70px 0px; /**/
     padding: 0px;
 }
 
@@ -300,7 +300,7 @@ div.high_quality {
     height: 108px;
     background-color: white;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
-    box-shadow: 0px 1px 1px 1px #fce169;
+    box-shadow: 0px 1px 1px 1px #facd05; /*#fce169;*/
 }
 div.high_quality_top {  /* вехний блок */
     position: absolute;
@@ -308,7 +308,7 @@ div.high_quality_top {  /* вехний блок */
     top: 6px;
     left: 6px;
     right: 6px;
-    box-shadow: 0px 3px 5px 1px #fce169;
+    box-shadow: 0px 3px 5px 1px #facd05; /*#fce169;*/
 }
 @media all and (max-width: 500px) {
     .high_quality {
@@ -1977,7 +1977,7 @@ div.delivery {
 
 body#login,
 body#register {
-  background-image: url('/../../images/login.webp');
+  background-image: url('/start_pocket/assets/login/login.webp');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
@@ -1985,14 +1985,46 @@ body#register {
   text-align: center;
 }
 
-div.login {
-    margin: 19% 2px -1px auto;
+div.login,
+div.register {
+    margin: 8vh 2px -1px auto;
     padding: 20px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px !important;
+    background: #2674b6;
 }
+
+.login .text-primary h5,
+.register .text-primary h5 {
+    color: white;
+}
+
+input.form-control {
+    border-color: #2674b6;
+    border-radius: 4px !important;
+}
+
+input#login_button,
+input#register_button {
+    width: 30vw;
+    border-color: #2674b6;
+    border-radius: 4px !important;
+    background: white;
+    color: var(--grey-color);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+p.login a,
+p.register a{
+    font-size: 18px;
+    font-weight; 600;
+    color: white;
+}
+
+
 @media all and (max-width: 700px) {
-    div.login {
+    div.login,
+    div.register {
         height: auto;
         width: 96%;
         margin: 5% 20px 50px 22px;
@@ -2004,7 +2036,8 @@ div.login {
 }
 
 @media all and (max-width: 500px) {
-    div.login {
+    div.login,
+    div.register {
         height: auto;
         width: 96%;
         margin: 40% 12px 50px 10px;
@@ -2015,7 +2048,7 @@ div.login {
 }
 
 /* register */
-
+/*
 div.register {
     margin: 10% 2px -1px auto;
     padding: 20px;
@@ -2043,6 +2076,6 @@ div.register {
             display: none;
         }
     }
-}
+}*/
 
 

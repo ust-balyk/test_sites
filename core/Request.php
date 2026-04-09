@@ -7,7 +7,8 @@ class Request
 
    public function __construct($uri)
    {
-      $sanitized_uri = filter_var($uri, FILTER_SANITIZE_URL);
+      //$sanitized_uri = filter_var($uri, FILTER_SANITIZE_URL);
+      $sanitized_uri = preg_replace('~[^a-zA-Z0-9_/]~', '', $uri);
       $this->formatted_uri = strtolower(trim($sanitized_uri, '/'));
       
    }

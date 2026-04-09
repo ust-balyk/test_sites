@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">
     <title><?= $title ?? 'Japan-in.Ru'; ?></title>
+    <link rel="preload" href="<?= base_url(POCKET_STYLE.'/assets/banner/banner.webp'); ?>" as="image">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Japan-in.Ru - японская косметика по доступной цене!">
     <meta name="keywords" content="косметика, япония, красота">
@@ -22,7 +23,6 @@
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
-    <link rel="preload" href="<?= base_url('/images/login.webp'); ?>" as="image">
     <meta property="og:locale" content="ru_RU" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты!" />
@@ -127,7 +127,7 @@
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/login'); ?>">
+                    <a href="/login">
                       <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
                     </a>
                   <?php } else { echo user_icon(); } ?>
@@ -206,9 +206,9 @@
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
                   <ul>
-                    <li><a href="<?= base_url('/delivery'); ?>">Условия доставки</a></li>
-                    <li><a href="<?= base_url('/delivery'); ?>">Безопасность оплаты</a></li>
-                    <li><a href="<?= base_url('/delivery'); ?>">Возврат товара</a></li>
+                    <li><a href="/product/delivery'">Условия доставки</a></li>
+                    <li><a href="/product/delivery">Безопасность оплаты</a></li>
+                    <li><a href="/product/delivery">Возврат товара</a></li>
                   </ul>
                 </div>
               </div>

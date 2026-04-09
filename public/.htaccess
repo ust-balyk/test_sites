@@ -12,8 +12,20 @@
     Header set Content-Security-Policy "default-src 'self';"
 
 </IfModule>
+
 #<filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
 
  #   Header set Cache-Control "max-age=2628000, public"
     
 #</filesMatch>
+
+#<IfModule mod_expires.c>
+
+#    ExpiresActive On
+#    ExpiresByType image/jpeg "access plus 1 week"
+#    ExpiresByType image/png "access plus 1 week"
+#    ExpiresByType image/gif "access plus 1 week"
+#    ExpiresByType image/webp "access plus 1 week"
+
+#</IfModule>
+

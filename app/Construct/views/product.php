@@ -2,12 +2,11 @@
 <?php if (!empty($product)): ?>
   <section class="product">
     <div class="container product">
-    <?php //foreach ($products as $product): ?>
       <div class="container justify-content-between breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="<?= base_url('/'); ?>">
+              <a href="/">
                 <img class="link_to_home" src="<?= base_url(POCKET_STYLE.'/favicon/home.svg'); ?>"
                     alt="link_to_the_home_page">
                 </img>
@@ -17,20 +16,21 @@
               <a href="/cosmetics/<?= $product['slug'] ?>"><?= $product['category'] ?></a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              <?= $product['title'] ?>
+              арт.<?= $product['outer_id'] ?>
             </li>
           </ol>
         </nav>
-        <!--div class="d-none d-md-block">
-          <a href="<?=base_url('/category');?>" class="btn btn-sm btn-outline-secondary back_link">
+        <div class="d-none d-md-block">
+          <a href="/cosmetics/<?= $product['slug'] ?>" class="btn btn-sm btn-outline-secondary back_link">
             <h5>вернуться в категорию</h5>
           </a>
-        </div-->
+        </div>
       </div>
       <div class="row product">
         <div class="col-md-6">
           <div class="product_image">
-            <img src="<?= $product['image'] ?>" alt="">
+            <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'" 
+              alt="<?= $product['title'] ?>">
           </div>
         </div>
         <div class="col-md-6">
@@ -236,9 +236,15 @@
       <div class="owl-carousel owl-theme" id="slider-product">
       <?php foreach ($related_products as $product): ?>
         <div class="product-card" itemscope itemtype="https://schema.org/Product">
+          <?php if ($product['price'] == '' && $product['new_price'] == '' && $product['old_price'] == '') { 
+                  echo '<div class="product_expected">
+                          <p>ожидается</p>
+                        </div>';
+                  }
+          ?>
           <a href="/product/<?= $product['outer_id'] ?>">
             <div class="product-card-img">
-              <img src="<?= $product['image'] ?>"
+              <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
                 loading="lazy" alt="натуральная японская косметика и витамины для долголетия" itemprop="image">
             </div>
           </a>

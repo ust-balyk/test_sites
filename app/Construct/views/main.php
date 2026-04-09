@@ -433,7 +433,7 @@ dump($_SESSION);
         <div class="product-card" itemscope itemtype="https://schema.org/Product"><!-- popular-card -->
           <a href="#">
             <div class="product-card-img">
-              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>"
+              <img src="<?= base_url('/images/for-face/11642.jpg'); ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
                 loading="lazy" alt="изображение продукта" itemprop="image">
             </div>
           </a>

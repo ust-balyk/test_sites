@@ -15,17 +15,18 @@ $app->router->add('/', [HomeController::class, 'index'], ['POST', 'GET']);
 $app->router->post('/', [HomeController::class])->withoutCsrfToken();
 $app->router->get('/', [HomeController::class]);
 
-$app->router->get('/cosmetics/(.*)/?', [PageController::class, 'category']);
-$app->router->get('/product/(.*)/?', [PageController::class, 'product']);
-$app->router->get('/cosmetics/([a-z_]+)/product/([0-9])/?', [PageController::class, 'product']);
-$app->router->get('/product/discount/?', [PageController::class, 'discount']);
-$app->router->get('/product/delivery/?', [PageController::class, 'delivery']);
+// сначала прямые маршруты 
+$app->router->get('/product/delivery', [PageController::class, 'delivery']);
+$app->router->get('/product/discount', [PageController::class, 'discount']);
+$app->router->get('/cosmetics/(.*)', [PageController::class, 'category']);
+$app->router->get('/product/(.*)', [PageController::class, 'product']);
+$app->router->get('/cosmetics/([a-z_]+)/product/([0-9])', [PageController::class, 'product']);
 
-$app->router->get('/register/?', [UserController::class, 'register'])->closed_for(['frend']);
-$app->router->post('/register/?', [UserController::class, 'record']);
-$app->router->get('/login/?', [UserController::class, 'login'])->closed_for(['frend']);
-$app->router->post('/login/?', [UserController::class, 'enter']);
-$app->router->get('/logout/?', [UserController::class, 'logout']);
+$app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);
+$app->router->post('/register', [UserController::class, 'record']);
+$app->router->get('/login', [UserController::class, 'login'])->closed_for(['frend']);
+$app->router->post('/login', [UserController::class, 'enter']);
+$app->router->get('/logout', [UserController::class, 'logout']);
 
 $app->router->get('/account', [AccountController::class])->closed_for(['guest']);
 
@@ -37,4 +38,4 @@ $app->router->get('/post/?(?P<slug>[a-z0-9-]+)/?', function() {
 
 //dump(__FILE__ . " str.: " . __LINE__, $app->router->getRoutes());
 $app->router->get('/autor', function() { return
-   '<pre><br><h3 style="text-indent:40px">&copy; исламов вадим ханифович</h3></pre>'; });
+   '<pre><br><h3 style="text-indent:40px;color:grey">&copy; исламов вадим ханифович</h3></pre>'; });

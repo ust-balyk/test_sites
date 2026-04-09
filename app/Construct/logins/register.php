@@ -15,7 +15,7 @@
           <div class="col-md-12 register">
 
             <div class="text-primary">
-              <h5>Заполните все поля, чтобы создать личное пространство</h5>
+              <h5>заполните все поля, чтобы создать личное пространство</h5>
             </div>
 
             <form action="<?= base_url('/register'); ?>" method="post">
@@ -33,7 +33,7 @@
 
               <div class="form-group">
                 <label></label>
-                <input type="email" name="email" placeholder="Электронная почта"
+                <input type="email" name="email" placeholder="электронная почта"
                         class="form-control border-0 rounded-1
                   <?= get_validation_class('email'); ?>"
                   value="<?= old('email'); ?>"> <!-- required /-->
@@ -42,32 +42,30 @@
 
               <div class="form-group">
                 <label></label>
-                <input type="password" name="password" placeholder="Пароль не менее 6 символов"
-                        class="form-control border-0 rounded-1
+                <input type="password" name="password" placeholder="пароль не менее 6 символов"
+                        class="form-control
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('password'); ?>
               </div>
 
               <div class="form-group">
                 <label></label>
-                <input type="password" name="confirm_password" placeholder="Повторите пароль" 
-                        class="form-control border-0 rounded-1
+                <input type="password" name="confirm_password" placeholder="повторите пароль" 
+                        class="form-control
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('confirm_password'); ?>
                 </div><br><br>
 
               <div class="form-group">
-                <input type="submit" name="submit" class="btn btn-primary rounded-1"
-                        value="     р е г и с т р а ц и я     ">
+                <input type="submit" name="submit" id="register_button"
+                     class="btn btn-primary" value="     р е г и с т р а ц и я     ">
               </div><br>
 
               <?= get_auth_token(); ?>
 
-              <p>
-                <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                    href="<?= base_url('/login'); ?>">Войти в систему,</a>
-                <a style="font-weight:bold; color:#4d4d4d; text-decoration:none"
-                    href="#" id="register_page"> или Отказаться.</a>
+              <p class="register">
+                <a href="/login">&#9654; войти в систему </a>
+                <a href="#" id="register_page">&#9654; отказаться</a>
               </p>
               <script>
                 document.addEventListener("DOMContentLoaded", function() {
