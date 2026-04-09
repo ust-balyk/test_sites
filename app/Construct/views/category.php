@@ -1,7 +1,7 @@
 <?php if (!empty($products)): ?>  
   <section class="category">
     <div class="container category">
-      <div class="container breadcrumb">
+      <div class="container justify-content-between breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -13,6 +13,28 @@
             <li class="breadcrumb-item active" aria-current="page"><?= $title_category ?></li>
           </ol>
         </nav>
+        <div class="d-none d-md-block">
+          <a href="#" onclick="goBack()" id="go_back" class="btn btn-sm btn-outline-secondary back_link">
+            <h5>вернуться</h5>
+          </a>
+        </div>
+        <script>
+          function goBack() {
+            var previousLocation = localStorage.getItem('product');
+            if (previousLocation) {
+              window.location.href = previousLocation; // Переход назад
+            } else {
+              window.location.href = '/'; // На главную, если адреса нет
+            }
+          }
+          /*
+          document.addEventListener("DOMContentLoaded", function() {
+            var go_back = document.getElementById("go_back");
+            go_back.addEventListener("click", function() {
+              window.location.href = localStorage.getItem('location');
+            });
+          });*/
+        </script>
       </div>
 
       <h1 class="text-center title_category"><?= $title_category ?></h1>

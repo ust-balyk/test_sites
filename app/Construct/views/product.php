@@ -1,4 +1,4 @@
-<?=db()->user_back();?>
+<?= db()->user_back(); ?>
 <?php if (!empty($product)): ?>
   <section class="product">
     <div class="container product">
@@ -26,6 +26,7 @@
           </a>
         </div>
       </div>
+
       <div class="row product">
         <div class="col-md-6">
           <div class="product_image">
@@ -224,7 +225,7 @@
   <section class="carouse-promo">
     <div class="container promo">
       <div class="slider-header">
-        <a href="#" class="btn btn-sm btn-outline-secondary promo">
+        <a href="/cosmetics/<?= $product['slug'] ?>" class="btn btn-sm btn-outline-secondary promo">
           <h5>похожие продукты</h5>
         </a>
         <div class="slider-btn-control">
@@ -333,5 +334,5 @@
         (<strong>сроки перевода зависят от правил Вашего банка</strong>).
       </div>
     </div>
-  </section>  
-<script>localStorage.setItem('location', window.location.href);</script>
+  </section>
+<script>localStorage.setItem('location', window.location.href);</script>   
