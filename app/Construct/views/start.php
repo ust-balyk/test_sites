@@ -1,22 +1,17 @@
-<?php 
-//  dump($_COOKIE);          
-//  dump($_SESSION);           
-?>
   <section class="superiority">
-    <div class="container">
+    <div class="container superiority">
       <div class="row">
-        <h1 class="mt-3 mb-2 header_post">
+        <h1 class="header_post">
           Добро пожаловать в мир красоты на Japan-in.Ru!
         </h1><br>
         <h3>
-          Пусть каждый день начинается с особенного ритуала, наполняющего Тебя любовью к самой себе и
+          Пусть каждый день начинается с личного ритуала, наполняющего тебя любовью к самой себе и
           сиянием очарования!
         </h3>
         <div class="col-md-4 g-md-4">
           <div class="high_quality">
             <div class="high_quality_top">
-              <img class="high_quality" src="<?= base_url(POCKET_STYLE .'/assets/quality/quality.png'); ?>"
-                alt="high quality">
+              <h3>本物</h3>
               <h5>Оригинальный товар!</h5>
             </div>
           </div>
@@ -24,8 +19,7 @@
         <div class="col-md-4 g-md-4">
           <div class="high_quality">
             <div class="high_quality_top">
-              <img class="high_quality" src="<?= base_url(POCKET_STYLE .'/assets/quality/quality.png'); ?>"
-                alt="high quality">
+              <h3>最新ロット</h3>
               <h5>Лучший срок годности!</h5>
             </div>
           </div> 
@@ -33,8 +27,7 @@
         <div class="col-md-4 g-md-4">
           <div class="high_quality">
             <div class="high_quality_top">
-              <img class="high_quality" src="<?= base_url(POCKET_STYLE .'/assets/quality/quality.png'); ?>"
-                alt="high quality">
+              <h3>丁寧な梱包</h3>
               <h5>Качественная логистика!</h5>
             </div>
           </div> 
@@ -232,7 +225,7 @@
   <section class="carousel-promo popular"><!--sale_items-->
     <div class="container">
       <div class="slider-header">
-        <a href="/product/discount" class="btn btn-sm btn-outline-secondary popular">
+        <a href="/cosmetics/discount" class="btn btn-sm btn-outline-secondary popular">
           <h5>товары по акции</h5>
         </a>
         <div class="slider-btn-control">
@@ -246,16 +239,15 @@
           <div class="discounted_product">
             <p>акция!</p>
           </div>
-          <a href="/product/<?= $sale['outer_id']; ?>">
+          <a href="/cosmetics/<?= $sale['slug']; ?>/product/<?= $sale['outer_id']; ?>">
             <div class="product-card-img">
-            <img src="<?= $sale['image'] ?>" 
-              onerror="this.onerror=null; this.src='/images/onerror.webp'"
+              <img src="<?= $sale['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
                  alt="<?= $sale['title'] ?>">
             </div>
           </a>
           <div class="product-card-details">
             <h6 class="product-card-title">
-              <a href="/product/<?= $sale['outer_id']; ?>"><?= $sale['title'] ?></a>
+              <a href="/cosmetics/<?= $sale['slug']; ?>/product/<?= $sale['outer_id']; ?>"><?= $sale['title'] ?></a>
             </h6>
             <div class="product-card-price">
               <?= $sale['new_price'] ?><del><?= $sale['old_price'] ?></del>

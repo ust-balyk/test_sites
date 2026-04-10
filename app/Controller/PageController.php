@@ -5,37 +5,60 @@ use Master\Pagination;
 class PageController
 {
 
+    static function cosmetics()
+    {
+        $cosmetics = db()->query("SELECT * FROM ". TABLE_NAME ." ORDER BY RAND()")->get();
+
+        shuffle($cosmetics);
+
+        return app()->view->full_view (
+
+            CATEGORY_LAYOUT, 
+            'cosmetics', 
+            [ 
+                'cosmetics' => $cosmetics, 
+            
+            ]
+
+        );
+
+    }
+
     static function category()
     {
         $slug = request()->get_ID_or_SLUG();
-        $products = [];
-        $title_category = '';
-        $slug_category = '';
+        //$products = [];
+        //$category = '';
+        //$slug = '';
             
         $products = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get();
-        
+
+        /*
         if (empty($products)) {
 
             $products = db()->query("SELECT * FROM " . TABLE_NAME )->get(); //. " LIMIT 30")->get();
+            $first_item = $products[0];         
+            $category = 'косметика';
+            $slug  = 'cosmetics';
             shuffle($products);
-            $title_category = 'популярные товары'; 
-            $slug_category  = 'popular_products';
-
 
         } else {
+        */
             $firstItem = $products[0];         
-            $title_category = $firstItem['category'] ?? null; // 'Категория';
-            $slug_category  = $firstItem['slug'] ?? null; //$slug;
+            $category = $firstItem['category'];
+            $slug  = $firstItem['slug'];
             shuffle($products);
 
-        }
+        //}
+        
+
         return app()->view->full_view(
             CATEGORY_LAYOUT,
             CATEGORY_VIEW,
             [
-                'products'       => $products,
-                'title_category' => $title_category,
-                'slug_category'  => $slug_category,
+                'products' => $products,
+                'category' => $category,
+                'slug'     => $slug,
             ]
         );
 

@@ -13,6 +13,9 @@
               </a>
             </li>
             <li class="breadcrumb-item">
+              <a href="/cosmetics">косметика</a>
+            </li>
+            <li class="breadcrumb-item">
               <a href="/cosmetics/<?= $product['slug'] ?>"><?= $product['category'] ?></a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
@@ -50,10 +53,12 @@
               <h3 class="product-title"><?= $product['title'] ?></h3>
               <div class="distance"></div>
               <div class="product-price">
-                <?php if ($product['price'] == '') {
+                <?php if ($product['price']) {
+                        echo $product['price'];
+                      } else if ($product['price'] == '') {
                         echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
                       } else {
-                        echo $product['price'];
+                        echo ' ';
                       }
                 ?>
               </div>
@@ -243,7 +248,7 @@
                         </div>';
                   }
           ?>
-          <a href="/product/<?= $product['outer_id'] ?>">
+          <a href="/cosmetics/<?= $product['slug'] ?>/product/<?= $product['outer_id'] ?>">
             <div class="product-card-img">
               <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
                 loading="lazy" alt="натуральная японская косметика и витамины для долголетия" itemprop="image">
@@ -251,7 +256,9 @@
           </a>
           <div class="product-card-details">
             <h6 class="product-card-title" itemprop="name">
-              <a href="/product/<?= $product['outer_id'] ?>"><?= $product['title'] ?></a>
+              <a href="/cosmetics/<?= $product['slug'] ?>/product/<?= $product['outer_id'] ?>">
+                <?= $product['title'] ?>
+              </a>
             </h6>
             <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <p style="margin:0;padding:0;" itemprop="price">

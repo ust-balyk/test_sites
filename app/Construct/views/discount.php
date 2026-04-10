@@ -139,7 +139,7 @@
 
               <?php foreach ($products as $product): ?>
               <div class="col-lg-3 product-card" style="">
-                <a href="/product/<?= $product['outer_id']; ?>">
+                <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
                     <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
                         alt="<?= $product['title'] ?>">
@@ -147,7 +147,7 @@
                 </a>
                 <div class="product-card-details">
                   <h6 class="product-card-title">
-                    <a href="/product/<?= $product['outer_id']; ?>">
+                    <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
                       <?= $product['title'] ?>
                     </a>
                   </h6>

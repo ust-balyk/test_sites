@@ -15,12 +15,11 @@ $app->router->add('/', [HomeController::class, 'index'], ['POST', 'GET']);
 $app->router->post('/', [HomeController::class])->withoutCsrfToken();
 $app->router->get('/', [HomeController::class]);
 
-// сначала прямые маршруты 
+$app->router->get('/cosmetics', [PageController::class, 'cosmetics']);
+$app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
+$app->router->get('/cosmetics/([a-z_]+)/?', [PageController::class, 'category']);
+$app->router->get('/cosmetics/([a-z_]+)/product/([0-9]+)', [PageController::class, 'product']);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
-$app->router->get('/product/discount', [PageController::class, 'discount']);
-$app->router->get('/cosmetics/(.*)', [PageController::class, 'category']);
-$app->router->get('/product/(.*)', [PageController::class, 'product']);
-$app->router->get('/cosmetics/([a-z_]+)/product/([0-9])', [PageController::class, 'product']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);
 $app->router->post('/register', [UserController::class, 'record']);

@@ -239,6 +239,7 @@ section.superiority {
 
 div.container .superiority {
     padding: 0px 5px; /*!important;*/
+    /*border-top: 2px solid #ca6a7a; /*#facd05;*/
 }
 
 /* числа счётчиков */
@@ -249,23 +250,25 @@ p.header_post > strong {
     font-weight: 500;
 } 
 
-.superiority h1 {
+h1.header_post {
     color: var(--grey-color);
-    margin: 20px 0px 40px 0px;
-    font-size: 24px;
+    margin: 30px 0px 10px 0px !important;
+    font-size: 28px !important;
     letter-spacing: 1px;
     font-weight: 500;
+    /*border-bottom: 2px solid #facd05; /*#ca6a7a;*/
 }
 
 .superiority h3 {
     font-size: 22px;
     font-weight: 400;
-    margin: 0px 0px 70px 0px; /**/
+    margin: 0px 0px 40px 0px; /**/
     padding: 0px;
 }
 
-.superiority p { color: rgba(0,0,0,0.6); }
+/*.superiority p { color: rgba(0,0,0,0.6); }*/
 
+/*
 img.high_quality {
     margin-top: 10px;
     margin-bottom: 4px;
@@ -273,6 +276,7 @@ img.high_quality {
     height: auto;
     text-align: center;
 }
+
 @media all and (max-width: 500px) {
     img.high_quality {
         margin-top: 13px;
@@ -282,18 +286,7 @@ img.high_quality {
         text-align: center;
     }
 }
-
-.superiority h2 {
-    color: var(--grey-color);
-    font-size: 18px;
-    line-height: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-div.col-md-4 {
-    margin-top: 15px;
-}
+*/
 
 div.high_quality {
     position: relative;
@@ -310,6 +303,18 @@ div.high_quality_top {  /* вехний блок */
     right: 6px;
     box-shadow: 0px 3px 5px 1px #facd05; /*#fce169;*/
 }
+
+div.high_quality_top h3 {
+    margin: 18px auto 8px auto;
+    font-size: 24px;
+    font-weight: 500;
+    color: #ca6a7a;
+}
+
+div.high_quality_top h5 {
+    margin: 0px auto 9px auto;
+}
+
 @media all and (max-width: 500px) {
     .high_quality {
         height: 80px;

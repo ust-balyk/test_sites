@@ -43,15 +43,9 @@
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Каталог
                   </a>
-                  <?php
-                    new App\Widgets\Menu\Menu([
-                      'container' => 'div',
-                      'class'     => 'container dropdown-menu megamenu',
-                      'prepend'   => '<div class="row g-3">',
-                      'append'    => '</div>',
-                      'attrs'     => ['role' => 'menu',],
-                    ]);
-                  ?>
+
+                  <?php new App\Widgets\Menu\Menu(); ?>
+
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#about_us">О нас</a>
@@ -64,9 +58,9 @@
                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Условия доставки
                   </a>
-                  <?php
-                    new App\Widgets\Delivery\Delivery();
-                  ?>
+
+                  <?php new App\Widgets\Delivery\Delivery(); ?>
+
                 </li>
               </ul>
             </div><!--navbar-collapse-->

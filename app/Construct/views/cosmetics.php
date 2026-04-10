@@ -1,4 +1,4 @@
-<?php if (!empty($products)): ?>  
+<?php if (!empty($cosmetics)): ?>  
   <section class="category">
     <div class="container category">
       <div class="container justify-content-between breadcrumb">
@@ -10,20 +10,15 @@
                     alt="link_to_the_home_page">
               </a>
             </li>
-            <li class="breadcrumb-item" aria-current="page">
-              <a href="/cosmetics">косметика</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              <?= $category; ?>
-            </li>
+            <li class="breadcrumb-item active" aria-current="page">косметика</li>
           </ol>
         </nav>
-        <!--div class="d-none d-md-block">
-          <a href="#" onclick="goBack()" id="go_back" class="btn btn-sm btn-outline-secondary back_link">
-            <h5>вернуться</h5>
+        <div class="d-none d-md-block">
+          <a href="/" class="btn btn-sm btn-outline-secondary back_link">
+            <h5>дом</h5>
           </a>
         </div>
-        <script>
+        <!--script>
           function goBack() {
             var previousLocation = localStorage.getItem('product');
             if (previousLocation) {
@@ -42,10 +37,9 @@
         </script-->
       </div>
 
-      <h1 class="text-center title_category"><?= $category ?></h1>
+      <h1 class="text-center title_category">косметика</h1>
 
       <div class="row category">
-
         <div class="col-md-2 d-none d-md-block sidebar" style="height: 100%;">
 
           <div class="d-grid">
@@ -158,7 +152,7 @@
         <div class="col-md-10 content">
           <div class="container content">
             <div id="category_content" class="row">
-            <?php foreach ($products as $product): ?>
+            <?php foreach ($cosmetics as $product): ?>
               <div class="col-lg-3 col-md-4 product-card" style="">
                 <?php if ($product['price'] == '' && $product['new_price'] == '' && $product['old_price'] == '') { 
                   echo '<div class="product_expected">
