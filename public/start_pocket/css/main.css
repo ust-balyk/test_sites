@@ -243,16 +243,17 @@ div.container .superiority {
 }
 
 /* числа счётчиков */
+/*
 p.header_post > strong {
     margin: 5px 0px 40px 0px;
     padding: 0;
     font-size: 18px;
     font-weight: 500;
-} 
+} */
 
 h1.header_post {
     color: var(--grey-color);
-    margin: 30px 0px 10px 0px !important;
+    margin: 20px 0px 15px 0px !important;
     font-size: 28px !important;
     letter-spacing: 1px;
     font-weight: 500;
@@ -262,7 +263,7 @@ h1.header_post {
 .superiority h3 {
     font-size: 22px;
     font-weight: 400;
-    margin: 0px 0px 40px 0px; /**/
+    margin: 0px 0px 45px 0px; /**/
     padding: 0px;
 }
 
@@ -290,29 +291,30 @@ img.high_quality {
 
 div.high_quality {
     position: relative;
-    height: 108px;
+    height: 100px;
     background-color: white;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 0px 1px 1px 1px #facd05; /*#fce169;*/
 }
 div.high_quality_top {  /* вехний блок */
     position: absolute;
-    height: 96px;
+    height: 88px;
     top: 6px;
     left: 6px;
     right: 6px;
     box-shadow: 0px 3px 5px 1px #facd05; /*#fce169;*/
 }
 
+/* иероглифы */
 div.high_quality_top h3 {
-    margin: 18px auto 8px auto;
+    margin: 16px auto 6px auto;
     font-size: 24px;
     font-weight: 500;
     color: #ca6a7a;
 }
 
 div.high_quality_top h5 {
-    margin: 0px auto 9px auto;
+    margin: 0px auto 4px auto;
 }
 
 @media all and (max-width: 500px) {
