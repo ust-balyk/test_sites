@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 login">
-                    <div class="text-primary">
+                    <div class="text-primary" style="text-transform: lowercase">
                         <h5>правильно укажите свои данные, чтобы войти в личное пространство</h5>
                     </div>
                     <form action="<?= base_url('/login'); ?>" method="post">
@@ -22,25 +22,25 @@
 
                         <div class="form-group">
                             <label></label>
-                            <input type="email" name="email" placeholder="электронная почта"
-                                class="form-control"
+                            <input type="email" name="email" style="text-transform: lowercase"
+                                placeholder="электронная почта" class="form-control"
                                    value="<?= session()->get('form_data'); ?>"><!-- required /-->
                         </div>
                         
                         <div class="form-group">
                             <label></label>
-                            <input type="password" name="password" placeholder="пароль" class="form-control">
+                            <input type="password" name="password" style="text-transform: lowercase"
+                                placeholder="пароль" class="form-control">
                         </div><br><br>
                         
                         <div class="form-group">
-                            <input type="submit" name="submit" id="login_button"
-                                   class="btn btn-primary rounded-1"
-                                   value="     а у т е н т и ф и к а ц и я     ">
+                            <input type="submit" name="submit" style="text-transform: lowercase" 
+                                id="login_button" class="btn btn-primary" value="     а у т е н т и ф и к а ц и я     ">
                         </div><br>
 
                         <p class="login">
-                            <a href="/register">&#9654; создать аккаунт </a>
-                            <a href="#" id="login_page"> &#9654; отказаться</a>
+                            <a style="text-transform: lowercase" href="/register">&#9654; создать аккаунт </a>
+                            <a style="text-transform: lowercase" href="#" id="login_page"> &#9654; отказаться</a>
                         </p>
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {

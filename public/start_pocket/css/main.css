@@ -1995,9 +1995,9 @@ body#register {
 div.login,
 div.register {
     margin: 8vh 2px -1px auto;
-    padding: 20px;
+    padding: 30px;
     border-radius: 4px !important;
-    background: #2674b6;
+    background: rgba(28, 25, 19, 0.8); /*#2674b6;*/
 }
 
 .login .text-primary h5,
@@ -2006,14 +2006,14 @@ div.register {
 }
 
 input.form-control {
-    border-color: #2674b6;
+    border-color: rgba(28, 25, 19, 0.8); /*#2674b6;*/
     border-radius: 4px !important;
 }
 
 input#login_button,
 input#register_button {
     width: 30vw;
-    border-color: #2674b6;
+    border-color: rgba(28, 25, 19, 0.8); /*#2674b6;*/
     border-radius: 4px !important;
     background: white;
     color: var(--grey-color);
@@ -2053,36 +2053,4 @@ p.register a{
         }
     }
 }
-
-/* register */
-/*
-div.register {
-    margin: 10% 2px -1px auto;
-    padding: 20px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.5);
-}
-@media all and (max-width: 700px) {
-    div.register {
-        height: auto;
-        width: 96%;
-        margin: 5% auto 50px auto;
-        padding: 12px;
-        .text-primary {
-            display: none;
-        }
-    }
-}
-
-@media all and (max-width: 500px) {
-    div.register {
-        height: auto;
-        width: 96%;
-        margin: 30% auto 50px auto;
-        .text-primary {
-            display: none;
-        }
-    }
-}*/
-
 

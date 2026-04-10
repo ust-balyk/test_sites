@@ -65,14 +65,14 @@ class Database
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
                         INSERT IGNORE INTO start (`id`, `category`, `slug`, `parent_id`) VALUES
                         (1, 'декоративная косметика', 'makeup', 0),
-                        (2, 'для лица', 'for-face', 0),
-                        (3, 'для полости рта', 'for-oral-cavity', 0),
-                        (4, 'для волос', 'for-hair', 0),
-                        (5, 'для тела', 'for-body', 0),
-                        (6, 'для рук', 'for-hands', 0),
-                        (7, 'для ног', 'for-feet', 0),
+                        (2, 'для лица', 'for_face', 0),
+                        (3, 'для полости рта', 'for_oral_cavity', 0),
+                        (4, 'для волос', 'for_hair', 0),
+                        (5, 'для тела', 'for_body', 0),
+                        (6, 'для рук', 'for_hands', 0),
+                        (7, 'для ног', 'for_feet', 0),
                         (8, 'ароматерапия', 'aromatherapy', 0),
-                        (9, 'подарочные наборы', 'sets-gift', 0),
+                        (9, 'подарочные наборы', 'sets_gift', 0),
                         (10, 'аксессуары', 'accessories', 0);";
                     $this->connection->exec($tbl_start);
                     $tbl_cosmetics = "CREATE TABLE `cosmetics` (

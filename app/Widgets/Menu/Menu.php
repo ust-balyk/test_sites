@@ -48,7 +48,7 @@ class Menu
     protected function output()
     {
         $attrs = '';
-        if (! empty($this->attrs)) { // если задаёи атрибуты
+        if (! empty($this->attrs)) { // если задаём атрибуты
             foreach ($this->attrs as $k => $v) {
                 $attrs .= " $k=\"$v\"";
             }

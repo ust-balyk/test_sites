@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-12 register">
 
-            <div class="text-primary">
+            <div class="text-primary" style="text-transform: lowercase">
               <h5>заполните все поля, чтобы создать личное пространство</h5>
             </div>
 
@@ -24,7 +24,7 @@
 
               <div class="form-group">
                 <label></label>
-                <input type="text" name="name" placeholder="Имя" 
+                <input type="text" name="name" style="text-transform: lowercase" placeholder="имя" 
                         class="form-control border-0 rounded-1
                   <?= get_validation_class('name'); ?>"
                   value="<?= old('name'); ?>"> <!-- required /-->
@@ -33,7 +33,7 @@
 
               <div class="form-group">
                 <label></label>
-                <input type="email" name="email" placeholder="электронная почта"
+                <input type="email" name="email" style="text-transform: lowercase" placeholder="электронная почта"
                         class="form-control border-0 rounded-1
                   <?= get_validation_class('email'); ?>"
                   value="<?= old('email'); ?>"> <!-- required /-->
@@ -42,30 +42,30 @@
 
               <div class="form-group">
                 <label></label>
-                <input type="password" name="password" placeholder="пароль не менее 6 символов"
-                        class="form-control
+                <input type="password" name="password" style="text-transform: lowercase"
+                      placeholder="пароль не менее 6 символов" class="form-control
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('password'); ?>
               </div>
 
               <div class="form-group">
                 <label></label>
-                <input type="password" name="confirm_password" placeholder="повторите пароль" 
-                        class="form-control
+                <input type="password" name="confirm_password" style="text-transform: lowercase"
+                      placeholder="повторите пароль" class="form-control
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('confirm_password'); ?>
                 </div><br><br>
 
               <div class="form-group">
-                <input type="submit" name="submit" id="register_button"
+                <input type="submit" name="submit" id="register_button" style="text-transform: lowercase"
                      class="btn btn-primary" value="     р е г и с т р а ц и я     ">
               </div><br>
 
               <?= get_auth_token(); ?>
 
               <p class="register">
-                <a href="/login">&#9654; войти в систему </a>
-                <a href="#" id="register_page">&#9654; отказаться</a>
+                <a style="text-transform: lowercase" href="/login">&#9654; войти в систему </a>
+                <a style="text-transform: lowercase" href="#" id="register_page">&#9654; отказаться</a>
               </p>
               <script>
                 document.addEventListener("DOMContentLoaded", function() {

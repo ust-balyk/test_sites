@@ -9,7 +9,7 @@ class HomeController
     static function index()
     {
         if ($discounted_products = db()->query(
-            "SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC LIMIT 10")->get()
+            "SELECT * FROM ". TABLE_NAME ." WHERE price = ''")->get() // ORDER BY id DESC LIMIT 10")->get()
         
         ) {
             if (TABLE_NAME == 'cosmetics') {

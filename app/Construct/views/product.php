@@ -246,7 +246,11 @@
                   echo '<div class="product_expected">
                           <p>ожидается</p>
                         </div>';
-                  }
+                } else if ($product['new_price']) {
+                  echo '<div class="discounted_product">
+                          <p>акция!</p>
+                        </div>';
+                }
           ?>
           <a href="/cosmetics/<?= $product['slug'] ?>/product/<?= $product['outer_id'] ?>">
             <div class="product-card-img">
@@ -262,11 +266,13 @@
             </h6>
             <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <p style="margin:0;padding:0;" itemprop="price">
-                <?php if ($product['price'] == '') {
-                        echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
-                      } else {
-                        echo $product['price'];
-                      }
+                <?php if ($product['price']) {
+                            echo $product['price'];
+                          } else if ($product['price'] == '') {
+                            echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
+                          } else {
+                            echo ' ';
+                          }
                 ?>
                 </p>
             </div>

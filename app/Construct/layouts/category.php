@@ -142,9 +142,9 @@
                 <h6>оплата и доставка</h6>
                 <div class="payment_delivery">
                   <ul>
-                    <li><a href="<?= base_url('/delivery'); ?>">Условия доставки</a></li>
-                    <li><a href="<?= base_url('/delivery'); ?>">Безопасность оплаты</a></li>
-                    <li><a href="<?= base_url('/delivery'); ?>">Возврат товара</a></li>
+                    <li><a href="/product/delivery">Условия доставки</a></li>
+                    <li><a href="/product/delivery">Безопасность оплаты</a></li>
+                    <li><a href="/product/delivery">Возврат товара</a></li>
                   </ul>
                 </div>
               </div>

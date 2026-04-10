@@ -33,24 +33,24 @@ class PageController
             
         $products = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get();
 
-        /*
+        
         if (empty($products)) {
 
-            $products = db()->query("SELECT * FROM " . TABLE_NAME )->get(); //. " LIMIT 30")->get();
+            $products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = ''")->get();
+            /*
             $first_item = $products[0];         
-            $category = 'косметика';
-            $slug  = 'cosmetics';
+            $category = 'товары по акции «тест-драйв качества»';
+            $slug  = 'discount';
             shuffle($products);
-
-        } else {
-        */
-            $firstItem = $products[0];         
-            $category = $firstItem['category'];
-            $slug  = $firstItem['slug'];
-            shuffle($products);
+            */
+        } //else {
+        
+        $firstItem = $products[0];         
+        $category = $firstItem['category'];
+        $slug  = $firstItem['slug'];
+        shuffle($products);
 
         //}
-        
 
         return app()->view->full_view(
             CATEGORY_LAYOUT,

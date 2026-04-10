@@ -138,10 +138,14 @@
             <?php foreach ($cosmetics as $product): ?>
               <div class="col-lg-3 col-md-4 product-card" style="">
                 <?php if ($product['price'] == '' && $product['new_price'] == '' && $product['old_price'] == '') { 
-                  echo '<div class="product_expected">
-                          <p>ожидается</p>
-                        </div>';
-                  }
+                        echo '<div class="product_expected">
+                                <p>ожидается</p>
+                              </div>';
+                      } else if ($product['new_price']) {
+                        echo '<div class="discounted_product">
+                                <p>акция!</p>
+                              </div>';
+                      }
                 ?>
                 <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
