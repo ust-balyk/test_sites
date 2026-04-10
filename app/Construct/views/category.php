@@ -18,28 +18,11 @@
             </li>
           </ol>
         </nav>
-        <!--div class="d-none d-md-block">
-          <a href="#" onclick="goBack()" id="go_back" class="btn btn-sm btn-outline-secondary back_link">
-            <h5>вернуться</h5>
+        <div class="d-none d-md-block">
+          <a href="/" class="btn btn-sm btn-outline-secondary back_link">
+            <h5>дом</h5>
           </a>
         </div>
-        <script>
-          function goBack() {
-            var previousLocation = localStorage.getItem('product');
-            if (previousLocation) {
-              window.location.href = previousLocation; // Переход назад
-            } else {
-              window.location.href = '/'; // На главную, если адреса нет
-            }
-          }
-          /*
-          document.addEventListener("DOMContentLoaded", function() {
-            var go_back = document.getElementById("go_back");
-            go_back.addEventListener("click", function() {
-              window.location.href = localStorage.getItem('location');
-            });
-          });*/
-        </script-->
       </div>
 
       <h1 class="text-center title_category"><?= $category ?></h1>

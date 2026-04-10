@@ -18,23 +18,6 @@
             <h5>дом</h5>
           </a>
         </div>
-        <!--script>
-          function goBack() {
-            var previousLocation = localStorage.getItem('product');
-            if (previousLocation) {
-              window.location.href = previousLocation; // Переход назад
-            } else {
-              window.location.href = '/'; // На главную, если адреса нет
-            }
-          }
-          /*
-          document.addEventListener("DOMContentLoaded", function() {
-            var go_back = document.getElementById("go_back");
-            go_back.addEventListener("click", function() {
-              window.location.href = localStorage.getItem('location');
-            });
-          });*/
-        </script-->
       </div>
 
       <h1 class="text-center title_category">косметика</h1>
