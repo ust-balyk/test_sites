@@ -180,7 +180,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/gift-set">
+            <a href="/cosmetics/sets-gift">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/8.jpg'); ?>" alt="">
                 <div class="category_right"><h5>подарочные наборы</h5></div>
             </a>
