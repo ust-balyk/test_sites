@@ -20,17 +20,17 @@
 
                         <?= get_csrf_field(); ?>
 
-                        <div class="form-group">
+                        <div class="form-group email">
                             <label></label>
                             <input type="email" name="email" style="text-transform: lowercase"
-                                placeholder="электронная почта" class="form-control"
+                                placeholder="электронная почта" class="form-control email"
                                    value="<?= session()->get('form_data'); ?>"><!-- required /-->
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group password">
                             <label></label>
                             <input type="password" name="password" style="text-transform: lowercase"
-                                placeholder="пароль" class="form-control">
+                                placeholder="пароль" class="form-control password">
                         </div><br><br>
                         
                         <div class="form-group">
@@ -46,7 +46,11 @@
                             document.addEventListener("DOMContentLoaded", function() {
                                 var go_back = document.getElementById("login_page");
                                 go_back.addEventListener("click", function() {
-                                    window.location.href = localStorage.getItem('location');
+                                    if (localStorage.getItem('location')) {
+                                        window.location.href = localStorage.getItem('location');
+                                    } else {
+                                        window.location.href = '/';
+                                    }
                                 });
                             });
                         </script> 

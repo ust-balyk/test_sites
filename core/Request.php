@@ -8,7 +8,7 @@ class Request
    public function __construct($uri)
    {
       //$sanitized_uri = filter_var($uri, FILTER_SANITIZE_URL);
-      $sanitized_uri = preg_replace('~[^a-zA-Z0-9_/]~', '', $uri);
+      $sanitized_uri = preg_replace('~[^a-zA-Z0-9-/]~', '', $uri);
       $this->formatted_uri = strtolower(trim($sanitized_uri, '/'));
       
    }
@@ -50,47 +50,41 @@ class Request
 
    }
 
-   public function get_ID_or_SLUG()
+   public function get_SLUG_or_ID()
    {
       $uri = $this->formatted_uri;
-
-      define('valid_keys', ['cosmetics', 'product']);
+      $valid_keys = ['cosmetics', 'product']; // Лучше использовать локальную переменную
       
       $segments = explode('/', trim($uri, '/'));
       $count = count($segments);
 
-      // Валидация структуры: только 1 или 2 полные пары
-      // типа /cosmetics/for-body или /cosmetict/for-body/product/11140
+      // Валидация структуры: ровно 2 или 4 сегмента
       if ($count !== 2 && $count !== 4) {
          return response()->redirect('/');
-      
       }
+
       $result = null;
-      // Проходим по парам
+
       for ($i = 0; $i < $count; $i += 2) {
          $key = $segments[$i];
          $value = $segments[$i + 1];
-         // Проверка ключа
-         if (!in_array($key, valid_keys)) {
-            return response()->redirect('/');
-         
+
+         // 1. Проверяем ключ (cosmetics или product)
+         if (!in_array($key, $valid_keys)) {
+               return response()->redirect('/');
          }
-         // Проверка и типизация значения
-         if (preg_match('~^\d+$~', $value)) {
-            $result = (int)$value;
 
-         } elseif (preg_match('~^[a-z_]+$~i', $value)) {
-            $result = (string)$value;
-
+         // 2. Определяем тип значения
+         if (ctype_digit($value)) {
+               $result = (int)$value; // Если только цифры — это ID
+         } elseif (preg_match('~^[a-z-]+$~', $value)) {
+               $result = (string)$value; // Если буквы/дефисы — это SLUG
          } else {
-            return response()->redirect('/');
-
+               return response()->redirect('/');
          }
-         // Если это была единственная пара, цикл завершится сам.
-         // Если пар две, цикл перезапишет $result значением из второй пары.
       }
+
       return $result;
-   
    }
 
    public function getPath(): string

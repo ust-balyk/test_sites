@@ -44,7 +44,8 @@ class Database
                     $this->connection->exec("USE japan_in_ru");
 
                     //frend — пользователь, assistant — модератор
-                    $tbl_users = "CREATE TABLE `users` (
+                    $tbl_users = "START TRANSACTION;
+                    CREATE TABLE `users` (
                         `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                         `name` VARCHAR(55) NULL DEFAULT NULL,
                         `email` VARCHAR(105) UNIQUE NOT NULL,
@@ -53,11 +54,13 @@ class Database
                         `created_at` timestamp NULL DEFAULT NULL,
                         `updated_at` timestamp NULL DEFAULT NULL,
                         `auth_token` VARCHAR(255) DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    COMMIT;";
                     $this->connection->exec($tbl_users);
 
                     /* стартовый пакет */
-                    $tbl_start = "CREATE TABLE `start` (
+                    $tbl_start = "START TRANSACTION;
+                    CREATE TABLE `start` (
                         `id` INT PRIMARY KEY,
                         `category` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `slug` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
@@ -65,17 +68,20 @@ class Database
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
                         INSERT IGNORE INTO start (`id`, `category`, `slug`, `parent_id`) VALUES
                         (1, 'декоративная косметика', 'makeup', 0),
-                        (2, 'для лица', 'for_face', 0),
-                        (3, 'для полости рта', 'for_oral_cavity', 0),
-                        (4, 'для волос', 'for_hair', 0),
-                        (5, 'для тела', 'for_body', 0),
-                        (6, 'для рук', 'for_hands', 0),
-                        (7, 'для ног', 'for_feet', 0),
+                        (2, 'для лица', 'for-face', 0),
+                        (3, 'для полости рта', 'for-oral-cavity', 0),
+                        (4, 'для волос', 'for-hair', 0),
+                        (5, 'для тела', 'for-body', 0),
+                        (6, 'для рук', 'for-hands', 0),
+                        (7, 'для ног', 'for-feet', 0),
                         (8, 'ароматерапия', 'aromatherapy', 0),
-                        (9, 'подарочные наборы', 'sets_gift', 0),
-                        (10, 'аксессуары', 'accessories', 0);";
+                        (9, 'подарочные наборы', 'sets-gift', 0),
+                        (10, 'аксессуары', 'accessories', 0);
+                    COMMIT;";
                     $this->connection->exec($tbl_start);
-                    $tbl_cosmetics = "CREATE TABLE `cosmetics` (
+
+                    $tbl_cosmetics = "START TRANSACTION;
+                    CREATE TABLE `cosmetics` (
                         `id` INT AUTO_INCREMENT PRIMARY KEY,
                         `category` TEXT NOT NULL,
                         `slug` VARCHAR(50) NOT NULL,
@@ -89,11 +95,13 @@ class Database
                         `category_id` INT
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
                     ALTER TABLE `cosmetics` ADD FOREIGN KEY (`category_id`) 
-                        REFERENCES `start`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
+                    REFERENCES `start`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+                    COMMIT;";
                     $this->connection->exec($tbl_cosmetics);
 
                     /* основной пакет */
-                    $tbl_categories = "CREATE TABLE `categories` (
+                    $tbl_categories = "START TRANSACTION;
+                    CREATE TABLE `categories` (
                         `id` INT PRIMARY KEY,
                         `category` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `slug` VARCHAR(55) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE KEY,
@@ -111,9 +119,12 @@ class Database
                         (9, 'Продукты питания', 'foodstuffs', 0),
                         (10, 'Товары для дома', 'household-goods', 0),
                         (11, 'Приборы и массажеры', 'devices', 0),
-                        (12, 'Зоотовары', 'pet-supplies', 0);";
-                    $this->connection->exec($tbl_categories);    
-                    $tbl_products = "CREATE TABLE `products` (
+                        (12, 'Зоотовары', 'pet-supplies', 0);
+                    COMMIT;";
+                    $this->connection->exec($tbl_categories); 
+
+                    $tbl_products = "START TRANSACTION;
+                    CREATE TABLE `products` (
                         `id` INT AUTO_INCREMENT PRIMARY KEY,
                         `category` TEXT NOT NULL,
                         `slug` VARCHAR(50) NOT NULL,
@@ -127,8 +138,46 @@ class Database
                         `category_id` INT
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
                     ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) 
-                        REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
+                    REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+                    COMMIT;";
                     $this->connection->exec($tbl_products);
+
+                    //Основная информация о заказе
+                    $tbl_orders = "START TRANSACTION;
+                    CREATE TABLE orders (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        total_price INT NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+                    COMMIT;";
+                    $this->connection->exec($tbl_orders);
+
+                    // Состав заказа (какие именно товары куплены)
+                    $tbl_order_items = "START TRANSACTION;
+                    CREATE TABLE order_items (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        order_id INT NOT NULL,
+                        product_id INT NOT NULL,
+                        quantity INT NOT NULL,
+                        price_at_purchase INT NOT NULL,
+                    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE);
+                    COMMIT;";
+                    $this->connection->exec($tbl_order_items);
+                    /* price_at_purchase INT NOT NULL, -- цена на момент покупки */
+
+                    $relations = "START TRANSACTION;
+                    ALTER TABLE `products` 
+                        DROP FOREIGN KEY IF EXISTS `products_ibfk_1`,
+                        DROP FOREIGN KEY IF EXISTS `products_ibfk_2`;
+                    ALTER TABLE `cosmetics`
+                        ADD CONSTRAINT `fk_cosmetics_to_start` 
+                        FOREIGN KEY (`category_id`) REFERENCES `start` (`id`) 
+                        ON DELETE RESTRICT ON UPDATE RESTRICT;
+                    ALTER TABLE `products`
+                        ADD CONSTRAINT `fk_products_to_categories` 
+                        FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) 
+                        ON DELETE RESTRICT ON UPDATE RESTRICT;
+                    COMMIT;";
+                    $this->connection->exec($relations);
                 }
 
             } else {

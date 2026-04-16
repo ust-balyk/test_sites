@@ -53,39 +53,69 @@ class Session
       $_SESSION['info'] = 'created';
       */
    }
-   
-   public function set($key, $value)
+
+   // Проверяет наличие ключа в точечной нотации
+   public function has(string $key): bool
    {
-      if ($value != false) {
-         $_SESSION[$key] = $value;
-         return true;
+      $keys = explode('.', $key);
+      $session_data = $_SESSION; // копия — не модифицирует $_SESSION
 
+      foreach ($keys as $k) {
+         if (isset($session_data[$k])) {
+               $session_data = $session_data[$k];
+         } else {
+               return false;
+         }
       }
-      return false;
-
+      return true;
    }
 
-   public function get($key, $value=false)
+   // Устанавливает значение по пути, создавая вложенные массивы при необходимости
+   public function set(string $key, $value): void
    {
-      return $_SESSION[$key] ?? $value;
+      $keys = explode('.', $key);
+      // Используем ссылку, чтобы изменять непосредственно $_SESSION
+      $ref =& $_SESSION;
 
+      foreach ($keys as $k) {
+         if (!isset($ref[$k]) || !is_array($ref[$k])) {
+               // если ключ не существует или не массив — создаём массив,
+               // кроме последнего уровня (последний будет перезаписан значением)
+               $ref[$k] = [];
+         }
+         // Переходим внутрь по ссылке
+         $ref =& $ref[$k];
+      }
+
+      // На этом уровне $ref — ссылка на конечный элемент, записываем значение
+      $ref = $value;
    }
 
-   public function isKey($key)
+   // Альтернатива: безопасный get с дефолтом
+   public function get(string $key, $default = null)
    {
-      if (isset($_SESSION[$key])) {
-         return true;
+      $keys = explode('.', $key);
+      $session_data = $_SESSION;
 
+      foreach ($keys as $k) {
+         if (isset($session_data[$k])) {
+               $session_data = $session_data[$k];
+         } else {
+               return $default;
+         }
       }
-   
-   }  
+      return $session_data;
+   }
 
-   public function remove($key): void
+
+   public function remove($key): bool
    {
       if (isset($_SESSION[$key])) {
          unset($_SESSION[$key]);
+         return true;
       
       }
+      return false;
    
    }
 

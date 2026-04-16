@@ -1,4 +1,5 @@
-  <section class="superiority">
+<?php// dump(Cart::getCart()); ?>  
+<section class="superiority">
     <div class="container superiority">
       <div class="row">
         <h1 class="header_post">
@@ -31,38 +32,31 @@
               <h5>Качественная логистика!</h5>
             </div>
           </div> 
-        </div>
-      
+        </div>    
       </div><!--row-->
     </div><!--container-->
   </section><!--superiority-->
 
-  <section class="achievements"><!--достижения-->
-    <div class="border border-dark-subtle">
-      <div class="row gy-3">
-
-        <div class="col-md-3 col-6 counter">
-          <h4 class="counter-num">3,267</h4>
-          <span>счастливых клиентов</span>
-        </div>
-
-        <div class="col-md-3 col-6 counter">
-          <h4 class="counter-num">1,195</h4>
-          <span>продуктов на выбор</span>
-        </div>
-
-        <div class="col-md-3 col-6 counter">
-          <h4 class="counter-num">378</h4>
-          <span>продаж в день</span>
-        </div>
+  <section class="achievements">
+    <div class="container achievements">
+      <div class="row achievements">
         
-        <div class="col-md-3 col-6 counter">
-          <h4 class="counter-num">18</h4>
-          <span>лет на рынке</span>
+        <div class="col-md-4 col-sm-6 achievement-item left">
+            <span class="counter-num" data-from="0">5976</span>
+            <p class="counter-text">Довольных покупателей</p>
         </div>
 
-      </div><!--row-->
-    </div><!--container-->
+        <div class="col-md-4 col-sm-6 achievement-item">
+            <span class="counter-num">~1000</span>
+            <p class="counter-text">Продуктов на выбор</p>
+        </div>
+
+        <div class="col-md-4 col-sm-12 achievement-item right">
+            <span class="counter-num">12</span>
+            <p class="counter-text">Лет на рынке</p>
+        </div>
+      </div>
+    </div>
   </section><!--achievements-->
 
   <!--section class="carouse-promo">
@@ -132,7 +126,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/for_body">
+            <a href="/cosmetics/for-body">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/2.jpg'); ?>" alt="">
                 <div class="category_right"><h5>для тела</h5></div>
             </a>
@@ -141,7 +135,7 @@
 
         <div class="col-md-6 category left">
           <div class="image-container">
-            <a href="/cosmetics/for_face">
+            <a href="/cosmetics/for-face">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/3.jpg'); ?>" alt="">
                 <div class="category_left"><h5>для лица</h5></div>
             </a>
@@ -150,7 +144,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/for_oral_cavity">
+            <a href="/cosmetics/for-oral-cavity">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/4.jpg'); ?>" alt="">
                 <div class="category_right"><h5>для полости рта</h5></div>
             </a>
@@ -159,7 +153,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/for_hair">
+            <a href="/cosmetics/for-hair">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/5.jpg'); ?>" alt="">
                 <div class="category_left"><h5>для волос</h5></div>
             </a>
@@ -168,7 +162,7 @@
     
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/for_hands">
+            <a href="/cosmetics/for-hands">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/6.jpg'); ?>" alt="">
                 <div class="category_right"><h5>для рук</h5></div>
             </a>
@@ -177,7 +171,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/for_feet">
+            <a href="/cosmetics/for-feet">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/7.jpg'); ?>" alt="">
                 <div class="category_left"><h5>для ног</h5></div>
             </a>
@@ -186,7 +180,7 @@
 
         <div class="col-md-6 category">
           <div class="image-container">
-            <a href="/cosmetics/gift_set">
+            <a href="/cosmetics/gift-set">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/8.jpg'); ?>" alt="">
                 <div class="category_right"><h5>подарочные наборы</h5></div>
             </a>

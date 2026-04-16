@@ -17,8 +17,8 @@ $app->router->get('/', [HomeController::class]);
 
 $app->router->get('/cosmetics', [PageController::class, 'cosmetics']);
 $app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
-$app->router->get('/cosmetics/([a-z_]+)', [PageController::class, 'category']);
-$app->router->get('/cosmetics/([a-z_]+)/product/([0-9]+)', [PageController::class, 'product']);
+$app->router->get('/cosmetics/([a-z-]+)', [PageController::class, 'category']);
+$app->router->get('/cosmetics/([a-z-]+)/product/([0-9]+)', [PageController::class, 'product']);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);

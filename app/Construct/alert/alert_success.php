@@ -4,7 +4,6 @@
        <?= $flash_success ?? ''; ?>
     </div>
     <script>
-        //var timer = setTimeout(function() {
         setTimeout(function() {
             window.location='http://localhost:8888'
         }, 3000);

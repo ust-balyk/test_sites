@@ -97,6 +97,34 @@ function base_url($path="/"): string
    return PATH . $path;
 }
 
+function safe_put_json($relativePath, $data) {
+   $fullPath = $_SERVER['DOCUMENT_ROOT'] . '/' . ltrim($relativePath, '/');
+   $dir = dirname($fullPath);
+
+   if (!is_dir($dir) && !mkdir($dir, 0755, true)) {
+      error_log("Ошибка: Не удалось создать директорию $dir");
+      return false;
+   }
+
+   $tempFile = $fullPath . '.tmp';
+   $jsonData = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+   if (file_put_contents($tempFile, $jsonData) === false) {
+      return false;
+   }
+
+   // Атомарная замена: если rename прошел, значит файл записан полностью
+   if (!rename($tempFile, $fullPath)) {
+      unlink($tempFile);
+      return false;
+   }
+
+   touch($fullPath);
+   return true;
+
+}
+
+
 function link_resource($rel, $href): string
 {   
    return "<link rel='{$rel}' href='/public/assets{$href}'>";

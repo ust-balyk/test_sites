@@ -1,0 +1,4 @@
+[2026-04-16 04:35:15] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IF EXISTS `products_ibfk_1`,
+                        DROP FOREIGN KEY IF EXISTS ' at line 2
+[2026-04-16 10:45:30] DB Error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IF EXISTS `products_ibfk_1`,
+                        DROP FOREIGN KEY IF EXISTS ' at line 2

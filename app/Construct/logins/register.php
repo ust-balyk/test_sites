@@ -22,36 +22,34 @@
 
               <?= get_csrf_field(); ?>
 
-              <div class="form-group">
+              <div class="form-group name">
                 <label></label>
                 <input type="text" name="name" style="text-transform: lowercase" placeholder="имя" 
-                        class="form-control border-0 rounded-1
-                  <?= get_validation_class('name'); ?>"
+                        class="form-control name <?= get_validation_class('name'); ?>"
                   value="<?= old('name'); ?>"> <!-- required /-->
                   <?//= get_errors('name'); ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group register_email">
                 <label></label>
                 <input type="email" name="email" style="text-transform: lowercase" placeholder="электронная почта"
-                        class="form-control border-0 rounded-1
-                  <?= get_validation_class('email'); ?>"
+                        class="form-control register_email <?= get_validation_class('email'); ?>"
                   value="<?= old('email'); ?>"> <!-- required /-->
                   <?//= get_errors('email'); ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group register_password">
                 <label></label>
                 <input type="password" name="password" style="text-transform: lowercase"
-                      placeholder="пароль не менее 6 символов" class="form-control
+                      placeholder="пароль не менее 6 символов" class="form-control register_password
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('password'); ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group confirm_password">
                 <label></label>
                 <input type="password" name="confirm_password" style="text-transform: lowercase"
-                      placeholder="повторите пароль" class="form-control
+                      placeholder="повторите пароль" class="form-control confirm_password
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('confirm_password'); ?>
                 </div><br><br>
@@ -71,7 +69,11 @@
                 document.addEventListener("DOMContentLoaded", function() {
                   var go_back = document.getElementById("register_page");
                   go_back.addEventListener("click", function() {
-                    window.location.href = localStorage.getItem('location');
+                    if (localStorage.getItem('location')) {
+                      window.location.href = localStorage.getItem('location');
+                    } else {
+                      window.location.href = '/';
+                    }
                   });
                 });
               </script>
