@@ -75,7 +75,7 @@ class Database
                         (6, 'для рук', 'for-hands', 0),
                         (7, 'для ног', 'for-feet', 0),
                         (8, 'ароматерапия', 'aromatherapy', 0),
-                        (9, 'подарочные наборы', 'sets-gift', 0),
+                        (9, 'подарочные наборы', 'gift-set', 0),
                         (10, 'аксессуары', 'accessories', 0);
                     COMMIT;";
                     $this->connection->exec($tbl_start);

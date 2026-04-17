@@ -10,6 +10,7 @@ class HomeController
     {
 
         //cache()->refreshCache();
+
         /*        
         dump(Cart::addToCart(11444));
         dump(Cart::getCart(11444));
@@ -20,49 +21,45 @@ class HomeController
         dump(session()->has('cart'));
         dump($_SESSION);
         */
-        /*
-        $indexed_DB = db()->query("SELECT * FROM ". TABLE_NAME)->get();
-        $cache_dir = 'cache_db';
-        $cache_file = 'cache_db.json';
-        $path = "/public/$cache_dir/$cache_file";
 
-        if (!is_dir($cache_dir)) {
-            mkdir($cache_dir, 0755, true);
-        
-        }
-        //$json_data = file_get_contents($cache_file);
-        //$products = json_decode($json_data, true);
-        
 
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] .$path, json_encode($indexed_DB, JSON_UNESCAPED_UNICODE));
-        */
-        if ($discounted_products = db()->query(
-            "SELECT * FROM ". TABLE_NAME ." WHERE price = ''")->get() // ORDER BY id DESC LIMIT 10")->get()
-        
-        ) {
+        if ($all_products = cache()->loadCache()) {
+            // Фильтруем массив (аналог WHERE price = '')
+            $discounted_products = array_filter($all_products, function($product) {
+                return isset($product['price']) && $product['price'] === '';
+            
+            });
+
+            // Если нужно ограничить количество и отсортировать (аналог LIMIT 10 и ORDER BY id DESC)
+            // usort($discounted_products, fn($a, $b) => $b['id'] <=> $a['id']);
+            // $discounted_products = array_slice($discounted_products, 0, 10);
+
+            if (empty($discounted_products)) {
+                $discounted_products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = ''")->get();
+            
+            }
+            
             if (TABLE_NAME == 'cosmetics') {
                 $title = 'JAPAN-IN.RU = Всё для Твоей красоты из Японии!';
-
+        
             } else {
                 $title = 'JAPAN-IN.RU = Всё для Твоей красоты и здоровья из Японии!';
-
             }
 
-            return app()->view->full_view (
-
+            return app()->view->full_view(
                 HOME_LAYOUT,
                 HOME_VIEW,
                 [
                     'title'               => $title,
                     'discounted_products' => $discounted_products,
+                
                 ],
             );
 
-        }
-        return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []); //'title' = Japan-in.Ru',]);
-
-
+        } else {
+            return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []); //'title' = Japan-in.Ru',]);
+        
+        }   
     }
-
 
 }

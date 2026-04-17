@@ -137,20 +137,24 @@
             <div id="category_content" class="row">
             <?php foreach ($cosmetics as $product): ?>
               <div class="col-lg-3 col-md-4 product-card" style="">
-                <?php if ($product['price'] == '' && $product['new_price'] == '' && $product['old_price'] == '') { 
-                        echo '<div class="product_expected">
-                                <p>ожидается</p>
-                              </div>';
-                      } else if ($product['new_price']) {
-                        echo '<div class="discounted_product">
-                                <p>акция!</p>
-                              </div>';
-                      }
+                <?php //dump($product);
+                  if (empty($product['price']) && empty($product['new_price']) 
+                    && empty($product['old_price'])) { 
+                      echo '<div class="product_expected">
+                              <p>ожидается</p>
+                            </div>';
+                  }
+                  else if (!empty($product['new_price'])) {
+                      echo '<div class="discounted_product">
+                              <p>акция!</p>
+                            </div>';
+                  }
                 ?>
                 <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
-                    <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
-                        alt="<?= $product['title'] ?>">
+                    <img src="<?= $product['image'] ?>" 
+                        onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                      alt="<?= $product['title'] ?>">
                   </div>
                 </a>
                 <div class="product-card-details">
@@ -179,7 +183,7 @@
                   </div>
                 </div>
               </div><!--product-card-->
-            <?php endforeach ?>
+            <?php endforeach; ?>
             </div><!--row-->
           </div><!--container-->
 

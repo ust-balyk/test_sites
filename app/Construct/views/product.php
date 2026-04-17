@@ -98,7 +98,10 @@
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                   aria-labelledby="description-tab" tabindex="0">
               <div class="category-description clearfix">
-                <p><?= $product['description'] ?></p>
+                <?php $description = preg_replace('~&#13;~', '', (string)$product['description']);
+                    $description = preg_replace('~</?pre\b[^>]*>~i', '', $description);
+                  echo "<p>$description</p>";
+                ?>
               </div>
               <!--div>
                 <h2>статья для seo</h2>
@@ -242,7 +245,8 @@
       <div class="owl-carousel owl-theme" id="slider-product">
       <?php foreach ($related_products as $product): ?>
         <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <?php if ($product['price'] == '' && $product['new_price'] == '' && $product['old_price'] == '') { 
+          <?php if (empty($product['price']) && empty($product['new_price'])
+                    && empty($product['old_price'])) { 
                   echo '<div class="product_expected">
                           <p>ожидается</p>
                         </div>';
