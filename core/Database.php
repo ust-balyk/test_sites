@@ -164,19 +164,16 @@ class Database
                     $this->connection->exec($tbl_order_items);
                     /* price_at_purchase INT NOT NULL, -- цена на момент покупки */
 
-                    $relations = "START TRANSACTION;
-                    ALTER TABLE `products` 
-                        DROP FOREIGN KEY IF EXISTS `products_ibfk_1`,
-                        DROP FOREIGN KEY IF EXISTS `products_ibfk_2`;
+                    $relations = "
                     ALTER TABLE `cosmetics`
-                        ADD CONSTRAINT `fk_cosmetics_to_start` 
-                        FOREIGN KEY (`category_id`) REFERENCES `start` (`id`) 
-                        ON DELETE RESTRICT ON UPDATE RESTRICT;
+                    ADD CONSTRAINT `fk_cosmetics_to_start` 
+                    FOREIGN KEY (`category_id`) REFERENCES `start` (`id`) 
+                    ON DELETE RESTRICT ON UPDATE RESTRICT;
+        
                     ALTER TABLE `products`
-                        ADD CONSTRAINT `fk_products_to_categories` 
-                        FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) 
-                        ON DELETE RESTRICT ON UPDATE RESTRICT;
-                    COMMIT;";
+                    ADD CONSTRAINT `fk_products_to_categories` 
+                    FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) 
+                    ON DELETE RESTRICT ON UPDATE RESTRICT;";
                     $this->connection->exec($relations);
                 }
 

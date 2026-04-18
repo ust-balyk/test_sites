@@ -4,60 +4,48 @@ namespace Master;
 class Cache
 {
    private $indexed_DB = [];
+   private $path;
 
    public function __construct()
    {
-      $cache_dir = $_SERVER['DOCUMENT_ROOT'] .'/cache_db';
-      $path = $cache_dir . '/cache_db.json';
+      $this->path = __DIR__ . '/../cache_db/cache_db.json';
 
-      // 1. Проверяем: существует ли файл и совпадает ли дата его создания с сегодняшней
-      if (file_exists($path) && date('Y-m-d', filemtime($path)) === date('Y-m-d')) {
-         $this->indexed_DB = json_decode(file_get_contents($path), true);
+      if (file_exists($this->path)) {
+         // Если файл есть, просто загружаем его в память
+         $this->indexed_DB = json_decode(file_get_contents($this->path), true);
       } else {
-         // 2. Если файл устарел или его нет — вызываем обновление
+         // Если файла нет, запускаем полное обновление
          $this->refreshCache();
       }
-   
    }
 
-   /**
-    * Метод для принудительного обновления кэша
-    * Можно вызывать из админки: cache()->refreshCache();
-    */
    public function refreshCache()
    {
-      $products = Application::$app->db->query("SELECT * FROM " . TABLE_NAME)->get();
-    
+      $products = Application::$app->db->query("SELECT * FROM " . TABLE_NAME)->get();    
+      
       $cache = [
-         'by_category' => [], // Индекс для категорий (slug)
-         'by_id'       => []  // Индекс для товаров (id)
+         'by_category' => [],
+         'by_id'       => []
       ];
 
       foreach ($products as $product) {
-         $slug = $product['slug'];
-         $id = $product['outer_id'];
-
-         // Группируем по slug (массив товаров)
-         $cache['by_category'][$slug][] = $product;
-
-         // Привязываем по ID (один товар)
-         $cache['by_id'][$id] = $product;
+         $cache['by_category'][$product['slug']][] = $product;
+         $cache['by_id'][$product['outer_id']] = $product;
       }
-      // если файл не существует, то создаётся
-      $path = $_SERVER['DOCUMENT_ROOT'] .'/cache_db/cache_db.json';
-      file_put_contents($path, json_encode($cache, JSON_UNESCAPED_UNICODE));
+
+      // Сохраняем на диск
+      file_put_contents($this->path, json_encode($cache, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT), LOCK_EX);
+      
+      // Обязательно обновляем данные в памяти текущего объекта
+      $this->indexed_DB = $cache;    
+   }
+
+   // Теперь данные доступны через этот метод или напрямую
+   public function getCache()
+   {
+      return $this->indexed_DB;
    
    }
-
-   public function loadCache()
-   {
-      $path = $_SERVER['DOCUMENT_ROOT'] .'/cache_db/cache_db.json';
-      $jsonString = file_get_contents($path); // Простой поиск файла по пути
-      $cache = json_decode($jsonString, true); // Декодирование в ассоциативный массив
-      return $cache;
-
-   }
-
 
    public function set($key, $data, $seconds = 3600): void
    {

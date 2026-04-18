@@ -97,29 +97,10 @@
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                   aria-labelledby="description-tab" tabindex="0">
               <div class="category-description clearfix">
-                <?php 
-                      $description = preg_replace('~&#13;~', '', (string)$product['description']);
-                      $description = preg_replace('~</?pre\b[^>]*>~i', '', $description);
-                      $description = preg_replace('~</br>i~', '', $description);
-                      $description = preg_replace('#<img\b[^>]*>#i', '', $description);
-                      $description = preg_replace('~<font\b[^>]*>~i', '', $description);
-                      $description = preg_replace('~</font>~i', '', $description);
-                      $description = preg_replace('#</?div\b[^>]*>#i', '', $description);
-                      // удаляет <p>...</p>, где внутри только пробельные символы
-                      $description = preg_replace('#<p\b[^>]*>(?:\s|&nbsp;|\x{00A0})*</p>#iu', '', $description);
-                      // удалить все атрибуты у всех тегов
-                      $description = preg_replace_callback('#<([a-z0-9]+)([^>]*)>#i', function($m){
-                        return "<{$m[1]}>";
-                      }, $description);
-                      $description = preg_replace('/<script\b[^>]*>([\s\S]*?)<\/script>/i', '', $description);
-                      $bad = ['▼','•','・','▸','▪','►','◦','◆'];
-                      $description = str_replace($bad, '', $description);
-                      //$description = preg_replace('/\s{2,}/u',' ', $description); // заменить пробелы на один
-                      //$description = str_replace(["\r","\n","\t"],'',$description);
-                      echo "<div class=\"description\">$description</div>";
-                      
-
-                    ?>
+                <?php
+                  $description = preg_replace('~<meta\b[^>]*>~i', '', $product['description']);
+                  echo "<div class='description'>". $description ."</div>";
+                ?>
               </div>
               <!--div>
                 <h2>статья для seo</h2>
@@ -196,22 +177,6 @@
                   <div class="my_card">
                     <!--h5 class="mb-3">оставить отзыв</h5-->
                     <form class="reply_form" action="">
-                      <!--div class="mb-3">
-                        <label for="userName" class="form-label">Ваше имя</label>
-                        <input type="text" class="form-control" id="userName" placeholder="">
-                      </div>
-                            
-                      <div class="mb-3">
-                        <label for="userRating" class="form-label">Рейтинг</label>
-                        <select class="form-select" id="userRating">
-                          <option selected>выберите оценку</option>
-                          <option value="5">★★★★★ (Отлично)</option>
-                          <option value="4">★★★★☆ (Хорошо)</option>
-                          <option value="3">★★★☆☆ (Нормально)</option>
-                          <option value="2">★★☆☆☆ (Плохо)</option>
-                          <option value="1">★☆☆☆☆ (Ужасно)</option>
-                        </select>
-                      </div--> 
 
                       <div class="mb-3 stars">
                         <p class="mb-0">Ваша оценка</p>

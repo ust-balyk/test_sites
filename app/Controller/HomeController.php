@@ -23,7 +23,7 @@ class HomeController
         */
 
 
-        if ($all_products = cache()->loadCache()) {
+        if ($all_products = cache()->getCache()) {
             // Фильтруем массив (аналог WHERE price = '')
             $discounted_products = array_filter($all_products, function($product) {
                 return isset($product['price']) && $product['price'] === '';
