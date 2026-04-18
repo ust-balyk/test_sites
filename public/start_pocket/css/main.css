@@ -60,24 +60,64 @@
 
 /* ================== General ==================== */
 
-*, *::before, *::after {
-  box-sizing: border-box;
+html { font-size: 62.5%; }
+
+body {
+  font-size: 1.6rem; /* 16px */
+  font-family: 'SF Pro Text', sans-serif;
+  line-height: 1.625; /* ~26px */
+  font-weight: 400;
+  color: var(--grey-color);
   margin: 0;
-  padding: 0;
 }
 
-*:focus { outline: none !important; }
+/* базовые размеры (относительно body = 16px) */
+h1 { font-size: 2.8em; }  /* 44px */
+h2 { font-size: 2.4em; }  /* 38.4px */
+h3 { font-size: 1.5em; }  /* 24px */
+h4 { font-size: 1.25em; } /* 20px */
+h5 { font-size: 1.0em; }  /* 16px */
+h6 { font-size: 0.875em;} /* 14px */
+p  { font-size: 1em; }    /* 16px */
 
-a { text-decoration: none !important; }
+h1,h2,h3,h4,h5,h6,p { margin: 0 0 1rem 0; }
 
+/* ПЛАНШЕТЫ (пример: 768px — 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  body { font-size: 1.5rem; } /* 15px (немного меньше) */
+  h1 { font-size: 2.6em; }    /* 39px */
+  h2 { font-size: 2.2em; }    /* 33px */
+  h3 { font-size: 1.4em; }    /* 21px */
+  h4 { font-size: 1.15em; }   /* 17px */
+  h5 { font-size: 0.95em; }   /* 14.25px */
+  h6 { font-size: 0.85em; }   /* ~12.75px */
+  p  { font-size: 0.95em; }   /* ~14.25px */
+}
+
+/* ТЕЛЕФОНЫ (пример: до 767px) */
+@media (max-width: 767px) {
+  body { font-size: 1.4rem; } /* 14px */
+  h1 { font-size: 2.2em; }    /* 30.8px */
+  h2 { font-size: 1.9em; }    /* 26.6px */
+  h3 { font-size: 1.25em; }   /* 17.5px */
+  h4 { font-size: 1.05em; }   /* 14.7px */
+  h5 { font-size: 0.95em; }   /* 13.3px */
+  h6 { font-size: 0.85em; }   /* 11.9px */
+  p  { font-size: 0.95em; }   /* ~13.3px */
+
+  /* уменьшить отступы между заголовками и текстом на узких экранах */
+  h1,h2,h3,h4,h5,h6,p { margin-bottom: 0.8rem; }
+}
+
+/*
 html {
-    /* 62.5% от 16px (стандарт браузера) = 10px */
+    /* 62.5% от 16px (стандарт браузера) = 10px *//*
     font-size: 62.5% !important;
 }
 
 body {
     /* Все размеры будут зависеть от базового размера шрифта в браузере (обычно это 16px)
-    /* Возвращаем обычный текст к 16px для чтения */
+    /* Возвращаем обычный текст к 16px для чтения *//*
     font-size: 1.6rem !important;
     font-family: 'SF Pro Text', sans-serif;
     line-height: 26px;
@@ -92,17 +132,17 @@ body {
 120px → 12rem
 */
 
-/* Для планшетов чуть уменьшаем всё разом */
+/* Для планшетов чуть уменьшаем всё разом *//*
 @media (max-width: 1024px) {
     html {
-        font-size: 55% !important; /* Теперь 1rem ≈ 8.8px. Все отступы и шрифты сжались */
+        font-size: 55% !important; /* Теперь 1rem ≈ 8.8px. Все отступы и шрифты сжались *//*
     }
 }
 
-/* Для мобильных еще сильнее */
+/* Для мобильных еще сильнее *//*
 @media (max-width: 480px) {
     html {
-        font-size: 50% !important; /* Теперь 1rem = 8px. Всё стало в 2 раза меньше оригинала */
+        font-size: 50% !important; /* Теперь 1rem = 8px. Всё стало в 2 раза меньше оригинала *//*
     }
 }
 
@@ -117,7 +157,7 @@ body {
 Если элемент должен иметь строго фиксированный размер и не меняться никогда.
 
 */
-    
+
 html,
 body {
     height: 100%;
@@ -133,9 +173,26 @@ body {
     html, body { overflow-x: hidden; }
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+*:focus { outline: none !important; }
+  
+a { text-decoration: none !important; }
+
 ::selection {
     background-color: var(--description-color);
 }
+
+u::before,
+u::after {
+  content: none;
+}
+
+ul, ol { list-style: none; }
 
 .form-control:focus {
     outline: none;
@@ -1923,12 +1980,14 @@ button#reviews-tab,
 button#description-tab {
     padding: 0px 3rem 0.2rem 3rem;
     h5 {
+        font-size: 2rem;
         margin: 0;
     }
 }
 button#reviews-tab {
     padding: 0px 4rem 0.2rem 4rem;
     h5 {
+        font-size: 2rem;
         margin: 0;
     }
 }
@@ -1963,6 +2022,92 @@ button#reviews-tab {
 .product-desc-tabs-content {
     padding-top: 25px;
 }
+
+/* описание продукта */
+
+/* блок под кнопками */
+div#product-desc-tabs-content {
+    margin-top: 4rem;
+}
+
+div.description h3 {
+    font-size: 2.2rem;
+}
+
+div.description h4 {
+    font-size: 2rem;
+}
+
+div.description p {
+    font-size: 1.8rem;
+}
+/* убрать стандартные маркеры и отступы *//*
+div.description ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.2em; /* отступ слева для выравнивания текста *//*
+}
+
+/* общий стиль для элементов списка: добавляем квадрат через псевдоэлемент *//*
+div.description ul li {
+  position: relative;
+  padding-left: 1.1em; /* место для квадрата *//*
+  margin: 0.4em 0;
+}
+
+/* квадрат-маркер *//*
+div.description ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35em; /* вертикальное выравнивание маркера *//*
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 2px; /* сделать слегка закруглённым; уберите для строгого квадрата *//*
+  background: #ff6b6b; /* цвет по умолчанию *//*
+}
+*/
+div.description p u::before,
+div.description p u::after {
+  content: none;
+}
+div.description p u {
+  position: relative;
+  text-decoration: none; /* убирает подчёркивание */
+  background: none;       /* убирает фон, если это выглядит как точка */
+  border: none;           /* убирает рамку, если точка — border */
+  padding-left: 1.1em;
+}
+div.description p u::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.28em;
+  width: 0.6em;
+  height: 0.6em;
+  background: #ca6a7a;
+  border-radius: 2px;
+}
+
+/*div.description p u::before { background:#f00 !important; }*//*
+
+/* пример: разные цвета для вложенных уровней *//*
+div.description ul ul li::before { background: #4ecdc4; }    /* 2 уровень *//*
+div.description ul ul ul li::before { background: #556270; }  /* 3 уровень *//*
+
+/* вариант: назначить цвета по порядку через nth-child *//*
+div.description ul li:nth-child(3n+1)::before { background:#ff6b6b; }
+div.description ul li:nth-child(3n+2)::before { background:#4ecdc4; }
+div.description ul li:nth-child(3n+3)::before { background:#556270; }
+
+/* уменьшение расстояния между маркером и текстом на узких экранах (опционально) *//*
+@media (max-width:480px){
+  div.description ul li { padding-left:0.9em; }
+  div.description ul li::before { width:0.5em; height:0.5em; top:0.28em; }
+}
+*/
+
+
 
 /* ----- оставленые отзывы ----- */
 

@@ -26,16 +26,16 @@ class Cache
     */
    public function refreshCache()
    {
-      $data = Application::$app->db->query("SELECT * FROM " . TABLE_NAME)->get();
+      $products = Application::$app->db->query("SELECT * FROM " . TABLE_NAME)->get();
     
       $cache = [
          'by_category' => [], // Индекс для категорий (slug)
          'by_id'       => []  // Индекс для товаров (id)
       ];
 
-      foreach ($data as $product) {
+      foreach ($products as $product) {
          $slug = $product['slug'];
-         $id = $product['id'];
+         $id = $product['outer_id'];
 
          // Группируем по slug (массив товаров)
          $cache['by_category'][$slug][] = $product;
@@ -44,32 +44,16 @@ class Cache
          $cache['by_id'][$id] = $product;
       }
       // если файл не существует, то создаётся
-      $path = $_SERVER['DOCUMENT_ROOT'] . '/cache_db/cache_db.json';
+      $path = $_SERVER['DOCUMENT_ROOT'] .'/cache_db/cache_db.json';
       file_put_contents($path, json_encode($cache, JSON_UNESCAPED_UNICODE));
    
    }
 
    public function loadCache()
    {
-      $path = $_SERVER['DOCUMENT_ROOT'] . '/cache_db/cache_db.json';
-
-      if (!file_exists($path)) {
-         error_log("[Cache] Файл не найден: $path");
-         return ['by_category' => [], 'by_id' => []];
-      }
-
-      $cache = json_decode(file_get_contents($path, true));
-
-      if (json_last_error() !== JSON_ERROR_NONE || !is_array($cache)) {
-         error_log("[Cache] Ошибка JSON: " . json_last_error_msg());
-           
-         // Попытка самовосстановления
-         $this->refreshCache();
-           
-         // Повторная попытка прочитать свежий файл
-         $raw = file_get_contents($path);
-         return json_decode($raw, true) ?? ['by_category' => [], 'by_id' => []];
-      }
+      $path = $_SERVER['DOCUMENT_ROOT'] .'/cache_db/cache_db.json';
+      $jsonString = file_get_contents($path); // Простой поиск файла по пути
+      $cache = json_decode($jsonString, true); // Декодирование в ассоциативный массив
       return $cache;
 
    }

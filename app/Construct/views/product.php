@@ -9,7 +9,6 @@
               <a href="/">
                 <img class="link_to_home" src="<?= base_url(POCKET_STYLE.'/favicon/home.svg'); ?>"
                     alt="link_to_the_home_page">
-                </img>
               </a>
             </li>
             <li class="breadcrumb-item">
@@ -98,10 +97,29 @@
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                   aria-labelledby="description-tab" tabindex="0">
               <div class="category-description clearfix">
-                <?php $description = preg_replace('~&#13;~', '', (string)$product['description']);
-                    $description = preg_replace('~</?pre\b[^>]*>~i', '', $description);
-                  echo "<p>$description</p>";
-                ?>
+                <?php 
+                      $description = preg_replace('~&#13;~', '', (string)$product['description']);
+                      $description = preg_replace('~</?pre\b[^>]*>~i', '', $description);
+                      $description = preg_replace('~</br>i~', '', $description);
+                      $description = preg_replace('#<img\b[^>]*>#i', '', $description);
+                      $description = preg_replace('~<font\b[^>]*>~i', '', $description);
+                      $description = preg_replace('~</font>~i', '', $description);
+                      $description = preg_replace('#</?div\b[^>]*>#i', '', $description);
+                      // удаляет <p>...</p>, где внутри только пробельные символы
+                      $description = preg_replace('#<p\b[^>]*>(?:\s|&nbsp;|\x{00A0})*</p>#iu', '', $description);
+                      // удалить все атрибуты у всех тегов
+                      $description = preg_replace_callback('#<([a-z0-9]+)([^>]*)>#i', function($m){
+                        return "<{$m[1]}>";
+                      }, $description);
+                      $description = preg_replace('/<script\b[^>]*>([\s\S]*?)<\/script>/i', '', $description);
+                      $bad = ['▼','•','・','▸','▪','►','◦','◆'];
+                      $description = str_replace($bad, '', $description);
+                      //$description = preg_replace('/\s{2,}/u',' ', $description); // заменить пробелы на один
+                      //$description = str_replace(["\r","\n","\t"],'',$description);
+                      echo "<div class=\"description\">$description</div>";
+                      
+
+                    ?>
               </div>
               <!--div>
                 <h2>статья для seo</h2>

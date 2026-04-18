@@ -143,7 +143,8 @@
             <div id="category_content" class="row">
             <?php foreach ($products as $product): ?>
               <div class="col-lg-3 col-md-4 product-card" style="">
-                <?php if ($product['price'] == '' && $product['new_price'] == '' && $product['old_price'] == '') { 
+                <?php if (empty($product['price']) && empty($product['new_price']) 
+                        && empty($product['old_price'])) { 
                         echo '<div class="product_expected">
                                 <p>ожидается</p>
                               </div>';
@@ -168,7 +169,7 @@
                   <div class="product-card-price">
                     <?php if ($product['price']) {
                             echo $product['price'];
-                          } else if ($product['price'] == '') {
+                          } else if (empty($product['price'])) {
                             echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
                           } else {
                             echo ' ';

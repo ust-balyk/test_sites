@@ -120,11 +120,10 @@
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="#" onclick="toggleCart()">
+                    <a href="#">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
                     </a>
                   <?php } else { echo user_cart(); } ?>
-                  <span id="cart-count">0</span>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>
@@ -135,33 +134,6 @@
                 </li>
               </ul>
             </div><!--navbar-icon-->
-            <!-- Всплывающее окно (Overlay) -->
-            <div id="cart-modal" style="display:none;position:fixed;top:0;left:0;
-                    width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;">
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; width: 90%; max-width: 500px; border-radius: 10px; max-height: 80vh; overflow-y: auto;">
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h2>Ваш заказ</h2>
-                        <span onclick="toggleCart()" style="cursor: pointer; font-size: 24px;">&times;</span>
-                    </div>
-
-                    <div id="cart-items">
-                        <!-- Сюда JS отрисует товары -->
-                    </div>
-
-                    <div style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 15px;">
-                        <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 15px;">
-                            Итого: <span id="cart-total">0</span> руб.
-                        </div>
-                        <button onclick="checkout()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; cursor: pointer; border-radius: 5px;">
-                            Оформить заказ
-                        </button>
-                        <button onclick="clearCart()" style="width: 100%; background: none; border: none; color: #888; margin-top: 10px; cursor: pointer;">
-                            Очистить корзину
-                        </button>
-                    </div>
-                </div>
-            </div><!-- Overlay -->
           </nav>
         </div><!--container-->
       </header>

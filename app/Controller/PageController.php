@@ -46,7 +46,7 @@ class PageController
                 CATEGORY_VIEW, 
                 [
                     'products' => $products,
-                    'category' => $products[0]['category'] ?? '',
+                    'category' => $products[0]['category'],
                     'slug'     => $slug
                 ]
             );
@@ -58,7 +58,7 @@ class PageController
             CATEGORY_VIEW, 
             [
                 'products' => $products,
-                'category' => $products[0]['category'] ?? '',
+                'category' => $products[0]['category'],
                 'slug'     => $slug
             ]
         );
@@ -70,49 +70,42 @@ class PageController
         $id = request()->get_SLUG_or_ID();
         $cache = cache()->loadCache();
         $product = $cache['by_id'][$id] ?? null;
+        $slug_product = $cache['by_id'][$id]['slug']; 
         
         if (!$product) {
             $product = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ?", [$id])->get();
-            $currentProduct = $product[0]; // Данные текущего товара
-            //$title_category = $currentProduct['category'] ?? null;
-            $slug_category  = $currentProduct['slug'] ?? null;
-            // запрос ПОХОЖИХ товаров (из той же категории, исключая текущий)
-            $relatedProducts = db()->query(
+            $current_product = $product[0];
+            $slug_category  = $current_product['slug'];
+            $related_products = db()->query(
                 "SELECT * FROM ". TABLE_NAME .
-                " WHERE category = ? AND outer_id != ? ORDER BY RAND() LIMIT 8", [$slug_category, $id])->get();
+                " WHERE slug = ? AND outer_id != ? ORDER BY RAND() LIMIT 8", [$slug_category, $id])->get();
             return app()->view->full_view(
                 PRODUCT_LAYOUT,
                 PRODUCT_VIEW,
                 [
-                    'product'          => $currentProduct,
-                    'related_products' => $relatedProducts, // Массив для блока "похожие продукты"
-                    //'title_category'   => $title_category,
-                    //'slug_category'    => $slug_category,
+                    'product'          => $current_product,
+                    'related_products' => $related_products, // похожие продукты
+                    
                 ]
             );
-
+            
         }
 
-        $category_slug = $product[3]['slug'];
-        $related = $cache['by_category'][$category_slug] ?? [];
-
-        // исключаем текущий товар из списка похожих
-        $related = array_filter($related, function($item) use ($id) {
-            return $item['id'] !== $id;
-        });
-
-        shuffle($related);
-        $related = array_slice($related, 0, 4); // например, только 4 штуки
-
+        $related_products = $cache['by_category'][$slug_product];
+        $related_products = array_filter($related_products, fn($item) => $item['outer_id'] != $id);
+        $related_products = array_values($related_products); // Сброс ключей
+        shuffle($related_products);
+        $related_products = array_slice($related_products, 0, 8); // например, только 8 штук
+        
         return app()->view->full_view(
             PRODUCT_LAYOUT,
             PRODUCT_VIEW, 
             [
                 'product' => $product,
-                'related' => $related
+                'related_products' => $related_products
             ]
         );
-
+        
     }
 
     static function discount()
