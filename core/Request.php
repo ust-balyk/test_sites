@@ -3,15 +3,19 @@ namespace Master;
 
 class Request
 {
-   public string $formatted_uri; # отформатированая строка запроса
+   public string $formatted_uri;  // отформатированая строка запроса
 
    public function __construct($uri)
    {
-      //$sanitized_uri = filter_var($uri, FILTER_SANITIZE_URL);
-      $sanitized_uri = preg_replace('~[^a-zA-Z0-9-/]~', '', $uri);
+      //error_log("URI_BEFORE: '".$_SERVER['REQUEST_URI']."'");
+      
+      $sanitized_uri = preg_replace('~[^a-zA-Z0-9-/]+~i', '', $uri);
       $this->formatted_uri = strtolower(trim($sanitized_uri, '/'));
       
+      //error_log("URI_AFTER_NORMALIZE: '".trim($_SERVER['REQUEST_URI'])."'");
+      
    }
+
 
    public function getMethod(): string
    {  
@@ -19,24 +23,28 @@ class Request
 
    }
 
+
    public function isGet(): bool
    {  
       return $this->getMethod() == "GET";
 
    }
 
+
    public function isPost(): bool
    {  
       return $this->getMethod() == "POST";
 
    }
-      
+    
+   
    public function isAjax(): bool
    {  
       return isset($_SERVER['HTTP_X_REQUESTED_WITH']) 
          && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
    
    }
+
 
    public function get($key, $default_value = null): ?string
    {  
@@ -50,42 +58,74 @@ class Request
 
    }
 
+   
    public function get_SLUG_or_ID()
    {
       $uri = $this->formatted_uri;
-      $valid_keys = ['cosmetics', 'product']; // Лучше использовать локальную переменную
-      
+      // Инициализируем массив [slug, id] пустыми значениями
+      $result = [null, null]; 
+
+      $valid_keys = [
+         'cosmetics', 
+         'product'
+      ];
+      $valid_values = [
+         "makeup", 
+         "for-body", 
+         "for-face", 
+         "for-oral-cavity", 
+         "for-hair", 
+         "for-hands", 
+         "for-feet", 
+         "aromatherapy", 
+         "gift-set", 
+         "accessories"
+      ];
+   
       $segments = explode('/', trim($uri, '/'));
       $count = count($segments);
 
-      // Валидация структуры: ровно 2 или 4 сегмента
-      if ($count !== 2 && $count !== 4) {
-         return response()->redirect('/');
+      if ($count < 2) {
+         header("Location: /cosmetics", true, 302);
+         exit();
+      
       }
 
-      $result = null;
+      if ($count === 2 || $count === 4) {
+         for ($i = 0; $i < $count; $i += 2) {
+            $key = $segments[$i];
+            $value = $segments[$i + 1] ?? null;
 
-      for ($i = 0; $i < $count; $i += 2) {
-         $key = $segments[$i];
-         $value = $segments[$i + 1];
-
-         // 1. Проверяем ключ (cosmetics или product)
-         if (!in_array($key, $valid_keys)) {
-               return response()->redirect('/');
-         }
-
-         // 2. Определяем тип значения
-         if (ctype_digit($value)) {
-               $result = (int)$value; // Если только цифры — это ID
-         } elseif (preg_match('~^[a-z-]+$~', $value)) {
-               $result = (string)$value; // Если буквы/дефисы — это SLUG
-         } else {
-               return response()->redirect('/');
+            if (in_array($key, $valid_keys)) {
+               
+               if (ctype_digit($value)) {
+                  // Записываем ID во второй индекс (1)
+                  $result[1] = (int)$value;
+               
+               } elseif (in_array($value, $valid_values)) {
+                  // Записываем SLUG в первый индекс (0)
+                  $result[0] = (string)$value;
+               
+               } else {
+                  // Проверка опечаток
+                  foreach ($valid_values as $valid) {
+                  
+                     if (levenshtein((string)$value, $valid) <= 2) {
+                           $segments[$i + 1] = $valid;
+                           $correct_url = '/' . implode('/', $segments);
+                           header("Location: $correct_url", true, 301);
+                           exit();
+                     }
+                  }
+               }
+            }
          }
       }
 
       return $result;
+   
    }
+   
 
    public function getPath(): string
    {  

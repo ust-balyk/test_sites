@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('Asia/Yekaterinburg');
 //$start_time = microtime(true);
 
 if (PHP_MAJOR_VERSION < 8) {

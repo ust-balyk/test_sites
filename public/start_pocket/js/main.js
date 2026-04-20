@@ -431,6 +431,48 @@ $(document).ready(function() {
         cartTotalEl.innerText = total;
     }
 
+    /* ---------- тёмная тема ----------- */
+    /*
+    const btn = document.getElementById("theme-toggle");
+    const currentTheme = localStorage.getItem("theme");
+
+    // Если пользователь уже выбирал тему ранее, применяем её
+    if (currentTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+    }
+
+    btn.addEventListener("click", () => {
+        let theme = document.documentElement.getAttribute("data-theme");
+
+        if (theme === "dark") {
+            document.documentElement.removeAttribute("data-theme");
+            localStorage.setItem("theme", "light"); // Сохраняем выбор
+        } else {
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+        }
+    });
+    */
+
+    const btn = document.getElementById("theme-toggle");
+    const moon = btn?.querySelector('.icon-moon');
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let theme = stored || (prefersDark ? 'dark' : 'light');
+
+    // Применяем тему
+    document.documentElement.setAttribute('data-theme', theme);
+    if (btn) btn.setAttribute('aria-pressed', theme === 'dark');
+    if (moon) moon.setAttribute('aria-hidden', theme === 'dark' ? 'false' : 'false'); // оставляем доступность
+
+    btn?.addEventListener('click', () => {
+    theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (btn) btn.setAttribute('aria-pressed', theme === 'dark');
+    });
+
+
 
     
     /* =========== ссылка на сайт при копировании =========== */

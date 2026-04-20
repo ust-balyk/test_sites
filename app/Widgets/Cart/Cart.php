@@ -1,8 +1,13 @@
 <?php
-namespace App\Cart;
+namespace App\Widgets\Cart;
 
 class Cart
 {
+    public function __construct()
+    {
+        include "cart.html";
+
+    }
 
     public static function getCart(): array
     {

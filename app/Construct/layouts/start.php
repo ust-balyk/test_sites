@@ -98,7 +98,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
                 </li>
-                <li class="nav-item dropdown show delivery_and_payment">
+                <li class="nav-item dropdown delivery_and_payment">
                   <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Условия доставки
@@ -108,22 +108,32 @@
 
                 </li>
               </ul>
-            </div><!--navbar-collapse-->
+            </div>
+            <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему" style="margin-right:2.2rem">
+              <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="false">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
             <div class="navbar-icon">
               <ul>
-                <li>
+                <li class="nav-item dropdown favorites">
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="#">
+                    <a href="#" class="nav-link dropdown-toggle" id="favorites"
+                      role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
                     </a>
                   <?php } else { echo user_heart(); } ?>
                 </li>
-                <li>
+                <li class="nav-item dropdown cart">
                   <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="#">
+                    <a href="#" class="nav-link dropdown-toggle" id="cart"
+                      role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
                     </a>
                   <?php } else { echo user_cart(); } ?>
+                  <?php new App\Widgets\Cart\Cart(); ?>
                 </li>
                 <li>
                   <?php if (! isset($_SESSION['name'])) { ?>

@@ -30,9 +30,9 @@ class HomeController
             
             });
 
-            // Если нужно ограничить количество и отсортировать (аналог LIMIT 10 и ORDER BY id DESC)
-            // usort($discounted_products, fn($a, $b) => $b['id'] <=> $a['id']);
-            // $discounted_products = array_slice($discounted_products, 0, 10);
+            // ограничить количество и отсортировать (аналог LIMIT 10 и ORDER BY id DESC)
+            usort($discounted_products, fn($a, $b) => $b['id'] <=> $a['id']);
+            $discounted_products = array_slice($discounted_products, 0, 10);
 
             if (empty($discounted_products)) {
                 $discounted_products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = ''")->get();

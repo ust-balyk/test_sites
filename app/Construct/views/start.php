@@ -1,7 +1,7 @@
 <?php// dump(Cart::getCart()); ?>  
 <section class="superiority">
     <div class="container superiority">
-      <div class="row">
+      <div class="row superiority">
         <h1 class="header_post">
           Добро пожаловать в мир красоты на Japan-in.Ru!
         </h1><br>

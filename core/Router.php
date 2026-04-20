@@ -106,7 +106,7 @@ class Router
       
       if ($route === false) {
          Application::$app->abort->error();
-         //Application::$app->response->redirect('/');
+         //Application::$app->response->redirect('/cosmetics/discount');
       
       } elseif (is_array($route['callback'])
          && array_key_exists('1', $route['callback'])) {

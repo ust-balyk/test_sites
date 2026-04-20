@@ -1,3 +1,38 @@
+#стандартный front-controller (если в PHP вы берёте путь из $_SERVER['REQUEST_URI'] или маршрутизируете сами):
+
+
+#<IfModule mod_rewrite.c>
+ #   RewriteEngine On
+
+    # Убираем конечный слэш
+ #   RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Если файл/папка существуют — отдать напрямую
+#  RewriteCond %{REQUEST_FILENAME} !-f
+#    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Отправляем всё на index.php, без добавления query string
+ #   RewriteRule . index.php [L]
+#</IfModule>
+
+#<IfModule mod_headers.c>
+ #   Header set Content-Security-Policy "default-src 'self';"
+#</IfModule>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <IfModule mod_rewrite.c>   
 
     RewriteEngine On
@@ -7,11 +42,11 @@
     RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
 </IfModule> 
-<IfModule mod_headers.c>
+#<IfModule mod_headers.c>
     
-    Header set Content-Security-Policy "default-src 'self';"
+ #   Header set Content-Security-Policy "default-src 'self';"
 
-</IfModule>
+#</IfModule>
 
 #<filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
 

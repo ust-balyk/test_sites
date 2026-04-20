@@ -40,7 +40,7 @@
         position: static;
     }
 
-    .container .dropdown-menu.delivery_payment {
+    .container.dropdown-menu.delivery_payment {
         top: 5.6rem;
         left: 0;
         right: 0;
@@ -52,7 +52,7 @@
     }
     
     /* показать каталог без click */
-    .navbar-nav .dropdown-menu.delivery_payment {
+    .navbar-nav.dropdown-menu.delivery_payment {
         display: block;
         /*text-wrap: balance;*/
         transform: translateY(10px);
@@ -61,7 +61,7 @@
         visibility: hidden;
         transition-delay: .2s;
     }
-    .navbar-nav .dropdown:hover>.dropdown-menu.delivery_payment {
+    .navbar-nav.dropdown:hover>.dropdown-menu.delivery_payment {
         display: block;
         transform: translateY(0);
         opacity: 1;

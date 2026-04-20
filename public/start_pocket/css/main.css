@@ -13,6 +13,29 @@
     --border-color:      #989ea4;
 }
 
+:root {
+  --bg: #fffffd;
+  --text: #4d4d4d;
+}
+
+/* тёмная тема */
+html[data-theme="dark"] {
+  --bg: #fef5ec;
+  --text: #e6eef6;
+}
+html[data-theme="dark"] body { background-color: #fef5ec; }
+html[data-theme="dark"] div.superiority { background-color: #fef5ec; }
+html[data-theme="dark"] div.container.justify-content-between.breadcrumb { background-color: #fef5ec; }
+html[data-theme="dark"] div.container.product img { background-color: #fef5ec; }
+html[data-theme="dark"] div.container.product .breadcrumb { background-color: #fef5ec; }
+html[data-theme="dark"] div.container.justify-content-between .breadcrumb { background-color: #fef5ec; }
+
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
 @font-face {
     font-family: 'SF Pro Text';
     src: url('../font/sfpro_text/SFProText-Light.woff2') format('woff2'),
@@ -57,6 +80,8 @@
     font-style: normal;
     font-display: swap;
 }
+
+
 
 /* ================== General ==================== */
 
@@ -163,7 +188,8 @@ body {
     height: 100%;
     width: auto;
     min-width: 320px;
-    background-color: var( --bg-color);
+    /*background-color: var( --bg-color);*/
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход */
     margin-left: -0.3rem;
     margin-right: auto;
     overflow-x: hidden;
@@ -279,6 +305,91 @@ img.brand {
     letter-spacing: 0.5px;
 }
 
+/* луна */
+/*
+.theme-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black; /* Цвет иконки в светлой теме *//*
+  padding: 10px;
+}
+
+/* По умолчанию скрываем солнце *//*
+/*.icon-sun { display: none; }*//*
+.icon-moon { display: block; }
+
+/* Когда активна темная тема *//*
+[data-theme="dark"] .icon-sun { 
+  display: none; 
+  color: black; /* Цвет иконки в темной теме *//*
+}*//*
+[data-theme="dark"] .icon-moon { display: block; }
+
+/* Стили для темной темы страницы *//*
+[data-theme="dark"] body, div {
+  background-color: #96c6d4;
+  color: white;
+}
+
+/* Базовые стили для обеих иконок *//*
+.theme-btn svg {
+  /*width: 32px;
+  height: 32px;*//*
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Плавная анимация *//*
+}
+
+/* Зеркальное отображение луны *//*
+.icon-moon .icon-moon {
+  transform: scaleX(-1);
+  stroke: currentColor;
+}
+
+/* Анимация при нажатии (вращение) *//*
+.theme-btn:active svg {
+  transform: rotate(270deg);
+}
+
+/* Если хотите, чтобы луна при появлении тоже была развернута *//*
+body:not(.dark-theme) .icon-moon {
+  display: block;
+  transform: scaleX(-1); /* Сохраняем зеркальность *//*
+}
+
+/* Анимация вращения при наведении (опционально) *//*
+.theme-btn:hover svg {
+  transform: scaleX(-1) rotate(270deg); /* Для луны с учетом зеркальности *//*
+}
+*/
+
+.theme-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  border:0;
+  padding:0;
+  cursor:pointer;
+}
+
+/* Центрируем точку вращения по центру SVG */
+.icon-moon {
+  transition: transform .4s cubic-bezier(.2,.9,.2,1), opacity .2s;
+  transform-origin: 50% 50%;
+  transform: rotate(0deg);
+  opacity: 1;
+  will-change: transform;
+}
+
+/* В тёмной теме поворачиваем полумесяц на -90deg (270)*/
+html[data-theme="dark"] .icon-moon {
+  transform: rotate(270deg);
+}
+
+
+
+
+
 /* стили иконок */
 .navbar-icon {
     display: flex;
@@ -355,13 +466,19 @@ div.container.dropdown-menu.megamenu {
 
 section.superiority {
     margin: 1rem 0px 4rem 0px;
+    padding: 0;
     background: var(--bg-color);
     text-align: center;
 }
 
-div.container .superiority {
-    padding: 0px 0.5rem; /*!important;*/
-    /*border-top: 2px solid #ca6a7a; /*#facd05;*/
+div.container.superiority {
+  padding: 0px !important;
+  /*border-top: 2px solid #ca6a7a; /*#facd05;*/
+}
+
+div.row.superiority {
+  margin: 0;
+  padding: 0;
 }
 
 h1.header_post {
@@ -2227,6 +2344,43 @@ div.delivery {
 }
 
 /* =================== /Delivery =================== */
+
+/* =================== Cart ======================== */
+
+section.cart { 
+    padding: 3rem 0px 2rem 0px;
+    border-bottom: solid 2px rgba(255,140,0,0.1);
+}
+
+div.cart {
+
+    h6, p, ul, li { padding: 0px 4rem; }
+
+    p, li { font-weight: 500; }
+
+    ul {
+        list-style: none; /* Убираем стандартные маркеры */
+        /*padding-left: 2rem;*/
+    }
+
+    ul > li::before {
+        content: "*"; /* Задаем символ маркера */
+        color: orange; /*var(--blue-color); /* Цвет маркера */
+        font-size: 2rem;
+        display: inline-block;
+        /*width: 1em; /* Дистанция до текста */
+        margin-left: -1em;
+    }
+
+    div.block {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+}
+
+
+/* =================== /Cart ======================= */
 
 /* =================== login & register ===================== */
 
