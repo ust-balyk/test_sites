@@ -33,7 +33,6 @@
 
 <?php dump($_SESSION); ?>
 <?php dump($_COOKIE); ?>
-<?//= $hash_cost = db()->createMasterUser(); define('HASH_COST', $hash_cost); ?>
 
 <?php if (!empty($product)): ?>
   <section class="product">
