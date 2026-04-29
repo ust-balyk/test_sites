@@ -204,7 +204,7 @@ class Database
         $password = 'vjqZpsr8Ytvfzhs,f';
 
         // Подбор оптимальной сложности (Cost)
-        $timeTarget = 3; // секунда 
+        $timeTarget = 2; // секунда 
         $cost = 10;
     
         do {
@@ -213,7 +213,7 @@ class Database
             password_hash($password, PASSWORD_BCRYPT, ["cost" => $cost]);
             $end = microtime(true);
         
-            if ($cost >= 20) break; //максимум 31 (рекомендуемое 10-13) 
+            if ($cost >= 15) break; //максимум 31 (рекомендуемое 10-13) 
         
         } while (($end - $start) < $timeTarget);
 
