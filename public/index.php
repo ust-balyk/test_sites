@@ -1,5 +1,5 @@
 <?php
-//$start_time = microtime(true);
+$start_time = microtime(true);
 
 if (PHP_MAJOR_VERSION < 8) {
    die("<pre><br>  Текущая версия PHP: " . phpversion() .
@@ -28,4 +28,4 @@ $app = new Master\Application();
 include ROUTES;
 $app->run();
 
-//dump("время выполнения запроса: " . microtime(true) - $start_time);
+dump("время выполнения запроса: " . microtime(true) - $start_time);

@@ -89,78 +89,76 @@
       <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
-          <div class="container">
-            <a class="navbar-brand" href="<?= base_url('/home'); ?>">
-              <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown has-megamenu">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Каталог
-                  </a>
-                  <?php
-                    new App\Widgets\Menu\Menu([
-                      'container' => 'div',
-                      'class'     => 'container dropdown-menu megamenu',
-                      'prepend'   => '<div class="row g-3">',
-                      'append'    => '</div>',
-                      'attrs'     => ['role' => 'menu',],
-                    ]);
-                  ?>
-                </li> 
-                <li class="nav-item">
-                  <a class="nav-link" href="#about_us">О нас</a>
+          <a class="navbar-brand" href="<?= base_url('/home'); ?>">
+            <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown has-megamenu">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Каталог
+                </a>
+                <?php
+                  new App\Widgets\Menu\Menu([
+                    'container' => 'div',
+                    'class'     => 'container dropdown-menu megamenu',
+                    'prepend'   => '<div class="row g-3">',
+                    'append'    => '</div>',
+                    'attrs'     => ['role' => 'menu',],
+                  ]);
+                ?>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="#about_us">О нас</a>
                   <!--div class="hide">
                     <a class="nav-link" href="<?= base_url('/page'); ?>">О нас</a>
                   </div-->
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
-                </li>
-                <li class="nav-item dropdown show delivery_and_payment">
-                  <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
-                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Условия доставки
-                  </a>
-                  <?php
-                    new App\Widgets\Delivery\Delivery();
-                  ?>
-                </li>
-              </ul>
-            </div><!--navbar-collapse-->
-            <div class="navbar-icon">
-              <ul>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="#">
-                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
-                    </a>
-                  <?php } else { echo user_heart(); } ?>
-                </li>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="#">
-                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
-                    </a>
-                  <?php } else { echo user_cart(); } ?>
-                </li>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/login'); ?>">
-                      <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
-                    </a>
-                  <?php } else { echo user_icon(); } ?>
-                </li>
-              </ul>
-            </div><!--navbar-icon-->
-          </div><!--container-->
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
+              </li>
+              <li class="nav-item dropdown show delivery_and_payment">
+                <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
+                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Условия доставки
+                </a>
+                <?php
+                  new App\Widgets\Delivery\Delivery();
+                ?>
+              </li>
+            </ul>
+          </div><!--navbar-collapse-->
+          <div class="navbar-icon">
+            <ul>
+              <li>
+              <?php if (! isset($_SESSION['name'])) { ?>
+                <a href="#">
+                  <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
+                </a>
+              <?php } else { echo user_heart(); } ?>
+              </li>
+              <li>
+              <?php if (! isset($_SESSION['name'])) { ?>
+                <a href="#">
+                  <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
+                </a>
+              <?php } else { echo user_cart(); } ?>
+              </li>
+              <li>
+              <?php if (! isset($_SESSION['name'])) { ?>
+                <a href="<?= base_url('/login'); ?>">
+                  <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
+                </a>
+              <?php } else { echo user_icon(); } ?>
+              </li>
+            </ul>
+          </div><!--navbar-icon-->
         </nav>
         <div class="banner">
           <img class="banner-img" src="<?= base_url(POCKET_STYLE .'/assets/banner/banner.png'); ?>"

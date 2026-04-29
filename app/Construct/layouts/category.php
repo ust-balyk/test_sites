@@ -1,9 +1,11 @@
+<?php session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/'); ?>
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>
     <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
-    <title>Здоровье из Японии</title>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title><?= $title ?? 'Японский уход и косметика на Japan-in.Ru' ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Японские витамины - покупайте по доступной цене на Japan-in.Ru!">
     <meta name="keywords" content="japan-in.ru, satomi-japan.com, японские витамины, японская косметика,
@@ -27,69 +29,80 @@
       <!---------------- HEADER ---------------->
       <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
-          <div class="container">
-            <a class="navbar-brand" href="<?= base_url('/home'); ?>">
-              <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown has-megamenu">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Каталог
-                  </a>
+          <a class="navbar-brand" href="<?= base_url('/home'); ?>">
+            <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown has-megamenu">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Каталог
+                </a>
 
-                  <?php new App\Widgets\Menu\Menu(); ?>
+                <?php new App\Widgets\Menu\Menu(); ?>
 
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#about_us">О нас</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
-                </li>
-                <li class="nav-item dropdown show delivery_and_payment">
-                  <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
-                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Условия доставки
-                  </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="#about_us">О нас</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
+              </li>
+              <li class="nav-item dropdown delivery_and_payment">
+                <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
+                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Условия доставки
+                </a>
 
-                  <?php new App\Widgets\Delivery\Delivery(); ?>
+                <?php new App\Widgets\Delivery\Delivery(); ?>
 
-                </li>
-              </ul>
-            </div><!--navbar-collapse-->
-            <div class="navbar-icon">
-              <ul>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="">
-                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
-                    </a>
-                  <?php } else { echo user_heart(); } ?>
-                </li>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="">
-                      <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
-                    </a>
-                  <?php } else { echo user_cart(); } ?>
-                </li>
-                <li>
-                  <?php if (! isset($_SESSION['name'])) { ?>
-                    <a href="<?= base_url('/login'); ?>">
-                      <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
-                    </a>
-                  <?php } else { echo user_icon(); } ?>
-                </li>
-              </ul>
-            </div><!--navbar-icon-->
-          </div><!--container-->
+              </li>
+            </ul>
+            <ul class="navbar-nav d-flex align-items-center gap-3 mb-2 mb-lg-0">
+              <li class="nav-item dropdown user">
+                <?php if (empty(session()->get('user.name'))) { ?>
+                <a href="/login">
+                  <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
+                </a>
+                <?php } else { echo user_icon(); } ?>
+              </li>
+              <li class="nav-item dropdown wishlist">
+                <?php if (empty(session()->get('user.name'))) { ?>
+                <a href="#" class="nav-link dropdown-toggle" id="wishlist"
+                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
+                </a>
+                <?php } else { echo user_heart(); } ?>
+
+                <?php new App\Widgets\Cart\Cart(); ?>
+
+              </li>
+              <li class="nav-item dropdown cart ms-1">
+                <?php if (empty(session()->get('user.name'))) { ?>
+                <a href="#" class="nav-link dropdown-toggle" id="cart"
+                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
+                </a>
+                <?php } else { echo user_cart(); } ?>
+
+                <?php new App\Widgets\Cart\Cart(); ?>
+
+              </li>
+              <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему" style="margin-right:2.2rem">
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                  viewBox="0 0 24 24" fill="none" stroke="#4d4d4d" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="false">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </button>
+            </ul>
+          </div>
         </nav>
       </header>
       <!---------------- MAIN ---------------->

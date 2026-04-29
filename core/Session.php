@@ -15,26 +15,25 @@ class Session
    
    public function __construct()
    {
-      //session_save_path(realpath(dirname($_SERVER['DOCUMENT_ROOT']) .'/Master/session/'));
-      session_set_cookie_params( [ 
-         'lifetime' => 0, //31536000,     // год
-         'path'     => '/',         // для всех путей в домене 
-         'secure'   => true,       // заставляет браузер отправлять cookie только по HTTPS
-         'httponly' => true,      // запрещает доступ к cookie из JavaScript через document.cookie.
-         'samesite' => 'Strict', // 'Lax' будут ли cookies отправляться при межсайтовых запросах
-      ] );
-      session_start( [ 
-         'name'                   => 'JapanInRu',
+      $session_path = dirname($_SERVER['DOCUMENT_ROOT']) . '/Master/session/tmp';
+      if (!is_dir($session_path)) { mkdir($session_path, 0777, true); }
+      session_save_path($session_path);
+      session_start([
+         'name'                   => '23~',
          'sid_length'             => 96,
          'sid_bits_per_character' => 6,
-         'use_strict_mode'        => true, // является обязательным для общей безопасности сессии
-      ] );
-      /*
+         'use_strict_mode'        => true,
+         'cookie_lifetime'        => 0,    
+         'cookie_path'            => '/',  
+         'cookie_httponly'        => true, 
+      ]);
+
+      /*      
       date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
       $_SESSION['date']                 = date(DATE_RSS);
       $_SESSION['remote_addr']          = $_SERVER['REMOTE_ADDR'];
       $_SESSION['http_user_agent']      = $_SERVER['HTTP_USER_AGENT'];
-      */
+       */
       $this->generateCsrfToken();
       /*
       $data = [
@@ -44,14 +43,16 @@ class Session
          $_SERVER['HTTP_USER_AGENT'],
          $_SERVER['REQUEST_URI'], 
       ];
+      $path = '../log/enter/';
+      if (!is_dir($path)) { mkdir($path, 0777, true); }
       if (!isset($_SESSION['info'])) {
          $info = implode("\n", $data);
-         file_put_contents('../log/enter.txt', $info . "\n
+         file_put_contents($path .'enter.txt', $info . "\n
 --------------------------------------------------------\n", FILE_APPEND|LOCK_EX);
       
       }
       $_SESSION['info'] = 'created';
-      */
+       */
    }
 
    // Проверяет наличие ключа в точечной нотации
@@ -111,6 +112,7 @@ class Session
    public function remove($key): bool
    {
       if (isset($_SESSION[$key])) {
+
          unset($_SESSION[$key]);
          return true;
       
@@ -128,6 +130,7 @@ class Session
    public function getFlash($key, $value_default=null)
    {
       if (isset($_SESSION['flash'][$key])) {
+
          $value = $_SESSION['flash'][$key];
          unset($_SESSION['flash'][$key]);
 

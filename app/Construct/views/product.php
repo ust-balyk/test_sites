@@ -1,4 +1,40 @@
 <?= db()->user_back(); ?>
+<input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
+
+<?php if (session()->get('role') === 'master'): ?>
+<div id="admin-toolbar" class="admin-toolbar shadow-sm">
+    <div class="container d-flex align-items-center gap-3">
+        <span class="badge bg-warning text-dark">ADMIN MODE</span>
+        <button class="btn btn-sm btn-primary" onclick="toggleEditMode()">📝 Редактировать</button>
+        <button class="btn btn-sm btn-success" onclick="prepareNewProduct()">➕ Новый товар</button>
+        
+        <div id="format-tools" class="d-none border-start ps-3 ms-2">
+            <button class="btn btn-sm btn-outline-light" onclick="format('bold')"><b>B</b></button>
+            <button class="btn btn-sm btn-outline-light" onclick="format('italic')"><i>I</i></button>
+            <button class="btn btn-sm btn-outline-light" onclick="format('insertUnorderedList')">• Список</button>
+            <button class="btn btn-sm btn-warning" 
+                    onclick="format('removeFormat')" 
+                    title="Сбросить оформление">
+                    <i class="fa-solid fa-eraser"></i> Ластик
+            </button>
+            <button class="btn btn-sm btn-danger ms-3" onclick="saveAllChanges()">💾 Сохранить ВСЁ</button>
+        </div>
+    </div>
+</div>
+
+<style>
+  .admin-toolbar { position: fixed; top: 0; left: 0; width: 100%; background: #212529; z-index: 1050; padding: 8px 0; color: white; }
+  [contenteditable="true"] { outline: 2px dashed #0d6efd !important; background: rgba(13, 110, 253, 0.05); }
+  .edit-image-hover { cursor: pointer; position: relative; }
+  .edit-image-hover::after { content: "Сменить фото"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+  .edit-image-hover:hover::after { opacity: 1; }
+</style>
+<?php endif; ?>
+
+<?php dump($_SESSION); ?>
+<?php dump($_COOKIE); ?>
+<?//= $hash_cost = db()->createMasterUser(); define('HASH_COST', $hash_cost); ?>
+
 <?php if (!empty($product)): ?>
   <section class="product">
     <div class="container product">
@@ -15,25 +51,25 @@
               <a href="/cosmetics">косметика</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="/cosmetics/<?= $product['slug'] ?>"><?= $product['category'] ?></a>
+              <a href="/cosmetics/<?= $product['slug'] ?>"><?= hsc($product['category']) ?></a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              арт.<?= $product['outer_id'] ?>
+              арт.<?= hsc($product['outer_id']) ?>
             </li>
           </ol>
         </nav>
         <div class="d-none d-md-block">
-          <a href="/cosmetics/<?= $product['slug'] ?>" class="btn btn-sm btn-outline-secondary back_link">
-            <h5>вернуться в категорию</h5>
+          <a href="/cosmetics/<?= hsc($product['slug']) ?>" class="btn btn-sm btn-outline-secondary back_link">
+            <span>вернуться в категорию</span>
           </a>
         </div>
       </div>
 
       <div class="row product">
         <div class="col-md-6">
-          <div class="product_image">
-            <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'" 
-              alt="<?= $product['title'] ?>">
+          <div class="product_image" id="image-container">
+            <img src="<?= hsc($product['image']) ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'" 
+              alt="<?= hsc($product['title']) ?>">
           </div>
         </div>
         <div class="col-md-6">
@@ -49,24 +85,23 @@
                 </span>
                 <a htef="#" class="product_review_count">(12) отзывов</a>
               </div>
-              <h3 class="product-title"><?= $product['title'] ?></h3>
+              <h1 class="product-title" id="edit-title"><?= hsc($product['title']) ?></h1>
               <div class="distance"></div>
-              <div class="product-price">
-                <?php if ($product['price']) {
-                        echo $product['price'];
-                      } else if ($product['price'] == '') {
-                        echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
-                      } else {
-                        echo ' ';
-                      }
-                ?>
+              <div class="product-price" id="edit-price">
+              <?php if ($product['price']): ?>
+                <?= hsc($product['price']) ?>
+              <?php else: ?>
+                <?= hsc($product['new_price']) ?><del><?= hsc($product['old_price']) ?></del>
+              <?php endif; ?>
               </div>
               <div class="product-buttons">
-                <button class="btn btn btn-outline-secondary to-favorites">
-                  <h5>отложить</h5>
+                <button class="btn btn btn-outline-secondary add-to-favorites"
+                  data-id="<?= hsc($product['outer_id']) ?>">
+                  <span>отложить</span>
                 </button>
-                <button class="btn btn-outline-secondary to-cart">
-                  <h5>купить</h5>
+                <button class="btn btn-outline-secondary add-to-cart"
+                  data-id="<?= hsc($product['outer_id']) ?>">
+                  <span>купить</span>
                 </button>
               </div>
             </div>
@@ -81,13 +116,15 @@
             <li class="nav-item" role="presentation">
               <button class="flex-sm-fill text-sm-center nav-link active" id="description-tab" data-bs-toggle="tab"
                       data-bs-target="#description-tab-pane" type="button" role="tab"
-                      aria-controls="description-tab-pane" aria-selected="true"><h5>описание</h5>
+                      aria-controls="description-tab-pane" aria-selected="true">
+                      <span>описание</span>
               </button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="flex-sm-fill text-sm-center nav-link" id="reviews-tab" data-bs-toggle="tab"
                       data-bs-target="#reviews-tab-pane" type="button" role="tab"
-                      aria-controls="reviews-tab-pane" aria-selected="false"><h5>отзывы</h5>
+                      aria-controls="reviews-tab-pane" aria-selected="false">
+                      <span>отзывы</span>
               </button>
             </li>
           </ul>
@@ -96,32 +133,9 @@
 
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                   aria-labelledby="description-tab" tabindex="0">
-              <div class="category-description clearfix">
-                <?php
-                  $description = preg_replace('~<meta\b[^>]*>~i', '', $product['description']);
-                  echo "<div class='description'>". $description ."</div>";
-                ?>
+              <div class="category-description clearfix" id="edit-description">
+                <?= $product['description'] ?>
               </div>
-              <!--div>
-                <h2>статья для seo</h2>
-                <p><img src="<?= $product['image'] ?>" class="note-float-left"
-                        style="width: 25%;" alt=""></p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae vitae accusamus
-                    quasi quos
-                    laboriosam blanditiis, soluta, labore voluptates, ad magni omnis facilis amet
-                    illo voluptatum
-                    accusantium error voluptatibus eveniet inventore.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi velit praesentium
-                    repudiandae a
-                    quam, qui assumenda soluta dolores officiis tempora cum, consectetur optio? Id
-                    adipisci
-                    necessitatibus, aliquid nihil minus laborum.</p>
-                <p>Similique, culpa veniam ullam voluptas maiores, aliquid repellendus ipsum
-                    suscipit eligendi enim
-                    natus iusto dolore deleniti earum cum labore accusantium quas numquam quo eos
-                    saepe fugiat,
-                    blanditiis rerum quisquam! Placeat!</p>
-              </div-->
             </div>
 
             <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" 
@@ -217,7 +231,7 @@
     <div class="container promo">
       <div class="slider-header">
         <a href="/cosmetics/<?= $product['slug'] ?>" class="btn btn-sm btn-outline-secondary promo">
-          <h5>похожие продукты</h5>
+          <span>похожие продукты</span>
         </a>
         <div class="slider-btn-control">
           <span class="prev-btn"><i class="fa-solid fa-chevron-left"></i></span>
@@ -226,50 +240,43 @@
       </div>
 
       <div class="owl-carousel owl-theme" id="slider-product">
-      <?php foreach ($related_products as $product): ?>
-        <div class="product-card" itemscope itemtype="https://schema.org/Product">
-          <?php if (empty($product['price']) && empty($product['new_price'])
-                    && empty($product['old_price'])) { 
-                  echo '<div class="product_expected">
-                          <p>ожидается</p>
-                        </div>';
-                } else if ($product['new_price']) {
-                  echo '<div class="discounted_product">
-                          <p>акция!</p>
-                        </div>';
-                }
-          ?>
-          <a href="/cosmetics/<?= $product['slug'] ?>/product/<?= $product['outer_id'] ?>">
+      <?php foreach ($related_products as $related_): ?>
+        <div class="product-card">
+        <?php if (empty($related_['price']) && empty($related_['new_price'])): ?>
+          <div class="product_expected"><p>ожидается</p></div>
+        <?php elseif ($related_['new_price']): ?>
+          <div class="discounted_product">акция!</div>
+        <?php endif; ?>
+          <a href="/cosmetics/<?= $related_['slug'] ?>/product/<?= $related_['outer_id'] ?>">
             <div class="product-card-img">
-              <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
-                loading="lazy" alt="натуральная японская косметика и витамины для долголетия" itemprop="image">
+              <img src="<?= hsc($related_['image']) ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                loading="lazy" alt="<?= hsc($related_['title']) ?? 
+                'японская косметика и витамины для красоты и долголетия' ?>">
             </div>
           </a>
           <div class="product-card-details">
-            <h6 class="product-card-title" itemprop="name">
-              <a href="/cosmetics/<?= $product['slug'] ?>/product/<?= $product['outer_id'] ?>">
-                <?= $product['title'] ?>
+            <h6 class="product-card-title">
+              <a href="/cosmetics/<?= $related_['slug'] ?>/product/<?= $related_['outer_id'] ?>">
+                <?= hsc($product['title']) ?>
               </a>
             </h6>
-            <div class="product-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p style="margin:0;padding:0;" itemprop="price">
-                <?php if ($product['price']) {
-                            echo $product['price'];
-                          } else if ($product['price'] == '') {
-                            echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
-                          } else {
-                            echo ' ';
-                          }
-                ?>
-                </p>
+            <div class="product-card-price">
+            <?php if (!empty($related_['price'])): ?>
+                <span class="current-price"><?= $related_['price'] ?></span>
+            <?php else: ?>
+                <span class="new-price"><?= hsc($related_['new_price']) ?? '' ?></span>
+                <del class="old-price"><?= hsc($related_['old_price']) ?? '' ?></del>
+            <?php endif; ?>
             </div>
             <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
+              <button class="btn btn btn-outline-secondary add-to-favorites"
+                data-id="<?= hsc($related_['outer_id']) ?>">
                 <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
+              </button>
+              <button class="btn btn-outline-secondary add-to-cart"
+                data-id="<?= hsc($related_['outer_id']) ?>">
                 <i class="fa-solid fa-cart-shopping"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div><!--product-card-->
@@ -287,24 +294,23 @@
         Мы сотрудничаем с логистической компанией «Служба Доставки Экспресс-Курьер».<br> 
         <strong>
         Стоимость и сроки доставки рассчитываются автоматически и соответствуют тарифам перевозчика.
-        </strong><br>
-          <ul>
-            <li>
+        </strong></p>
+        <ul>
+          <li>
             <strong>Сроки отгрузки:</strong> 
             Отправка заказа осуществляется в течение 3 рабочих дней после оформления.
-            </li>
-            <li>
+          </li>
+          <li>
             <strong>Отслеживание:</strong>
             После передачи заказа в службу доставки вы получите трек-номер 
             для отслеживания посылки на указанный при регистрации e-mail или в мессенджер.
-            </li>
-            <li>
+          </li>
+          <li>
             <strong>Важно:</strong> 
             При заказе за пределы России или не входящие в географию присутствия «СДЭК» регионы,
             пожалуйста, свяжитесь с нами в WhatsApp для согласования способа доставки.
-            </li>
-          </ul>
-        </p>
+          </li>
+        </ul>
         <p style="margin-bottom: 40px">
       </div>
 
@@ -312,12 +318,12 @@
         <h6 style="color: #4295e4; margin-top: 20px">ОПЛАТА</h6>
         <p><strong>
         Платежи по банковским картам проводятся в строгом соответствии с требованиями платежных систем.
-        </strong><br>
+        </strong></br>
         При оплате на сайте вы будете перенаправлены на защищённый платежный шлюз АО «Тинькофф Банк». 
         Оплата происходит через зашифрованный протокол SSL 
         <strong>
         без комиссии картой любого банка.
-        </strong>
+        </strong></p>
         <p style="color: orange; margin-bottom: 40px">
         Мы не получаем и не сохраняем данные вашей карты, равно как и не несём ответственности 
         за несоблюдение сроков доставки по вине перевозчика.
@@ -332,6 +338,7 @@
         Возврат переведенных средств, производится на Ваш банковский счет в 
         течение 5—30 рабочих дней<br> 
         (<strong>сроки перевода зависят от правил Вашего банка</strong>).
+        </p>
       </div>
     </div>
   </section>

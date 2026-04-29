@@ -32,7 +32,7 @@
         <div class="col-md-2 d-none d-md-block sidebar" style="height: 100%;">
 
           <div class="d-grid">
-            <a href="#" class="btn btn-outline-primary"><h6>сбросить фильтры</h6></a>
+            <a href="#" class="btn btn-outline-primary"><h6>отменить фильтры</h6></a>
           </div>
 
           <div class="filters">
@@ -143,19 +143,13 @@
             <div id="category_content" class="row">
             <?php foreach ($products as $product): ?>
               <div class="col-lg-3 col-md-4 product-card" style="">
-                <?php if (empty($product['price']) && empty($product['new_price']) 
-                        && empty($product['old_price'])) { 
-                        echo '<div class="product_expected">
-                                <p>ожидается</p>
-                              </div>';
-                      } else if ($product['new_price']) {
-                        echo '<div class="discounted_product">
-                                <p>акция!</p>
-                              </div>';
-                      }
-                ?>
+              <?php if (empty($product['price']) && empty($product['new_price'])): ?>
+                <div class="product_expected"><p>ожидается</p></div>
+              <?php elseif ($product['new_price']): ?>
+                <div class="discounted_product">акция!</div>
+              <?php endif; ?>
                 <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
-                  <div class="product-card-img">
+                  <div id="new_top" class="product-card-img">
                     <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
                         alt="<?= $product['title'] ?>">
                   </div>
@@ -167,22 +161,22 @@
                     </a>
                   </h6>
                   <div class="product-card-price">
-                    <?php if ($product['price']) {
-                            echo $product['price'];
-                          } else if (empty($product['price'])) {
-                            echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
-                          } else {
-                            echo ' ';
-                          }
-                    ?>
+                  <?php if (!empty($product['price'])): ?>
+                    <span class="current-price"><?= $product['price'] ?></span>
+                  <?php elseif ($product['new_price']): ?>
+                    <span class="new-price"><?= $product['new_price'] ?? '' ?></span>
+                    <del class="old-price"><?= $product['old_price'] ?? '' ?></del>
+                  <?php endif; ?>
                   </div>
                   <div class="product-card-btns">
-                    <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">
+                    <button class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное"
+                      data-id="<?= $product['outer_id'] ?>">
                       <i class="fa-solid fa-heart"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-secondary add-to-cart" title="добавить в корзину">
+                    </button>
+                    <button class="btn btn-outline-secondary add-to-cart" title="добавить в корзину"
+                      data-id="<?= $product['outer_id'] ?>">
                       <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div><!--product-card-->
@@ -212,5 +206,5 @@
 
     </div><!--container category-->
   </section>
-  <script>localStorage.setItem('location', window.location.href);</script>
 <?php endif ?>
+<script>localStorage.setItem('location', window.location.href);</script>

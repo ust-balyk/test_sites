@@ -1,0 +1,1 @@
+csrf_token|s:128:"09311ed1d1f8f9db467da10449dfcee1c0a966d64e6c74c89451c6ce7650884aad009095fe3ca1454bf6341cd97cccb32eb56a7cbcb876c591e92f5e02b19e87";return_to|s:1:"/";back_url|s:22:"http://localhost:8888/";user|a:3:{s:5:"email";s:12:"test@test.ru";s:4:"name";s:4:"Test";s:4:"role";s:5:"frend";}flash|a:0:{}

@@ -1,4 +1,3 @@
-<?php// dump(Cart::getCart()); ?>  
 <section class="superiority">
     <div class="container superiority">
       <div class="row superiority">
@@ -39,8 +38,7 @@
 
   <section class="achievements">
     <div class="container achievements">
-      <div class="row achievements">
-        
+      <div class="row achievements">        
         <div class="col-md-4 col-sm-6 achievement-item left">
             <span class="counter-num" data-from="0">5976</span>
             <p class="counter-text">Довольных покупателей</p>
@@ -58,7 +56,7 @@
       </div>
     </div>
   </section><!--achievements-->
-
+  
   <!--section class="carouse-promo">
     <div class="container">
       <div class="slider-header">
@@ -100,6 +98,9 @@
     </div>
   </section--><!--carousel-promo-->
 
+<?php dump($_SESSION); ?>
+<?php dump($_COOKIE); ?>
+
   <section class="categories">
     <div class="container categories">
       <h3 class="text-center categories-title">Японская косметика</h3>
@@ -133,7 +134,7 @@
           </div>
         </div>
 
-        <div class="col-md-6 category left">
+        <div class="col-md-6 category">
           <div class="image-container">
             <a href="/cosmetics/for-face">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/3.jpg'); ?>" alt="">
@@ -142,7 +143,7 @@
           </div>
         </div>
 
-        <div class="col-md-6 category">
+        <div class="col-md-6 category" id="new_top"><!-- new_top -->
           <div class="image-container">
             <a href="/cosmetics/for-oral-cavity">
               <img src="<?= base_url(POCKET_STYLE .'/assets/categories/4.jpg'); ?>" alt="">
@@ -214,7 +215,7 @@
       </a>
     </div>
   </section><!--/categories-->
-
+<?php dump(session()->get('role')) ?>
 <?php if (!empty($discounted_products)): ?>
   <section class="carousel-promo popular"><!--sale_items-->
     <div class="container">
@@ -228,31 +229,35 @@
         </div>
       </div><!--slider-header-->
       <div class="owl-carousel owl-theme" id="slider-popular">
-      <?php foreach ($discounted_products as $sale): ?>
+      <?php foreach ($discounted_products as $product): ?>
         <div class="product-card .popular_product">
           <div class="discounted_product">
             <p>акция!</p>
           </div>
-          <a href="/cosmetics/<?= $sale['slug']; ?>/product/<?= $sale['outer_id']; ?>">
+          <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
             <div class="product-card-img">
-              <img src="<?= $sale['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
-                 alt="<?= $sale['title'] ?>">
+              <img src="<?= $product['image'] ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                 alt="<?= $product['title'] ?>">
             </div>
           </a>
           <div class="product-card-details">
             <h6 class="product-card-title">
-              <a href="/cosmetics/<?= $sale['slug']; ?>/product/<?= $sale['outer_id']; ?>"><?= $sale['title'] ?></a>
+              <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
+                <?= $product['title'] ?>
+              </a>
             </h6>
             <div class="product-card-price">
-              <?= $sale['new_price'] ?><del><?= $sale['old_price'] ?></del>
+              <?= $product['new_price'] ?><del><?= $product['old_price'] ?></del>
             </div>
             <div class="product-card-btns">
-              <a href="#" class="btn btn btn-outline-secondary add-to-favorites">
+              <button class="btn btn btn-outline-secondary add-to-favorites"
+                  data-id="<?= $product['outer_id'] ?>">
                 <i class="fa-solid fa-heart"></i>
-              </a>
-              <a href="#" class="btn btn-outline-secondary add-to-cart">
+              </button>
+              <button class="btn btn-outline-secondary add-to-cart"
+                  data-id="<?= $product['outer_id'] ?>">
                 <i class="fa-solid fa-cart-shopping"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div><!--product-card-->

@@ -1,47 +1,30 @@
-#стандартный front-controller (если в PHP вы берёте путь из $_SERVER['REQUEST_URI'] или маршрутизируете сами):
-
-
-#<IfModule mod_rewrite.c>
- #   RewriteEngine On
-
+#стандартный front-controller (если путь из $_SERVER['REQUEST_URI'] или маршрутизируете сами):
+<IfModule mod_rewrite.c>
+    RewriteEngine On
     # Убираем конечный слэш
- #   RewriteRule ^(.*)/$ /$1 [L,R=301]
-
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
     # Если файл/папка существуют — отдать напрямую
-#  RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteCond %{REQUEST_FILENAME} !-d
-
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
     # Отправляем всё на index.php, без добавления query string
- #   RewriteRule . index.php [L]
-#</IfModule>
+    # Query string — это параметры в URL после знака вопроса (например, index.php?id=123)
+    RewriteRule . index.php [L]
+</IfModule>
 
 #<IfModule mod_headers.c>
  #   Header set Content-Security-Policy "default-src 'self';"
 #</IfModule>
 
 
+#<IfModule mod_rewrite.c>   
 
+    #RewriteEngine On
+    #RewriteRule ^(.*)/$ /$1 [L,R=301]
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
-
-
-
-
-
-
-
-
-
-
-
-<IfModule mod_rewrite.c>   
-
-    RewriteEngine On
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ index.php?$1 [L,QSA]
-
-</IfModule> 
+#</IfModule> 
 #<IfModule mod_headers.c>
     
  #   Header set Content-Security-Policy "default-src 'self';"

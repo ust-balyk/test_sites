@@ -80,29 +80,48 @@ class UserController
                     
                     if ($this->filterEmail($user->attributes['email'])) {
                         
-                        if ( ! db()->emailExists($user->attributes['email']) ) {
-                            
-                            $time_cost = TIME_COST;     // Целевое время
-                            $cost = 10;                 // Минимальный порог
+                        if (! db()->emailExists($user->attributes['email'])) {
+
                             $password = $user->attributes['password'];
 
-                            do {
-                                $cost++;
-                                $start = microtime(true);
-                                password_hash($password, PASSWORD_BCRYPT, ["cost" => $cost]);
-                                $end = microtime(true);
-                            } while (($end - $start) < $time_cost);
-                            $cost = ($cost - 1);
-                            $options = ['cost' => $cost]; // выпадает 10 ~ 15
-                            $user->attributes['password'] = password_hash($password, PASSWORD_DEFAULT, $options);
+                            if (! defined('HASH_COST'))  {
+                                $time_cost = TIME_COST;     // Целевое время
+                                $cost = 10;                 // Минимальный порог
+                            
+                                do {
+                                    $cost++;
+                                    $start = microtime(true);
+                                    password_hash($password, PASSWORD_BCRYPT, ["cost" => $cost]);
+                                    $end = microtime(true);
+                                
+                                } while (($end - $start) < $time_cost);
+                                    $cost = ($cost - 1);
+                                    $options = ['cost' => $cost]; // выпадает 10 ~ 15*/
+                                    $user->attributes['password'] = password_hash($password, 
+                                        PASSWORD_DEFAULT, $options);
+                                    
+                                    define('HASH_COST', $cost);
+
+                            } else {
+                                $user->attributes['password'] = password_hash($password,
+                                    PASSWORD_DEFAULT, HASH_COST);
+
+                            }
+
 
                             if ($user->save()) {
 
-                                session()->remove($_SESSION['csrf_token']);
-                                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-                                session()->set('email', $user->attributes['email']);
-                                session()->set('name', $user->attributes['name']);
-                                echo "<script>window.history.go(-2);window.location.reload();</script>";
+                                session()->set('csrf_token', (string)bin2hex(random_bytes(32)));
+                                session()->set('user.email', $user->attributes['email']);
+                                session()->set('user.name', $user->attributes['name']);
+                                $user_23 = db()->getLastId();
+                                db()->set_token_23($user_23);
+                                //$redirect_back = session()->get('return_to') ?? '/';
+                                //session()->remove('return_to'); // Очищаем после использования
+                                //app()->response->redirect($redirect_back);
+                                //app()->response->redirect('/');
+                                //echo "<script>window.history.go(-3);window.location.reload();</script>";
+
                             }
 
                         } else {
@@ -134,20 +153,11 @@ class UserController
             if ($email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) && 
                 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
 
-                if (db()->realUser($email, $password)) {
-                    $token = strval(bin2hex(random_bytes(32)));
-                    $email = session()->get('email');
-                    db()->query("UPDATE users SET `auth_token`=? WHERE `email`=?", [$token, $email]);
-                    $hash_token = password_hash($token, PASSWORD_DEFAULT);
-                    $options = array (
-                        'expires'  => time() + 31536000,
-                        'path'     => '/',
-                        'secure'   => true,      
-                        'httponly' => true,     
-                        'samesite' => 'Strict'
-                    );
-                    setcookie('~23', $hash_token, $options);
-                    echo "<script>window.history.go(-1);window.location.reload();</script>";
+                if ($user_id = db()->realUser($email, $password)) { 
+                    db()->set_token_23($user_id);
+                    //$redirect_back = session()->get('return_to') ?? '/';
+                    //session()->remove('return_to'); // Очищаем после использования
+                    //app()->response->redirect($redirect_back);
 
                 } else {
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');

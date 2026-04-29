@@ -3,28 +3,30 @@
 доступен маршрут без указания метода
 класс должен иметь единственный статический метод index()
 $app->router->get('/', [App\Controller\PageController::class], 'index');
-$app->router->get('/', [App\Controller\PageController::class]);
+равно что -> $app->router->get('/', [App\Controller\PageController::class]);
 */
 use \App\Controller\HomeController;
+use \App\Controller\CategoryController;
+use \App\Controller\ProductController;
 use \App\Controller\PageController;
 use \App\Controller\UserController;
 use \App\Controller\AccountController;
 use \App\Controller\AdminController;
 
-$app->router->add('/', [HomeController::class, 'index'], ['POST', 'GET']);
+//$app->router->add('/', [HomeController::class, 'index'], ['POST', 'GET']);
 $app->router->post('/', [HomeController::class])->withoutCsrfToken();
 $app->router->get('/', [HomeController::class]);
-
 $app->router->get('/cosmetics', [PageController::class, 'cosmetics']);
+//$app->router->get('/cosmetics/([a-zA-Z-]+)', [PageController::class, 'category']);
+$app->router->get('/cosmetics/([a-zA-Z-]+)', [CategoryController::class]);
+$app->router->get('/cosmetics/([a-zA-Z-]+)/product/([0-9]+)', [ProductController::class]);
 $app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
-$app->router->get('/cosmetics/([a-z-]+)', [PageController::class, 'category']);
-$app->router->get('/cosmetics/([a-z-]+)/product/([0-9]+)', [PageController::class, 'product']);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);
-$app->router->post('/register', [UserController::class, 'record']);
+$app->router->post('/register', [UserController::class, 'record'])->withoutCsrfToken();
 $app->router->get('/login', [UserController::class, 'login'])->closed_for(['frend']);
-$app->router->post('/login', [UserController::class, 'enter']);
+$app->router->post('/login', [UserController::class, 'enter'])->withoutCsrfToken();
 $app->router->get('/logout', [UserController::class, 'logout']);
 
 $app->router->get('/account', [AccountController::class])->closed_for(['guest']);

@@ -92,8 +92,10 @@ function abort($code=404)
    exit();
 }
 
-function base_url($path="/"): string
+function base_url($path = '/'): string
+//function base_url($path = '/'): string
 {
+   //return rtrim(PATH, '/') .'/path';
    return PATH . $path;
 }
 
@@ -203,7 +205,7 @@ function old($fieldname): string
 
 function get_auth_token(): string
 {
-   return '<input type="hidden" name="auth_token" value="'. db()->set_auth_token() .'">';
+   return '<input type="hidden" name="auth_token" value="'. db()->set_token_23() .'">';
 }
 
 function get_csrf_field(): string

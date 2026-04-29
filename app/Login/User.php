@@ -9,14 +9,14 @@ class User extends Logon
     //public bool $timestamps = false;
     
     # поля для валидации
-    protected array $loaded = ['name', 'email', 'password', 'confirm_password', 'auth_token'];
+    protected array $loaded = ['name', 'email', 'password', 'confirm_password']; //, 'auth_token'];
     
     # поля для базы данных
-    protected array $fillable = ['name', 'email', 'password', 'auth_token'];
+    protected array $fillable = ['name', 'email', 'password']; //, 'auth_token'];
 
     # правила проверки
     protected array $rules = [
-        'required'         => ['name', 'email', 'password', 'auth_token'],
+        'required'         => ['name', 'email', 'password'], //, 'auth_token'],
         'lengthMax'        => [['name', 50], ['email', 100]],
         'email'            => [['email']],
         //'lengthMin'    => [['password', 6]],

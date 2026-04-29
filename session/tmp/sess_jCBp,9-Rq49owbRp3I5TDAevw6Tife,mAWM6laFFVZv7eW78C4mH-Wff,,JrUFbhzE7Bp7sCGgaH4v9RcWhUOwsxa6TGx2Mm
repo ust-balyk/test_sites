@@ -1,0 +1,1 @@
+csrf_token|s:128:"ebb3a1f8c5d9e5a04906e0370ae1364fa58ec8dee58d80ac675d193b504bafcdb163fa0fcde30d9cda5773731e3ca55530835d1683327ff9bdcab406055a81f7";return_to|s:54:"http://localhost:8888/cosmetics/for-body/product/12051";user|a:3:{s:5:"email";s:12:"test@test.ru";s:4:"name";s:4:"Test";s:4:"role";s:5:"frend";}

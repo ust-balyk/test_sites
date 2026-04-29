@@ -1,3 +1,10 @@
+<?php //session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/'); ?>
+<?php //session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/');
+$back = $_SERVER['HTTP_REFERER'] ?? '/';
+// Проверяем: если мы пришли НЕ с логина и НЕ с регистрации, значит это "та самая" страница
+if (strpos($back, '/login') === false && strpos($back, '/register') === false) {
+session()->set('back_url', $back);
+}; ?>
   <!DOCTYPE html>
   <html lang="ru">
     <head>
@@ -65,7 +72,7 @@
                 <a style="text-transform: lowercase" href="/login">&#9654; войти в систему </a>
                 <a style="text-transform: lowercase" href="#" id="register_page">&#9654; отказаться</a>
               </p>
-              <script>
+              <!--script>
                 document.addEventListener("DOMContentLoaded", function() {
                   var go_back = document.getElementById("register_page");
                   go_back.addEventListener("click", function() {
@@ -76,7 +83,7 @@
                     }
                   });
                 });
-              </script>
+              </script-->
 
             </form>
 

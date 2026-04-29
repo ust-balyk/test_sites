@@ -1,7 +1,104 @@
 $(document).ready(function() {
 
+    // add-to-cart 
+    //
+    $('.add-to-cart').on('click', function(e) {
+        e.preventDefault();
+        let btn = $(this);
+        let productId = btn.data('outer_id');
+        console.log(btn, productId);
+
+    });
+    //---------------------------------------
+
+    /*
+    setTimeout(function() {
+        var target = $('#new_top');
+
+        if (target.length) {
+            $('html, body').animate({
+                scrollTop: target.offset().top
+            }, {
+                duration: 1850, // Увеличим время для более заметного эффекта
+                easing: 'swing', // Стандартная плавная остановка
+                complete: function() {
+                        //console.log('Прокрутка завершена точно у цели');
+                }
+            });
+        }
+    }, 5000);*/
     
+    //
+    // new_start
+    //
+    /*    
+    $(function() {
+        var key = 'scrolled_to_new_start';
+        if (sessionStorage.getItem(key)) return;
+
+        var idleTimeout = 8000; // 5 секунд
+        var idleTimer;
+
+        // селектор поля поиска — поправьте при необходимости
+        var searchSelector = 'input[type="search"], input.search, #search, .search input';
+
+        function markDone() {
+            sessionStorage.setItem(key, '1');
+            clearTimeout(idleTimer);
+        }
+
+        function startIdleTimer() {
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(function() {
+            var target = $('#new_top');
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top }, 1850, 'swing', markDone);
+            } else {
+                markDone();
+            }
+            }, idleTimeout);
+        }
+
+        // События, которые сбрасывают таймер (т.е. активность)
+        $(document).on('mousemove click keydown scroll', function(e) {
+            // Для keydown допускаем только ввод в поле поиска
+            // — иначе любое нажатие клавиш будет считать активностью.
+            if (e.type === 'keydown') {
+            // если фокус в поле поиска или событие произошло в элементе поиска — считаем активностью
+            if ($(e.target).is(searchSelector) || $(e.target).closest(searchSelector).length) {
+                startIdleTimer();
+            }
+            // иначе игнорируем keydown как активность
+            } else {
+            // mousemove, click, scroll — считаем активностью
+            startIdleTimer();
+            }
+        });
+
+        // Также слушаем ввод в поле поиска (input) — активность
+        $(document).on('input', searchSelector, startIdleTimer);
+
+        // Запускаем первый таймер при загрузке
+        startIdleTimer();
+
+        // Если прокрутка была вызвана вручную до таймера — пометим как выполненное
+        $(window).one('scroll', function() {
+            // если пользователь сам прокрутил к нужной позиции, не выполнять авто-прокрутку
+            var target = $('#new_top');
+            if (target.length) {
+            var top = target.offset().top;
+            var st = $(window).scrollTop();
+            if (Math.abs(st - top) < 50) {
+                markDone();
+            }
+            }
+        });
+    });
+    
+    //---------------------------------------
+    //
     // получить кнопку "вернуться наверх"
+    //
     top_btn = document.getElementById("top_btn");
     window.onscroll = function() { scrollFunction() };
     function scrollFunction() {
@@ -15,10 +112,10 @@ $(document).ready(function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     
     });
-
-
+    //----------------------------------------
+    //
     // развернуть форму поиска 
-    
+    //
     $('#submit').on('click', function(e) {
         e.preventDefault();        
         let form = $(this).parent();
@@ -30,7 +127,10 @@ $(document).ready(function() {
         }
 
     });
+    //-----------------------------------------
+    //
     // спрятать кнопку поиска при scroll
+    //
     $(window).scroll(function() {
         $("#search").css("display", "none").fadeIn("fast");
 
@@ -183,6 +283,8 @@ $(document).ready(function() {
     }
     */
 
+    /* достижения */
+    
     let achievementItems = $('.achievement-item');
 
     if (achievementItems.length) {
@@ -203,7 +305,7 @@ $(document).ready(function() {
             }, baseDelay + (orderIndex * step)); 
         });
     }
-
+    
     
     
     /* попробовать */
@@ -364,9 +466,8 @@ $(document).ready(function() {
     /* =========== tooltip =========== */
 
     $(function() {
-        $(".add-to-favorites").tooltip();
-        $(".add-to-cart").tooltip();
-        $(".user_out").tooltip();
+        $(".user_out").tooltip({ placement: 'left' });
+        
     });
 
 
@@ -382,78 +483,9 @@ $(document).ready(function() {
     
     /* ============ cart =============== */
 
-    // Переключение видимости корзины
-    function toggleCart() {
-        const modal = document.getElementById('cart-modal');
-        modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'block' : 'none';
-        renderUI(); // Обновляем данные при открытии
-    }
-
-    // Закрытие при клике вне окна
-    window.onclick = function(event) {
-        const modal = document.getElementById('cart-modal');
-        if (event.target == modal) toggleCart();
-    }
-
-    // Обновим renderUI, чтобы он также обновлял счетчик в хедере
-    function renderUI() {
-        const cartItemsWrapper = document.getElementById('cart-items');
-        const cartTotalEl = document.getElementById('cart-total');
-        const cartCountEl = document.getElementById('cart-count'); // Тот, что в хедере
-
-        // Считаем общее количество товаров для иконки
-        const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCountEl.innerText = totalQty;
-
-        cartItemsWrapper.innerHTML = '';
-        let total = 0;
-
-        if (cart.length === 0) {
-            cartItemsWrapper.innerHTML = '<p style="text-align:center; color:#999;">Корзина пуста</p>';
-        } else {
-            cart.forEach(item => {
-                total += item.price * item.quantity;
-                cartItemsWrapper.innerHTML += `
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
-                        <div>
-                            <div style="font-weight:bold;">${item.name}</div>
-                            <div style="font-size:0.9em; color:#666;">${item.price} руб.</div>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <button onclick="removeFromCart(${item.id})" style="width:25px;">-</button>
-                            <span style="margin: 0 10px;">${item.quantity}</span>
-                            <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})" style="width:25px;">+</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-        cartTotalEl.innerText = total;
-    }
 
     /* ---------- тёмная тема ----------- */
     /*
-    const btn = document.getElementById("theme-toggle");
-    const currentTheme = localStorage.getItem("theme");
-
-    // Если пользователь уже выбирал тему ранее, применяем её
-    if (currentTheme === "dark") {
-        document.documentElement.setAttribute("data-theme", "dark");
-    }
-
-    btn.addEventListener("click", () => {
-        let theme = document.documentElement.getAttribute("data-theme");
-
-        if (theme === "dark") {
-            document.documentElement.removeAttribute("data-theme");
-            localStorage.setItem("theme", "light"); // Сохраняем выбор
-        } else {
-            document.documentElement.setAttribute("data-theme", "dark");
-            localStorage.setItem("theme", "dark");
-        }
-    });
-    */
-
     const btn = document.getElementById("theme-toggle");
     const moon = btn?.querySelector('.icon-moon');
     const stored = localStorage.getItem("theme");
@@ -471,12 +503,31 @@ $(document).ready(function() {
     localStorage.setItem('theme', theme);
     if (btn) btn.setAttribute('aria-pressed', theme === 'dark');
     });
+    */
+    const btn = document.getElementById("theme-toggle");
+    const moon = btn?.querySelector('.icon-moon');
+    const stored = localStorage.getItem("theme");
+    // игнорируем prefers-color-scheme, если нет сохранённой темы
+    let theme = stored || 'light';
+
+    // Применяем тему
+    document.documentElement.setAttribute('data-theme', theme);
+    if (btn) btn.setAttribute('aria-pressed', theme === 'dark');
+    if (moon) moon.setAttribute('aria-hidden', theme === 'dark' ? 'false' : 'false');
+
+    // Переключение кнопкой
+    btn?.addEventListener('click', () => {
+    theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (btn) btn.setAttribute('aria-pressed', theme === 'dark');
+    });
 
 
 
-    
+
     /* =========== ссылка на сайт при копировании =========== */
-
+    /*
     function wpguruLink() {
         var istS = 'Источник:'; // Слово должно находится в кавычках!
         //var copyR = '© japan-in.ru'; // Слово должно находится в кавычках!
@@ -496,5 +547,5 @@ $(document).ready(function() {
         },0);
     }
     document.oncopy = wpguruLink;
-
+    */
 });

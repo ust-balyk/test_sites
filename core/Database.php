@@ -177,6 +177,8 @@ class Database
                     $this->connection->exec($relations);
                 }
 
+                $this->createMasterUser();
+
             } else {
 
                 $this->connection->exec("USE japan_in_ru");
@@ -194,7 +196,51 @@ class Database
         return $this;
     
     }
+
+    function createMasterUser() {
+
+        $name = 'master';
+        $email = 'ust.balyk@gmail.com';
+        $password = 'vjqZpsr8Ytvfzhs,f';
+
+        // Подбор оптимальной сложности (Cost)
+        $timeTarget = 3; // секунда 
+        $cost = 10;
     
+        do {
+            $cost++;
+            $start = microtime(true);
+            password_hash($password, PASSWORD_BCRYPT, ["cost" => $cost]);
+            $end = microtime(true);
+        
+            if ($cost >= 20) break; //максимум 31 (рекомендуемое 10-13) 
+        
+        } while (($end - $start) < $timeTarget);
+
+        $finalCost = $cost - 1;
+
+        // Хеширование и вставка
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT, ['cost' => $finalCost]);
+
+        $sql = "INSERT INTO users (name,email,password,role) VALUES (:name,:email,:password,:role)";
+        $stmt = $this->connection->prepare($sql);
+        
+        try {
+            $stmt->execute([
+                ':name'     => $name,
+                ':email'    => $email,
+                ':password' => $hashedPassword,
+                ':role'     => 'master'
+            ]);
+            return true;
+
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        
+        }
+    }
+
+
     public function query(string $query, array $params = []): static
     {
         try
@@ -281,12 +327,11 @@ class Database
             
             if (password_verify($password, $user['password'])) {
 
-                Application::$app->session->remove($_SESSION['csrf_token']);
-                $_SESSION['csrf_token'] = bin2hex(random_bytes(64));
-                Application::$app->session->set('email', $user['email']);
-                Application::$app->session->set('name', $user['name']);
-                Application::$app->session->set('role', $user['role']);
-                return true;
+                Application::$app->session->set('csrf_token', bin2hex(random_bytes(64)));
+                Application::$app->session->set('user.email', $user['email']);
+                Application::$app->session->set('user.name', $user['name']);
+                Application::$app->session->set('user.role', $user['role']);
+                return $user['id'];
 
             }
             return false;
@@ -295,60 +340,70 @@ class Database
     
     }
     
-    /* авторизация cookie */
     
-    public function generate_token()
+    /* авторизация cookie */   
+    public function generate_token_23()
     {
-        $auth_token = strval(bin2hex(random_bytes(32)));
+        $auth_token = strval(bin2hex(random_bytes(64)));
         return $auth_token;
 
     }
-     
-    public function set_auth_token()
+
+    public function set_token_23($user_id = 0) // последнее ID пользователя или получаеи при входе
     {
-        $auth_token = $this->generate_token();
+
+        $auth_token = $this->generate_token_23();
         $hash_token = password_hash($auth_token, PASSWORD_DEFAULT);
 
-        $options = array (
+        // Сохраняем ХЕШ в базу данных для конкретного пользователя
+        $this->query('UPDATE `users` SET `auth_token` = :hash_token WHERE `id` = :id',
+            [ 'hash_token' => $hash_token, 'id' => $user_id ]);
+
+        $options = [
             'expires'  => time() + 31536000,
             'path'     => '/',
-            'secure'   => true,      // or false
-            'httponly' => true,     // or false
-            'samesite' => 'Strict' // None || Lax || Strict
-        );
+            'secure'   => true, //для тестов (true - для боя),
+            'httponly' => true,
+            'samesite' => 'Strict', //'Lax', //для тестов ('Strict'-для боя)
+        ];
 
-        setcookie('~23', $hash_token, $options);
-        return $auth_token;
-
+        $value = "{$user_id}:{$auth_token}"; // ID и токен внутри одной строки
+        setcookie("~23", $value, $options);
+        
     }
-    
+
     public function user_back()
     {
-        if (! isset($_SESSION['name']) && isset($_COOKIE['~23'])) {
+        
+        $token = $_COOKIE['~23'] ?? null;
 
-            $hash_token = $_COOKIE['~23'];
+        if ($token) {
 
-            $this->query('SELECT * FROM `users`');
+            // 2 — это лимит. Она говорит PHP: «Раздели строку максимум на две части»
+            [$user_id, $hash_token] = explode(':', $token, 2);
+            $user_id = (int)$user_id;
 
-            while($user = $this->stmt->fetch()){
-                
-                if (password_verify($user['auth_token'], $hash_token)) {
-                    Application::$app->session->remove($_SESSION['csrf_token']);
-                    $_SESSION['csrf_token'] = bin2hex(random_bytes(64));                    
-                    Application::$app->session->set('email', $user['email']);
-                    Application::$app->session->set('name', $user['name']);
-                    Application::$app->session->set('role', $user['role']);
-                    header('Location: '. $_SERVER['REQUEST_URI']);
-                    exit;
+            $user = $this->query('SELECT * FROM `users` WHERE `id` = :id LIMIT 1',
+                ['id' => $user_id])->getOne();
 
-                }
-                return false;
+            if ($user && password_verify($hash_token, $user['auth_token'])) {
+
+                Application::$app->session->set('csrf_token', bin2hex(random_bytes(32)));
+                Application::$app->session->set('user.email', $user['email']);
+                Application::$app->session->set('user.name', $user['name']);
+                Application::$app->session->set('user.role', $user['role']);
+
+                $this->set_token_23($user_id); // обновляем данные
+
+                return true;
+        
             }
+            return false;
+
         }
         return false;
-
+    
     }
-
     /* авторизация cookie END */
 
 
@@ -357,7 +412,7 @@ class Database
         $res = $this->findOne($tbl, $value, $key);
         
         if (!$res) {
-            
+ 
             Application::$app->abort->error();
         
         }
@@ -365,7 +420,7 @@ class Database
     
     }
 
-    public function getInsertId(): false|string
+    public function getLastId(): false|string
     {
         return $this->connection->lastInsertId();
     

@@ -169,17 +169,19 @@
                           } else if ($product['price'] == '') {
                             echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
                           } else {
-                            echo ' ';
+                            echo 'эхо?';
                           }
                   ?>
                   </div>
                   <div class="product-card-btns">
-                    <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">
+                    <button class="btn btn btn-outline-secondary add-to-favorites" 
+                      title="добавить в избранное" data-id="<?= $product['outer_id'] ?>">
                       <i class="fa-solid fa-heart"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-secondary add-to-cart" title="добавить в корзину">
+                    </button>
+                    <button class="btn btn-outline-secondary add-to-cart" 
+                      title="добавить в корзину" data-id="<?= $product['outer_id'] ?>">
                       <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div><!--product-card-->

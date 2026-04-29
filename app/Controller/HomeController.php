@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 use Master\Pagination;
-use App\Cart\Cart;
+use App\Widgets\Cart\Cart;
 
 class HomeController
 {
@@ -10,20 +10,11 @@ class HomeController
     {
 
         //cache()->refreshCache();
+        //dump(Cart::addToCart('10834'));
 
-        /*        
-        dump(Cart::addToCart(11444));
-        dump(Cart::getCart(11444));
-        dump(session()-<?= base_url('>has('cart'));
-        dump($_SESSION);
-        dump(session()->get('cart.11444.slug'));
-        dump(Cart::clearCart('cart.11444'));
-        dump(session()->has('cart'));
-        dump($_SESSION);
-        */
+        //db()->createMasterUser();
 
-
-        if ($all_products = cache()->getCache()) {
+        if ($all_products = cache()->getCache_db()) {
             // Фильтруем массив (аналог WHERE price = '')
             $discounted_products = array_filter($all_products, function($product) {
                 return isset($product['price']) && $product['price'] === '';
@@ -32,18 +23,20 @@ class HomeController
 
             // ограничить количество и отсортировать (аналог LIMIT 10 и ORDER BY id DESC)
             usort($discounted_products, fn($a, $b) => $b['id'] <=> $a['id']);
-            $discounted_products = array_slice($discounted_products, 0, 10);
+            $discounted_products = array_slice($discounted_products, 0, 8);
 
             if (empty($discounted_products)) {
-                $discounted_products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = ''")->get();
+                $discounted_products = db()->query("SELECT * FROM ". TABLE_NAME .
+                    " WHERE price = '' ORDER BY id DESC LIMIT 8")->get();
             
             }
             
             if (TABLE_NAME == 'cosmetics') {
-                $title = 'JAPAN-IN.RU = Всё для Твоей красоты из Японии!';
-        
+                $title = 'Японский уход и косметика — всё для твоей красоты!';
+
             } else {
-                $title = 'JAPAN-IN.RU = Всё для Твоей красоты и здоровья из Японии!';
+                $title = 'Японский уход, косметика и витамины — секреты твоей красоты!';
+            
             }
 
             return app()->view->full_view(
