@@ -30,6 +30,7 @@ class CategoryController extends BaseController
             }
 
             return app()->view->full_view(
+
                 CATEGORY_LAYOUT,
                 CATEGORY_VIEW, 
                 [
@@ -37,6 +38,7 @@ class CategoryController extends BaseController
                     'products' => $products,
                     //[0] - индекс первого продукта
                     'category' => $products[0]['category'] ?? '',
+                    'title_category' => self::getTitleByInternalKey($products[0]['slug']),
                     'slug'     => $slug
                 ]
             );

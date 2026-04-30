@@ -203,11 +203,12 @@ body {
   html, body { overflow-x: hidden; }
 }
 
+/*
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+}*/
   
 *:focus { outline: none !important; }
   
@@ -770,18 +771,23 @@ div .product-card:hover {
     position: absolute;
     left: -2.5%;
     top: 4%;
+    padding: 0px 16px;
+    font-size: 1.6rem;
+    letter-spacing: 0.4rem;
+    color: white;
     border: 1px solid var(--border-color);
     border-radius: 3px;
-    background-color: rgba(235, 160, 166, 1); /*rgba(229, 143, 53, 0.8); /*#beffbb;/*#aeffaa; /*var(--light-blue-color);*/
+    background-color: rgba(235, 160, 166, 1); /*rgba(229, 143, 53, 0.8); /*#beffbb;/*#aeffaa;*/
 }
+/*
 .product-card .discounted_product p {
     font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.2rem;
-    color: white; /*var(--grey-color);*/
+    color: white; /*var(--grey-color);*//*
     margin: 0.2rem 1.2rem;
     padding: 0px 0px 0.2rem 0px;
-}
+}*/
 
 /* нет в наличии  */
 .product-card .product_expected {
@@ -2443,10 +2449,18 @@ input.form-control.confirm_password {
 }
 
 p.login a,
-p.register a{
-    font-size: 1.8rem;
-    font-weight; 600;
-    color: white;
+p.register a {
+  font-size: 1.9rem;
+  font-weight; 600;
+  color: white;
+}
+
+p.login span.play-icon,
+p.register span.play-icon {
+    display: inline-block;
+    vertical-align: middle; /* Базовое выравнивание по центру */
+    font-size: 1.5rem;
+    transform: translateY(0rem); /* Точечная настройка выше/ниже */
 }
 
 @media (max-width: 1024px) {

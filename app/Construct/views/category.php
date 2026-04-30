@@ -1,6 +1,6 @@
 <?php dump($_SESSION); ?>
 <?php dump($_SERVER['REQUEST_URI']); ?>
-<?php //dump($_COOKIE); ?>
+<?php dump($_COOKIE); ?>
 
 <?php if (!empty($products)): ?>  
   <section class="category">
@@ -24,12 +24,12 @@
         </nav>
         <div class="d-none d-md-block">
           <a href="/" class="btn btn-sm btn-outline-secondary back_link">
-            <h5>дом</h5>
+            <span>дом</span>
           </a>
         </div>
       </div>
 
-      <h1 class="text-center title_category"><?= $category ?></h1>
+      <h1 class="text-center title_category"><?= $title_category ?></h1>
 
       <div class="row category">
 

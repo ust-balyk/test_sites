@@ -64,12 +64,14 @@
 
               <?= get_auth_token(); ?>
 
-              <p class="register">
-                <a style="text-transform: lowercase" href="/login">&#9654; войти в систему </a>
-                <a style="text-transform: lowercase" 
-                  href="<?= htmlspecialchars(
-                  \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')) ?>"
-                  id="register_page">&#9654; отказаться</a>
+              <p class="register" style="text-transform: lowercase">
+                <a href="/login"><span class="play-icon">&#9654;</span></a>
+                <a href="/login">&thinsp;создать аккаунт&emsp;</a>
+                <?php $back_url = htmlspecialchars(
+                  \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
+                ); ?>
+                <a href="<?= $back_url ?>"><span class="play-icon">&#9654;</span></a>
+                <a href="<?= $back_url ?>">&thinsp;отказаться</a>
               </p>
             </form>
 

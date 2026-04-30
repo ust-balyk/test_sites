@@ -99,8 +99,8 @@
   </section--><!--carousel-promo-->
 
 <?php dump($_SESSION); ?>
-<?php //dump($_COOKIE); ?>
 <?php dump($_SERVER['REQUEST_URI']); ?>
+<?php dump($_COOKIE); ?>
 
   <section class="categories">
     <div class="container categories">
