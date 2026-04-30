@@ -3,7 +3,7 @@ namespace App\Controller;
 use Master\Pagination;
 use App\Widgets\Cart\Cart;
 
-class HomeController
+class HomeController extends BaseController
 {
 
     static function index()
@@ -12,7 +12,7 @@ class HomeController
         //cache()->refreshCache();
         //dump(Cart::addToCart('10834'));
 
-        //db()->createMasterUser();
+        self::init(); // запись URL
 
         if ($all_products = cache()->getCache_db()) {
             // Фильтруем массив (аналог WHERE price = '')

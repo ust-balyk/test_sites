@@ -1,6 +1,9 @@
 <?= db()->user_back(); ?>
-<input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
+<?php dump($_SESSION); ?>
+<?php dump($_SERVER['REQUEST_URI']); ?>
+<?php //dump($_COOKIE); ?>
 
+<input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
 <?php if (session()->get('role') === 'master'): ?>
 <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
@@ -30,9 +33,6 @@
   .edit-image-hover:hover::after { opacity: 1; }
 </style>
 <?php endif; ?>
-
-<?php dump($_SESSION); ?>
-<?php dump($_COOKIE); ?>
 
 <?php if (!empty($product)): ?>
   <section class="product">

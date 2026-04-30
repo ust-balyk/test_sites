@@ -2,7 +2,7 @@
 namespace App\Controller;
 use App\Login\User;
 
-class UserController
+class UserController extends BaseController
 {
     public function register()
     {
@@ -60,6 +60,8 @@ class UserController
     
     public function record()
     {
+        self::init(); // запись URL
+
         if (! app()->router->validateCsrfToken()) {
             session()->setFlash('error', 'Нарушение норм безопасности');
             app()->response->redirect('/register');
@@ -116,11 +118,13 @@ class UserController
                                 session()->set('user.name', $user->attributes['name']);
                                 $user_23 = db()->getLastId();
                                 db()->set_token_23($user_23);
-                                //$redirect_back = session()->get('return_to') ?? '/';
-                                //session()->remove('return_to'); // Очищаем после использования
-                                //app()->response->redirect($redirect_back);
-                                //app()->response->redirect('/');
-                                //echo "<script>window.history.go(-3);window.location.reload();</script>";
+                                // Получаем URL из формы или берем главную по умолчанию
+                                $target_page = $_POST['target_page'] ?? '/';
+                                // пропускаем через safeRedirect перед переходом
+                                $safeUrl = self::safeRedirect($target_page);
+                                // Выполняем переход
+                                header("Location: " . $safeUrl);
+                                exit;
 
                             }
 
@@ -144,6 +148,8 @@ class UserController
 
     public function enter()
     {
+        self::init(); // запись URL
+
         if (! app()->router->validateCsrfToken() ) {
             session()->setFlash('error', 'Нарушение норм безопасности');
             app()->response->redirect('/login');
@@ -155,9 +161,12 @@ class UserController
 
                 if ($user_id = db()->realUser($email, $password)) { 
                     db()->set_token_23($user_id);
-                    //$redirect_back = session()->get('return_to') ?? '/';
-                    //session()->remove('return_to'); // Очищаем после использования
-                    //app()->response->redirect($redirect_back);
+                    // Получаем URL из формы или берем главную по умолчанию
+                    $target_page = $_POST['target_page'] ?? '/';
+                    // пропускаем через safeRedirect перед переходом
+                    $safeUrl = self::safeRedirect($target_page);
+                    header("Location: " . $safeUrl);
+                    exit;
 
                 } else {
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');

@@ -1,5 +1,5 @@
 <?php
-$start_time = microtime(true);
+//$start_time = microtime(true);
 
 if (PHP_MAJOR_VERSION < 8) {
    die("<pre><br>  Текущая версия PHP: " . phpversion() .
@@ -15,6 +15,7 @@ if (DEBUG) {
    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 } else {
    $whoops->pushHandler(new \Whoops\Handler\CallbackHandler(function (Throwable $e) {
+      date_default_timezone_set('Asia/Yekaterinburg');
       error_log("[" . date('Y-m-d H:i:s') . "] Error: {$e->getMessage()}" .
          PHP_EOL . "File: {$e->getFile()}" . "Line: {$e->getLine()}" .
          PHP_EOL . "****************************************************" .
@@ -28,4 +29,4 @@ $app = new Master\Application();
 include ROUTES;
 $app->run();
 
-dump("время выполнения запроса: " . microtime(true) - $start_time);
+//dump("время выполнения запроса: " . microtime(true) - $start_time);

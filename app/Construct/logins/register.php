@@ -1,10 +1,3 @@
-<?php //session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/'); ?>
-<?php //session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/');
-$back = $_SERVER['HTTP_REFERER'] ?? '/';
-// Проверяем: если мы пришли НЕ с логина и НЕ с регистрации, значит это "та самая" страница
-if (strpos($back, '/login') === false && strpos($back, '/register') === false) {
-session()->set('back_url', $back);
-}; ?>
   <!DOCTYPE html>
   <html lang="ru">
     <head>
@@ -28,20 +21,23 @@ session()->set('back_url', $back);
             <form action="<?= base_url('/register'); ?>" method="post">
 
               <?= get_csrf_field(); ?>
-
+              
+              <input type="hidden" name="target_page" 
+                    value="<?= htmlspecialchars($_SESSION['target_page'] ?? '/'); ?>">
+              
               <div class="form-group name">
                 <label></label>
                 <input type="text" name="name" style="text-transform: lowercase" placeholder="имя" 
-                        class="form-control name <?= get_validation_class('name'); ?>"
-                  value="<?= old('name'); ?>"> <!-- required /-->
+                      class="form-control name <?= get_validation_class('name'); ?>"
+                    value="<?= old('name'); ?>"> <!-- required /-->
                   <?//= get_errors('name'); ?>
               </div>
 
               <div class="form-group register_email">
                 <label></label>
                 <input type="email" name="email" style="text-transform: lowercase" placeholder="электронная почта"
-                        class="form-control register_email <?= get_validation_class('email'); ?>"
-                  value="<?= old('email'); ?>"> <!-- required /-->
+                      class="form-control register_email <?= get_validation_class('email'); ?>"
+                    value="<?= old('email'); ?>"> <!-- required /-->
                   <?//= get_errors('email'); ?>
               </div>
 
@@ -70,21 +66,11 @@ session()->set('back_url', $back);
 
               <p class="register">
                 <a style="text-transform: lowercase" href="/login">&#9654; войти в систему </a>
-                <a style="text-transform: lowercase" href="#" id="register_page">&#9654; отказаться</a>
+                <a style="text-transform: lowercase" 
+                  href="<?= htmlspecialchars(
+                  \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')) ?>"
+                  id="register_page">&#9654; отказаться</a>
               </p>
-              <!--script>
-                document.addEventListener("DOMContentLoaded", function() {
-                  var go_back = document.getElementById("register_page");
-                  go_back.addEventListener("click", function() {
-                    if (localStorage.getItem('location')) {
-                      window.location.href = localStorage.getItem('location');
-                    } else {
-                      window.location.href = '/';
-                    }
-                  });
-                });
-              </script-->
-
             </form>
 
             <?= get_alerts(); ?>

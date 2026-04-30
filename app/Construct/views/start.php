@@ -99,7 +99,8 @@
   </section--><!--carousel-promo-->
 
 <?php dump($_SESSION); ?>
-<?php dump($_COOKIE); ?>
+<?php //dump($_COOKIE); ?>
+<?php dump($_SERVER['REQUEST_URI']); ?>
 
   <section class="categories">
     <div class="container categories">
@@ -215,7 +216,6 @@
       </a>
     </div>
   </section><!--/categories-->
-<?php dump(session()->get('role')) ?>
 <?php if (!empty($discounted_products)): ?>
   <section class="carousel-promo popular"><!--sale_items-->
     <div class="container">

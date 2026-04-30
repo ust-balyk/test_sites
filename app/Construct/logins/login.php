@@ -1,9 +1,3 @@
-<?php //session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/');
-$back = $_SERVER['HTTP_REFERER'] ?? '/';
-// Проверяем: если мы пришли НЕ с логина и НЕ с регистрации, значит это "та самая" страница
-if (strpos($back, '/login') === false && strpos($back, '/register') === false) {
-    session()->set('back_url', $back);
-}; ?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -26,6 +20,9 @@ if (strpos($back, '/login') === false && strpos($back, '/register') === false) {
 
                         <?= get_csrf_field(); ?>
 
+                        <input type="hidden" name="target_page" 
+                            value="<?= htmlspecialchars($_SESSION['target_page'] ?? '/'); ?>">
+
                         <div class="form-group email">
                             <label></label>
                             <input type="email" name="email" style="text-transform: lowercase"
@@ -41,28 +38,17 @@ if (strpos($back, '/login') === false && strpos($back, '/register') === false) {
                         
                         <div class="form-group">
                             <input type="submit" name="submit" style="text-transform: lowercase" 
-                                id="login_button" class="btn btn-primary" value="     а у т е н т и ф и к а ц и я     ">
+                                id="login_button" class="btn btn-primary" 
+                                value="     а у т е н т и ф и к а ц и я     ">
                         </div><br>
 
                         <p class="login">
                             <a style="text-transform: lowercase" href="/register">&#9654; создать аккаунт </a>
                             <a style="text-transform: lowercase"
-                                href="<?= session()->get('exit_destination') ?? '/' ?>" 
+                                href="<?= htmlspecialchars(
+                                \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')) ?>"
                                 id="login_page"> &#9654; отказаться</a>
                         </p>
-                        <!--script>
-
-                            document.addEventListener("DOMContentLoaded", function() {
-                                var go_back = document.getElementById("login_page");
-                                go_back.addEventListener("click", function() {
-                                    if (localStorage.getItem('location')) {
-                                        window.location.href = localStorage.getItem('location');
-                                    } else {
-                                        window.location.href = '/';
-                                    }
-                                });
-                            });
-                        </script--> 
                     </form>
 
                     <?= get_alerts(); ?>

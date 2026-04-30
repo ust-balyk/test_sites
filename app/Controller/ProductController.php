@@ -4,11 +4,13 @@ use App\Widgets\Cart\Cart;
 use App\Helper\Text\Text;
 
 
-class ProductController
+class ProductController extends BaseController
 {
 
     static function index()
     {
+        self::init(); // запись URL
+
         [$slug, $id] = request()->get_SLUG_or_ID();
         $cache = cache()->getCache_db();
         

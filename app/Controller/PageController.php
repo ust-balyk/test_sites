@@ -4,11 +4,13 @@ use Master\Pagination;
 use App\Cart\Cart;
 
 
-class PageController
+class PageController extends BaseController
 {
 
     static function cosmetics() 
-    {         
+    {
+        self::init(); // запись URL
+
         $cosmetics = cache()->getCache_db();
         $cosmetics = $cosmetics['by_id'];
  

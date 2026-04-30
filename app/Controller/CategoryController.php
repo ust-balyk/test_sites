@@ -1,11 +1,13 @@
 <?php
 namespace App\Controller;
 
-class CategoryController
+// back_url уже записался автоматически в родителе!
+class CategoryController extends BaseController
 {
     
     public static function index()
     {
+        self::init(); // запись URL
 
         if ($slug = request()->get_SLUG_or_ID()[0]) {
 

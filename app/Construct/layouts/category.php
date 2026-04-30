@@ -1,4 +1,3 @@
-<?php session()->set('return_to', $_SERVER['HTTP_REFERER'] ?? '/'); ?>
 <!DOCTYPE html>
 <html lang="ru" class="notranslate">
   <head>

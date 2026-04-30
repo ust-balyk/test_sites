@@ -1,3 +1,7 @@
+<?php dump($_SESSION); ?>
+<?php dump($_SERVER['REQUEST_URI']); ?>
+<?php //dump($_COOKIE); ?>
+
 <?php if (!empty($products)): ?>  
   <section class="category">
     <div class="container category">
