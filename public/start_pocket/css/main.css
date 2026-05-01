@@ -1387,7 +1387,7 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
   content: ">";
   font-size: 1.6rem;
   color: var(--grey-color) !important;
-  margin: 0 4px 2px 4px;
+  margin: 0 2px 2px 4px;
   vertical-align: middle; /* выравнивание по центру */
   display: inline-block;
 }

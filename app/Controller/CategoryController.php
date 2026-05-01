@@ -38,6 +38,7 @@ class CategoryController extends BaseController
                     'products' => $products,
                     //[0] - индекс первого продукта
                     'category' => $products[0]['category'] ?? '',
+                    // отображение категории корректируется по slug
                     'title_category' => self::getTitleByInternalKey($products[0]['slug']),
                     'slug'     => $slug
                 ]
