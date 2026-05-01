@@ -36,35 +36,39 @@ class PageController extends BaseController
 
     static function discount()
     {
+        self::init(); // запись URL
+
         $all_products = cache()->getCache_db();
-        $products = array_filter($all_products, function($product) {
+        $discounted_products = array_filter($all_products, function($product) {
             return isset($product['price']) && $product['price'] === '';
 
         });
         // ORDER BY id DESC
-        usort($products, function($a, $b) {return $b['id'] <=> $a['id'];});
+        usort($discounted_products, function($a, $b) {return $b['id'] <=> $a['id'];});
         
-        if (empty($products)) {
-            $products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC")->get();
+        if (empty($discounted_products)) {
+
+            $discounted_products = db()->
+                query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC")->get();
 
         }
 
-        if (!empty($products)) {
+        if (!empty($discounted_products)) {
 
             return app()->view->full_view(
                 
-                PRODUCT_LAYOUT,
+                CATEGORY_LAYOUT,
                 'discount',
                 [
-                    'discount' => 'title',
-                    'products' => $products,
+                    'title'               => 'Купить японскую косметику со скидкой на Japan-in.Ru!',
+                    'discounted_products' => $discounted_products,
                 
                 ],
             );
         
         }
         
-        return null;
+        return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []);
     
     }
 

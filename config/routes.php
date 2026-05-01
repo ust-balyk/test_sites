@@ -17,10 +17,9 @@ use \App\Controller\AdminController;
 $app->router->post('/', [HomeController::class])->withoutCsrfToken();
 $app->router->get('/', [HomeController::class]);
 $app->router->get('/cosmetics', [PageController::class, 'cosmetics']);
-//$app->router->get('/cosmetics/([a-zA-Z-]+)', [PageController::class, 'category']);
+$app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
 $app->router->get('/cosmetics/([a-zA-Z-]+)', [CategoryController::class]);
 $app->router->get('/cosmetics/([a-zA-Z-]+)/product/([0-9]+)', [ProductController::class]);
-$app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);

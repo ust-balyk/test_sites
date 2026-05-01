@@ -221,7 +221,7 @@
     <div class="container">
       <div class="slider-header">
         <a href="/cosmetics/discount" class="btn btn-sm btn-outline-secondary popular">
-          <h5>товары по акции</h5>
+          <span>товары по акции</span>
         </a>
         <div class="slider-btn-control">
           <span class="prev-btn"><i class="fa-solid fa-chevron-left"></i></span>

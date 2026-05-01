@@ -1,4 +1,4 @@
-<?php if (!empty($products)): ?>
+<?php if (!empty($discounted_products)): ?>
   
   <section class="category">
     <div class="container category">
@@ -137,7 +137,7 @@
           <div id="discount" class="container content">
             <div id="category_content" class="row">
 
-              <?php foreach ($products as $product): ?>
+              <?php foreach ($discounted_products as $product): ?>
               <div class="col-lg-3 product-card" style="">
                 <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
