@@ -1379,8 +1379,25 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
     
 /* ======= хлебные крошки ======= */
 
+.breadcrumb-item + .breadcrumb-item::before {
+  content: none;
+}
+
+.breadcrumb > li::after {
+  content: ">";
+  font-size: 1.6rem;
+  color: var(--grey-color) !important;
+  margin: 0 4px 2px 4px;
+  vertical-align: middle; /* выравнивание по центру */
+  display: inline-block;
+}
+/* убрать последний content: "→" */
+.breadcrumb-item:last-child::after {
+  content: none;
+}
+
 div.breadcrumb {
-    margin: 1rem 0px 1.5reim 0px;
+    margin: 1rem 0px 1.5rem 0px;
     background-color: var(--bg-color);
 
     nav.breadcrumb {
@@ -1393,6 +1410,7 @@ div.breadcrumb {
     .link_to_home {
         height: 1.8rem;
         width: 1.8rem;
+        margin-right: 0.2rem;
         margin-bottom: 0.2rem;
     }
 }
