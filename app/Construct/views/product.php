@@ -1,7 +1,7 @@
 <?= db()->user_back(); ?>
-<?php dump($_SESSION); ?>
-<?php dump($_SERVER['REQUEST_URI']); ?>
-<?php dump($_COOKIE); ?>
+<?php //dump($_SESSION); ?>
+<?php //dump($_SERVER['REQUEST_URI']); ?>
+<?php //dump($_COOKIE); ?>
 
 <input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
 <?php if (session()->get('role') === 'master'): ?>
