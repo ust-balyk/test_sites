@@ -19,7 +19,7 @@ abstract class BaseController
       $uri = $_SERVER['REQUEST_URI'];
 
       // Исключаем системные страницы (улучшенная проверка)
-      $excluded = ['/register', '/login', '/logout'];
+      $excluded = ['/register', '/login'];
       foreach ($excluded as $page) {
          if (strpos($uri, $page) !== false) return;
       
@@ -33,7 +33,7 @@ abstract class BaseController
       
       }
 
-      // Если мы перешли на НОВУЮ страницу
+      // Если мы перешли на login/register -> 'target_page' для вернуться назад
       if ($_SESSION['target_page'] !== $uri) {
          // Сначала сохраняем то, где были, как "назад"
          $_SESSION['back_url'] = $_SESSION['target_page'];

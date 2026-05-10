@@ -256,6 +256,12 @@
         <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
+    <script>
+      if (typeof window.baseUrl === 'undefined') {
+        const baseUrl = '<?= base_url('/'); ?>';
+        window.baseUrl = baseUrl;
+      }
+    </script>   
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>

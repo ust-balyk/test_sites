@@ -31,20 +31,14 @@ class Cache
          'by_id'       => []
       ];
 
-      /*
-      foreach ($products as $product) {
+      foreach ($products as &$product) {
+         // Чистим описание прямо в исходном объекте/массиве
+         $product['title'] = Text::clean($product['title']);
+         $product['description'] = Text::clean($product['description']);
+
+         // Распределяем уже чистые данные
          $cache['by_category'][$product['slug']][] = $product;
          $cache['by_id'][$product['outer_id']] = $product;
-      }*/
-
-      foreach ($products as &$product) {
-      // Чистим описание прямо в исходном объекте/массиве
-      $product['title'] = Text::clean($product['title']);
-      $product['description'] = Text::clean($product['description']);
-
-      // Распределяем уже чистые данные
-      $cache['by_category'][$product['slug']][] = $product;
-      $cache['by_id'][$product['outer_id']] = $product;
       
       }
       unset($product); // Обязательно удаляем ссылку после цикла!
@@ -64,11 +58,12 @@ class Cache
       return $this->indexed_DB;
    
    }
-
+   
    public function set($key, $data, $seconds = 3600): void
-   {
+   {      
       if (! file_exists(CACHE_MENU)) {
          mkdir(CACHE_MENU);
+         
       }
       $content[$key] = $data;
       $content['time'] = time() + $seconds;
@@ -89,8 +84,8 @@ class Cache
             return $content[$key];
          
          }
-         unlink($cache_file);
-         //file_put_contents($cache_file, "");
+         //unlink($cache_file);
+         file_put_contents($cache_file, "");
       
       }
       return $default;
@@ -102,10 +97,11 @@ class Cache
       $cache_file = CACHE_MENU . '/' . md5($key) . '.txt';
       
       if (file_exists($cache_file)) {
-         unlink($cache_file);
-         //file_put_contents($cache_file, "");
+         //unlink($cache_file);
+         file_put_contents($cache_file, "");
       
       }
+      
    }
 
 }

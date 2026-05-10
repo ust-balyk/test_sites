@@ -27,7 +27,7 @@
                             <label></label>
                             <input type="email" name="email" style="text-transform: lowercase"
                                 placeholder="электронная почта" class="form-control email"
-                                   value="<?= session()->get('form_data'); ?>"><!-- required /-->
+                                value="<?= session()->get('form_data'); ?>"><!-- required /-->
                         </div>
                         
                         <div class="form-group password">

@@ -1,4 +1,4 @@
-<section class="superiority">
+  <section class="superiority">
     <div class="container superiority">
       <div class="row superiority">
         <h1 class="header_post">
@@ -217,7 +217,7 @@
     </div>
   </section><!--/categories-->
 <?php if (!empty($discounted_products)): ?>
-  <section class="carousel-promo popular"><!--sale_items-->
+  <section class="carousel-promo popular">
     <div class="container">
       <div class="slider-header">
         <a href="/cosmetics/discount" class="btn btn-sm btn-outline-secondary popular">
@@ -251,19 +251,22 @@
             </div>
             <div class="product-card-btns">
               <button class="btn btn btn-outline-secondary add-to-favorites"
-                  data-id="<?= $product['outer_id'] ?>">
-                <i class="fa-solid fa-heart"></i>
+                data-id="<?= hsc($product['outer_id']) ?>"><i class="fa-solid fa-heart"></i>
               </button>
               <button class="btn btn-outline-secondary add-to-cart"
-                  data-id="<?= $product['outer_id'] ?>">
+                data-id="<?= hsc($product['outer_id']) ?>">
                 <i class="fa-solid fa-cart-shopping"></i>
+                <div class="spinner-border d-none" 
+                  style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#a0cbeb" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
               </button>
             </div>
           </div>
-        </div><!--product-card-->
+        </div>
       <?php endforeach; ?>
       </div>
     </div><!--container-->
-  </section><!--sale_items-->
+  </section>
 <?php endif; ?>
-<script>localStorage.setItem('location', window.location.href);</script> 
+<script>localStorage.setItem('location', window.location.href);</script>

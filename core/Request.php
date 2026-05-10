@@ -42,9 +42,9 @@ class Request
    }
 
 
-   public function get($key, $default_value = null): ?string
+   public function get(string $key, $default_value = null): ?string
    {  
-      return $_GET[$key] ?? $default_value;
+      return $_REQUEST[$key] ?? $default_value;
 
    }
 
@@ -63,7 +63,7 @@ class Request
 
       $valid_keys = [
          'cosmetics',
-         'product'
+         'product',
       ];
 
       $valid_values = [

@@ -27,57 +27,8 @@
     <meta property="og:image" content="<?= $imageUrl ?>">
     <meta property="product:price:amount" content="<?= $numericPrice ?>">
     <meta property="product:price:currency" content="RUB">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            <?php foreach ($breadcrumbs as $index => $bc): ?>
-            {
-              "@type": "ListItem",
-              "position": <?= $index + 1 ?>,
-              "name": "<?= htmlspecialchars($bc['name']) ?>",
-              "item": "<?= $bc['url'] ?>"
-            }<?= ($index + 1 < count($breadcrumbs)) ? ',' : '' ?>
-            <?php endforeach; ?>
-          ]
-        },
-        {
-          "@type": "Product",
-          "@id": "<?= $fullUrl ?>#product",
-          "name": "<?= $productTitle ?>",
-          "image": "<?= $imageUrl ?>",
-          "description": "<?= htmlspecialchars($shortDescription) ?>",
-          "sku": "<?= $product['outer_id'] ?>",
-          "brand": {
-            "@type": "Brand",
-            "name": "Japan Cosmetic"
-          },
-          "countryOfOrigin": {
-            "@type": "Country",
-            "name": "Japan"
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "<?= $fullUrl ?>",
-            "priceCurrency": "RUB",
-            "price": "<?= $numericPrice ?>",
-            "itemCondition": "https://schema.org/NewCondition",
-            "availability": "<?= ($numericPrice > 0) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' ?>"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "reviewCount": "12"
-          },
-          "isRelatedTo": <?= json_encode($relatedJson, JSON_UNESCAPED_UNICODE) ?>
-        }
-      ]
-    }
-    <?= json_encode($schemaData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>
-    </script>
+    <script type="application/ld+json"><?= json_encode($schemaData, 
+      JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?></script>
   </head>
   <body>
     <div style="height:1px;border-bottom:1px dotted #744474;clear:both"></div>
@@ -230,6 +181,12 @@
         <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
+    <script>
+      if (typeof window.baseUrl === 'undefined') { 
+        const baseUrl = '<?= base_url('/'); ?>';
+        window.baseUrl = baseUrl;
+      }
+    </script>   
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>

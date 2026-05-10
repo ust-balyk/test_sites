@@ -211,5 +211,5 @@
 
     </div><!--container category-->
   </section>
-  <script>localStorage.setItem('location', window.location.href);</script>
 <?php endif ?>
+<script>localStorage.setItem('location', window.location.href);</script>

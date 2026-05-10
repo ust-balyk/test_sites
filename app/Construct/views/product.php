@@ -256,7 +256,7 @@
           <div class="product-card-details">
             <h6 class="product-card-title">
               <a href="/cosmetics/<?= $related_['slug'] ?>/product/<?= $related_['outer_id'] ?>">
-                <?= hsc($product['title']) ?>
+                <?= hsc($related_['title']) ?>
               </a>
             </h6>
             <div class="product-card-price">
@@ -341,4 +341,4 @@
       </div>
     </div>
   </section>
-<script>localStorage.setItem('location', window.location.href);</script>   
+  <script>localStorage.setItem('location', window.location.href);</script>

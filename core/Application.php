@@ -20,6 +20,7 @@ class Application
    {
       self::$app = $this;
 
+      /*
       $this->uri = $_SERVER['REQUEST_URI'];
       $this->view     = new View();
       $this->abort    = new Abort();
@@ -30,6 +31,19 @@ class Application
       $this->db       = new Database();
       $this->cache    = new Cache();
       $this->admin    = new Administrator();
+      */
+
+      $this->uri      = $_SERVER['REQUEST_URI'];
+      $this->session  = new Session();
+      $this->request  = new Request($this->uri); // если Request не нуждается в Session
+      $this->response = new Response();
+      $this->view     = new View();
+      $this->abort    = new Abort();
+      $this->router   = new Router($this->request, $this->response);
+      $this->db       = new Database();
+      $this->cache    = new Cache();
+      $this->admin    = new Administrator(); // если Admin требует DB/Cache — передвиньте выше
+
 
    }
 

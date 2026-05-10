@@ -1,7 +1,7 @@
 <?php
 // Подключаем ваш конфиг БД и класс безопасности
 //require_once '../config.php'; 
-require_once '../app/Widgets/Test/Text.php'; 
+require_once '../app/Helper/Text/Text.php'; 
 
 header('Content-Type: application/json');
 
@@ -54,18 +54,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // ЛОГИКА: Обновление текущего
             if ($imagePath) {
-                $sql = "UPDATE products SET title = ?, price = ?, description = ?, image = ? WHERE outer_id = ?";
+                $sql = "UPDATE ". TABLE_NAME .
+                   " SET title = ?, price = ?, description = ?, image = ? WHERE outer_id = ?";
                 $stmt = db()->prepare($sql);
                 $stmt->execute([$title, $price, $description, $imagePath, $outer_id]);
             } else {
-                $sql = "UPDATE products SET title = ?, price = ?, description = ? WHERE outer_id = ?";
+                $sql = "UPDATE ". TABLE_NAME .
+                   " products SET title = ?, price = ?, description = ? WHERE outer_id = ?";
                 $stmt = db()->prepare($sql);
                 $stmt->execute([$title, $price, $description, $outer_id]);
             }
         }
 
         // 3. СБРОС КЕША (если вы его используете)
-        // refresh_product_cache($outer_id);
+        //refresh_product_cache($outer_id);
 
         $response['success'] = true;
 

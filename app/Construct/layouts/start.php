@@ -8,55 +8,81 @@
     <title><?= $title ?? 'Японский уход и косметика на Japan-in.Ru'; ?></title>
     <link rel="preload" href="<?= base_url(POCKET_STYLE.'/assets/banner/banner.webp'); ?>" as="image">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Japan-in.Ru - японская косметика по доступной цене!">
-    <meta name="keywords" content="косметика, япония, красота">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Japan-in.Ru : Японская косметика по доступной цене!">
+    <meta name="keywords" content="косметика, япония, секреты красоты">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?=base_url(POCKET_STYLE.'/favicon/icon.png');?>" type="image/png">
-    <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Regular.woff2');?>" 
+    <!--link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Regular.woff2');?>" 
           as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Medium.woff2');?>" 
-          as="font" type="font/woff2" crossorigin="anonymous">
+          as="font" type="font/woff2" crossorigin="anonymous"-->
     <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('/library/toastr/toastr.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <meta property="og:locale" content="ru_RU" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Japan-in.Ru — всё для Твоей красоты!" />
     <meta property="og:description" content="Инновационные достижения косметологии из Страны восходящего солнца!" />
-	<meta property="og:url" content="https://japan-in.ru" />
-	<meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.jpg" />
-	<meta property="og:image:width" content="1630" />
-	<meta property="og:image:height" content="1136" />
+    <meta property="og:url" content="https://japan-in.ru" />
+    <meta property="og:image" content="https://japan-in.ru/public/japan-in-ru.jpg" />
+    <meta property="og:image:width" content="1630" />
+    <meta property="og:image:height" content="1136" />
     <meta property="og:image:type" content="image/jpg" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "OnlineStore",
-      "name": "Japan-in-Ru — магазин японской косметики.",
+      "@id": "https://japan-in.ru/#store",
+      "name": "Japan-in-Ru : Магазин японской косметики",
+      "areaServed": "RU",
       "url": "https://japan-in.ru",
       "logo": "https://japan-in.ru/public/japan-in-ru.png",
-      "description": "Действительный поставщик премиальной косметики из Японии.\nВсё для Твоей красоты!",
+      "description": "Поставщик премиальной японской косметики",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "RU"
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+7-912-417-48-18",
+        "telephone": "+79124174818",
         "contactType": "customer service",
-        "availableLanguage": "Russian",
-        "sameAs": [
-          "https://wa.me",
-          "https://t.me"
+        "availableLanguage": [
+          {
+            "@type": "Language",
+            "name": "Russian",
+            "alternateName": "ru"
+          }
         ]
-      }
+      },
+      "knowsAbout": [
+        "Японская косметика",
+        "Уход за кожей лица",
+        "Натуральная косметика",
+        "Органическая косметика",
+        "Q-beauty",
+        "Антивозрастной уход",
+        "Увлажнение кожи",
+        "Восстановление барьерной функции кожи",
+        "Минималистичный уход (скинимализм)",
+        "Гибридные средства (уход + макияж)",
+        "Косметика с SPF",
+        "Профессиональная косметика",
+        "Уход за волосами",
+        "Красивые ногти",
+        "Тренды красоты",
+        "Безопасная косметика"
+      ],
+      "sameAs": [
+        "https://wa.me/79124174818",
+        "https://t.me/japan_in_ru"
+      ]
     }
-    </script>
+    </script>  
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
@@ -233,12 +259,23 @@
         <span id="about_us"></span>
       </footer>
     </div><!--wrapper-->
+    <script>
+      // Проверяем наличие переменной в глобальном объекте `window`
+      if (typeof window.baseUrl === 'undefined') {
+        // Объявляем константу только после проверки
+        const baseUrl = '<?= base_url('/'); ?>';
+        // Делаем её доступной глобально
+        window.baseUrl = baseUrl;
+      }
+    </script>   
+    <!--script>const baseUrl = '<?= base_url('/'); ?>';</script-->
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
+    <script src="<?= base_url('/library/toastr/toastr.min.js'); ?>"></script>
     <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
   </body>
 </html>

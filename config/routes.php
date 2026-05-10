@@ -9,6 +9,7 @@ use \App\Controller\HomeController;
 use \App\Controller\CategoryController;
 use \App\Controller\ProductController;
 use \App\Controller\PageController;
+use \App\Controller\CartController;
 use \App\Controller\UserController;
 use \App\Controller\AccountController;
 use \App\Controller\AdminController;
@@ -21,6 +22,8 @@ $app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
 $app->router->get('/cosmetics/([a-zA-Z-]+)', [CategoryController::class]);
 $app->router->get('/cosmetics/([a-zA-Z-]+)/product/([0-9]+)', [ProductController::class]);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
+$app->router->get('/add-to-cart([?id=0-9]+)', [CartController::class, 'add_to_cart']);
+$app->router->get('/add-to-favorites([?id=0-9]+)', [CartController::class, 'add_to_favorites']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);
 $app->router->post('/register', [UserController::class, 'record'])->withoutCsrfToken();

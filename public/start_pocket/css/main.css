@@ -203,12 +203,12 @@ body {
   html, body { overflow-x: hidden; }
 }
 
-/*
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}*/
+}
   
 *:focus { outline: none !important; }
   
@@ -667,13 +667,14 @@ a.btn.promo:hover {
     border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
-a.btn.btn-outline-secondary.promo h5 {
-    font-size: 1.8rem;
+a.btn.btn-outline-secondary.promo span {
+    font-size: 2rem;
     color: var(--grey-color);
     letter-spacing: 0.1rem;
-    padding: 0.4rem 2rem 0.4rem 2rem;
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem 2rem 0rem 2rem;
 }
-a.btn.btn-outline-secondary.promo h5:hover {
+a.btn.btn-outline-secondary.promo span:hover {
     color: black;
 }
 
@@ -930,26 +931,29 @@ div.container .popular {
   padding: 0px !important;
 }
 
-a.btn.popular {
+/*a.btn.popular {*/
+a.btn.btn-sm.btn-outline-secondary.popular {
   height: 3.4rem;
   margin-top: 1.5rem;
+  padding: 4px 15px;
   color: var(--grey-color);
   border: 1px solid #989ea4;
   background-color: white; /*var(--bg-color);*/
   transition: all .350s;
 }
 
-a.btn.popular h5 {
-  font-size: 1.8rem;
+a.btn.popular span {
+  margin-top: 10px;
+  padding: 4px 20px;
+  font-size: 2rem;
   color: var(--grey-color);
   letter-spacing: 0.1rem;
-  padding: 0.4rem 2rem 0.4rem 2rem;
 }
 
 a.btn.popular:hover {
   border: 1px solid white;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  h5 { color: black; } 
+  span { color: black; } 
 }
 
 /* =================== /Carousel Popular =========== */

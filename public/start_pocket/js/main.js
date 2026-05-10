@@ -1,15 +1,147 @@
 $(document).ready(function() {
 
-    // add-to-cart 
-    //
-    $('.add-to-cart').on('click', function(e) {
+    /*
+    let addToCart = $('.add-to-cart');
+    // remove from cart
+    $('body').on('click', '.btn-cart-remove', function (e) {
         e.preventDefault();
         let btn = $(this);
-        let productId = btn.data('outer_id');
-        console.log(btn, productId);
+        let icon = btn.find('i');
+        let loader = btn.find('div');
+        //let productId = btn.data('id');
+        let productId = $('#addToCart').val();
 
+        $.ajax({
+            url: baseUrl + '/remove-from-cart',
+            method: 'GET',
+            data: {
+                //'product_id': productId
+                'id': productId
+            },
+            beforeSend: function () {
+                $('.btn-cart-remove').prop('disabled', true);
+                icon.addClass('d-none');
+                loader.removeClass('d-none');
+            },
+            success: function (res) {
+                toastr.success(res.data);
+                $('.product-id-' + productId).find('.add-to-cart').
+                    removeClass('btn-outline-primary').addClass('btn-outline-secondary');
+                $('#offcanvasCart .offcanvas-body').html(res.mini_cart);
+                $('.offcanvas-cart-qty').text(res.cart_qty);
+            },
+            error: function (request) {
+                toastr.error(request.responseText);
+                btnCartRemove.prop('disabled', false);
+                icon.removeClass('d-none');
+                loader.addClass('d-none');
+            }
+        });
+    });
+
+    // add to cart
+    
+    addToCart.on('click', function (e) {
+        e.preventDefault();
+        let btn = $(this);
+        let icon = btn.find('i');
+        let loader = btn.find('div');
+        //let productId = btn.data('id');
+        let productId = $('.to-cart').val();
+
+        $.ajax({
+            url: baseUrl + 'add-to-cart',
+            method: 'GET',
+            data: {
+                //'product-id': productId
+                'id': productId
+            },
+            beforeSend: function () {
+                // btn.prop('disabled', true);
+                addToCart.prop('disabled', true);
+                icon.addClass('d-none');
+                loader.removeClass('d-none');
+            },
+            success: function (res) {
+                toastr.success(res.data);
+                $('.product-id-' + productId).find('.add-to-cart').
+                    removeClass('btn-outline-secondary').addClass('btn-outline-primary');
+                $('#offcanvasCart .offcanvas-body').html(res.mini_cart);
+                $('.offcanvas-cart-qty').text(res.cart_qty);
+            },
+            error: function (request) {
+                toastr.error(request.responseText);
+            },
+            complete: function () {
+                setTimeout(() => {
+                    // btn.prop('disabled', false);
+                    addToCart.prop('disabled', false);
+                    icon.removeClass('d-none');
+                    loader.addClass('d-none');
+                    productId = undefined;
+                }, 500);
+            },
+        });
+    });
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "500",
+        "timeOut": "4000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "slideDown",
+        "hideMethod": "slideUp"
+    }*/
+    
+
+        
+    // add-to-cart 
+    //$('.add-to-cart').on('click', function(e) {
+        //e.preventDefault(); // отправить данные без перезагрузки страницы
+    $('.add-to-cart').on('click', function() {
+        let btn = $(this);
+        let productId = $(this).data('id');
+        let icon = btn.find('i');
+        let loader = btn.find('div');
+
+        $.ajax({
+            url: baseUrl + 'add-to-cart',
+            metod: 'GET',
+            data: {
+                'id': productId
+            },
+            beforeSend: function() {
+                btn.prop('disabled', true);
+                icon.addClass('d-none');
+                loader.removeClass('d-none');
+            },
+            success: function (result) {
+                
+                console.log(result);
+            },
+            error: function(request) {
+                
+                console.log(request);
+            },
+            complete: function() {
+                btn.prop('disabled', false);
+                icon.removeClass('d-none');
+                loader.addClass('d-none');
+            }
+        });
+    
     });
     //---------------------------------------
+    
 
     /*
     setTimeout(function() {
@@ -31,12 +163,12 @@ $(document).ready(function() {
     //
     // new_start
     //
-    /*    
+      /* 
     $(function() {
         var key = 'scrolled_to_new_start';
         if (sessionStorage.getItem(key)) return;
 
-        var idleTimeout = 8000; // 5 секунд
+        var idleTimeout = 5000; // N секунд
         var idleTimer;
 
         // селектор поля поиска — поправьте при необходимости
@@ -94,9 +226,9 @@ $(document).ready(function() {
             }
         });
     });
-    
-    //---------------------------------------
     */
+    //---------------------------------------
+    
     // получить кнопку "вернуться наверх"
     //
     top_btn = document.getElementById("top_btn");
@@ -356,6 +488,7 @@ $(document).ready(function() {
 
     /* =========Slider Promo========== */
 
+    
     $("#slider-promo").owlCarousel({
         autoplay: true,
         loop: true,
@@ -548,4 +681,24 @@ $(document).ready(function() {
     }
     document.oncopy = wpguruLink;
     */
+
+    /*
+    toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "500",
+    "timeOut": "4000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "slideDown",
+    "hideMethod": "slideUp"
+    }*/
+
 });

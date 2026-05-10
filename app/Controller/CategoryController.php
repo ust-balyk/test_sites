@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-// back_url уже записался автоматически в родителе!
 class CategoryController extends BaseController
 {
     
@@ -34,7 +33,7 @@ class CategoryController extends BaseController
                 CATEGORY_LAYOUT,
                 CATEGORY_VIEW, 
                 [
-                    'title'    => $title,
+                    'title'    => mb_ucfirst($title),
                     'products' => $products,
                     //[0] - индекс первого продукта
                     'category' => $products[0]['category'] ?? '',
@@ -73,20 +72,18 @@ class CategoryController extends BaseController
         ];
 
         // Базовая проверка: если ключа нет в списке, возвращаем общее название
-        if (!isset($categories[$key])) { return "Косметика"; }
+        if (!isset($categories[$key])) { return "косметика"; }
 
         $categoryName = $categories[$key];
 
-        // --- ЛОГИКА ОБРАБОТКИ СПЕЦСЛУЧАЕВ ---
-
         // Декоративная косметика (Всегда с большой буквы, без добавления слова "Косметика")
-        if ($key === 'makeup') { return "Декоративная косметика"; }
+        if ($key === 'makeup') { return "декоративная косметика"; }
 
         // Полость рта (Полная замена фразы по вашему требованию)
-        if ($key === 'for-oral-cavity') { return "Средства по уходу за полостью рта"; }
+        if ($key === 'for-oral-cavity') { return "средства по уходу за полостью рта"; }
 
         // Подарочные наборы (Смена предлога и падежа)
-        if ($key === 'gift-set') { return "Косметика в подарочных наборах"; }
+        if ($key === 'gift-set') { return "косметика в подарочных наборах"; }
 
         // --- ЛОГИКА ДЛЯ ОСТАЛЬНЫХ КАТЕГОРИЙ ---
 
@@ -102,18 +99,12 @@ class CategoryController extends BaseController
         }
 
         // Сборка финальной строки (Косметика + связка + название)
-        $title = "Косметика" . ($link ? " {$link} " : " ") . $categoryName;
+        $title = "косметика" . ($link ? " {$link} " : " ") . $categoryName;
 
         return $title;
     
     }
 
-    // ПРИМЕРЫ ВЫЗОВА:
-    // echo getTitleByInternalKey('makeup');          // Выведет: Декоративная косметика
-    // echo getTitleByInternalKey('for-oral-cavity'); // Выведет: Средства по уходу за полостью рта
-    // echo getTitleByInternalKey('for-face');        // Выведет: Косметика для лица
-    // echo getTitleByInternalKey('gift-set');        // Выведет: Косметика в подарочных наборах
-    // echo getTitleByInternalKey('accessories');     // Выведет: Косметика и аксессуары
 
 }
 

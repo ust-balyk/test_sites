@@ -29,12 +29,14 @@ class Cart
     
     }*/
 
-    public static function addToCart(int $product_id, int $quantity = 1)
+    public static function addToCart($product_id =0, $quantity =1)
     {
         $added = false;
         $quantity = $quantity > 0 ? $quantity : 1;
 
         if (self::hasProductInCart($product_id)) {
+            $product_id = (string)$product_id;
+            // отдаём строкой id продукта и цифрой количество
             session()->set("cart.$product_id.quantity", 
                 session()->get("cart.$product_id.quantity") + $quantity);
             $added = true;
@@ -60,14 +62,17 @@ class Cart
 
     }
 
-    public static function hasProductInCart(int $product_id): bool
+    public static function hasProductInCart($product_id): bool
     {
+        $product_id = (string)$product_id;
         return session()->has("cart.$product_id");
 
     }
 
-    public static function removeProductFromCart(int $product_id): bool
+    public static function removeProductFromCart($product_id): bool
     {
+        $product_id = (string)$product_id;
+        // передать только id строкой
         if (self::hasProductInCart($product_id)) {
             session()->remove("cart.$product_id");
             return true;
@@ -82,9 +87,11 @@ class Cart
 
     }
 
-    public static function updateProductQuantity(int $product_id, int $quantity): bool
+    public static function updateProductQuantity($product_id, int $quantity): bool
     {
         $quantity = $quantity > 0 ? $quantity : 1;
+        $product_id = (string)$product_id;
+
         if (self::hasProductInCart($product_id)) {
             session()->set("cart.$product_id.quantity", $quantity);
             return true;
@@ -103,6 +110,26 @@ class Cart
     {
         $cart = self::getCart();
         return array_sum(array_column($cart, 'quantity'));
+
+    }
+
+    public static function getCartSum()
+    {
+        $sum = 0;
+        $cart = self::getCart();
+
+        if ($cart) {
+
+            foreach ($cart as $item) {
+                $price = $item['price'] ?: $item['new_price'];
+                $sum += (int)$price * (int)$item['quantity'];
+                $sum = (string)$sum;
+
+            }
+            return $sum;
+
+        }
+        return false;
 
     }
 

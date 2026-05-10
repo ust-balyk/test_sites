@@ -45,7 +45,7 @@ const ADMIN_A = [
 ];
 
 ######## сложность password 
-const TIME_COST = 0.350;
+const TIME_COST = 0.200;
 
 ########
 const HOME_LAYOUT     = 'start';

@@ -1,5 +1,4 @@
-<?php if (!empty($discounted_products)): ?>
-  
+<?php if (!empty($discounted_products)): ?>  
   <section class="category">
     <div class="container category">
       
@@ -190,5 +189,5 @@
 
     </div><!--container category-->
   </section>
-
 <?php endif; ?>
+<script>localStorage.setItem('location', window.location.href);</script>

@@ -92,7 +92,8 @@ class Database
                         `price` TEXT DEFAULT NULL,
                         `old_price` TEXT DEFAULT NULL,
                         `new_price` TEXT DEFAULT NULL,
-                        `category_id` INT
+                        `category_id` INT,
+                        `in_stock` INT NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
                     ALTER TABLE `cosmetics` ADD FOREIGN KEY (`category_id`) 
                     REFERENCES `start`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -135,7 +136,8 @@ class Database
                         `price` TEXT DEFAULT NULL,
                         `old_price` TEXT DEFAULT NULL,
                         `new_price` TEXT DEFAULT NULL,
-                        `category_id` INT
+                        `category_id` INT,
+                        `in_stock` INT NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
                     ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) 
                     REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -383,20 +385,16 @@ class Database
             [$user_id, $hash_token] = explode(':', $token, 2);
             $user_id = (int)$user_id;
 
-            $user = $this->query('SELECT * FROM `users` WHERE `id` = :id LIMIT 1',
+            $user = $this->query('SELECT * FROM `users` WHERE `id` = :id AND id <> 1; LIMIT 1',
                 ['id' => $user_id])->getOne();
 
             if ($user && password_verify($hash_token, $user['auth_token'])) {
-
                 Application::$app->session->set('csrf_token', bin2hex(random_bytes(32)));
                 Application::$app->session->set('user.email', $user['email']);
                 Application::$app->session->set('user.name', $user['name']);
                 Application::$app->session->set('user.role', $user['role']);
-
                 $this->set_token_23($user_id); // обновляем данные
 
-                return true;
-        
             }
             return false;
 

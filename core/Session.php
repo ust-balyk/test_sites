@@ -76,20 +76,20 @@ class Session
    {
       $keys = explode('.', $key);
       // Используем ссылку, чтобы изменять непосредственно $_SESSION
-      $ref =& $_SESSION;
+      $session =& $_SESSION;
 
       foreach ($keys as $k) {
-         if (!isset($ref[$k]) || !is_array($ref[$k])) {
+         if (!isset($session[$k]) || !is_array($session[$k])) {
                // если ключ не существует или не массив — создаём массив,
                // кроме последнего уровня (последний будет перезаписан значением)
-               $ref[$k] = [];
+               $session[$k] = [];
          }
          // Переходим внутрь по ссылке
-         $ref =& $ref[$k];
+         $session =& $session[$k];
       }
 
-      // На этом уровне $ref — ссылка на конечный элемент, записываем значение
-      $ref = $value;
+      // На этом уровне $session — ссылка на конечный элемент, записываем значение
+      $session = $value;
    }
 
    // Альтернатива: безопасный get с дефолтом
@@ -108,16 +108,23 @@ class Session
       return $session_data;
    }
 
-
-   public function remove($key): bool
+   public function remove(string $key): void
    {
-      if (isset($_SESSION[$key])) {
+      $keys = explode('.', $key);
+      $session =& $_SESSION;
 
-         unset($_SESSION[$key]);
-         return true;
-      
+      // Проходим по всем ключам, кроме последнего
+      for ($i = 0; $i < count($keys) - 1; $i++) {
+         $k = $keys[$i];
+         if (!isset($session[$k]) || !is_array($session[$k])) {
+            return; // Путь не существует
+         
+         }
+         $session =& $session[$k];
       }
-      return false;
+
+      // Удаляем последний ключ
+      unset($session[$keys[$i]]);
    
    }
 
