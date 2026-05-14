@@ -259,6 +259,11 @@ img {
   color: var(--grey-color) !important;
 }
 
+button:active,
+button:focus {
+  background-color: transparent;
+}
+
 /* ================== /General ==================== */
 
 /* ================== Header ===================== */
@@ -839,7 +844,7 @@ h6.product-card-title {
     margin-top: 1rem;
     margin-bottom: 0.8rem;
     text-align: center;
-    height: 12rem;
+    height: 13rem;
     text-decoration: none;
     word-break: break-word;
     hyphens: auto;
@@ -892,7 +897,7 @@ button.add-to-cart {
 }
 i.fa-solid.fa-cart-shopping {
     font-size: 2.4rem;
-    color: #a0cbeb; /*#a0eba6;*/
+    color: #90cdfb;
 }
 button.add-to-cart:hover {
     background-color: white;
@@ -1097,6 +1102,121 @@ div.writer a {
 
 /* =================== /Categories ================= */
 
+/* ==================== Toast Container ====================== */
+
+
+/* Белый тост с зеленой обводкой */
+.bg-success {
+    background-color: #beffbb /* #a8f32f*/ !important;
+    color: green !important; /* печать */
+    border: 1px solid green !important;
+}
+
+/* Белый тост с красной обводкой */
+.bg-danger {
+    background-color: #f3c8cc !important;
+    color: #d94a56 !important; /* печать */
+    border: 1px solid #d94a56 !important;
+}
+/* Здесь кнопку закрытия (btn-close) нужно сделать черной */
+
+
+/* Основные стили тоста */
+
+.custom-toast {
+    /*min-height: 5rem !important; /* Подберите значение под ваш дизайн */
+    width: 30vw;
+    min-width: 320px; 
+    display: flex !important;
+    align-items: center; /* Центрирует содержимое по вертикали */
+    border-radius: 4px;
+    backdrop-filter: blur(10px); /* Эффект матового стекла */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.7) !important;
+    transition: all 0.5s ease;
+}
+
+/* Стили японского иероглифа-печати */
+.jp-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.2rem;
+    height: 4.2rem;
+    border: 3px solid currentColor;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 2.4rem;
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    flex-shrink: 0;
+    -webkit-font-smoothing: antialiased; /* Для Safari и Chrome */
+    -moz-osx-font-smoothing: grayscale; /* Для Firefox */
+    text-rendering: optimizeLegibility;
+    backface-visibility: hidden; /* Убирает дрожание при масштабировании */
+}
+
+/* Переопределяем стандартное скрытие Bootstrap */
+.toast.fade:not(.show) {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+    transition: all 0.4s ease-in-out;
+    display: block !important; /* Не даем Bootstrap мгновенно убрать элемент через display:none */
+}
+
+/* Для плавного «схлопывания» места, которое занимал тост */
+.toast {
+    transition: all 0.4s ease-in-out;
+}
+
+
+/* Стили текстовых меток */
+.jp-status-label {
+    color: var(--grey-color);
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 1.6rem;
+    /*line-height: 1.2;*/
+    /*letter-spacing: 0.01em;*/
+}
+
+.jp-detail-text {
+    color: var(--grey-color);
+    font-size: 1.3rem;
+    margin-top: 2px;
+}
+
+.jp-icon {
+    opacity: 0;
+    transform: scale(4);
+}
+/* Анимация Штампа при появлении тоста */
+.toast.show .jp-icon {
+    animation: stampIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 0.45s;
+}
+
+@keyframes stampIn {
+    0% { transform: scale(4) rotate(-20deg); opacity: 0; } /* filter: blur(4px); }*/
+    70% { transform: scale(0.9) rotate(0deg); opacity: 1; } /* filter: blur(0); }*/
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 767.98px) {
+    .toast-container {
+        width: 100%;
+        padding: 12px;
+    }
+    .custom-toast {
+        width: 100%;
+        min-width: auto;
+        margin-bottom: 8px;
+    }
+}
+
+
+/* ==================== /Toast ====================== */
+
 /* =================== Call Back ================== */
 
 section.call-back {
@@ -1147,6 +1267,7 @@ div.call-back button.btn.btn-primary {
     margin-bottom: -1.9rem;
     padding: 0.2rem 2rem 0.4rem 2rem;
 }
+  
 
 /* =================== /Call Back ================== */
 
@@ -2406,7 +2527,8 @@ div.cart {
 
 body#login,
 body#register {
-  background-image: url('/start_pocket/assets/login/login.webp');
+  /*background-image: url('/start_pocket/assets/login/login.webp');*/
+  background-image: url('./images/login.webp');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;

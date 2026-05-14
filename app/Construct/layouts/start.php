@@ -3,6 +3,7 @@
   <head>
     <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
+    <!--meta name="csrf-token" content="<?= hsc(session()->get('csrf_token')) ?>"-->
     <meta name="referrer" content="no-referrer-when-downgrade">
     <meta name="robots" content="index, follow">
     <title><?= $title ?? 'Японский уход и косметика на Japan-in.Ru'; ?></title>
@@ -12,10 +13,10 @@
     <meta name="keywords" content="косметика, япония, секреты красоты">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="<?=base_url(POCKET_STYLE.'/favicon/icon.png');?>" type="image/png">
-    <!--link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Regular.woff2');?>" 
+    <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Regular.woff2');?>" 
           as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="<?=base_url(POCKET_STYLE.'/font/sfpro_text/SFProText-Medium.woff2');?>" 
-          as="font" type="font/woff2" crossorigin="anonymous"-->
+          as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= base_url('/library/fontawesome/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/bootstrap/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
@@ -184,13 +185,33 @@
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
+          <div class="toast-container position-fixed bottom-0 start-0" 
+              style="z-index: 9999; margin:2.4rem 4.4rem"></div>
+          <!-- Шаблон тоста (чертеж для JS) -->
+          <template id="toast-template">
+            <div class="toast custom-toast border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex p-3 align-items-center">
+                <div class="toast-body d-flex align-items-center w-100">
+                  <!-- Контейнер для штампа -->
+                  <div class="jp-stamp-wrapper">
+                    <span class="jp-icon"></span>
+                  </div>
+                  <!-- Контейнер для текста -->
+                  <div class="ms-4">
+                    <span class="d-block fw-bold jp-status-label"></span>
+                    <span class="d-block small opacity-75 jp-detail-text"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
       </main>
       <!---------------- FOOTER ---------------->
       <footer>
         <section class="call-back">
           <div class="col-md-8 offset-md-2 call-back">
-            <h6>Если у вас возникли вопросы, пожалуйста, оставьте свой номер телефона,и мы<br>
+            <h6>Если у вас возникли вопросы, пожалуйста, оставьте свой номер телефона, и мы<br>
                 обязательно Вам перезвоним.</h6>          
             <form>
               <div class="row">
@@ -268,14 +289,12 @@
         window.baseUrl = baseUrl;
       }
     </script>   
-    <!--script>const baseUrl = '<?= base_url('/'); ?>';</script-->
     <script src="<?= base_url('/library/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
-    <script src="<?= base_url('/library/toastr/toastr.min.js'); ?>"></script>
     <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
   </body>
 </html>

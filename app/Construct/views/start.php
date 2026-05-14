@@ -251,13 +251,14 @@
             </div>
             <div class="product-card-btns">
               <button class="btn btn btn-outline-secondary add-to-favorites"
+                    style="background-color:transparent!important"
                 data-id="<?= hsc($product['outer_id']) ?>"><i class="fa-solid fa-heart"></i>
               </button>
-              <button class="btn btn-outline-secondary add-to-cart"
+              <button class="btn btn-outline-secondary add-to-cart" style="background-color:transparent!important"
                 data-id="<?= hsc($product['outer_id']) ?>">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <div class="spinner-border d-none" 
-                  style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#a0cbeb" role="status">
+                  style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#90cdfb" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
               </button>
@@ -267,6 +268,6 @@
       <?php endforeach; ?>
       </div>
     </div><!--container-->
-  </section>
+  </section> 
 <?php endif; ?>
 <script>localStorage.setItem('location', window.location.href);</script>

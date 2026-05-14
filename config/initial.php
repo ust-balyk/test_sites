@@ -71,7 +71,7 @@ define( 'TABLE_NAME',   $TABLE_NAME );
 $MENU_TABLE           = 'start';        //'products';
 $MENU_TEMPLATE        = 'partial_menu'; //'full_menu';
 $MENU_CACHE_KEY       = 'partial_menu'; //'full_menu';
-const MENU_CACHE_TIME = 10; //86400;          //31536000;
+const MENU_CACHE_TIME =  86400;          //31536000;
 define( 'MENU_TABLE',     $MENU_TABLE );
 define( 'MENU_TEMPLATE',  $MENU_TEMPLATE );
 define( 'MENU_CACHE_KEY', $MENU_CACHE_KEY );

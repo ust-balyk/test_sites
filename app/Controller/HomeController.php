@@ -17,8 +17,7 @@ class HomeController extends BaseController
             // аналог WHERE price = ''
             // dump($all_products['by_id']); тоесть во всех категориях
             $discounted_products = array_filter($all_products['by_id'], function($product) {
-                //return isset($product['price']) && $product['price'] === '';
-                return isset($product['price' === '']) && $product['in_stock'] == 1;
+                return isset($product['price']) && $product['price'] === '' && $product['in_stock'] == 1;
             
             });
 
@@ -29,7 +28,7 @@ class HomeController extends BaseController
             if (empty($discounted_products)) {
                 $discounted_products = db()->query("SELECT * FROM ". TABLE_NAME .
                     //" WHERE price = '' ORDER BY id DESC LIMIT 8")->get();
-                    " WHERE price != '' AND in_stock = 1 ORDER BY id DESC LIMIT 8")->get();
+                    " WHERE price = '' AND in_stock = 1 ORDER BY id DESC LIMIT 8")->get();
             
             }
             

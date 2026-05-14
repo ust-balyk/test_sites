@@ -32,17 +32,22 @@ class Cart
     public static function addToCart($product_id =0, $quantity =1)
     {
         $added = false;
+
+        $product_id = preg_replace('~\D+~', '', $product_id);
+
         $quantity = $quantity > 0 ? $quantity : 1;
 
         if (self::hasProductInCart($product_id)) {
             $product_id = (string)$product_id;
-            // отдаём строкой id продукта и цифрой количество
+            // отдаём строкой id продукта и количество
             session()->set("cart.$product_id.quantity", 
                 session()->get("cart.$product_id.quantity") + $quantity);
             $added = true;
 
         } else {
-            $product = db()->query("select * from ". TABLE_NAME ." where outer_id = ?", [$product_id])->getOne();
+            $product = db()->query("select * from ". TABLE_NAME ." where outer_id = ? and in_stock = 1", 
+                [$product_id])->getOne();
+
             if ($product) {
                 $product_data = [
                     'id'        => $product['outer_id'],

@@ -20,8 +20,7 @@
 
                         <?= get_csrf_field(); ?>
 
-                        <input type="hidden" name="target_page" 
-                            value="<?= htmlspecialchars($_SESSION['target_page'] ?? '/'); ?>">
+                        <input type="hidden" name="target_page" value="<?= hsc($_SESSION['target_page'] ?? '/'); ?>">
 
                         <div class="form-group email">
                             <label></label>
@@ -45,8 +44,8 @@
                         <p class="login" style="text-transform: lowercase">
                             <a href="/register"><span class="play-icon">&#9654;</span></a>
                             <a href="/register">&thinsp;создать аккаунт&emsp;</a>
-                            <?php $back_url = htmlspecialchars(
-                                \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
+                            <?php $back_url = 
+                                hsc(\App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
                             ); ?>
                             <a href="<?= $back_url ?>"><span class="play-icon">&#9654;</span></a>
                             <a href="<?= $back_url ?>">&thinsp;отказаться</a>

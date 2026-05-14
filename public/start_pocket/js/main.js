@@ -1,4 +1,113 @@
+function showBSCoreToast(detailMessage, type = 'success') {
+
+    const container = document.querySelector('.toast-container');
+    const template = document.getElementById('toast-template');
+
+    if (!container || !template) return;
+
+    const clone = template.content.cloneNode(true);
+    const toastEl = clone.querySelector('.toast');
+    const iconEl = clone.querySelector('.jp-icon');
+    const titleEl = clone.querySelector('.jp-status-label');
+    const textEl = clone.querySelector('.jp-detail-text');
+
+    // Настройка темы оформления
+    if (type === 'success') {
+        toastEl.classList.add('bg-success');
+        iconEl.textContent = '済'; // завершено
+        titleEl.textContent = 'Добавлено в корзину';
+    } else {
+        toastEl.classList.add('bg-danger');
+        iconEl.textContent = '誤'; // ошибка
+        titleEl.textContent = 'Товар не найден';
+    }
+    textEl.textContent = detailMessage;
+
+    container.appendChild(clone);
+
+    const bsToast = new bootstrap.Toast(toastEl, {
+        autohide: true,
+        delay: 4000
+    });
+
+    toastEl.addEventListener('hide.bs.toast', () => {
+        toastEl.style.pointerEvents = 'none';
+    });
+
+    // Событие 'hidden.bs.toast' срабатывает, когда Bootstrap закончил свою анимацию.
+    toastEl.addEventListener('hidden.bs.toast', () => {
+        // Безопасное и плавное скрытие без конфликта с CSS Bootstrap
+        toastEl.style.maxHeight = toastEl.offsetHeight + 'px';
+
+        // Форсируем перерисовку (Reflow) для запуска анимации
+        toastEl.offsetHeight;
+
+        // Предотвращаем резкий прыжок: плавно убираем высоту и отступы
+        //toastEl.style.transition = 'max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease';
+        toastEl.style.transition = 'all 0.4s ease-in-out';
+        toastEl.style.maxHeight = '0';
+        toastEl.style.opacity = '0';
+        toastEl.style.marginTop = '0';
+        toastEl.style.marginBottom = '0';
+        toastEl.style.paddingTop = '0';
+        toastEl.style.paddingBottom = '0';
+        toastEl.style.overflow = 'hidden';
+
+        // Удаляем физически из DOM только после завершения "схлопывания"
+        setTimeout(() => {
+            toastEl.remove();
+        }, 300);
+    });
+
+    bsToast.show();
+}
+
 $(document).ready(function() {
+    // Используем делегирование событий на случай динамической подгрузки товаров
+    $(document).on('click', '.add-to-cart', function (e) {
+        e.preventDefault();
+
+        //const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const btn = $(this);
+        const icon = btn.find('i');
+        const loader = btn.find('div');
+        const productId = btn.data('id');
+
+        $.ajax({
+            url: baseUrl + 'add-to-cart',
+            method: 'GET',
+            data: { 'id': productId },
+            beforeSend: function () {
+                btn.prop('disabled', true);
+                icon.addClass('d-none');
+                loader.removeClass('d-none');
+            },
+            success: function (res) {
+                showBSCoreToast(res.data || 'Успешно добавлено', 'success');
+
+                // Поиск по контексту текущей карточки товара надежнее, чем поиск по всему DOM
+                //btn.removeClass('btn-outline-secondary').addClass('btn-outline-primary');
+                
+                $('#offcanvasCart .offcanvas-body').html(res.mini_cart);
+                $('.offcanvas-cart-qty').text(res.cart_qty);
+            },
+            error: function (request) {
+                let errorMsg = request.responseText || 'Произошла ошибка';
+                showBSCoreToast(errorMsg, 'danger');
+            },
+            complete: function () {
+                setTimeout(() => {
+                    btn.prop('disabled', false);
+                    icon.removeClass('d-none');
+                    loader.addClass('d-none');
+                }, 500);
+            },
+        });
+    });
+//});
+
+ 
+
 
     /*
     let addToCart = $('.add-to-cart');
@@ -8,14 +117,12 @@ $(document).ready(function() {
         let btn = $(this);
         let icon = btn.find('i');
         let loader = btn.find('div');
-        //let productId = btn.data('id');
-        let productId = $('#addToCart').val();
+        let productId = $(this).data('id');
 
         $.ajax({
-            url: baseUrl + '/remove-from-cart',
+            url: baseUrl + 'remove-from-cart',
             method: 'GET',
             data: {
-                //'product_id': productId
                 'id': productId
             },
             beforeSend: function () {
@@ -46,14 +153,12 @@ $(document).ready(function() {
         let btn = $(this);
         let icon = btn.find('i');
         let loader = btn.find('div');
-        //let productId = btn.data('id');
-        let productId = $('.to-cart').val();
+        let productId = $(this).data('id');
 
         $.ajax({
             url: baseUrl + 'add-to-cart',
             method: 'GET',
             data: {
-                //'product-id': productId
                 'id': productId
             },
             beforeSend: function () {
@@ -100,14 +205,14 @@ $(document).ready(function() {
         "hideEasing": "linear",
         "showMethod": "slideDown",
         "hideMethod": "slideUp"
-    }*/
-    
+    }
+    */
 
-        
+       /* 
     // add-to-cart 
-    //$('.add-to-cart').on('click', function(e) {
-        //e.preventDefault(); // отправить данные без перезагрузки страницы
-    $('.add-to-cart').on('click', function() {
+    $('.add-to-cart').on('click', function(e) {
+        e.preventDefault(); // отправить данные без перезагрузки страницы
+    //$('.add-to-cart').on('click', function() {
         let btn = $(this);
         let productId = $(this).data('id');
         let icon = btn.find('i');
@@ -139,7 +244,7 @@ $(document).ready(function() {
             }
         });
     
-    });
+    });*/
     //---------------------------------------
     
 
@@ -490,8 +595,8 @@ $(document).ready(function() {
 
     
     $("#slider-promo").owlCarousel({
-        autoplay: true,
-        loop: true,
+        autoplay: false, //true,
+        loop: false, //true,
         slideTransition: 'linear', // эффект бегущей строки (autoplayTimeout===autoplaySpeed)
         autoplayTimeout: 3000,    // пауза между переходами
         autoplaySpeed: 3000,     // скорость анимации
@@ -538,8 +643,8 @@ $(document).ready(function() {
     /* ========== Slider-Popular & Slider-Product ========== */
 
     $("#slider-popular, #slider-product").owlCarousel({
-        autoplay: true,
-        loop: true,
+        autoplay: false, //true,
+        loop: false, //true,
         autoplayTimeout: 5000,
         autoplaySpeed: 3000,
         smartSpeed: 1000,
