@@ -2530,8 +2530,8 @@ div.cart {
 
 body#login,
 body#register {
-  /*background-image: url('/start_pocket/assets/login/login.webp');*/
-  background-image: url('./images/login.webp');
+  background-image: url('/start_pocket/assets/login/login.webp');
+  /*background-image: url('./images/login.webp');*/
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;

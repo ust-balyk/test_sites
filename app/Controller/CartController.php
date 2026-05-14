@@ -19,9 +19,6 @@ class CartController
             ], 200);
         
         }
-        // Если addToCart вернул false
-        //response()->text('Товар (ID: '.$product_id.') не найден или недоступен', 400);
-        // скрываем обработку запроса
         response()->text('ID продукта не найден или недоступен', 400);
 
     }

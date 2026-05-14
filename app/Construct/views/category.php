@@ -172,6 +172,7 @@
                     <del class="old-price"><?= $product['old_price'] ?? '' ?></del>
                   <?php endif; ?>
                   </div>
+                  <?php if ($product['in_stock']) : ?>
                   <div class="product-card-btns">
                     <button class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное"
                       data-id="<?= $product['outer_id'] ?>">
@@ -182,6 +183,7 @@
                       <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
+                  <?php endif; ?>
                 </div>
               </div><!--product-card-->
             <?php endforeach ?>

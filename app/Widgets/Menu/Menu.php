@@ -1,6 +1,7 @@
 <?php
 namespace App\Widgets\Menu;
 
+
 class Menu
 {
     protected array  $data;
