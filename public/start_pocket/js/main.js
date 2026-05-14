@@ -84,10 +84,7 @@ $(document).ready(function() {
             },
             success: function (res) {
                 showBSCoreToast(res.data || 'Успешно добавлено', 'success');
-
-                // Поиск по контексту текущей карточки товара надежнее, чем поиск по всему DOM
-                //btn.removeClass('btn-outline-secondary').addClass('btn-outline-primary');
-                
+                icon.css('color', 'blue') && icon.addClass('in_cart');
                 $('#offcanvasCart .offcanvas-body').html(res.mini_cart);
                 $('.offcanvas-cart-qty').text(res.cart_qty);
             },

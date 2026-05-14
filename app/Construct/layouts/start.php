@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="<?= base_url('/library/js/jquery-ui.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.carousel.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('/library/toastr/toastr.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <meta property="og:locale" content="ru_RU" />

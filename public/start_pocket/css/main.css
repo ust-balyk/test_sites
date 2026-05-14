@@ -899,6 +899,9 @@ i.fa-solid.fa-cart-shopping {
     font-size: 2.4rem;
     color: #90cdfb;
 }
+i.fa-solid.fa-cart-shopping.in_cart {
+  color: blue !important;
+}
 button.add-to-cart:hover {
     background-color: white;
     i.fa-solid.fa-cart-shopping {
