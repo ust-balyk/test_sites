@@ -29,12 +29,10 @@ class Cart
     
     }*/
 
-    public static function addToCart($product_id =0, $quantity =1)
+    public static function addToCart($product_id, $quantity =1)
     {
         $added = false;
-
         $product_id = preg_replace('~\D+~', '', $product_id);
-
         $quantity = $quantity > 0 ? $quantity : 1;
 
         if (self::hasProductInCart($product_id)) {

@@ -1,37 +1,56 @@
 <?= db()->user_back(); ?>
-<?php //dump($_SESSION); ?>
-<?php //dump($_SERVER['REQUEST_URI']); ?>
-<?php //dump($_COOKIE); ?>
-
-<input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
 <?php if (session()->get('role') === 'master'): ?>
-<div id="admin-toolbar" class="admin-toolbar shadow-sm">
+  <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
-        <span class="badge bg-warning text-dark">ADMIN MODE</span>
-        <button class="btn btn-sm btn-primary" onclick="toggleEditMode()">📝 Редактировать</button>
-        <button class="btn btn-sm btn-success" onclick="prepareNewProduct()">➕ Новый товар</button>
+      <span class="badge bg-warning text-dark">ADMIN MODE</span>
+      <button class="btn btn-sm btn-primary" onclick="toggleEditMode()">📝 Редактировать</button>
+      <button class="btn btn-sm btn-success" onclick="prepareNewProduct()">➕ Новый товар</button>
         
-        <div id="format-tools" class="d-none border-start ps-3 ms-2">
-            <button class="btn btn-sm btn-outline-light" onclick="format('bold')"><b>B</b></button>
-            <button class="btn btn-sm btn-outline-light" onclick="format('italic')"><i>I</i></button>
-            <button class="btn btn-sm btn-outline-light" onclick="format('insertUnorderedList')">• Список</button>
-            <button class="btn btn-sm btn-warning" 
-                    onclick="format('removeFormat')" 
-                    title="Сбросить оформление">
-                    <i class="fa-solid fa-eraser"></i> Ластик
-            </button>
-            <button class="btn btn-sm btn-danger ms-3" onclick="saveAllChanges()">💾 Сохранить ВСЁ</button>
-        </div>
+      <div id="format-tools" class="d-none border-start ps-3 ms-2">
+        <button class="btn btn-sm btn-outline-light" onclick="format('bold')"><b>B</b></button>
+        <button class="btn btn-sm btn-outline-light" onclick="format('italic')"><i>I</i></button>
+        <button class="btn btn-sm btn-outline-light" onclick="format('insertUnorderedList')">• Список</button>
+        <button class="btn btn-sm btn-warning" onclick="format('removeFormat')" title="Сбросить оформление">
+          <i class="fa-solid fa-eraser"></i> Ластик
+        </button>
+        <button class="btn btn-sm btn-danger ms-3" onclick="saveAllChanges()">💾 Сохранить ВСЁ</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<style>
-  .admin-toolbar { position: fixed; top: 0; left: 0; width: 100%; background: #212529; z-index: 1050; padding: 8px 0; color: white; }
-  [contenteditable="true"] { outline: 2px dashed #0d6efd !important; background: rgba(13, 110, 253, 0.05); }
+  <style>
+  .admin-toolbar { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    background: #212529; 
+    z-index: 1050; 
+    padding: 8px 0; 
+    color: white; 
+  }
+  [contenteditable="true"] { 
+    outline: 2px dashed #0d6efd !important; 
+    background: rgba(13, 110, 253, 0.05); 
+  }
   .edit-image-hover { cursor: pointer; position: relative; }
-  .edit-image-hover::after { content: "Сменить фото"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+  .edit-image-hover::after { 
+    content: "Сменить фото"; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    color: white; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    transition: 0.3s; 
+  }
   .edit-image-hover:hover::after { opacity: 1; }
-</style>
+  </style>
 <?php endif; ?>
 
 <?php if (!empty($product)): ?>
@@ -243,8 +262,10 @@
         <div class="product-card">
         <?php if (empty($related_['price']) && empty($related_['new_price'])): ?>
           <div class="product_expected"><p>ожидается</p></div>
+        <?php elseif ($related_['in_stock'] == 0): ?>
+          <div class="product_expected"><p>ожидается</p></div>
         <?php elseif ($related_['new_price']): ?>
-          <div class="discounted_product">акция!</div>
+          <div class="discounted_product"><p>акция!</p></div>
         <?php endif; ?>
           <a href="/cosmetics/<?= $related_['slug'] ?>/product/<?= $related_['outer_id'] ?>">
             <div class="product-card-img">
@@ -261,28 +282,34 @@
             </h6>
             <div class="product-card-price">
             <?php if (!empty($related_['price'])): ?>
-                <span class="current-price"><?= $related_['price'] ?></span>
+              <span class="current-price"><?= $related_['price'] ?></span>
             <?php else: ?>
-                <span class="new-price"><?= hsc($related_['new_price']) ?? '' ?></span>
-                <del class="old-price"><?= hsc($related_['old_price']) ?? '' ?></del>
+              <span class="new-price"><?= hsc($related_['new_price']) ?? '' ?></span>
+              <del class="old-price"><?= hsc($related_['old_price']) ?? '' ?></del>
             <?php endif; ?>
             </div>
-            <div class="product-card-btns">
+            <div class="product-card-btns" style="height:4.3rem">
+            <?php if ($related_['in_stock']): ?>
               <button class="btn btn btn-outline-secondary add-to-favorites"
                 data-id="<?= hsc($related_['outer_id']) ?>">
                 <i class="fa-solid fa-heart"></i>
               </button>
-              <button class="btn btn-outline-secondary add-to-cart"
-                data-id="<?= hsc($related_['outer_id']) ?>">
-                <i class="fa-solid fa-cart-shopping"></i>
+              <button class="btn btn-outline-secondary add-to-cart" data-id="<?= hsc($related_['outer_id']) ?>">
+                <i class="fa-solid fa-cart-shopping
+                <?= \App\Widgets\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
+                <div class="spinner-border d-none"
+                  style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#90cdfb" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
               </button>
+            <?php endif; ?>
             </div>
           </div>
         </div><!--product-card-->
       <?php endforeach; ?>
       </div>
     </div>
-  </section>
+  </section-->
 <?php endif; ?>
 
   <section class="delivery">

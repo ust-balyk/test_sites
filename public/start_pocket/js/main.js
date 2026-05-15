@@ -63,8 +63,11 @@ function showBSCoreToast(detailMessage, type = 'success') {
 }
 
 $(document).ready(function() {
+
+    //const addToCart = $('.add-to-cart');
     // Используем делегирование событий на случай динамической подгрузки товаров
     $(document).on('click', '.add-to-cart', function (e) {
+    //addToCart.on('click', function (e) {
         e.preventDefault();
 
         //const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -79,6 +82,7 @@ $(document).ready(function() {
             data: { 'id': productId },
             beforeSend: function () {
                 btn.prop('disabled', true);
+                //addToCart.prop('disabled', true);
                 icon.addClass('d-none');
                 loader.removeClass('d-none');
             },
@@ -95,6 +99,7 @@ $(document).ready(function() {
             complete: function () {
                 setTimeout(() => {
                     btn.prop('disabled', false);
+                    //addToCart.prop('disabled', false);
                     icon.removeClass('d-none');
                     loader.addClass('d-none');
                 }, 500);

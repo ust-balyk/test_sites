@@ -12,15 +12,13 @@ class ProductController extends BaseController
         self::init(); // запись URL
 
         [$slug, $id] = request()->get_SLUG_or_ID();
-        $cache = cache()->getCache_db();
         
-        // Пытаемся найти товар (сначала кэш, потом база)
+        $cache = cache()->getCache_db();
         $product = $cache['by_id'][$id] ?? null;
         
         if (empty($product) && !empty($id)) {
-            // Используем ?: так как get() возвращает false при неудаче
-            $result = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ?", [$id])->get();
-            $product = $result ? $result[0] : null;
+            $product = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ? end in_stock = 1", 
+                [$id])->get();
     
         }
 
@@ -58,7 +56,8 @@ class ProductController extends BaseController
                 }
                 
             }
- 
+        
+
             /********* LD+JSON **********/
             // --------------------------------------------------
             // Безопасный host/протокол/URL

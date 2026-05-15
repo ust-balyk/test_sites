@@ -15,7 +15,7 @@
         </nav>
         <div class="d-none d-md-block">
           <a href="/" class="btn btn-sm btn-outline-secondary back_link">
-            <h5>дом</h5>
+            <span>дом</span>
           </a>
         </div>
       </div>
@@ -137,19 +137,13 @@
             <div id="category_content" class="row">
             <?php foreach ($cosmetics as $product): ?>
               <div class="col-lg-3 col-md-4 product-card" style="">
-                <?php //dump($product);
-                  if (empty($product['price']) && empty($product['new_price']) 
-                    && empty($product['old_price'])) { 
-                      echo '<div class="product_expected">
-                              <p>ожидается</p>
-                            </div>';
-                  }
-                  else if (!empty($product['new_price'])) {
-                      echo '<div class="discounted_product">
-                              <p>акция!</p>
-                            </div>';
-                  }
-                ?>
+              <?php if (empty($product['price']) && empty($product['new_price'])): ?>
+                <div class="product_expected"><p>ожидается</p></div>
+              <?php elseif ($product['in_stock'] == 0): ?>
+                <div class="product_expected"><p>ожидается</p></div>
+              <?php elseif ($product['new_price'] && $product['in_stock']): ?>
+                <div class="discounted_product"><p>акция!</p></div>
+              <?php endif; ?>
                 <a href="/cosmetics/<?= $product['slug']; ?>/product/<?= $product['outer_id']; ?>">
                   <div class="product-card-img">
                     <img src="<?= $product['image'] ?>" 
@@ -164,24 +158,29 @@
                     </a>
                   </h6>
                   <div class="product-card-price">
-                    <?php if ($product['price']) {
-                            echo $product['price'];
-                          } else if ($product['price'] == '') {
-                            echo $product['new_price'].'<del>'.$product['old_price'].'</del>';
-                          } else {
-                            echo 'эхо?';
-                          }
-                  ?>
+                  <?php if (!empty($product['price'])): ?>
+                    <span class="current-price"><?= $product['price'] ?></span>
+                  <?php elseif ($product['new_price']): ?>
+                    <span class="new-price"><?= $product['new_price'] ?? '' ?></span>
+                    <del class="old-price"><?= $product['old_price'] ?? '' ?></del>
+                  <?php endif; ?>
                   </div>
-                  <div class="product-card-btns">
+                  <div class="product-card-btns" style="height:4.3rem">
+                    <?php if ($product['in_stock']): ?>
                     <button class="btn btn btn-outline-secondary add-to-favorites" 
                       title="добавить в избранное" data-id="<?= $product['outer_id'] ?>">
                       <i class="fa-solid fa-heart"></i>
                     </button>
                     <button class="btn btn-outline-secondary add-to-cart" 
                       title="добавить в корзину" data-id="<?= $product['outer_id'] ?>">
-                      <i class="fa-solid fa-cart-shopping"></i>
+                      <i class="fa-solid fa-cart-shopping
+                      <?= \App\Widgets\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
+                      <div class="spinner-border d-none"
+                          style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#90cdfb" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
                     </button>
+                    <?php endif; ?>
                   </div>
                 </div>
               </div><!--product-card-->
