@@ -3,57 +3,107 @@ namespace Master;
 
 class Session
 {
+   private string $session_path;
+   private string $log_dir;
 
-   private function generateCsrfToken()
+   public function __construct(string $session_path = null, string $log_dir = null)
    {
-      if (! isset($_SESSION['csrf_token'])) {
-         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-      
+      $this->session_path = $session_path ?? dirname($_SERVER['DOCUMENT_ROOT']) . '/Master/session/tmp';
+      $this->log_dir = rtrim($log_dir ?? 
+         (__DIR__ . '/../session/log_Visit/'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+      // Создаём папку для сессий
+      if (!is_dir($this->session_path) && !mkdir($this->session_path, 0755, true) && !is_dir($this->session_path)) {
+         throw new \RuntimeException('Cannot create session directory: ' . $this->session_path);
       }
-   
-   }
-   
-   public function __construct()
-   {
-      $session_path = dirname($_SERVER['DOCUMENT_ROOT']) . '/Master/session/tmp';
-      if (!is_dir($session_path)) { mkdir($session_path, 0777, true); }
-      session_save_path($session_path);
-      session_start([
-         'name'                   => '23~',
-         'sid_length'             => 96,
-         'sid_bits_per_character' => 6,
-         'use_strict_mode'        => true,
-         'cookie_lifetime'        => 0,    
-         'cookie_path'            => '/',  
-         'cookie_httponly'        => true, 
-      ]);
+      session_save_path($this->session_path);
 
-      /*      
-      date_default_timezone_set('Asia/Yekaterinburg'); //('Europe/Moscow');
-      $_SESSION['date']                 = date(DATE_RSS);
-      $_SESSION['remote_addr']          = $_SERVER['REMOTE_ADDR'];
-      $_SESSION['http_user_agent']      = $_SERVER['HTTP_USER_AGENT'];
-       */
+      // Старт сессии если не запущена
+      if (session_status() !== PHP_SESSION_ACTIVE) {
+         session_start([
+               'name'                   => '23~',
+               'sid_length'             => 96,
+               'sid_bits_per_character' => 6,
+               'use_strict_mode'        => true,
+               'cookie_lifetime'        => 0,
+               'cookie_path'            => '/',
+               'cookie_httponly'        => true,
+         ]);
+      }
+
+      date_default_timezone_set('Asia/Yekaterinburg');
+
       $this->generateCsrfToken();
-      /*
-      $data = [
-         date(DATE_RSS),
-         $_SERVER['REMOTE_ADDR'],
-         $_SERVER['HTTP_ACCEPT_LANGUAGE'],
-         $_SERVER['HTTP_USER_AGENT'],
-         $_SERVER['REQUEST_URI'], 
-      ];
-      $path = '../log/enter/';
-      if (!is_dir($path)) { mkdir($path, 0777, true); }
+
       if (!isset($_SESSION['info'])) {
-         $info = implode("\n", $data);
-         file_put_contents($path .'enter.txt', $info . "\n
---------------------------------------------------------\n", FILE_APPEND|LOCK_EX);
-      
+         $this->logFirstVisit();
+         $_SESSION['info'] = 'created';
       }
-      $_SESSION['info'] = 'created';
-       */
    }
+
+
+   private function generateCsrfToken(): void
+   {
+      if (empty($_SESSION['csrf_token'])) {
+         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+      }
+   }
+
+
+   private function logFirstVisit(): void
+   {
+      $ip   = $this->getClientIp();
+      $user = $this->safeString($_SERVER['HTTP_USER_AGENT'] ?? '', 512);
+      $lang = $this->safeString($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 64);
+      $uri  = $this->safeString($_SERVER['REQUEST_URI'] ?? '', 1024);
+      //$date = date('c');
+      $date = date(DATE_RSS);
+
+      // Создаём папку для логов
+      if (!is_dir($this->log_dir) && !mkdir($this->log_dir, 0755, true) && !is_dir($this->log_dir)) {
+         error_log('Cannot create log directory: ' . $this->log_dir);
+         return;
+      }
+
+      $entry = sprintf(
+         "[%s] IP=%s; LANG=%s; USER=%s; URI=%s\n--------------------------------------------------------\n",
+         $date, $ip, $lang, $user, $uri
+      );
+
+      $file = $this->log_dir . 'enter.txt';
+      if (false === @file_put_contents($file, $entry, FILE_APPEND | LOCK_EX)) {
+         error_log('Failed to write to log file: ' . $file);
+      }
+
+      // Сохраняем в сессии (пример)
+      $_SESSION['date'] = $date;
+      $_SESSION['remote_addr'] = $ip;
+      $_SESSION['http_user_agent'] = $user;
+   }
+
+   private function getClientIp(): string
+   {
+      $keys = ['HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_REAL_IP', 'REMOTE_ADDR'];
+      foreach ($keys as $key) {
+         if (!empty($_SERVER[$key])) {
+               $ips = explode(',', (string)$_SERVER[$key]);
+               $ip = trim($ips[0]);
+               if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                  return $ip;
+               }
+         }
+      }
+      return '0.0.0.0';
+   }
+
+   private function safeString(string $s, int $max = 1024): string
+   {
+      $s = trim($s);
+      if ($s === '') return '';
+      $s = mb_substr($s, 0, $max);
+      return preg_replace('/[[:cntrl:]]+/u', ' ', $s);
+   }
+
 
    // Проверяет наличие ключа в точечной нотации
    public function has(string $key): bool
@@ -70,6 +120,7 @@ class Session
       }
       return true;
    }
+
 
    // Устанавливает значение по пути, создавая вложенные массивы при необходимости
    public function set(string $key, $value): void
@@ -108,6 +159,7 @@ class Session
       return $session_data;
    }
 
+
    public function remove(string $key): void
    {
       $keys = explode('.', $key);
@@ -128,11 +180,13 @@ class Session
    
    }
 
+
    public function setFlash($key, $value): void
    {
       $_SESSION['flash'][$key] = $value;
 
    }
+
 
    public function getFlash($key, $value_default=null)
    {
