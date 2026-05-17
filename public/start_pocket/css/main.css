@@ -1107,19 +1107,25 @@ div.writer a {
 
 /* ==================== Toast Container ====================== */
 
-
-/* Белый тост с зеленой обводкой */
 .bg-success {
     background-color: #beffbb /* #a8f32f*/ !important;
     color: green !important; /* печать */
-    border: 1px solid green !important;
+    /*border: 2px solid green !important;*/
+    border: 1px solid #989ea4 !important;
 }
 
-/* Белый тост с красной обводкой */
 .bg-danger {
     background-color: #f3c8cc !important;
     color: #d94a56 !important; /* печать */
-    border: 1px solid #d94a56 !important;
+    /*border: 2px solid #d94a56 !important;*/
+    border: 1px solid #989ea4 !important;
+}
+
+.bg-warning {
+  background-color: #ffed9e !important;
+  color: #ff8e22 !important; /* печать */
+  /*border: 2px solid #ff8e22 !important;*/
+  border: 1px solid #989ea4 !important;
 }
 /* Здесь кнопку закрытия (btn-close) нужно сделать черной */
 
@@ -1128,7 +1134,7 @@ div.writer a {
 
 .custom-toast {
     /*min-height: 5rem !important; /* Подберите значение под ваш дизайн */
-    width: 30vw;
+    width: 32vw;
     min-width: 320px; 
     display: flex !important;
     align-items: center; /* Центрирует содержимое по вертикали */

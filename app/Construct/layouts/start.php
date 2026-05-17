@@ -3,7 +3,8 @@
   <head>
     <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
-    <!--meta name="csrf-token" content="<?= hsc(session()->get('csrf_token')) ?>"-->
+    <meta name="csrf-token" content="<?= hsc(session()->get('csrf_token')) ?>">
+    <!--meta name="csrf-token" content="ffcc7dd51ec868bcb0d325b90217a5f91d96314b5bb"-->
     <meta name="referrer" content="no-referrer-when-downgrade">
     <meta name="robots" content="index, follow">
     <title><?= $title ?? 'Японский уход и косметика на Japan-in.Ru'; ?></title>

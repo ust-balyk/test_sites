@@ -1,116 +1,174 @@
 function showBSCoreToast(detailMessage, type = 'success') {
+  const container = document.querySelector('.toast-container');
+  const template = document.getElementById('toast-template');
+  if (!container || !template) return;
 
-    const container = document.querySelector('.toast-container');
-    const template = document.getElementById('toast-template');
+  const clone = template.content.cloneNode(true);
+  const toastEl = clone.querySelector('.toast');
+  const iconEl = clone.querySelector('.jp-icon');
+  const titleEl = clone.querySelector('.jp-status-label');
+  const textEl = clone.querySelector('.jp-detail-text');
 
-    if (!container || !template) return;
+  if (!toastEl || !iconEl || !titleEl || !textEl) return;
 
-    const clone = template.content.cloneNode(true);
-    const toastEl = clone.querySelector('.toast');
-    const iconEl = clone.querySelector('.jp-icon');
-    const titleEl = clone.querySelector('.jp-status-label');
-    const textEl = clone.querySelector('.jp-detail-text');
+  // Сбрасываем классы/стили от предыдущих вызовов (на случай повторного использования)
+  toastEl.classList.remove('bg-success', 'bg-warning', 'bg-danger');
+  toastEl.style.transition = '';
+  toastEl.style.maxHeight = '';
+  toastEl.style.opacity = '';
+  toastEl.style.marginTop = '';
+  toastEl.style.marginBottom = '';
+  toastEl.style.paddingTop = '';
+  toastEl.style.paddingBottom = '';
+  toastEl.style.overflow = '';
 
-    // Настройка темы оформления
-    if (type === 'success') {
-        toastEl.classList.add('bg-success');
-        iconEl.textContent = '済'; // завершено
-        titleEl.textContent = 'Добавлено в корзину';
-    } else {
-        toastEl.classList.add('bg-danger');
-        iconEl.textContent = '誤'; // ошибка
-        titleEl.textContent = 'Товар не найден';
-    }
-    textEl.textContent = detailMessage;
+  // Настройка темы
+  if (type === 'success') {
+    toastEl.classList.add('bg-success');
+    iconEl.textContent = '済'; // завершено
+    titleEl.textContent = 'Добавлено в корзину';
+  } else if (type === 'warning') {
+    toastEl.classList.add('bg-warning');
+    iconEl.textContent = '誤'; // ошибка
+    titleEl.textContent = 'Товар не найден';
+  } else if (type === 'danger') {
+    toastEl.classList.add('bg-danger');
+    iconEl.textContent = '危'; // опасно
+    titleEl.textContent = 'Нарушение безопасности';
+  } else {
+    // на всякий случай — нейтральный вариант
+    toastEl.classList.add('bg-secondary');
+    iconEl.textContent = '';
+    titleEl.textContent = '';
+  }
 
-    container.appendChild(clone);
+  textEl.textContent = detailMessage || '';
 
-    const bsToast = new bootstrap.Toast(toastEl, {
-        autohide: true,
-        delay: 4000
-    });
+  container.appendChild(clone);
 
-    toastEl.addEventListener('hide.bs.toast', () => {
-        toastEl.style.pointerEvents = 'none';
-    });
+  // После вставки в DOM получаем реальный элемент (в clone он уже в документе)
+  const actualToastEl = container.querySelector('.toast:last-child');
 
-    // Событие 'hidden.bs.toast' срабатывает, когда Bootstrap закончил свою анимацию.
-    toastEl.addEventListener('hidden.bs.toast', () => {
-        // Безопасное и плавное скрытие без конфликта с CSS Bootstrap
-        toastEl.style.maxHeight = toastEl.offsetHeight + 'px';
+  const bsToast = new bootstrap.Toast(actualToastEl, {
+    autohide: true,
+    delay: 4000
+  });
 
-        // Форсируем перерисовку (Reflow) для запуска анимации
-        toastEl.offsetHeight;
+  actualToastEl.addEventListener('hide.bs.toast', () => {
+    actualToastEl.style.pointerEvents = 'none';
+  });
 
-        // Предотвращаем резкий прыжок: плавно убираем высоту и отступы
-        //toastEl.style.transition = 'max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease';
-        toastEl.style.transition = 'all 0.4s ease-in-out';
-        toastEl.style.maxHeight = '0';
-        toastEl.style.opacity = '0';
-        toastEl.style.marginTop = '0';
-        toastEl.style.marginBottom = '0';
-        toastEl.style.paddingTop = '0';
-        toastEl.style.paddingBottom = '0';
-        toastEl.style.overflow = 'hidden';
+  actualToastEl.addEventListener('hidden.bs.toast', () => {
+    // плавное схлопывание перед удалением
+    actualToastEl.style.maxHeight = actualToastEl.offsetHeight + 'px';
+    // reflow
+    void actualToastEl.offsetHeight;
+    actualToastEl.style.transition = 'max-height 0.35s ease, opacity 0.35s ease, margin 0.35s ease, padding 0.35s ease';
+    actualToastEl.style.maxHeight = '0';
+    actualToastEl.style.opacity = '0';
+    actualToastEl.style.marginTop = '0';
+    actualToastEl.style.marginBottom = '0';
+    actualToastEl.style.paddingTop = '0';
+    actualToastEl.style.paddingBottom = '0';
+    actualToastEl.style.overflow = 'hidden';
+    // для корректного удаления после завершения анимации
+    actualToastEl.addEventListener('hidden.bs.toast', () => actualToastEl.remove());
+    //setTimeout(() => actualToastEl.remove(), 400);
+  });
 
-        // Удаляем физически из DOM только после завершения "схлопывания"
-        setTimeout(() => {
-            toastEl.remove();
-        }, 300);
-    });
-
-    bsToast.show();
+  bsToast.show();
 }
 
 $(document).ready(function() {
+  $(document).on('click', '.add-to-cart', function (e) {
+    e.preventDefault();
 
-    //const addToCart = $('.add-to-cart');
-    // Используем делегирование событий на случай динамической подгрузки товаров
-    $(document).on('click', '.add-to-cart', function (e) {
-    //addToCart.on('click', function (e) {
-        e.preventDefault();
+    const btn = $(this);
+    const icon = btn.find('i');
+    const loader = btn.find('.loader'); // предполагаемый селектор для лоадера
+    const productId = btn.data('id');
 
-        //const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const btn = $(this);
-        const icon = btn.find('i');
-        const loader = btn.find('div');
-        const productId = btn.data('id');
+    const csrfToken = $('meta[name="csrf-token"]').attr('content') || null;
 
-        $.ajax({
-            url: baseUrl + 'add-to-cart',
-            method: 'GET',
-            data: { 'id': productId },
-            beforeSend: function () {
-                btn.prop('disabled', true);
-                //addToCart.prop('disabled', true);
-                icon.addClass('d-none');
-                loader.removeClass('d-none');
-            },
-            success: function (res) {
-                showBSCoreToast(res.data || 'Успешно добавлено', 'success');
-                icon.css('color', 'blue') && icon.addClass('in_cart');
-                $('#offcanvasCart .offcanvas-body').html(res.mini_cart);
-                $('.offcanvas-cart-qty').text(res.cart_qty);
-            },
-            error: function (request) {
-                let errorMsg = request.responseText || 'Произошла ошибка';
-                showBSCoreToast(errorMsg, 'danger');
-            },
-            complete: function () {
-                setTimeout(() => {
-                    btn.prop('disabled', false);
-                    //addToCart.prop('disabled', false);
-                    icon.removeClass('d-none');
-                    loader.addClass('d-none');
-                }, 500);
-            },
-        });
+    if (!csrfToken) {
+      showBSCoreToast('CSRF токен отсутствует или неверен', 'danger');
+      return;
+    }
+
+    $.ajax({
+
+      url: baseUrl + 'add-to-cart',
+      method: 'POST',
+      data: { 'id': productId },
+      headers: csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {},
+      beforeSend: function () {
+        btn.prop('disabled', true);
+        if (icon.length) icon.addClass('d-none');
+        if (loader.length) loader.removeClass('d-none');
+      },
+      
+      success: function (res) {
+        // ожидаем JSON: { status: 'ok'|'error', type?: 'success'|'warning'|'danger', 
+        // message?: '...' , mini_cart?, cart_qty? }
+        if (res && res.status === 'error') {
+          const t = res.type || 'warning';
+          showBSCoreToast(res.message || 'Ошибка', t);
+        } else {
+          showBSCoreToast((res && res.message) || 'Успешно добавлено', 'success');
+          if (res && res.mini_cart) $('#offcanvasCart .offcanvas-body').html(res.mini_cart);
+          if (res && typeof res.cart_qty !== 'undefined') $('.offcanvas-cart-qty').text(res.cart_qty);
+          icon.css('color', 'blue').addClass('in_cart');
+        }
+      },
+
+      error: function (xhr) {
+        let errorMsg = 'Произошла ошибка';
+        let type = 'warning';
+      
+        try {
+          const json = xhr.responseJSON || JSON.parse(xhr.responseText || '{}');
+      
+          if (json) {
+            if (json.message) errorMsg = json.message;
+            else if (json.errors) {
+              const first = Object.values(json.errors)[0];
+              errorMsg = Array.isArray(first) ? first[0] : first;
+            }
+            if (json.type) type = json.type; // сервер явно указал тип
+            if (json.status && json.status === 'error' && !json.type) type = 'warning';
+          }
+        } catch (e) {
+          // игнорируем парсинг-ошибки
+        }
+      
+        // HTTP-статусы с CSRF/auth проблемой считаем 'danger'
+        if (xhr.status === 419 || xhr.status === 401 || xhr.status === 403) {
+          type = 'danger';
+          if (!errorMsg || errorMsg === 'Произошла ошибка') {
+            errorMsg = 'Неверный CSRF токен или сессия истекла';
+          }
+        } else if (!type) {
+          type = 'warning';
+        }
+      
+        showBSCoreToast(errorMsg, type);
+      },
+      
+      complete: function () {
+        setTimeout(function () {
+          btn.prop('disabled', false);
+          if (icon.length) icon.removeClass('d-none');
+          if (loader.length) loader.addClass('d-none');
+        }, 300);
+      }
     });
+  });
 
- 
 
 
-    /*
+
+  /*
+    
     let addToCart = $('.add-to-cart');
     // remove from cart
     $('body').on('click', '.btn-cart-remove', function (e) {
@@ -189,25 +247,8 @@ $(document).ready(function() {
             },
         });
     });
-
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-bottom-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "500",
-        "timeOut": "4000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "slideDown",
-        "hideMethod": "slideUp"
-    }
     */
+
 
        /* 
     // add-to-cart 
@@ -246,97 +287,42 @@ $(document).ready(function() {
         });
     
     });*/
-    //---------------------------------------
+
     
-
-    /*
-    setTimeout(function() {
-        var target = $('#new_top');
-
-        if (target.length) {
-            $('html, body').animate({
-                scrollTop: target.offset().top
-            }, {
-                duration: 1850, // Увеличим время для более заметного эффекта
-                easing: 'swing', // Стандартная плавная остановка
-                complete: function() {
-                        //console.log('Прокрутка завершена точно у цели');
-                }
-            });
-        }
-    }, 5000);*/
+    /* ------------- new start -------------- */
     
-    //
-    // new_start
-    //
-      /* 
-    $(function() {
-        var key = 'scrolled_to_new_start';
-        if (sessionStorage.getItem(key)) return;
+    var cancelled = false;
 
-        var idleTimeout = 5000; // N секунд
-        var idleTimer;
-
-        // селектор поля поиска — поправьте при необходимости
-        var searchSelector = 'input[type="search"], input.search, #search, .search input';
-
-        function markDone() {
-            sessionStorage.setItem(key, '1');
-            clearTimeout(idleTimer);
-        }
-
-        function startIdleTimer() {
-            clearTimeout(idleTimer);
-            idleTimer = setTimeout(function() {
-            var target = $('#new_top');
-            if (target.length) {
-                $('html, body').animate({ scrollTop: target.offset().top }, 1850, 'swing', markDone);
-            } else {
-                markDone();
-            }
-            }, idleTimeout);
-        }
-
-        // События, которые сбрасывают таймер (т.е. активность)
-        $(document).on('mousemove click keydown scroll', function(e) {
-            // Для keydown допускаем только ввод в поле поиска
-            // — иначе любое нажатие клавиш будет считать активностью.
-            if (e.type === 'keydown') {
-            // если фокус в поле поиска или событие произошло в элементе поиска — считаем активностью
-            if ($(e.target).is(searchSelector) || $(e.target).closest(searchSelector).length) {
-                startIdleTimer();
-            }
-            // иначе игнорируем keydown как активность
-            } else {
-            // mousemove, click, scroll — считаем активностью
-            startIdleTimer();
-            }
+    var scrollTimer = setTimeout(function() {
+    if (cancelled) return; // если было событие — ничего не делаем
+    var target = $('#new_top');
+    if (target.length) {
+        $('html, body').animate({
+        scrollTop: target.offset().top
+        }, {
+        duration: 1850,
+        easing: 'swing'
         });
+    }
+    }, 7000);
 
-        // Также слушаем ввод в поле поиска (input) — активность
-        $(document).on('input', searchSelector, startIdleTimer);
+    // события, при которых таймер "отключается"
+    var cancelEvents = 'mousemove mousedown wheel DOMMouseScroll mousewheel keydown touchstart touchmove click';
 
-        // Запускаем первый таймер при загрузке
-        startIdleTimer();
+    function markCancelled() {
+    cancelled = true;
+    // можно снять слушатели, чтобы не держать лишние обработчики
+    $(window).off(cancelEvents, markCancelled);
+    $(document).off(cancelEvents, markCancelled);
+    }
 
-        // Если прокрутка была вызвана вручную до таймера — пометим как выполненное
-        $(window).one('scroll', function() {
-            // если пользователь сам прокрутил к нужной позиции, не выполнять авто-прокрутку
-            var target = $('#new_top');
-            if (target.length) {
-            var top = target.offset().top;
-            var st = $(window).scrollTop();
-            if (Math.abs(st - top) < 50) {
-                markDone();
-            }
-            }
-        });
-    });
-    */
-    //---------------------------------------
+    $(window).on(cancelEvents, markCancelled);
+    $(document).on(cancelEvents, markCancelled);
+
+    /* ---------------------------------------- */
     
-    // получить кнопку "вернуться наверх"
-    //
+    /* ----- получить кнопку "вернуться наверх" ----- */
+    
     top_btn = document.getElementById("top_btn");
     window.onscroll = function() { scrollFunction() };
     function scrollFunction() {
@@ -350,7 +336,8 @@ $(document).ready(function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     
     });
-    //----------------------------------------
+
+    /* ---------------------------------------- */
     /*
     // развернуть форму поиска 
     //
@@ -592,8 +579,7 @@ $(document).ready(function() {
     */
 
 
-    /* =========Slider Promo========== */
-
+    /* ----------- Slider Promo ------------ */
     
     $("#slider-promo").owlCarousel({
         autoplay: false, //true,
@@ -629,8 +615,8 @@ $(document).ready(function() {
         }
     });
 
-    /* =============Slider Promo================ */
-    /* ===========кнопки управления============= */
+    /* ----------------------------------------- */
+    /* ----------- кнопки управления ------------ */
 
     $('.prev-btn').click(function() {
         $('.owl-carousel').trigger('prev.owl.carousel');
@@ -641,7 +627,7 @@ $(document).ready(function() {
     
     });
     
-    /* ========== Slider-Popular & Slider-Product ========== */
+    /* -------- Slider-Popular & Slider-Product -------- */
 
     $("#slider-popular, #slider-product").owlCarousel({
         autoplay: false, //true,
@@ -787,24 +773,5 @@ $(document).ready(function() {
     }
     document.oncopy = wpguruLink;
     */
-
-    /*
-    toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-bottom-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "500",
-    "timeOut": "4000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "slideDown",
-    "hideMethod": "slideUp"
-    }*/
 
 });

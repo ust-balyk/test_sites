@@ -23,7 +23,10 @@ $app->router->get('/cosmetics/([a-zA-Z-]+)', [CategoryController::class]);
 $app->router->get('/cosmetics/([a-zA-Z-]+)/product/([0-9]+)', [ProductController::class]);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
 //$app->router->get('/add-to-cart([?id=0-9]+)', [CartController::class, 'add_to_cart']);
-$app->router->get('/add-to-cart([?id=\s\S]*+)', [CartController::class, 'add_to_cart']);
+
+//$app->router->get('/add-to-cart([?id=\s\S]*+)', [CartController::class, 'add_to_cart']);
+$app->router->post('/add-to-cart([?id=\s\S]*+)', [CartController::class, 'add_to_cart'])->withoutCsrfToken();
+
 $app->router->get('/add-to-favorites([?id=0-9]+)', [CartController::class, 'add_to_favorites']);
 
 $app->router->get('/register', [UserController::class, 'register'])->closed_for(['frend']);
