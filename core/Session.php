@@ -10,7 +10,7 @@ class Session
    {
       $this->session_path = $session_path ?? dirname($_SERVER['DOCUMENT_ROOT']) . '/Master/session/tmp';
       $this->log_dir = rtrim($log_dir ?? 
-         (__DIR__ . '/../session/log_Visit/'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+         (__DIR__ . '/../session/log_visit/'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
       // Создаём папку для сессий
       if (!is_dir($this->session_path) && !mkdir($this->session_path, 0755, true) && !is_dir($this->session_path)) {

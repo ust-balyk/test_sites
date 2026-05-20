@@ -89,7 +89,10 @@ body {
 
 /* ================== General ==================== */
 
-html { font-size: 62.5%; }
+html {
+  /* 62.5% от 16px (стандарт браузера) = 10px */
+  font-size: 62.5% !important;
+}
 
 body {
   font-size: 1.6rem; /* 16px */
@@ -264,6 +267,10 @@ button:focus {
   background-color: transparent;
 }
 
+input, textarea {
+  caret-color: var(--grey-color);
+}
+
 /* ================== /General ==================== */
 
 /* ================== Header ===================== */
@@ -273,6 +280,81 @@ nav.navbar.navbar-expand-lg.navbar-light.fixed-top.nav-shadow {
   padding: 0rem 1.7rem 0rem 2.5rem;
   background: var(--nav-color);
 }
+
+/* --- Позиционирование и слои --- */
+.container-fluid.position-relative { position: relative; }
+
+div#navbarMain {
+  padding: 1rem;
+}
+/* Корзина — всегда справа и поверх всего */
+.cart-wrap {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3000; /* самый высокий слой */
+  pointer-events: none; /* по умолчанию пропускаем события за пределами кнопки */
+}
+.cart-button { pointer-events: auto; }
+
+/* Центрирование гамбургера на узких экранах */
+.center-toggler { position: relative; z-index: 2000; }
+@media (max-width: 992px) {
+  .center-toggler {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Меню (collapse) — базовые z-index и резерв места справа под корзину */
+#navbarMain { z-index: 1000; }
+@media (max-width: 992px) {
+  /*img.brand {
+    height: 4rem;
+  }*/
+  #navbarMain.collapse.show {
+    /* резерв под кнопку корзины — подгоняйте при необходимости */
+    padding-right: 4.5rem;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.98); /* чтобы визуально не просвечивало */
+    /* ограничиваем ширину, но не принуждаем к сжатию контейнера */
+    max-width: 100%;
+  }
+  /* защитная полоса справа (не перехватывает клики) */
+  #navbarMain.collapse.show::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4.5rem;
+    height: 100%;
+    pointer-events: none;
+  }
+  /* скроллинг меню по высоте при необходимости */
+  #navbarMain.collapse.show .navbar-nav { max-height: 60vh; overflow:auto; }
+}
+
+/* На очень узких экранах убираем некоторые эффект hover-стилей и предотвращаем изменение ширины */
+@media (max-width: 360px) {
+  img.brand { 
+    height: 4rem;
+  }
+  #navbarMain.collapse.show {
+    padding-right: 4.5rem;
+    max-width: 100%;
+  }
+  #navbarMain.collapse.show::after { display: none; }
+}
+
+/* Стили визуального порядка — бренд/меню под гамбургер и корзиной */
+.navbar .navbar-brand,
+.navbar .navbar-collapse { z-index: 1020; }
+
+/* Небольшая подгонка высоты шапки, чтобы позиционирование выглядело ровно */
+/*header.navbar { min-height: 56px; }*/
 
 img.brand {
   height: 5rem;
@@ -294,7 +376,6 @@ img.brand {
   content: none;
 }
 
-
 /* стили каталога */
 .has-megamenu {
   position: static;
@@ -305,7 +386,7 @@ div.container.dropdown-menu.megamenu {
   left: 0;
   right: 0;
   text-align: center;
-  margin: auto;
+  /*margin: auto;*/
   padding: 3rem 5rem 4rem 5rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.6);
 }
@@ -382,10 +463,27 @@ div.container.dropdown-menu.cart {
   visibility: visible;
 }
 
+/* гамбургер */
+span.navbar-toggler-icon {
+  width: 3rem;
+  height: 3rem
+}
+
+/* корзина */
+button.cart-button {
+  background-color: none;
+  border: none;
+}
+.cart-button::hover,
+.cart-button::focus,
+.cart-button::active {
+  background-color: transparent !important;
+}
+
 /* луна */
 
 .theme-btn {
-  background:transparent;
+  background-color: transparent;
   margin-left: 0.8rem;
   border:0;
   padding:0;
@@ -2078,7 +2176,7 @@ div.product-price {
 /* ----- rating stars ----- */
 
 i.fa-solid.fa-star {
-   color: #9fa9b5; /*#b2bac4; /*#818f9f; /*var(--light-grey-color);*/
+  color: #9fa9b5; /*#b2bac4; /*#818f9f; /*var(--light-grey-color);*/
 }
 i.fa-solid.fa-star.active {
   color: #f6ab3a; /*orange; /*#ffea00; /*#fff042;*/
@@ -2142,8 +2240,8 @@ div.product-buttons {
         color: var(--grey-color);
         transition: all .350s;
     }
-    h5 { 
-        font-size: 2rem;
+    span { 
+        font-size: 1.8rem;
         font-weight: 500;
         margin: 0;
         padding: 0;
@@ -2151,7 +2249,7 @@ div.product-buttons {
     .btn.btn-outline-secondary.add-to-favorites:hover {
         background-color: #e1fae8;
     }
-    .btn.btn-outline-secondary.add-to-favorites:hover + .to-cart {
+    .btn.btn-outline-secondary.add-to-favorites:hover + .add-to-cart {
         background-color: white !important;
     }
 }

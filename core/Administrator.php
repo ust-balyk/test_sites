@@ -29,8 +29,8 @@ class AdminController
 {
    static function index() {
 
-      if (isset($_SESSION["role"])) {          
-         $role = $_SESSION["role"];
+      if (isset($_SESSION["user"]["role"])) {          
+         $role = $_SESSION["user"]["role"];
                      
          if ($role === "master" || $role === "assistant") {
 
@@ -61,14 +61,14 @@ class AdminController
    }
 }';
 
-      if (array_intersect(array(Application::$app->session->get("email")), $administrator) &&
-         (Application::$app->session->get("role") === "master") && ($this->pass())) 
+      if (array_intersect(array(Application::$app->session->get("user.email")), $administrator) &&
+         (Application::$app->session->get("user.role") === "master") && ($this->pass())) 
       {
          session_regenerate_id(true);
          file_put_contents($filename, $content);
 
-      } else if (array_intersect(array(Application::$app->session->get("email")), ADMIN_A) &&
-         (Application::$app->session->get("role") === "assistant") && ($this->pass())) 
+      } else if (array_intersect(array(Application::$app->session->get("user.email")), ADMIN_A) &&
+         (Application::$app->session->get("user.role") === "assistant") && ($this->pass())) 
       {
          session_regenerate_id(true);
          file_put_contents($filename, $content);

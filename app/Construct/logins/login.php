@@ -24,7 +24,7 @@
 
                         <div class="form-group email">
                             <label></label>
-                            <input type="email" name="email" style="text-transform: lowercase"
+                            <input autofocus type="email" name="email" style="text-transform: lowercase"
                                 placeholder="электронная почта" class="form-control email"
                                 value="<?= session()->get('form_data'); ?>"><!-- required /-->
                         </div>

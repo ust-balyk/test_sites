@@ -154,12 +154,12 @@
                     <?= $product['new_price'] ?><del><?= $product['old_price'] ?></del>
                   </div>
                   <div class="product-card-btns">
-                    <a href="#" class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">
+                    <button class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное">
                       <i class="fa-solid fa-heart"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-secondary add-to-cart" title="добавить в корзину">
+                    </button>
+                    <button class="btn btn-outline-secondary add-to-cart" title="добавить в корзину">
                       <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div><!--product-card-->

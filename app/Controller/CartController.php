@@ -30,6 +30,7 @@ class CartController
 
         // hash_equals защищает от тайминг-атак
         return hash_equals($expected, $token);
+        
     }
 
     public function add_to_cart()
@@ -39,7 +40,7 @@ class CartController
             response()->json([
                 'status'  => 'error',
                 'type'    => 'danger',
-                'message' => 'Неверный CSRF токен или сессия истекла'
+                'message' => 'Ошибка идентификации продукта'
             ], 419); // 419/401/403 — по желанию; 419 распространён для expired CSRF
             return;
         }

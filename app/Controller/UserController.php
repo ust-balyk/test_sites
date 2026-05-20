@@ -129,17 +129,20 @@ class UserController extends BaseController
                             }
 
                         } else {
-                            session()->setFlash('error', 'Укажите другой адрес или аутентифицируйтесь');
+                            //session()->setFlash('error', 'Укажите другой адрес или аутентифицируйтесь');
+                            session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                             app()->response->redirect('/register');
                         }
 
                     } else {
-                        session()->setFlash('error', 'Пожалуйста, введите корректный адрес электронной почты');
+                        //session()->setFlash('error', 'Пожалуйста, введите корректный адрес электронной почты');
+                        session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                         app()->response->redirect('/register');
                     }
 
                 } else {
-                    session()->setFlash('error', 'Данное имя занято, пожалуйста, выберите любое другое');
+                    //session()->setFlash('error', 'Данное имя занято, пожалуйста, выберите любое другое');
+                    session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                     app()->response->redirect('/register');
                 }
             }
@@ -156,8 +159,7 @@ class UserController extends BaseController
         
         } else {
 
-            if ($email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) && 
-                $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
+            if (($email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)) && ($password = $_POST['password']))) {
 
                 if ($user_id = db()->realUser($email, $password)) { 
                     db()->set_token_23($user_id);

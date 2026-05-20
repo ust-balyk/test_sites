@@ -219,8 +219,8 @@
     }
     /* изменить размер гамбургера */
     .navbar-toggler-icon {
-        width: 1.2em;
-        height: 1.2em;
+        width: 2rem;
+        height: 2rem;
     }
 
     /* подчеркнуть пункты меню */
@@ -230,6 +230,11 @@
 }
 
 @media all and (max-width: 834px) {
+    /* гамбургер */
+    span.navbar-toggler-icon {
+        width: 2rem;
+        height: 2rem
+    }
     /* уменьшить изображение слайдера */
     .slider .img-fluid {
         display: block;

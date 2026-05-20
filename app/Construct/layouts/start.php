@@ -83,7 +83,15 @@
         "https://t.me/japan_in_ru"
       ]
     }
-    </script>  
+    </script>
+      <!--style>
+      .navbar .cart-wrapper { display:flex; align-items:center; gap:.5rem; }
+      @media (max-width: 991.98px) {
+        .navbar .cart-wrapper { order: 3; }
+      }
+      .dropdown-menu.cart-menu { min-width: 320px; max-width: calc(100vw - 2rem); }
+    </style-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> 
   </head>
   <body>
     <div style="height:1px;background:#a9ddf9;border-bottom:1px dotted #744474;clear:both"></div>
@@ -95,42 +103,39 @@
               alt="настоящая японская косметика">
         </div>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top nav-shadow">
-          <a class="navbar-brand" href="<?= base_url('/home'); ?>">
-            <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown has-megamenu">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Каталог
-                </a>
+          <div class="container-fluid position-relative">
+            <a class="navbar-brand" href="<?= base_url('/home'); ?>">
+              <img class="brand" src="<?= base_url(POCKET_STYLE .'/favicon/home.png'); ?>">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarMain">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+                <li class="nav-item">
+                  <a class="nav-link" href="#about_us">О нас</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
+                </li>
+                <li class="nav-item dropdown delivery_and_payment">
+                  <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Условия доставки
+                  </a>
 
-                <?php new App\Widgets\Menu\Menu(); ?>
+                  <?php new App\Widgets\Delivery\Delivery(); ?>
 
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="#about_us">О нас</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="tel:+79124174818">+7(912)4174818</a>
-              </li>
-              <li class="nav-item dropdown delivery_and_payment">
-                <a class="nav-link dropdown-toggle" href="#" id="delivery_payment"
-                  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Условия доставки
-                </a>
+                </li>
+                <li class="nav-item dropdown has-megamenu">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Каталог
+                  </a>
 
-                <?php new App\Widgets\Delivery\Delivery(); ?>
+                  <?php new App\Widgets\Menu\Menu(); ?>
 
-              </li>
-            </ul>
-            <ul class="navbar-nav d-flex align-items-center gap-3 mb-2 mb-lg-0">
+                </li>
+              </ul>
+            </div>
+            <!--ul class="navbar-nav d-flex align-items-center gap-3 mb-2 mb-lg-0">
               <li class="nav-item dropdown user">
                 <?php if (empty(session()->get('user.name'))) { ?>
                 <a href="/login">
@@ -167,13 +172,99 @@
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               </button>
-            </ul>
-          </div>
+            </ul-->
+        <!--nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top nav-shadow"-->
+
+
+
+          <!--div class="container-fluid position-relative"-->
+            <!--a class="navbar-brand me-3" href="#">Brand</a-->
+
+            <!-- Навигация (прижата влево) -->
+            <!--div class="collapse navbar-collapse" id="navbarMain">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="#">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Каталог</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">О нас</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Контакты</a></li>
+              </ul>
+            </div>
+
+            <!-- Гамбургер — центрируется на малых экранах -->
+            <button class="navbar-toggler center-toggler" type="button" 
+                  data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                aria-controls="navbarMain" aria-expanded="false" aria-label="Переключить навигацию">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Иконка корзины — справа, всегда поверх -->
+            <div class="cart-wrap">
+              <ul class="d-flex align-items-center gap-3 mb-2 mb-lg-0">
+                <li>
+                  <?php if (empty(session()->get('user.name'))) { ?>
+                  <a href="/login">
+                    <img class="ico" id="user" src="<?= base_url(POCKET_STYLE .'/favicon/user_add.png'); ?>"/>
+                  </a>
+                  <?php } else { echo user_icon(); } ?>
+                </li>
+                <li class="ms-2">
+                  <?php if (empty(session()->get('user.name'))) { ?>
+                  <a href="#" class="nav-link dropdown-toggle" id="wishlist"
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/heart.png'); ?>">
+                  </a>
+                  <?php } else { echo user_heart(); } ?>
+                </li>
+                <li>
+                  <button id="cartButton" class="btn btn-outline-primary cart-button" 
+                        type="button" aria-label="Открыть корзину"
+                      data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <?php if (empty(session()->get('user.name'))) { ?>
+                    <img class="ico" src="<?= base_url(POCKET_STYLE .'/favicon/cart.png'); ?>">
+                    <?php } else { echo user_cart(); } ?>
+                    <!-- SVG иконка -->
+                    <!--svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+                      fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 6A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.49-.402L1.61 2H.5a.5.5 0 0 1-.5-.5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg-->
+                  </button>
+                </li>
+                <li class="d-none d-md-flex">
+                  <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему" 
+                        style="margin-right:2.2rem">
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                      viewBox="0 0 24 24" fill="none" stroke="#4d4d4d" stroke-width="1.7"
+                      stroke-linecap="round" stroke-linejoin="round" aria-hidden="false">
+                      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>       
+
         </nav>
       </header>
       <!---------------- MAIN ---------------->
       <main>
         <div class="container">
+          <!-- Модал корзины -->
+          <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="cartModalLabel">Ваша корзина</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body"><p>Товары в корзине...</p></div>
+                <div class="modal-footer">
+                  <a href="/checkout" class="btn btn-primary">Оформить заказ</a>
+                  <button type="button" class="btn btn-secondary" 
+                        data-bs-dismiss="modal">Продолжить покупки</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <?= $view_file; ?>
           <button id="top_btn" title="Перейти к началу"> 
             <i class="fa-solid fa-chevron-up"></i>

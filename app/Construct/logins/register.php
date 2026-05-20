@@ -27,7 +27,7 @@
               
               <div class="form-group name">
                 <label></label>
-                <input type="text" name="name" style="text-transform: lowercase" placeholder="имя" 
+                <input autofocus type="text" name="name" style="text-transform: lowercase" placeholder="имя" 
                       class="form-control name <?= get_validation_class('name'); ?>"
                     value="<?= old('name'); ?>"> <!-- required /-->
                   <?//= get_errors('name'); ?>
