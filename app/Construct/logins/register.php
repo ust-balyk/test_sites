@@ -66,7 +66,7 @@
 
               <p class="register" style="text-transform: lowercase">
                 <a href="/login"><span class="play-icon">&#9654;</span></a>
-                <a href="/login">&thinsp;создать аккаунт&emsp;</a>
+                <a href="/login">&thinsp;войти в аккаунт&emsp;</a>
                 <?php $back_url = hsc(
                   \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
                 ); ?>
