@@ -21,42 +21,47 @@ class CategoryController extends BaseController
 
     public static function index()
     {
-        self::init(); // запись URL
+        self::init(); // запись URL для выхода из login
 
         if ($slug = request()->get_SLUG_or_ID()[0]) {
             $cache = cache()->getCache_db(); 
             $products = $cache['by_category'][$slug] ?? [];
+            
+            if (empty($products)) {
+                $products = db()->query("SELECT * FROM ". TABLE_NAME ." WHERE slug = ?", [$slug])->get();
+                cache()->refreshCache(); // восстанавливаем кеш
+            }
 
             if (empty($products)) {
-                $products = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get();
-            
+                foreach (self::$categories as $key => $slug) {
+                    $products = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get();
+                    if (!empty($products)) {
+                        break; // Выходим из цикла, когда нашли не пустую категорию
+                    }
+                }
             }
 
-            // crc32 = быстрая хеш‑функция, 
-            // которая преобразует данные (строку, файл и т.д.) в 32‑битное целое значение
+            // перемешаем отдельно каждую категорию на сутки
             $seed = crc32(date('Y-m-d') . ':' . $products[0]['slug']);
-            $products = $this->seeded_shuffle($products, $seed);
-            
-            if (TABLE_NAME == 'cosmetics') {
-                // отображение категории корректируется по slug
-                $title = self::getTitle_External($products[0]['slug']) .' на Japan-in.Ru';
+            $products = self::seeded_shuffle($products, $seed);
 
-            } else {
-                $title = 'Японский уход, косметика и витамины — секреты твоей красоты!';
-            
-            }
+            // Определяем заголовок
+            $title = (TABLE_NAME == 'cosmetics') 
+                ? self::getTitle_External($products[0]['slug']) .' на Japan-in.Ru'
+                : 'Японский уход, косметика и витамины — секреты твоей красоты!';
+
             return app()->view->full_view(
 
                 CATEGORY_LAYOUT,
                 CATEGORY_VIEW, 
                 [
-                    'title'    => mb_ucfirst($title),
-                    'products' => $products,
+                    'title'          => mb_ucfirst($title),
+                    'products'       => $products,
                     //[0] - индекс первого продукта
-                    'category' => $products[0]['category'] ?? '',
+                    'category'       => $products[0]['category'] ?? '',
                     // отображение категории корректируется по slug
                     'title_category' => self::getTitle_Internal($products[0]['slug']),
-                    'slug'     => $slug
+                    'slug'           => $slug
                 ]
             );
         
@@ -132,7 +137,7 @@ class CategoryController extends BaseController
 
     // перемешивает каждую категорию отдельно
     // не влияет на глобальный генератор RNG
-    function seeded_shuffle(array $arr, int $seed): array {
+    private static function seeded_shuffle(array $arr, int $seed): array {
         $n = count($arr);
         $state = $seed;
         $rand = function($min, $max) use (&$state) {

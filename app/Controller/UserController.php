@@ -150,6 +150,7 @@ class UserController extends BaseController
         }
     }
 
+    
     public function enter()
     {
         self::init(); // запись URL (вернуться на предыдущую страницу)

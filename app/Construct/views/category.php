@@ -2,7 +2,7 @@
 <?php //dump($_SERVER['REQUEST_URI']); ?>
 <?php //dump($_COOKIE); ?>
 
-<?php if (!empty($products)): ?>  
+<?php if (!empty($products)): ?>
   <section class="category">
     <div class="container category">
       <div class="container justify-content-between breadcrumb">
