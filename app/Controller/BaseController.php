@@ -44,12 +44,15 @@ abstract class BaseController
    
    }
 
-
+   /*
    static function safeRedirect($url = '/') 
    {
       $url = filter_var($url, FILTER_SANITIZE_URL);
       if (empty($url)) return '/';
-      
+
+      // Защита от CRLF/инъекций заголовков
+      if (preg_match('/[\r\n]/', $url)) return '/';
+
       // Базовая проверка на XSS
       if (preg_match('/^(javascript:|data:|vbscript:)/i', $url)) return '/';
 
@@ -67,6 +70,28 @@ abstract class BaseController
 
       return $url;
 
+   }*/
+
+   static function safeRedirect($url = '/')
+   {
+      $url = filter_var($url, FILTER_SANITIZE_URL);
+      if (empty($url)) return '/';
+      if (preg_match('/[\r\n]/', $url)) return '/';
+      if (preg_match('/^(javascript:|data:|vbscript:)/i', $url)) return '/';
+
+      $parts = parse_url($url);
+
+      if (isset($parts['scheme']) && !in_array(strtolower($parts['scheme']), ['http','https'])) return '/';
+
+      $currentHost = $_SERVER['HTTP_HOST'] ?? '';
+      if (isset($parts['host']) && strtolower($parts['host']) !== strtolower($currentHost)) return '/';
+
+      $path = $parts['path'] ?? (strpos($url, '/') === 0 ? $url : '');
+      if ($path === '' || !str_starts_with($path, '/')) return '/';
+      if (in_array($path, ['/register', '/login'], true)) return '/';
+
+      $safe = $path . (isset($parts['query']) ? "?{$parts['query']}" : '');
+      return $safe;
    }
 
 

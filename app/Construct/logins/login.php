@@ -23,14 +23,14 @@
                         <input type="hidden" name="target_page" value="<?= hsc($_SESSION['target_page'] ?? '/'); ?>">
 
                         <div class="form-group email">
-                            <label></label>
+                            <label>email</label>
                             <input autofocus type="email" name="email" style="text-transform: lowercase"
                                 placeholder="электронная почта" class="form-control email"
                                 value="<?= session()->get('form_data'); ?>"><!-- required /-->
                         </div>
                         
                         <div class="form-group password">
-                            <label></label>
+                            <label>password</label>
                             <input type="password" name="password" style="text-transform: lowercase"
                                 placeholder="пароль" class="form-control password">
                         </div><br><br>
@@ -44,8 +44,8 @@
                         <p class="login" style="text-transform: lowercase">
                             <a href="/register"><span class="play-icon">&#9654;</span></a>
                             <a href="/register">&thinsp;создать аккаунт&emsp;</a>
-                            <?php $back_url = 
-                                hsc(\App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
+                            <?php $back_url = hsc(
+                                \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
                             ); ?>
                             <a href="<?= $back_url ?>"><span class="play-icon">&#9654;</span></a>
                             <a href="<?= $back_url ?>">&thinsp;отказаться</a>

@@ -99,8 +99,8 @@ class Logon
       $placeholders = implode(',', $placeholders);
       
       if ($this->timestamps) {
-         $attributes['created_at'] = date("Y-m-d"); // H:i:s");
-         $attributes['updated_at'] = date("Y-m-d"); // H:i:s");
+         $attributes['created_at'] = date("Y-m-d + H:i:s");
+         $attributes['updated_at'] = date("Y-m-d + H:i:s");
          $field_names .= ', `created_at`, `updated_at`';
          $placeholders .= ', :created_at, :updated_at';
       

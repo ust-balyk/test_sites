@@ -32,6 +32,7 @@
   </head>
   <body>
     <div style="height:1px;border-bottom:1px dotted #744474;clear:both"></div>
+    <?= db()->user_back(); ?>
     <div class="wrapper">
       <!---------------- HEADER ---------------->
       <header>

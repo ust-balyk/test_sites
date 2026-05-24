@@ -23,36 +23,36 @@
               <?= get_csrf_field(); ?>
               
               <input type="hidden" name="target_page" 
-                    value="<?= htmlspecialchars($_SESSION['target_page'] ?? '/'); ?>">
+                    value="<?= hsc($_SESSION['target_page'] ?? '/'); ?>">
               
               <div class="form-group name">
-                <label></label>
-                <input autofocus type="text" name="name" style="text-transform: lowercase" placeholder="имя" 
+                <label>name</label>
+                <input autofocus type="text" name="name" placeholder="имя" style="text-transform: lowercase"
                       class="form-control name <?= get_validation_class('name'); ?>"
                     value="<?= old('name'); ?>"> <!-- required /-->
                   <?//= get_errors('name'); ?>
               </div>
 
               <div class="form-group register_email">
-                <label></label>
-                <input type="email" name="email" style="text-transform: lowercase" placeholder="электронная почта"
+                <label>email</label>
+                <input type="email" name="email" placeholder="электронная почта" style="text-transform: lowercase"
                       class="form-control register_email <?= get_validation_class('email'); ?>"
                     value="<?= old('email'); ?>"> <!-- required /-->
                   <?//= get_errors('email'); ?>
               </div>
 
               <div class="form-group register_password">
-                <label></label>
-                <input type="password" name="password" style="text-transform: lowercase"
-                      placeholder="пароль не менее 6 символов" class="form-control register_password
+                <label>password</label>
+                <input type="password" name="password" placeholder="пароль не менее 8 символов" 
+                      style="text-transform: lowercase" class="form-control register_password
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('password'); ?>
               </div>
 
               <div class="form-group confirm_password">
                 <label></label>
-                <input type="password" name="confirm_password" style="text-transform: lowercase"
-                      placeholder="повторите пароль" class="form-control confirm_password
+                <input type="password" name="confirm_password" placeholder="повторите пароль" 
+                      style="text-transform: lowercase" class="form-control confirm_password
                   <?= get_validation_class('password'); ?>"> <!-- required /-->
                   <?//= get_errors('confirm_password'); ?>
                 </div><br><br>
@@ -67,7 +67,7 @@
               <p class="register" style="text-transform: lowercase">
                 <a href="/login"><span class="play-icon">&#9654;</span></a>
                 <a href="/login">&thinsp;создать аккаунт&emsp;</a>
-                <?php $back_url = htmlspecialchars(
+                <?php $back_url = hsc(
                   \App\Controller\BaseController::safeRedirect($_SESSION['target_page'] ?? '/')
                 ); ?>
                 <a href="<?= $back_url ?>"><span class="play-icon">&#9654;</span></a>

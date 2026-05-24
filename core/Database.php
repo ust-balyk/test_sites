@@ -253,7 +253,7 @@ class Database
         catch (\PDOException $e)
         {
             date_default_timezone_set('Asia/Yekaterinburg');
-            $err = error_log("[". date('Y-m-d H:i:s') ."] {$e->getMessage()}". PHP_EOL, 3, ERROR_LOGS);
+            $err = error_log("[". date('Y-m-d * H:i:s') ."] {$e->getMessage()}". PHP_EOL, 3, ERROR_LOGS);
             file_put_contents(ERROR_LOGS, $err, FILE_APPEND);
         }
         return $this;
@@ -317,31 +317,7 @@ class Database
         return false;
     
     }
-    
-    public function realUser($email, $password)
-    {
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $this->query("select * from users where email=? LIMIT 1", [$email]);
-        
-        if ($user = $this->stmt->fetch()) {
-            
-            if (password_verify($password, $user['password'])) {
-
-                Application::$app->session->set('csrf_token', bin2hex(random_bytes(64)));
-                Application::$app->session->set('user.email', $user['email']);
-                Application::$app->session->set('user.name', $user['name']);
-                Application::$app->session->set('user.role', $user['role']);
-                return $user['id'];
-
-            }
-            return false;
-        }
-        return false;
-    
-    }
-    
     
     /* авторизация cookie */   
     public function generate_token_23()

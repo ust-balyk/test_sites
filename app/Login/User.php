@@ -19,7 +19,7 @@ class User extends Logon
         'required'         => ['name', 'email', 'password'], //, 'auth_token'],
         'lengthMax'        => [['name', 50], ['email', 100]],
         'email'            => [['email']],
-        //'lengthMin'    => [['password', 6]],
+        //'lengthMin'    => [['password', 8]],
         'equals'           => [['password', 'confirm_password']],
     ];
 

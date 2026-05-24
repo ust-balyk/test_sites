@@ -31,9 +31,11 @@ class UserController extends BaseController
         $name_taken = ['vadim islamov','islamov vadim','исламов вадим','вадим исламов'];
         $test = str_replace($name_taken, '', $test);
         
-        $dross = [ "‘", "`", "'", '"', '!', '@', '#', '$', '%', '\\','^', '&',
-                   "’", '“', '*', '(', ')', '_', '+', '{', '}', '|', ':', '.', "´",
-                   '<', '>', '?', '[', ']', ';', '=', '--', '~', '/', '#', ',' ];
+        $dross = [
+            "‘", "`", "'", '"', '!', '@', '#', '$', '%', '\\','^', '&',
+            '“', '*', '(', ')', '_', '+', '{', '}', '|', ':', '.', "´",
+            '<', '>', '?', '[', ']', ';', '=', '--', '~', '/', '#', ','
+        ];
         $test = str_replace($dross, '', $test);
         
         $test = preg_replace('#<.*>#', '', $test); // удалить все HTML-теги из строки $test 
@@ -116,33 +118,32 @@ class UserController extends BaseController
                                 session()->set('csrf_token', (string)bin2hex(random_bytes(32)));
                                 session()->set('user.email', $user->attributes['email']);
                                 session()->set('user.name', $user->attributes['name']);
+                                // получаем id и создаём куку для входа без пароля
                                 $user_23 = db()->getLastId();
                                 db()->set_token_23($user_23);
                                 // Получаем URL из формы или берем главную по умолчанию
                                 $target_page = $_POST['target_page'] ?? '/';
                                 // пропускаем через safeRedirect перед переходом
                                 $safeUrl = self::safeRedirect($target_page);
-                                // Выполняем переход
-                                header("Location: " . $safeUrl);
-                                exit;
+                                app()->response->redirect($safeUrl);
 
                             }
 
                         } else {
-                            //session()->setFlash('error', 'Укажите другой адрес или аутентифицируйтесь');
-                            session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
+                            session()->setFlash('error', 'Укажите другой адрес или аутентифицируйтесь');
+                            //session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                             app()->response->redirect('/register');
                         }
 
                     } else {
-                        //session()->setFlash('error', 'Пожалуйста, введите корректный адрес электронной почты');
-                        session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
+                        session()->setFlash('error', 'Пожалуйста, введите корректный адрес электронной почты');
+                        //session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                         app()->response->redirect('/register');
                     }
 
                 } else {
-                    //session()->setFlash('error', 'Данное имя занято, пожалуйста, выберите любое другое');
-                    session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
+                    session()->setFlash('error', 'Данное имя занято, пожалуйста, выберите любое другое');
+                    //session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                     app()->response->redirect('/register');
                 }
             }
@@ -151,34 +152,54 @@ class UserController extends BaseController
 
     public function enter()
     {
-        self::init(); // запись URL
+        self::init(); // запись URL (вернуться на предыдущую страницу)
+
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
 
         if (! app()->router->validateCsrfToken() ) {
             session()->setFlash('error', 'Нарушение норм безопасности');
             app()->response->redirect('/login');
         
+        } else if ($email === null || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            //session()->setFlash('error', 'поле EMAIL пустое или содержит ошибки');
+            session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
+            app()->response->redirect('/login');
+
+        } else if ($password === '' || //mb_strlen($password, 'UTF-8') < 8 ||
+            mb_strlen($password, 'UTF-8') > 255) {
+            //session()->setFlash('error', 'поле PASSWORD пустое или содержит ошибки');
+            session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
+            app()->response->redirect('/login');
+
         } else {
 
-            if (($email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)) && ($password = $_POST['password']))) {
+            if ($user = db()->query("select * from users where email=? LIMIT 1", [$email])->get()) {
 
-                if ($user_id = db()->realUser($email, $password)) { 
-                    db()->set_token_23($user_id);
-                    // Получаем URL из формы или берем главную по умолчанию
+            //dd($user);
+
+                if (password_verify($password, $user[0]['password'])) {
+                    session()->set('csrf_token', bin2hex(random_bytes(64)));
+                    session()->set('user.email', $user[0]['email']);
+                    session()->set('user.name', $user[0]['name']);
+                    session()->set('user.role', $user[0]['role']);
+                    db()->set_token_23($user[0]['id']);
+                    // вернуться на предыдущую страницу    
                     $target_page = $_POST['target_page'] ?? '/';
                     // пропускаем через safeRedirect перед переходом
                     $safeUrl = self::safeRedirect($target_page);
-                    header("Location: " . $safeUrl);
-                    exit;
+                    app()->response->redirect($safeUrl);
 
                 } else {
+                    //session()->setFlash('error', 'поле PASSWORD содержит неверный пароль');
                     session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
                     app()->response->redirect('/login');
-                
                 }
+
             } else {
-                session()->setFlash('error', 'Пожалуйста, заполните все поля');
-                app()->response->redirect('/login');
-            
+                //session()->setFlash('error', 'поле EMAIL содержит не существующий адрес');
+                session()->setFlash('error', 'Пожалуйста, проверьте введённые данные');
+                app()->response->redirect('/login');  
             }
         }  
     }
