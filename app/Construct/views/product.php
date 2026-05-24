@@ -29,7 +29,32 @@
 <?php if (!empty($product)): ?>
   <section class="product">
     <div class="container product">
-      <!-- breadcrumb omitted for brevity -->
+      <div class="container justify-content-between breadcrumb">
+        <nav class="breadcrumb" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/">
+                <img class="link_to_home" src="<?= base_url(POCKET_STYLE.'/favicon/home.svg'); ?>"
+                    alt="link_to_the_home_page">
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/cosmetics">косметика</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/cosmetics/<?= $product['slug'] ?>"><?= hsc($product['category']) ?></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              арт.<?= hsc($product['outer_id']) ?>
+            </li>
+          </ol>
+        </nav>
+        <div class="d-none d-md-block">
+          <a href="/cosmetics/<?= hsc($product['slug']) ?>" class="btn btn-sm btn-outline-secondary back_link">
+            <span>вернуться в категорию</span>
+          </a>
+        </div>
+      </div>
       <div class="row product">
         <div class="col-md-6">
           <div class="product_image" id="image-container">
