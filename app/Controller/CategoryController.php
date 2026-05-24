@@ -31,7 +31,11 @@ class CategoryController extends BaseController
                 $products = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get();
             
             }
-            shuffle($products);
+
+            // crc32 = быстрая хеш‑функция, 
+            // которая преобразует данные (строку, файл и т.д.) в 32‑битное целое значение
+            $seed = crc32(date('Y-m-d') . ':' . $products[0]['slug']);
+            $products = $this->seeded_shuffle($products, $seed);
             
             if (TABLE_NAME == 'cosmetics') {
                 // отображение категории корректируется по slug
@@ -125,6 +129,26 @@ class CategoryController extends BaseController
         return $title_category;
     
     }
+
+    // перемешивает каждую категорию отдельно
+    // не влияет на глобальный генератор RNG
+    function seeded_shuffle(array $arr, int $seed): array {
+        $n = count($arr);
+        $state = $seed;
+        $rand = function($min, $max) use (&$state) {
+            $state = (1103515245 * $state + 12345) & 0x7FFFFFFF;
+            return $min + ($state % ($max - $min + 1));
+        
+        };
+        for ($i = $n - 1; $i > 0; $i--) {
+            $j = $rand(0, $i);
+            [$arr[$i], $arr[$j]] = [$arr[$j], $arr[$i]];
+        
+        }
+        return $arr;
+    
+    }
+
 
 
 }
