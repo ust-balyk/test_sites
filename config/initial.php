@@ -1,7 +1,9 @@
 <?php
 const DEBUG = true;
 define("ROOT", dirname(__DIR__));
-const PATH        = 'http://localhost:8888';
+const PATH        =       'http://localhost:8888';
+const SITE_NAME   =       'Japan-in.Ru';
+const LOCALE      =       'ru_RU';
 const ADMIN       = PATH .'/entry';
 const APP         = ROOT .'/app';
 const CORE        = ROOT .'/core';

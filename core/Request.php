@@ -55,7 +55,7 @@ class Request
    }
 
 
-   public function get_SLUG_or_ID()
+   public function getSLUG_or_ID()
    {
       $uri = $this->formatted_uri;
       // Инициализируем массив [slug, id] пустыми значениями

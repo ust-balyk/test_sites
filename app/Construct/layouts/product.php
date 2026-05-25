@@ -27,8 +27,11 @@
     <meta property="og:image" content="<?= $imageUrl ?>">
     <meta property="product:price:amount" content="<?= $numericPrice ?>">
     <meta property="product:price:currency" content="RUB">
-    <script type="application/ld+json"><?= json_encode($schemaData, 
-      JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?></script>
+    <?php if (!empty($schemaData)): ?>
+      <script type="application/ld+json">
+        <?= json_encode($schemaData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
+      </script>
+    <?php endif; ?>
   </head>
   <body>
     <div style="height:1px;border-bottom:1px dotted #744474;clear:both"></div>

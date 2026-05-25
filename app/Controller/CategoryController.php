@@ -1,9 +1,20 @@
 <?php
+//declare(strict_types=1);
+
 namespace App\Controller;
 
+/**
+ * CategoryController – вывод списка товаров выбранной категории
+ * (страница каталога, а не отдельного продукта).  
+ * В JSON‑LD используется ItemList → ListItem, а в ListItem
+ * оставлены только свойства, необходимые для списка (Offer, rating, …).
+ */
 class CategoryController extends BaseController
 {
-    private static $categories = [
+    /* -----------------------------------------------------------------
+     * Списки категорий и заголовков
+     * ----------------------------------------------------------------- */
+    private static array $categories = [
         "makeup"          => "декоративная косметика",
         "for-body"        => "для тела",
         "for-face"        => "для лица",
@@ -16,14 +27,13 @@ class CategoryController extends BaseController
         "accessories"     => "аксессуары",
     ];
 
-    // Специальные заголовки
-    private static $titleExternal = [
+    private static array $titleExternal = [
         'makeup'           => "декоративная косметика",
         'for-oral-cavity'  => "средства по уходу за полостью рта",
         'gift-set'         => "косметика в подарочных наборах",
     ];
 
-    private static $titleInternal = [
+    private static array $titleInternal = [
         'makeup'           => "декоративная косметика",
         'for-body'         => "безупречность тела",
         'for-face'         => "сияние твоего лица",
@@ -34,163 +44,317 @@ class CategoryController extends BaseController
         'gift-set'         => "косметика в подарочных наборах",
     ];
 
-    public static function index()
+    /* -----------------------------------------------------------------
+     * Точка входа
+     * ----------------------------------------------------------------- */
+    public static function index(): string
     {
-        self::init();
-    
-        $requestedSlug = request()->get_SLUG_or_ID()[0] ?? null;
-        
-        // Если есть запрос, сначала пытаемся получить по нему
-        if ($requestedSlug) {
-            $products = self::getProducts($requestedSlug);
-            $usedSlug = $requestedSlug;
-        } else {
-            // ❌ Если $requestedSlug = null, переменные $products и $usedSlug не определены!
-            $products = [];
-            $usedSlug = null;
+        // При наличии init‑метода в BaseController вызываем его.
+        if (method_exists(parent::class, 'init')) {
+            self::init();
         }
-    
-        // Если товары по запросу не найдены, ищем первую категорию с товарами
+
+        $products      = [];
+        $usedSlug      = null; // slug выбранной категории
+        $requestedSlug = request()->getSLUG_or_ID()[0] ?? null;
+
+        /* Попытка загрузить товары по запрошенному slug */
+        if ($requestedSlug) {
+            $products = self::get_Products($requestedSlug);
+            $usedSlug = $requestedSlug;
+        }
+
+        /* Если ничего не найдено – ищем первую непустую категорию */
         if (empty($products)) {
-            foreach (self::$categories as $categorySlug => $categoryName) {
-                $products = self::getProducts($categorySlug);
-                
+            foreach (self::$categories as $catSlug => $catName) {
+                $products = self::get_Products($catSlug);
                 if (!empty($products)) {
-                    $usedSlug = $categorySlug;
+                    $usedSlug = $catSlug;
                     break;
                 }
             }
         }
-    
-        // Если совсем ничего не нашли, возвращаем главную
+
+        /* Если всё‑равно пусто – главная страница */
         if (empty($products)) {
             return app()->view->full_view(HOME_LAYOUT, HOME_VIEW, []);
         }
-    
-        $firstProduct = $products[0];
-    
-        // Перемешиваем товары
-        $seed = crc32(date('Y-m-d') . ':' . $firstProduct['slug']);
-        $products = self::seeded_shuffle($products, $seed);
-    
-        // Определяем заголовок
-        $title = (TABLE_NAME == 'cosmetics') 
-            ? self::getTitle_External($firstProduct['slug']) . ' на Japan-in.Ru'
+
+        /* -----------------------------------------------------------------
+         * Теперь $usedSlug – это slug выбранной категории,
+         * а $products – массив товаров этой категории.
+         * ----------------------------------------------------------------- */
+
+        // SEO‑заголовок для категории
+        $title = (TABLE_NAME === 'cosmetics')
+            ? self::getTitle_External($usedSlug) . ' на Japan-in.Ru'
             : 'Японский уход, косметика и витамины — секреты твоей красоты!';
-    
+
+        // Безопасный текущий URL (используется в хлебных крошках и JSON‑LD)
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $hostRaw  = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $host = filter_var($hostRaw, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
+            ? $hostRaw
+            : preg_replace('~[^a-zA-Z0-9.-]~', '', $hostRaw);
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $full_url   = $protocol . '://' . $host . $requestUri;
+
+        // Краткое описание категории (можно задать статически или взять из первой карточки)
+        $firstProduct   = $products[0];
+        $rawDescription = (string)($firstProduct['description'] ?? '');
+        if ($rawDescription !== '') {
+            $rawDescription = str_replace(['</p>', '</div>', '<br>', '<br/>'], ' ', $rawDescription);
+            $rawDescription = strip_tags($rawDescription);
+            $rawDescription = preg_replace('~[\r\n\xA0]+~u', ' ', $rawDescription);
+            $rawDescription = trim(preg_replace('/\s+/', ' ', $rawDescription));
+        }
+        $limit = 160;
+        if (mb_strlen($rawDescription) > $limit) {
+            $tempString = mb_substr($rawDescription, 0, $limit);
+            $lastSpace  = mb_strrpos($tempString, ' ');
+            $short_description = $lastSpace !== false
+                ? mb_substr($tempString, 0, $lastSpace) . '...'
+                : mb_substr($tempString, 0, $limit) . '...';
+        } else {
+            $short_description = $rawDescription;
+        }
+        if (trim($short_description) === '') {
+            $short_description = "Японская косметика категории «" . (self::$categories[$usedSlug] ?? $usedSlug) . "»";
+        }
+        $short_description = trim($short_description);
+
+        // Хлебные крошки
+        $breadcrumbs = [
+            ['name' => 'Главная',   'url' => $protocol . '://' . $host],
+            ['name' => 'Косметика', 'url' => $protocol . '://' . $host . '/cosmetics'],
+            [
+                'name' => self::$categories[$usedSlug] ?? 'Категория',
+                'url'  => $protocol . '://' . $host . '/cosmetics/' . $usedSlug,
+            ],
+        ];
+
+        $aggregateRating = null;
+        if (isset($ratingValue) && isset($reviewCount)) {
+            $rv = (float)$ratingValue;
+            $rc = (int)$reviewCount;
+            if ($rc > 0 && $rv >= 4.0) {
+                $aggregateRating = [
+                    '@type' => 'AggregateRating',
+                    'ratingValue' => $rv,
+                    'reviewCount' => $rc,
+                    'bestRating' => 5
+                ];
+            }
+        }
+
+        // JSON‑LD: BreadcrumbList + ItemList
+        $itemList_elements = [];
+        $position = 1;
+        foreach ($products as $item) {
+            $slug = $item['slug'] ?? '';
+            $url  = $protocol .'://'. $host .'/cosmetics/'. $slug .'/'. $item['outer_id'];
+            $price = (int)($item['price'] ?: $item['new_price']);
+            $description = $item['title'] ?? '';
+            $image_url = $item['image'] ?? '';
+
+            $itemList_elements[] = [
+                '@type'       => 'ListItem',
+                'position'    => $position++,
+                'url'         => $url,
+                'item'        => [
+                    '@type'  => 'Product',
+                    'name'   => $description,
+                    "image"  => $image_url,
+                    'offers' => [
+                        '@type'         => 'Offer',
+                        'name'          => $description,
+                        'url'           => $url,
+                        'priceCurrency' => 'RUB',
+                        'price'         => $price ?? '',
+                        'availability'  => (!empty($item['in_stock']) && $item['in_stock'])
+                            ? 'https://schema.org/InStock'
+                            : 'https://schema.org/OutOfStock',
+                    ],
+                    'aggregateRating' => $item['aggregate_rating'] ?? null,
+                ],
+            ];
+        }
+
+        $graph = [];
+
+        // BreadcrumbList
+        $graph[] = [
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => array_map(
+                static function (array $bc, int $i) {
+                    return [
+                        '@type'    => 'ListItem',
+                        'position' => $i + 1,
+                        'name'     => $bc['name'] ?? '',
+                        'item'     => [
+                            '@id' => $bc['url'] ?? '',
+                        ],
+                    ];
+                },
+                $breadcrumbs,
+                array_keys($breadcrumbs)
+            ),
+        ];
+
+        // ItemList – список товаров в категории
+        $graph[] = [
+            '@type'           => 'ItemList',
+            'description'     => self::getTitle_External($slug),
+            'name'            => $title,
+            'url'             => $full_url,
+            'numberOfItems'   => count($products),
+            'itemListElement' => $itemList_elements,
+        ];
+
+        $schema_data = [
+            '@context' => 'https://schema.org',
+            '@graph'   => $graph,
+        ];
+
+        /* передача данных во view */
         return app()->view->full_view(
             CATEGORY_LAYOUT,
-            CATEGORY_VIEW, 
+            CATEGORY_VIEW,
             [
-                'title'          => mb_ucfirst($title),
-                'products'       => $products,
-                'category'       => $firstProduct['category'] ?? '',
-                'title_category' => self::getTitle_Internal($firstProduct['slug']),
-                'slug'           => $usedSlug
+                'full_url'          => $full_url,
+                'breadcrumbs'       => $breadcrumbs,
+                'short_description' => $short_description,
+                'schema_data'       => $schema_data,
+                'title'             => mb_ucfirst($title),
+                'products'          => $products,
+                'category'          => $firstProduct['category'] ?? '',
+                'category_title'    => self::getTitle_Internal($firstProduct['slug']),
+                'slug'              => $usedSlug,
+                'image_url'         => $image_url,
             ]
         );
     }
-    
+
+    /* -----------------------------------------------------------------
+    * Вспомогательные методы
+    * ----------------------------------------------------------------- */
+
     /**
-     * Получить товары с использованием кеша
-     */
-    private static function getProducts($slug)
+    * Получить товары из кеша (или из БД, если кеш пуст)
+    */
+    private static function get_Products(string $slug): array
     {
-        $cache = cache()->getCache_db();
+        $cache    = cache()->getCache_db();
         $products = $cache['by_category'][$slug] ?? [];
-        
+
         if (empty($products)) {
-            $products = db()->query(
-                "SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", 
-                [$slug]
-            )->get();
-            
+            $products = db()
+                ->query(
+                    'SELECT * FROM ' . TABLE_NAME . ' WHERE slug = ?',
+                    [$slug]
+                )
+                ->get();
+
             if (!empty($products)) {
-                cache()->refreshCache();
+                cache()->refresh_Cache();
             }
         }
-        
+
         return $products;
     }
 
     /**
-     * Определить заголовок для SEO (внешний)
-     */
-    private static function getTitle_External($key)
+    * SEO‑заголовок (внешний) для категории
+    */
+    private static function getTitle_External(string $key): string
     {
-        // Проверяем специальные заголовки
         if (isset(self::$titleExternal[$key])) {
             return self::$titleExternal[$key];
         }
 
-        // Если ключ не найден в категориях
         if (!isset(self::$categories[$key])) {
-            return "косметика";
+            return 'косметика';
         }
 
         $categoryName = self::$categories[$key];
-        $link = self::getLinkWord($key, $categoryName);
+        $link         = self::getLink_Word($key, $categoryName);
 
-        return "косметика" . ($link ? " {$link} " : " ") . $categoryName;
+        return 'косметика' . ($link !== '' ? " {$link} " : ' ') . $categoryName;
     }
 
     /**
-     * Определить заголовок для внутреннего отображения
-     */
-    private static function getTitle_Internal($key)
+    * Внутренний заголовок (не используется в текущей версии, но оставлен для совместимости)
+    */
+    private static function getTitle_Internal(string $key): string
     {
-        // Проверяем специальные заголовки
         if (isset(self::$titleInternal[$key])) {
             return self::$titleInternal[$key];
         }
 
-        // Если ключ не найден в категориях
         if (!isset(self::$categories[$key])) {
-            return "косметика";
+            return 'косметика';
         }
 
         $categoryName = self::$categories[$key];
-        $link = self::getLinkWord($key, $categoryName);
+        $link         = self::getLink_Word($key, $categoryName);
 
-        return "косметика" . ($link ? " {$link} " : " ") . $categoryName;
+        return 'косметика' . ($link !== '' ? " {$link} " : ' ') . $categoryName;
     }
 
     /**
-     * Определить союз/предлог для связи слов
-     */
-    private static function getLinkWord($key, $categoryName)
+    * Возвращает предлог/союз, используемый в заголовках
+    */
+    private static function getLink_Word(string $key, string $categoryName): string
     {
         if ($key === 'aromatherapy' || $key === 'accessories') {
-            return "и";
+            return 'и';
         }
 
+        // Если название уже начинается с "для" – предлог не нужен
         if (strpos($categoryName, 'для') === 0) {
-            return ""; // "для" уже есть в названии
+            return '';
         }
 
-        return "для";
+        return 'для';
     }
 
     /**
-     * Перемешивает товары категории, используя детерминированный seed
-     * Не влияет на глобальный генератор RNG
-     */
+    * Детерминированное перемешивание массива (seed‑зависимое).
+    * Принимает любой массив – числовой или ассоциативный.
+    */
     private static function seeded_shuffle(array $arr, int $seed): array
     {
-        $n = count($arr);
+        // Сохраняем оригинальные ключи (если нужны дальше)
+        $originalKeys = array_keys($arr);
+        // Приводим к числовому массиву без «дырок»
+        $values = array_values($arr);
+
+        $n     = count($values);
         $state = $seed;
-        
-        $rand = function($min, $max) use (&$state) {
+
+        $rand = static function (int $min, int $max) use (&$state): int {
             $state = (1103515245 * $state + 12345) & 0x7FFFFFFF;
             return $min + ($state % ($max - $min + 1));
         };
-        
+
+        // Шаффл числового массива
         for ($i = $n - 1; $i > 0; $i--) {
             $j = $rand(0, $i);
-            [$arr[$i], $arr[$j]] = [$arr[$j], $arr[$i]];
+            [$values[$i], $values[$j]] = [$values[$j], $values[$i]];
         }
-        
-        return $arr;
+
+        // Если нужно вернуть ассоциативный массив – восстанавливаем старые ключи
+        if (!empty($originalKeys)) {
+            $shuffled = [];
+            foreach ($values as $index => $value) {
+                $shuffled[$originalKeys[$index]] = $value;
+            }
+            return $shuffled;
+        }
+
+        // Иначе просто возвращаем числовой массив
+        return $values;
     }
+
 }
 

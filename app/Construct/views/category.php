@@ -3,6 +3,7 @@
 <?php //dump($_COOKIE); ?>
 
 <?php if (!empty($products)): ?>
+<?//php dd($products); ?>
   <section class="category">
     <div class="container category">
       <div class="container justify-content-between breadcrumb">
@@ -18,7 +19,7 @@
               <a href="/cosmetics">косметика</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              <?= $category; ?>
+              <?= $category_title; ?>
             </li>
           </ol>
         </nav>
@@ -29,7 +30,7 @@
         </div>
       </div>
 
-      <h1 class="text-center title_category"><?= $title_category ?></h1>
+      <h1 class="text-center title_category"><?= $category_title ?></h1>
 
       <div class="row category">
 

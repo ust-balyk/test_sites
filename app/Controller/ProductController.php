@@ -11,7 +11,7 @@ class ProductController extends BaseController
     {
         self::init(); // запись URL
 
-        [$slug, $id] = request()->get_SLUG_or_ID();
+        [$slug, $id] = request()->getSLUG_or_ID() ?? [];
         
         $cache = cache()->getCache_db();
         $product = $cache['by_id'][$id] ?? null;
