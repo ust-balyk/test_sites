@@ -4,7 +4,7 @@
     <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <title><?= $title ?? 'Японский уход и косметика на Japan-in.Ru'; ?></title>
+    <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Японские витамины - покупайте по доступной цене на Japan-in.Ru!">
     <meta name="keywords" content="japan-in.ru, satomi-japan.com, японские витамины, японская косметика,
@@ -21,11 +21,11 @@
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
     <meta property="og:type" content="product">
-    <meta property="og:title" content="<?= $productTitle ?>">
-    <meta property="og:description" content="<?= htmlspecialchars($shortDescription) ?>">
-    <meta property="og:url" content="<?= $fullUrl ?>">
-    <meta property="og:image" content="<?= $imageUrl ?>">
-    <meta property="product:price:amount" content="<?= $numericPrice ?>">
+    <meta property="og:title" content="<?= hsc($productTitle) ?>">
+    <meta property="og:description" content="<?= hsc($shortDescription) ?>">
+    <meta property="og:url" content="<?= hsc($fullUrl) ?>">
+    <meta property="og:image" content="<?= hsc($imageUrl) ?>">
+    <meta property="product:price:amount" content="<?= hsc($numericPrice) ?>">
     <meta property="product:price:currency" content="RUB">
     <?php if (!empty($schemaData)): ?>
       <script type="application/ld+json">

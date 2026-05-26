@@ -17,7 +17,7 @@ class ProductController extends BaseController
         $product = $cache['by_id'][$id] ?? null;
         
         if (empty($product) && !empty($id)) {
-            $product = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ? end in_stock = 1", 
+            $product = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ? AND in_stock = 1", 
                 [$id])->get();
     
         }
@@ -32,29 +32,38 @@ class ProductController extends BaseController
                     $latin_word = array_shift($latin_matches[0]);
                     $product_title .= strtoupper($latin_word .' ');
                     unset($latin_matches[0]);
+                
                 } else {
                     $product_title .= mb_strtolower($word .' ');
+                
                 }
             }
-            $title = 'Купить '. $product_title;
+
+            $title = !empty($product_title) ? ('Купить '. $product_title) : 'Купить японскую косметику';
+ 
+
             $category_slug = $product['slug'];
 
             // Получаем похожие товары
-            if (isset($cache['by_category'][$category_slug])) {
-                $related_products = $cache['by_category'][$category_slug];
-                if ($x = count($related_products)) { 
-                    array_filter($related_products, fn($item) => $item['outer_id'] != $id);
-                    shuffle($related_products);
-                    $related_products = array_slice($related_products, 0, $x);
-                
-                } else {
-                    // Если в кэше нет, берем из базы
-                    $related_products = db()->query("SELECT * FROM " . TABLE_NAME . 
-                        " WHERE slug = ? AND outer_id != ? ORDER BY RAND() LIMIT 8", 
+            if ($related_products = $cache['by_category'][$category_slug] ?? []) {
+                if (!empty($related_products)) {
+                    // Удаляем текущий товар
+                    $related_products = array_filter($related_products, 
+                        fn($item) => $item['outer_id'] != $id);            
+                    // Если остались товары, выбираем случайные
+                    if (!empty($related_products)) {
+                        $keys = array_rand($related_products, min(8, count($related_products)));
+                        $related_products = array_intersect_key($related_products, array_flip($keys));
+                    } else {
+                        $related_products = [];
+                    }
+                }
+            } else {
+                // Если в кэше нет, берем из базы
+                $related_products = db()->query("SELECT * FROM " . TABLE_NAME . 
+                    " WHERE slug = ? AND outer_id != ? AND in_stock = 1 ORDER BY RAND() LIMIT 8", 
                         [$category_slug, $id])->get() ?: [];
 
-                }
-                
             }
         
 
@@ -62,11 +71,39 @@ class ProductController extends BaseController
             // --------------------------------------------------
             // Безопасный host/протокол/URL
             // --------------------------------------------------
-            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-            $hostRaw  = $_SERVER['HTTP_HOST'] ?? 'localhost';
-            $host     = preg_replace('~[^a-zA-Z0-9-]~','', $hostRaw); //.\-:]/', '', $hostRaw);
-            $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-            $fullUrl  = $protocol . '://' . $host . $requestUri;
+            // Получаем и обрабатываем хост и путь
+            $cacheKey = 'host_request_uri_product_cache';
+            $cachedData = cache()->get($cacheKey);
+
+            if ($cachedData) {
+                [$host, $requestUri] = $cachedData;
+            } else {
+                // Получаем 'сырой' хост (с портом, если есть)
+                $hostRaw = $_SERVER['HTTP_HOST'] ?? 'localhost';
+                $host = preg_replace('~:\d+$~', '', $hostRaw); // Удаляем порт
+                $host = preg_replace('~[^a-z0-9.-]~', '', $host); // Удаляем недопустимые символы
+                $host = strtolower($host); // Приводим к нижнему регистру
+
+                // Если хост не валиден и не localhost, заменяем на localhost
+                if (!filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) && $host !== 'localhost') {
+                    $host = 'localhost';
+                }
+
+                // Получаем и нормализуем путь
+                $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+                $requestUri = '/' . ltrim(trim($requestUri), '/'); // Убираем дублирующиеся слеши
+
+                // Кешируем результат на 1 час (3600 секунд)
+                cache()->set($cacheKey, [$host, $requestUri], 3600);
+            }
+
+            // Формируем протокол (HTTP/HTTPS)
+            $protocol = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+                ? 'https'
+                : 'http';
+
+            // Формируем полный URL
+            $fullUrl = $protocol . '://' . $host . $requestUri;
 
             // --------------------------------------------------
             // Подготовка данных о товаре
@@ -162,6 +199,24 @@ class ProductController extends BaseController
                     ];
                 }
             }
+            
+            /*
+            Из кэша (если кэш хранит рейтинг и количество отзывов):
+
+            $reviewCount = (int)($cache['by_id'][$id]['review_count'] ?? 0);
+
+            Из отдельного запроса (если данные о рейтингах хранятся в другой таблице):
+
+            $reviewData = db()->query("SELECT rating, review_count FROM reviews WHERE product_id = ?", [$id])->get();
+            $ratingValue = (float)($reviewData['rating'] ?? 0);
+            $reviewCount = (int)($reviewData['review_count'] ?? 0);
+            */
+
+            // --------------------------------------------------
+            // Получаем рейтинг и количество отзывов (если есть)
+            // --------------------------------------------------
+            $ratingValue = (float)($product['rating'] ?? 0);
+            $reviewCount = (int)($product['review_count'] ?? 0);
 
             // --------------------------------------------------
             // aggregateRating — включать только если rating >= 4.0 и reviewCount > 0

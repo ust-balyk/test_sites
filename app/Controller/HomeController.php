@@ -27,18 +27,12 @@ class HomeController extends BaseController
             
             if (empty($discounted_products)) {
                 $discounted_products = db()->query("SELECT * FROM ". TABLE_NAME .
-                    //" WHERE price = '' ORDER BY id DESC LIMIT 8")->get();
                     " WHERE price = '' AND in_stock = 1 ORDER BY id DESC LIMIT 8")->get();
             
             }
             
-            if (TABLE_NAME == 'cosmetics') {
-                $title = 'Японский уход и косметика — всё для твоей красоты!';
-
-            } else {
-                $title = 'Японский уход, косметика и витамины — секреты твоей красоты!';
-            
-            }
+            $title = (TABLE_NAME == 'cosmetics') ? 'Японский уход и косметика — всё для твоей красоты!'
+                : 'Японский уход, косметика и витамины — секреты твоей красоты!';
 
             return app()->view->full_view (
 

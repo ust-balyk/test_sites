@@ -5,9 +5,6 @@ namespace App\Controller;
 
 /**
  * CategoryController – вывод списка товаров выбранной категории
- * (страница каталога, а не отдельного продукта).  
- * В JSON‑LD используется ItemList → ListItem, а в ListItem
- * оставлены только свойства, необходимые для списка (Offer, rating, …).
  */
 class CategoryController extends BaseController
 {
@@ -90,14 +87,40 @@ class CategoryController extends BaseController
             ? self::getTitle_External($usedSlug) . ' на Japan-in.Ru'
             : 'Японский уход, косметика и витамины — секреты твоей красоты!';
 
-        // Безопасный текущий URL (используется в хлебных крошках и JSON‑LD)
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-        $hostRaw  = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $host = filter_var($hostRaw, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
-            ? $hostRaw
-            : preg_replace('~[^a-zA-Z0-9.-]~', '', $hostRaw);
-        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-        $full_url   = $protocol . '://' . $host . $requestUri;
+        // Получаем и обрабатываем хост и путь
+        $cacheKey = 'host_request_uri_category_cache';
+        $cachedData = cache()->get($cacheKey);
+
+        if ($cachedData) {
+            [$host, $requestUri] = $cachedData;
+        } else {
+            // Получаем 'сырой' хост (с портом, если есть)
+            $hostRaw = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $host = preg_replace('~:\d+$~', '', $hostRaw); // Удаляем порт
+            $host = preg_replace('~[^a-z0-9.-]~', '', $host); // Удаляем недопустимые символы
+            $host = strtolower($host); // Приводим к нижнему регистру
+
+            // Если хост не валиден и не localhost, заменяем на localhost
+            if (!filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) && $host !== 'localhost') {
+                $host = 'localhost';
+            }
+
+            // Получаем и нормализуем путь
+            $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+            $requestUri = '/' . ltrim(trim($requestUri), '/'); // Убираем дублирующиеся слеши
+
+            // Кешируем результат на 1 час (3600 секунд)
+            cache()->set($cacheKey, [$host, $requestUri], 3600);
+        }
+
+        // Формируем протокол (HTTP/HTTPS)
+        $protocol = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+            ? 'https'
+            : 'http';
+
+        // Формируем полный URL
+        $full_url = $protocol . '://' . $host . $requestUri;
+
 
         // Краткое описание категории (можно задать статически или взять из первой карточки)
         $firstProduct   = $products[0];
@@ -155,7 +178,7 @@ class CategoryController extends BaseController
             $url  = $protocol .'://'. $host .'/cosmetics/'. $slug .'/'. $item['outer_id'];
             $price = (int)($item['price'] ?: $item['new_price']);
             $description = $item['title'] ?? '';
-            $image_url = $item['image'] ?? '';
+            $image_url = $protocol . '://' . $host . $item['image'] ?? '';
 
             $itemList_elements[] = [
                 '@type'       => 'ListItem',
@@ -164,7 +187,7 @@ class CategoryController extends BaseController
                 'item'        => [
                     '@type'  => 'Product',
                     'name'   => $description,
-                    "image"  => $image_url,
+                    'image'  => $image_url,
                     'offers' => [
                         '@type'         => 'Offer',
                         'name'          => $description,

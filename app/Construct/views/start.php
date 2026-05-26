@@ -57,7 +57,7 @@
     </div>
   </section><!--achievements-->
 
-  <?php dump($_SESSION) ?> 
+  <?//php dump($_SESSION) ?> 
   <!--section class="carouse-promo">
     <div class="container">
       <div class="slider-header">

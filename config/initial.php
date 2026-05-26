@@ -13,6 +13,7 @@ const AUTO_LOAD   = ROOT .'/vendor/autoload.php';
 const WWW         = ROOT .'/public';
 const CACHE_DB    = ROOT .'/cache/db/cache_db.json';
 const CACHE_MENU  = ROOT .'/cache/menu';
+const CACHE       = ROOT .'/cache/temp';
 const ERROR_LOGS  = ROOT .'/log/errors/error.log';
 const ACCOUNT     = APP  .'/Account';
 const CONSTRUCT   = APP  .'/Construct';

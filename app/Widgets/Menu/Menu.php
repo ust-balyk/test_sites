@@ -31,7 +31,7 @@ class Menu
 
     protected function run()
     {
-        $menu_html = cache()->get($this->cache_key);
+        $menu_html = cache()->getCache_menu($this->cache_key);
 
         if ($menu_html) {
             echo $menu_html;
@@ -76,7 +76,7 @@ class Menu
             $menu_html .= "    </{$this->container}>". PHP_EOL;
         }
         //
-        cache()->set($this->cache_key, $menu_html, $this->cache_time);
+        cache()->setCache_menu($this->cache_key, $menu_html, $this->cache_time);
         echo $menu_html;
     
     }
