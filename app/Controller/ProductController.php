@@ -1,4 +1,5 @@
 <?php
+//declare(strict_types=1);
 namespace App\Controller;
 use App\Widgets\Cart\Cart;
 use App\Helper\Text\Text;
