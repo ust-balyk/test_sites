@@ -180,3 +180,130 @@
   <!-- hidden inputs managed by JS -->
   <input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
 <?php endif; ?>
+
+<?php if (!empty($related_products)): ?>
+  <section class="carouse-promo">
+    <div class="container promo">
+      <div class="slider-header">
+        <a href="/cosmetics/<?= $product['slug'] ?>" class="btn btn-sm btn-outline-secondary promo">
+          <span>похожие продукты</span>
+        </a>
+        <div class="slider-btn-control">
+          <span class="prev-btn"><i class="fa-solid fa-chevron-left"></i></span>
+          <span class="next-btn"><i class="fa-solid fa-chevron-right"></i></span>
+        </div>
+      </div>
+
+      <div class="owl-carousel owl-theme" id="slider-product">
+      <?php foreach ($related_products as $related_): ?>
+        <div class="product-card">
+        <?php if (empty($related_['price']) && empty($related_['new_price'])): ?>
+          <div class="product_expected"><p>ожидается</p></div>
+        <?php elseif ($related_['in_stock'] == 0): ?>
+          <div class="product_expected"><p>ожидается</p></div>
+        <?php elseif ($related_['new_price']): ?>
+          <div class="discounted_product"><p>акция!</p></div>
+        <?php endif; ?>
+          <a href="/cosmetics/<?= $related_['slug'] ?>/product/<?= $related_['outer_id'] ?>">
+            <div class="product-card-img">
+              <img src="<?= hsc($related_['image']) ?>" onerror="this.onerror=null; this.src='/images/onerror.webp'"
+                loading="lazy" alt="<?= hsc($related_['title']) ?? 
+                'японская косметика и витамины для красоты и долголетия' ?>">
+            </div>
+          </a>
+          <div class="product-card-details">
+            <h6 class="product-card-title">
+              <a href="/cosmetics/<?= $related_['slug'] ?>/product/<?= $related_['outer_id'] ?>">
+                <?= hsc($related_['title']) ?>
+              </a>
+            </h6>
+            <div class="product-card-price">
+            <?php if (!empty($related_['price'])): ?>
+              <span class="current-price"><?= $related_['price'] ?></span>
+            <?php else: ?>
+              <span class="new-price"><?= hsc($related_['new_price']) ?? '' ?></span>
+              <del class="old-price"><?= hsc($related_['old_price']) ?? '' ?></del>
+            <?php endif; ?>
+            </div>
+            <div class="product-card-btns" style="height:4.3rem">
+            <?php if ($related_['in_stock']): ?>
+              <button class="btn btn btn-outline-secondary add-to-favorites"
+                data-id="<?= hsc($related_['outer_id']) ?>">
+                <i class="fa-solid fa-heart"></i>
+              </button>
+              <button class="btn btn-outline-secondary add-to-cart" data-id="<?= hsc($related_['outer_id']) ?>">
+                <i class="fa-solid fa-cart-shopping
+                <?= \App\Widgets\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
+                <div class="spinner-border d-none"
+                  style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#90cdfb" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            <?php endif; ?>
+            </div>
+          </div>
+        </div><!--product-card-->
+      <?php endforeach; ?>
+      </div>
+    </div>
+  </section-->
+<?php endif; ?>
+
+  <section class="delivery">
+      <div class="container delivery">
+        <div class="block">
+          <h6 style="color: #4295e4; margin-top: 20px">ДОСТАВКА</h6>
+          <p>
+          Мы сотрудничаем с логистической компанией «Служба Доставки Экспресс-Курьер».<br> 
+          <strong>
+          Стоимость и сроки доставки рассчитываются автоматически и соответствуют тарифам перевозчика.
+          </strong></p>
+          <ul>
+            <li>
+              <strong>Сроки отгрузки:</strong> 
+              Отправка заказа осуществляется в течение 3 рабочих дней после оформления.
+            </li>
+            <li>
+              <strong>Отслеживание:</strong>
+              После передачи заказа в службу доставки вы получите трек-номер 
+              для отслеживания посылки на указанный при регистрации e-mail или в мессенджер.
+            </li>
+            <li>
+              <strong>Важно:</strong> 
+              При заказе за пределы России или не входящие в географию присутствия «СДЭК» регионы,
+              пожалуйста, свяжитесь с нами в WhatsApp для согласования способа доставки.
+            </li>
+          </ul>
+          <p style="margin-bottom: 40px">
+        </div>
+
+        <div class="block" style="margin-top: 20px">
+          <h6 style="color: #4295e4; margin-top: 20px">ОПЛАТА</h6>
+          <p><strong>
+          Платежи по банковским картам проводятся в строгом соответствии с требованиями платежных систем.
+          </strong></br>
+          При оплате на сайте вы будете перенаправлены на защищённый платежный шлюз АО «Тинькофф Банк». 
+          Оплата происходит через зашифрованный протокол SSL 
+          <strong>
+          без комиссии картой любого банка.
+          </strong></p>
+          <p style="color: orange; margin-bottom: 40px">
+          Мы не получаем и не сохраняем данные вашей карты, равно как и не несём ответственности 
+          за несоблюдение сроков доставки по вине перевозчика.
+          </p>
+        </div>
+
+        <div class="block" style="margin-top: 20px">
+          <h6 style="color: #4295e4; margin-top: 20px">ВОЗВРАТ</h6>
+          <p style="margin-bottom: 40px">
+          Срок возврата товара надлежащего качества в соответствии с перечнем товаров 
+          подлежащих возврату и обмену, составляет 30 дней с момента получения товара. 
+          Возврат переведенных средств, производится на Ваш банковский счет в 
+          течение 5—30 рабочих дней<br> 
+          (<strong>сроки перевода зависят от правил Вашего банка</strong>).
+          </p>
+        </div>
+      </div>
+    </section>
+    <script>localStorage.setItem('location', window.location.href);</script>
+

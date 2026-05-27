@@ -139,7 +139,9 @@ class Router
          return true;
       
       }
-      return false;*/
+      return false;
+      */
+
       return request()->post('csrf_token') && 
          (request()->post('csrf_token') == session()->get('csrf_token'));
    

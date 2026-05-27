@@ -1,7 +1,7 @@
 <?php
 //declare(strict_types=1);
-
 namespace App\Controller;
+use Master\Pagination;
 
 /**
  * CategoryController – вывод списка товаров выбранной категории
@@ -51,6 +51,11 @@ class CategoryController extends BaseController
             self::init();
         }
 
+        $pagination = new Pagination(); 
+        dump($pagination); 
+
+
+        $slug_         = (string)request()->getSLUG_or_ID()[0] ?? null;
         $products      = [];
         $usedSlug      = null; // slug выбранной категории
         $requestedSlug = request()->getSLUG_or_ID()[0] ?? null;
@@ -88,7 +93,7 @@ class CategoryController extends BaseController
             : 'Японский уход, косметика и витамины — секреты твоей красоты!';
 
         // Получаем и обрабатываем хост и путь
-        $cacheKey = 'host_request_uri_category_cache';
+        $cacheKey = "host_request_uri_category_{$slug_}";
         $cachedData = cache()->get($cacheKey);
 
         if ($cachedData) {
@@ -97,7 +102,7 @@ class CategoryController extends BaseController
             // Получаем 'сырой' хост (с портом, если есть)
             $hostRaw = $_SERVER['HTTP_HOST'] ?? 'localhost';
             $host = preg_replace('~:\d+$~', '', $hostRaw); // Удаляем порт
-            $host = preg_replace('~[^a-z0-9.-]~', '', $host); // Удаляем недопустимые символы
+            $host = preg_replace('~[^a-zA-Z0-9-]~', '', $host); // Удаляем недопустимые символы
             $host = strtolower($host); // Приводим к нижнему регистру
 
             // Если хост не валиден и не localhost, заменяем на localhost

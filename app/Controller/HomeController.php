@@ -1,6 +1,5 @@
 <?php
 namespace App\Controller;
-use Master\Pagination;
 use App\Widgets\Cart\Cart;
 
 class HomeController extends BaseController

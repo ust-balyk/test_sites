@@ -53,11 +53,41 @@ class Cache
    }
 
    // Теперь данные доступны через этот метод или напрямую
+   /*
    public function getCache_db()
    {
       return $this->indexed_DB;
    
+   }*/
+
+   public function getCache_db(): ?array
+   {
+      return !empty($this->indexed_DB) && is_array($this->indexed_DB)
+         ? $this->indexed_DB
+         : null;
+   
    }
+
+   public function countCache_ById(): ?int
+   {
+      if (empty($this->indexed_DB['by_id'])) {
+         return null;
+      }
+      return count($this->indexed_DB['by_id']);
+   
+   }
+
+
+   public function countCache_ByCategory(string $slug): ?int
+   {
+      if (empty($this->indexed_DB['by_category'][$slug])) {
+         return null;
+      }
+      return count($this->indexed_DB['by_category'][$slug]);
+   
+   }
+
+   /* ----------------- */
    
    public function setCache_menu($key, $data, $seconds = 3600): void
    {      

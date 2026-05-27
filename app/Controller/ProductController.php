@@ -13,7 +13,7 @@ class ProductController extends BaseController
         self::init(); // запись URL
 
         [$slug, $id] = request()->getSLUG_or_ID() ?? [];
-        
+        $id         = (string)request()->getSLUG_or_ID()[1] ?? null;        
         $cache = cache()->getCache_db();
         $product = $cache['by_id'][$id] ?? null;
         
@@ -41,39 +41,58 @@ class ProductController extends BaseController
             }
 
             $title = !empty($product_title) ? ('Купить '. $product_title) : 'Купить японскую косметику';
- 
 
             $category_slug = $product['slug'];
+            $related_products = $cache['by_category'][$category_slug] ?? [];
 
-            // Получаем похожие товары
-            if ($related_products = $cache['by_category'][$category_slug] ?? []) {
-                if (!empty($related_products)) {
-                    // Удаляем текущий товар
-                    $related_products = array_filter($related_products, 
-                        fn($item) => $item['outer_id'] != $id);            
-                    // Если остались товары, выбираем случайные
-                    if (!empty($related_products)) {
-                        $keys = array_rand($related_products, min(8, count($related_products)));
-                        $related_products = array_intersect_key($related_products, array_flip($keys));
-                    } else {
-                        $related_products = [];
+            if (!empty($related_products)) {
+                // убрать текущий товар и товары вне наличия
+                $related_products = array_values(array_filter(
+                    $related_products,
+                    fn($item) => ($item['outer_id'] ?? null) !== ($product['outer_id'] ?? null)
+                            && (($item['in_stock'] ?? 0) == 1)
+                ));
+                shuffle($related_products);
+                $related_products = array_slice($related_products, 0, 8);
+
+                if (count($related_products) < 8) {
+                    $needed = 8 - count($related_products);
+                    $discounted_products = array_values(array_filter(
+                        $cache['by_id'] ?? [],
+                        fn($item) => ($item['outer_id'] ?? null) !== ($product['outer_id'] ?? null)
+                                && !empty($item['new_price'])
+                                && (($item['in_stock'] ?? 0) == 1)
+                    ));
+                    if (empty($discounted_products)) {
+                        $discounted_products = db()->query(
+                            "SELECT * FROM " . TABLE_NAME .
+                            " WHERE outer_id != ? AND in_stock = 1 AND new_price IS NOT NULL 
+                            AND new_price <> '' ORDER BY RAND() LIMIT 8",
+                            [$product['outer_id']]
+                        )->get() ?: [];
                     }
-                }
-            } else {
-                // Если в кэше нет, берем из базы
-                $related_products = db()->query("SELECT * FROM " . TABLE_NAME . 
-                    " WHERE slug = ? AND outer_id != ? AND in_stock = 1 ORDER BY RAND() LIMIT 8", 
-                        [$category_slug, $id])->get() ?: [];
+                    shuffle($discounted_products);
 
+                    // Добавляем, но индексируем по outer_id чтобы избежать дубликатов
+                    $by_outer = [];
+                    foreach ($related_products as $p) {
+                        if (isset($p['outer_id'])) $by_outer[$p['outer_id']] = $p;
+                    }
+                    foreach ($discounted_products as $p) {
+                        if (count($by_outer) >= 8) break;
+                        if (!isset($p['outer_id']) || isset($by_outer[$p['outer_id']])) continue;
+                        $by_outer[$p['outer_id']] = $p;
+                    }
+                    $related_products = array_values($by_outer);
+                }
             }
-        
 
             /********* LD+JSON **********/
             // --------------------------------------------------
             // Безопасный host/протокол/URL
             // --------------------------------------------------
             // Получаем и обрабатываем хост и путь
-            $cacheKey = 'host_request_uri_product_cache';
+            $cacheKey = "host_request_uri_product_{$id}";
             $cachedData = cache()->get($cacheKey);
 
             if ($cachedData) {
@@ -82,7 +101,7 @@ class ProductController extends BaseController
                 // Получаем 'сырой' хост (с портом, если есть)
                 $hostRaw = $_SERVER['HTTP_HOST'] ?? 'localhost';
                 $host = preg_replace('~:\d+$~', '', $hostRaw); // Удаляем порт
-                $host = preg_replace('~[^a-z0-9.-]~', '', $host); // Удаляем недопустимые символы
+                $host = preg_replace('~[^a-zA-Z0-9-]~', '', $host); // Удаляем недопустимые символы
                 $host = strtolower($host); // Приводим к нижнему регистру
 
                 // Если хост не валиден и не localhost, заменяем на localhost

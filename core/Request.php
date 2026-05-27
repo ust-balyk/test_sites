@@ -322,8 +322,7 @@ class Request
       return $this->formatted_uri;
 
    }
-
-/*   
+  
    public function getRequestParams()
    {
       if (!str_contains($this->formatted_uri, "&")) {
@@ -345,6 +344,7 @@ class Request
 
    }
 
+   /*
    public function get_id()
    {
       if (str_contains($this->formatted_uri, '/')) {
@@ -364,7 +364,7 @@ class Request
 
    }
  
-*/
+   */
 
    public function getData(): array
    {

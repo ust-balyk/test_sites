@@ -4,9 +4,9 @@ use Master\Application;
 
 class Friend
 {
-   function lock()
+   public function lock()
    {
-      if (session()->get('name')) {
+      if (session()->get('user.name')) {
   
          response()->redirect('/');
 

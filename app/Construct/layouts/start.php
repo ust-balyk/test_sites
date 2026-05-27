@@ -246,6 +246,7 @@
         </nav>
       </header>
       <!---------------- MAIN ---------------->
+      <?php dump($_SESSION) ?>
       <main>
         <div class="container">
           <!-- Модал корзины -->

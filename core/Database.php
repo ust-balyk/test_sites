@@ -277,6 +277,18 @@ class Database
     
     }
 
+    public function countDB_ByCategory(string $tbl, string $slug): ?int
+    {
+        $total_count = $this->query(
+            "SELECT COUNT(*) AS total_count FROM `{$tbl}` WHERE `slug` = :value", ['value' => $slug]
+        )->getOne();
+        if ($total_count === null) return null;
+    
+        $count = (int) ($total_count['total_count'] ?? 0);
+        return $count === 0 ? null : $count;
+
+    }
+
     public function getOne()
     {
         return $this->stmt->fetch();

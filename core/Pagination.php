@@ -18,7 +18,7 @@ class Pagination
    )
    {
       $this->uriPage         = Application::$app->request->getRequestParams();
-      $this->totalRecords    = $this->getTotalRecords('users');   
+      $this->totalRecords    = $this->getTotalRecords(TABLE_NAME);   
       $this->countPages      = $this->getCountPages();
       $this->currentPage     = $this->getCurrentPage();
       $this->requestInterval = $this->getRequestInterval();
@@ -30,14 +30,15 @@ class Pagination
          return PAGINATION_SETTINGS['totalRecords'];
 
       }
-      return Application::$app->db->getColumn($tbl);
+      return Application::$app->cache->countCache_ByCategory(basename($this->uriPage)); ?
+         ? Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($this->uriPage));
    
    }
    
    protected function getCountPages()
    {
-      return (int)ceil($this->totalRecords / $this->linesOnPage) ?:
-         Application::$app->abort->error(500);
+      return (int)ceil($this->totalRecords / $this->linesOnPage) ?
+         : Application::$app->abort->error(500);
 
    }
 
