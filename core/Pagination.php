@@ -30,8 +30,8 @@ class Pagination
          return PAGINATION_SETTINGS['totalRecords'];
 
       }
-      return Application::$app->cache->countCache_ByCategory(basename($this->uriPage)); ?
-         ? Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($this->uriPage));
+      return Application::$app->cache->countCache_ByCategory(basename($this->uriPage)) ??
+         Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($this->uriPage));
    
    }
    

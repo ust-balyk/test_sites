@@ -126,8 +126,8 @@
                 </li>
                 <li class="nav-item dropdown has-megamenu">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Каталог
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style="font-weight:600">Каталог
                   </a>
 
                   <?php new App\Widgets\Menu\Menu(); ?>
@@ -246,7 +246,6 @@
         </nav>
       </header>
       <!---------------- MAIN ---------------->
-      <?php dump($_SESSION) ?>
       <main>
         <div class="container">
           <!-- Модал корзины -->

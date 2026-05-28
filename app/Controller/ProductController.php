@@ -52,7 +52,8 @@ class ProductController extends BaseController
                     fn($item) => ($item['outer_id'] ?? null) !== ($product['outer_id'] ?? null)
                             && (($item['in_stock'] ?? 0) == 1)
                 ));
-                shuffle($related_products);
+                //shuffle($related_products);
+                shuffle_assoc($related_products);
                 $related_products = array_slice($related_products, 0, 8);
 
                 if (count($related_products) < 8) {
@@ -71,7 +72,8 @@ class ProductController extends BaseController
                             [$product['outer_id']]
                         )->get() ?: [];
                     }
-                    shuffle($discounted_products);
+                    //shuffle($discounted_products);
+                    shuffle_assoc($discounted_products);
 
                     // Добавляем, но индексируем по outer_id чтобы избежать дубликатов
                     $by_outer = [];
@@ -338,7 +340,8 @@ class ProductController extends BaseController
                 : db()->query("SELECT * FROM " . TABLE_NAME . " WHERE slug = ?", [$slug])->get() ?: [];
             
             if($products) {
-                shuffle($products);
+                //shuffle($products);
+                shuffle_assoc($products);
                 return app()->view->full_view(CATEGORY_LAYOUT, CATEGORY_VIEW, [
                     'products' => $products,
                     'category' => $products[0]['category'] ?? 'Каталог',

@@ -35,6 +35,16 @@ function array_value_search($arr, $index, $value)
    return null;
 }
 
+function shuffle_assoc(array $arr): array {
+   $keys = array_keys($arr);
+   shuffle($keys);
+   $result = [];
+   foreach ($keys as $key) {
+      $result[$key] = $arr[$key];
+   }
+   return $result;
+}
+
 function db()
 {
    return app()->db;

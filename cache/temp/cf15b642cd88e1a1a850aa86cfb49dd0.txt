@@ -1,0 +1,1 @@
+a:2:{s:30:"host_request_uri_product_12195";a:2:{i:0;s:9:"localhost";i:1;s:36:"/cosmetics/accessories/product/12195";}s:4:"time";i:1779945000;}

@@ -51,19 +51,18 @@ class CategoryController extends BaseController
             self::init();
         }
 
+        /* ------------------------------ */
         $pagination = new Pagination(); 
         dump($pagination); 
 
+        /* ------------------------------ */
 
-        $slug_         = (string)request()->getSLUG_or_ID()[0] ?? null;
+        $slug          = (string)request()->getSLUG_or_ID()[0] ?? null;
         $products      = [];
-        $usedSlug      = null; // slug выбранной категории
-        $requestedSlug = request()->getSLUG_or_ID()[0] ?? null;
 
         /* Попытка загрузить товары по запрошенному slug */
-        if ($requestedSlug) {
-            $products = self::get_Products($requestedSlug);
-            $usedSlug = $requestedSlug;
+        if ($slug) {
+            $products = self::get_Products($slug);
         }
 
         /* Если ничего не найдено – ищем первую непустую категорию */
@@ -71,7 +70,7 @@ class CategoryController extends BaseController
             foreach (self::$categories as $catSlug => $catName) {
                 $products = self::get_Products($catSlug);
                 if (!empty($products)) {
-                    $usedSlug = $catSlug;
+                    $slug = $catSlug; // новый slug
                     break;
                 }
             }
@@ -82,18 +81,13 @@ class CategoryController extends BaseController
             return app()->view->full_view(HOME_LAYOUT, HOME_VIEW, []);
         }
 
-        /* -----------------------------------------------------------------
-         * Теперь $usedSlug – это slug выбранной категории,
-         * а $products – массив товаров этой категории.
-         * ----------------------------------------------------------------- */
-
         // SEO‑заголовок для категории
         $title = (TABLE_NAME === 'cosmetics')
-            ? self::getTitle_External($usedSlug) . ' на Japan-in.Ru'
+            ? self::getTitle_External($slug) . ' на Japan-in.Ru'
             : 'Японский уход, косметика и витамины — секреты твоей красоты!';
 
         // Получаем и обрабатываем хост и путь
-        $cacheKey = "host_request_uri_category_{$slug_}";
+        $cacheKey = "host_request_uri_category_{$slug}";
         $cachedData = cache()->get($cacheKey);
 
         if ($cachedData) {
@@ -147,7 +141,7 @@ class CategoryController extends BaseController
             $short_description = $rawDescription;
         }
         if (trim($short_description) === '') {
-            $short_description = "Японская косметика категории «" . (self::$categories[$usedSlug] ?? $usedSlug) . "»";
+            $short_description = "Японская косметика категории «" . (self::$categories[$slug] ?? $usedSlug) . "»";
         }
         $short_description = trim($short_description);
 
@@ -156,8 +150,8 @@ class CategoryController extends BaseController
             ['name' => 'Главная',   'url' => $protocol . '://' . $host],
             ['name' => 'Косметика', 'url' => $protocol . '://' . $host . '/cosmetics'],
             [
-                'name' => self::$categories[$usedSlug] ?? 'Категория',
-                'url'  => $protocol . '://' . $host . '/cosmetics/' . $usedSlug,
+                'name' => $slug ?? 'Категория',
+                'url'  => $protocol . '://' . $host . '/cosmetics/' . $slug,
             ],
         ];
 
@@ -257,7 +251,7 @@ class CategoryController extends BaseController
                 'products'          => $products,
                 'category'          => $firstProduct['category'] ?? '',
                 'category_title'    => self::getTitle_Internal($firstProduct['slug']),
-                'slug'              => $usedSlug,
+                'slug'              => $slug,
                 'image_url'         => $image_url,
             ]
         );
@@ -292,7 +286,7 @@ class CategoryController extends BaseController
     }
 
     /**
-    * SEO‑заголовок (внешний) для категории
+    *   SEO‑заголовок (внешний) для категории
     */
     private static function getTitle_External(string $key): string
     {
@@ -311,7 +305,7 @@ class CategoryController extends BaseController
     }
 
     /**
-    * Внутренний заголовок (не используется в текущей версии, но оставлен для совместимости)
+    *   Внутренний заголовок
     */
     private static function getTitle_Internal(string $key): string
     {
@@ -330,7 +324,7 @@ class CategoryController extends BaseController
     }
 
     /**
-    * Возвращает предлог/союз, используемый в заголовках
+    *   Возвращает предлог/союз, используемый в заголовках
     */
     private static function getLink_Word(string $key, string $categoryName): string
     {
@@ -347,8 +341,8 @@ class CategoryController extends BaseController
     }
 
     /**
-    * Детерминированное перемешивание массива (seed‑зависимое).
-    * Принимает любой массив – числовой или ассоциативный.
+    *   Детерминированное перемешивание массива (seed‑зависимое).
+    *   Принимает любой массив – числовой или ассоциативный.
     */
     private static function seeded_shuffle(array $arr, int $seed): array
     {

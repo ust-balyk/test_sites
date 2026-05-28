@@ -23,8 +23,12 @@ class PageController extends BaseController
             
             CATEGORY_LAYOUT, 
             'cosmetics', 
-            [ 
-                'cosmetics' => $cosmetics, 
+            [
+                'cosmetics' => $cosmetics,
+                'title'     => '',
+                'short_description' => '',
+                'full_url'  => '',
+                'image_url' => '',
                 
             ] 
         ); 

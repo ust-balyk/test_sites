@@ -19,7 +19,7 @@
               <a href="/cosmetics">косметика</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              <?= $category_title; ?>
+              <?= $category; ?>
             </li>
           </ol>
         </nav>
