@@ -35,6 +35,8 @@ function array_value_search($arr, $index, $value)
    return null;
 }
 
+/*
+// сохранить порядок ключей в сессии
 function shuffle_assoc(array $arr): array {
    $keys = array_keys($arr);
    shuffle($keys);
@@ -42,7 +44,40 @@ function shuffle_assoc(array $arr): array {
    foreach ($keys as $key) {
       $result[$key] = $arr[$key];
    }
+   $_SESSION['shuffled_keys'] = $keys;
    return $result;
+}
+// восстановить порядок из сессии (если есть)
+function restore_order(array $arr): array {
+   if (!session_id()) session_start();
+   if (empty($_SESSION['shuffled_keys'])) return $arr;
+   $keys = $_SESSION['shuffled_keys'];
+   $result = [];
+   foreach ($keys as $k) {
+       if (array_key_exists($k, $arr)) $result[$k] = $arr[$k];
+   }
+   // добавить оставшиеся элементы, которых не было в сохранённых ключах
+   foreach ($arr as $k => $v) {
+       if (!in_array($k, $keys, true)) $result[$k] = $v;
+   }
+   return $result;
+}*/
+
+function shuffle_assoc(array $arr): array {
+   $keys = array_keys($arr);
+   shuffle($keys);
+   $_SESSION['shuffled_keys'] = $keys; // сохраняем порядок сразу после shuffle
+   $result = [];
+   foreach ($keys as $k) $result[$k] = $arr[$k];
+   return $result;
+}
+function restore_order(array $arr): array {
+   if (empty($_SESSION['shuffled_keys']) || !is_array($_SESSION['shuffled_keys'])) return $arr;
+   $keys = $_SESSION['shuffled_keys'];
+   $res = [];
+   foreach ($keys as $k) if (array_key_exists($k, $arr)) $res[$k] = $arr[$k];
+   foreach ($arr as $k => $v) if (!in_array($k, $keys, true)) $res[$k] = $v;
+   return $res;
 }
 
 function db()
