@@ -4,7 +4,7 @@
     <?php if(!empty($first_page)): ?>
     <li class="page-item">
       <a class="page-link" href="<?= $first_page; ?>" aria-label="First page">
-        <span aria-hidden="true">&laquo;</span>
+        <span aria-hidden="true">最初</span>
       </a>
     </li>
     <?php endif; ?>
@@ -19,7 +19,9 @@
       <?php endforeach; ?>
     <?php endif; ?>
 
+    <?php if(!empty($current_page)): ?>
     <li class="page-item active"><a class="page-link"><?= $current_page; ?></a></li>
+    <?php endif; ?> 
 
     <?php if(!empty($pages_right)): ?>
       <?php foreach ($pages_right as $page_right): ?>
@@ -34,7 +36,7 @@
     <?php if(!empty($last_page)): ?>
     <li class="page-item">
       <a class="page-link" href="<?= $last_page; ?>" aria-label="Last page">
-        <span aria-hidden="true">&raquo;</span>
+        <span aria-hidden="true" style="font-size:1rem">最後</span>
       </a>
     </li>
     <?php endif; ?>

@@ -10,7 +10,7 @@ class Pagination
 
    public function __construct(
       
-      protected int $linesOnPage     = PAGINATION_SETTINGS['linesOnPage'],
+      protected int $onPageRecords   = PAGINATION_SETTINGS['onPageRecords'],
       protected int $requestInterval = PAGINATION_SETTINGS['requestInterval'],
       protected int $startPaging     = PAGINATION_SETTINGS['startPaging'],
       protected string $template     = PAGINATION_SETTINGS['template'],
@@ -24,23 +24,28 @@ class Pagination
       $this->requestInterval = $this->getRequestInterval();
    }
 
+
    protected function getTotalRecords($tbl): int
    {
       if (PAGINATION_SETTINGS['totalRecords'] > 0) {
          return PAGINATION_SETTINGS['totalRecords'];
 
       }
-      return Application::$app->cache->countCache_ByCategory(basename($this->uriPage)) ??
-         Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($this->uriPage));
-   
+      $slug = Application::$app->request->getPath($this->uriPage);
+          
+      return Application::$app->cache->countCache_ByCategory(basename($slug)) ??
+         Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($slug));
+      
    }
-   
+
+
    protected function getCountPages()
    {
-      return (int)ceil($this->totalRecords / $this->linesOnPage) ?
-         : Application::$app->abort->error(500);
+      return (int)ceil($this->totalRecords / $this->onPageRecords) ?: 1; 
+         //Application::$app->abort->error(500);
 
    }
+
 
    protected function getCurrentPage()
    {
@@ -48,13 +53,13 @@ class Pagination
       
       if ($page < 1 || $page > $this->countPages) {
          Application::$app->abort->error();
-         //Application::$app->response->redirect();
          
       }
       return $page;
 
    }
-   
+
+
    protected function getRequestInterval(): int
    {
       return ($this->countPages <= $this->startPaging) ? $this->countPages : $this->requestInterval;
@@ -62,22 +67,27 @@ class Pagination
 
    }
 
+
    public function getOffset(): int
    {
-      return  ($this->currentPage - 1) * $this->linesOnPage;   
+      return  ($this->currentPage - 1) * $this->onPageRecords;   
 
    }
+
 
    public function getPageNumber()
    {
       $first_page   = '';
       $back         = '';
       $pages_left   = [];
-      $current_page = $this->currentPage;
+      //$current_page = $this->currentPage;
+      $current_page = '';
       $pages_right  = [];
       $go           = '';
       $last_page    = '';
-      
+
+      $current_page = ($this->countPages > 1) ? $this->currentPage : '';
+
       if ($this->currentPage > $this->requestInterval +1) {
          $first_page = $this->getLink(1);      
       }
@@ -117,12 +127,37 @@ class Pagination
 
    }
 
+   
    protected function getLink($page): string
    {
-      return str_contains($this->uriPage, '?') ?
-         "{$this->uriPage}&page={$page}" : "{$this->uriPage}?page={$page}";
+      /*
+      if ($page === '1') { // удаляем ?page=1
+         return rtrim($this->uriPage, '?&');
+      }
+      return str_contains($this->uriPage, '?') 
+         ? "{$this->uriPage}&page={$page}" 
+         : "{$this->uriPage}?page={$page}";
+      */
+      
+      $url = $this->uriPage;
+      // отделить path и query
+      $parts = parse_url($url);
+      $query = [];
+      if (isset($parts['query'])) parse_str($parts['query'], $query);
+
+      $page = (int)$page;
+      if ($page == 1) {
+         unset($query['page']);
+      } else {
+         $query['page'] = $page;
+      }
+
+      $new_query = http_build_query($query);
+      $base = $parts['path'] ?? $url; // для относительных строк без схемы/хоста (вида "?a=1" и т.п.)
+      return $new_query === '' ? $base : $base .'?'. $new_query;
 
    }
+
 
    public function __toString(): string
    {

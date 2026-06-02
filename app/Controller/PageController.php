@@ -7,69 +7,41 @@ use App\Cart\Cart;
 class PageController extends BaseController
 {
 
-    /*
-    static function cosmetics() 
-    {
-        self::init(); // запись URL
-
-        $all_products = cache()->getCache_db();
-        $cosmetics = $all_products['by_id'];
-        $cosmetics = (shuffle_assoc($cosmetics)) // перемешать и сохранить в сессии внутри функции
-            ? $cosmetics = restore_order($cosmetics) // вернуть порядок из сессии
-            : $cosmetics = $cosmetics['by_id'];
-
-        if (empty($cosmetics)) { 
-            $cosmetics = db()->query("SELECT * FROM ". TABLE_NAME ." ORDER BY RAND()")->get();
-
-        }
-
-        return app()->view->full_view ( 
-            
-            CATEGORY_LAYOUT, 
-            'cosmetics', 
-            [
-                'cosmetics' => $cosmetics,
-                'title'     => '',
-                'short_description' => '',
-                'full_url'  => '',
-                'image_url' => '',
-                
-            ] 
-        ); 
-        
-        return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []); 
-        
-    }*/
-
     static function cosmetics()
     {
-        self::init(); // метка для возврата из <login/register>
+        self::init(); // путь на страницу из login/registr
+    
+        $items_by_cache = cache()->getCache_db();
+        $cosmetics = $items_by_cache['by_id'] ?? [];
+    
+        // если нет в кэше — возьмём из БД
+        if (empty($cosmetics)) {
+            $items_by_db = db()->query("SELECT * FROM ". TABLE_NAME)->getAssoc('id');
+            $cosmetics = $items_by_db ?? [];
+        }
 
-        $all_products = cache()->getCache_db();
-        $cosmetics = $all_products['by_id'] ?? [];
-
-        if ($cosmetics) {
-            // если всё ещё пусто — получить из БД
-            if (empty($cosmetics)) {
-                $cosmetics = db()->query("SELECT * FROM ". TABLE_NAME ." ORDER BY RAND()")->get();
-            }
-
-            // если нет сохранённого порядка для текущих данных — перемешиваем автоматически
-            if (empty($_SESSION['shuffled_keys'])) { // ключ создаётся shuffle_assoc()
-                $cosmetics = shuffle_assoc($cosmetics); // внутри сохраняет $_SESSION['shuffled_keys']
+        if (! empty($cosmetics)) {
+            // если нет сохранённого порядка — перемешиваем и сохраняем
+            if (empty($_SESSION['shuffled_keys'])) {
+                $cosmetics = shuffle_assoc($cosmetics); // внутри: $_SESSION['shuffled_keys'] = $keys;
             } else {
                 $cosmetics = restore_order($cosmetics);
             }
-
+    
             return app()->view->full_view(
                 CATEGORY_LAYOUT,
                 'cosmetics',
-                ['cosmetics' => $cosmetics, 'title'=>'', 'short_description'=>'', 'full_url'=>'', 'image_url'=>'']
+                [
+                    'cosmetics' => $cosmetics, 
+                    'title'     =>'', 
+                    'short_description'=>'', 
+                    'full_url'  =>'', 
+                    'image_url' =>''
+                ]
             );
-        
         }
-        return app()->view->full_view (HOME_LAYOUT, HOME_VIEW, []); 
-    
+        return app()->view->full_view(HOME_LAYOUT, HOME_VIEW, []);
+
     }
 
 

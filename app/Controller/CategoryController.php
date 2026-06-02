@@ -52,30 +52,33 @@ class CategoryController extends BaseController
         }
 
         /* ------------------------------ */
-        $pagination = new Pagination(); 
-        dump($pagination); 
-
-        /* ------------------------------ */
 
         $slug          = (string)request()->getSLUG_or_ID()[0] ?? null;
-        $products      = [];
+        $all_products      = [];
 
         /* Попытка загрузить товары по запрошенному slug */
         if ($slug) {
-            $products = self::get_Products($slug);
+            $all_products = self::get_Products($slug);
         }
 
         /* Если ничего не найдено – ищем первую непустую категорию */
-        if (empty($products)) {
-            foreach (self::$categories as $catSlug => $catName) {
-                $products = self::get_Products($catSlug);
-                if (!empty($products)) {
-                    $slug = $catSlug; // новый slug
+        if (empty($all_products)) {
+            foreach (self::$categories as $new_slug => $cat_slug) {
+                $all_products = self::get_Products($new_slug);
+                if (!empty($all_products)) {
+                    $slug = $new_slug; // новый slug
                     break;
                 }
             }
         }
 
+        /* -------------------------------------- */
+        $pagination = new Pagination();
+        $products = array_slice(
+            $all_products, $pagination->getOffset(), PAGINATION_SETTINGS['onPageRecords'] 
+        );
+
+        /* --------------------------------------- */
         /* Если всё‑равно пусто – главная страница */
         if (empty($products)) {
             return app()->view->full_view(HOME_LAYOUT, HOME_VIEW, []);
@@ -253,6 +256,7 @@ class CategoryController extends BaseController
                 'category_title'    => self::getTitle_Internal($firstProduct['slug']),
                 'slug'              => $slug,
                 'image_url'         => $image_url,
+                'pagination'        => $pagination,
             ]
         );
     }

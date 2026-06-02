@@ -370,7 +370,7 @@ $(document).ready(function() {
   })();
     
   /* ------------- new start -------------- */
-    
+  /*    
   var cancelled = false;
 
   var scrollTimer = setTimeout(function() {
@@ -398,7 +398,7 @@ $(document).ready(function() {
 
   $(window).on(cancelEvents, markCancelled);
   $(document).on(cancelEvents, markCancelled);
-
+  */
   /* ---------------------------------------- */
     
   /* ----- получить кнопку "вернуться наверх" ----- */

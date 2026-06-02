@@ -1,9 +1,10 @@
 <?php //dump($_SESSION); ?>
-<?php //dump($_SERVER['REQUEST_URI']); ?>
+<?php //dump($_SERVER['REQUEST_URI']) ?>
+<?php //dump($_GET); ?>
 <?php //dump($_COOKIE); ?>
 
 <?php if (!empty($products)): ?>
-<?//php dd($products); ?>
+<?//php dump($products); ?>
   <section class="category">
     <div class="container category">
       <div class="container justify-content-between breadcrumb">
@@ -198,7 +199,8 @@
             </div><!--row-->
           </div><!--container-->
 
-          <nav aria-label="navigation">
+          <?= $pagination; ?>
+          <!--nav aria-label="navigation">
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link disabled" href="#" aria-label="Previous">
@@ -214,7 +216,7 @@
                 </a>
               </li>
             </ul>
-          </nav>
+          </nav-->
         </div><!--content-->
       </div><!--row category-->
 

@@ -1,3 +1,4 @@
+<?php dump($_SESSION) ?>
 <?php if (!empty($cosmetics)): ?>  
   <section class="category">
     <div class="container category">

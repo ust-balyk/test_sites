@@ -86,9 +86,7 @@ class Cache
       return count($this->indexed_DB['by_category'][$slug]);
    
    }
-
-   /* ----------------- */
-   
+ 
    public function setCache_menu($key, $data, $seconds = 3600): void
    {      
       if (! file_exists(CACHE_MENU)) {

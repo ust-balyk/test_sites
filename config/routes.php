@@ -20,9 +20,11 @@ $app->router->get('/', [HomeController::class]);
 $app->router->get('/cosmetics', [PageController::class, 'cosmetics']);
 $app->router->get('/cosmetics/discount', [PageController::class, 'discount']);
 $app->router->get('/cosmetics/([a-zA-Z-]+)', [CategoryController::class]);
+//$app->router->get('/cosmetics/([a-zA-Z-]+)(?:\?page=(\d+))?', [CategoryController::class]);
 $app->router->get('/cosmetics/([a-zA-Z-]+)/product/([0-9]+)', [ProductController::class]);
 $app->router->get('/product/delivery', [PageController::class, 'delivery']);
 
+//пробельные (\s) и непустые (\S) символы
 $app->router->post('/add-to-cart([?id=\s\S]*+)', [CartController::class, 'add_to_cart'])->withoutCsrfToken();
 
 $app->router->get('/add-to-favorites([?id=0-9]+)', [CartController::class, 'add_to_favorites']);
