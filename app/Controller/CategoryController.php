@@ -3,14 +3,11 @@
 namespace App\Controller;
 use Master\Pagination;
 
-/**
- * CategoryController – вывод списка товаров выбранной категории
- */
 class CategoryController extends BaseController
 {
-    /* -----------------------------------------------------------------
-     * Списки категорий и заголовков
-     * ----------------------------------------------------------------- */
+    /*
+    * Списки категорий и заголовков
+    * ----------------------------------------------------------------- */
     private static array $categories = [
         "makeup"          => "декоративная косметика",
         "for-body"        => "для тела",
@@ -41,9 +38,9 @@ class CategoryController extends BaseController
         'gift-set'         => "косметика в подарочных наборах",
     ];
 
-    /* -----------------------------------------------------------------
-     * Точка входа
-     * ----------------------------------------------------------------- */
+    /*
+    * Точка входа
+    * ----------------------------------------------------------------- */
     public static function index(): string
     {
         // При наличии init‑метода в BaseController вызываем его.
@@ -52,16 +49,15 @@ class CategoryController extends BaseController
         }
 
         /* ------------------------------ */
+        $slug         = (string)request()->getSLUG_or_ID()[0] ?? null;
+        $all_products = [];
 
-        $slug          = (string)request()->getSLUG_or_ID()[0] ?? null;
-        $all_products      = [];
-
-        /* Попытка загрузить товары по запрошенному slug */
+        // Попытка загрузить товары по запрошенному slug
         if ($slug) {
             $all_products = self::get_Products($slug);
         }
 
-        /* Если ничего не найдено – ищем первую непустую категорию */
+        // Если ничего не найдено – ищем первую непустую категорию
         if (empty($all_products)) {
             foreach (self::$categories as $new_slug => $cat_slug) {
                 $all_products = self::get_Products($new_slug);
@@ -72,18 +68,18 @@ class CategoryController extends BaseController
             }
         }
 
-        /* -------------------------------------- */
-        $pagination = new Pagination();
-        $products = array_slice(
-            $all_products, $pagination->getOffset(), PAGINATION_SETTINGS['onPageRecords'] 
-        );
-
-        /* --------------------------------------- */
-        /* Если всё‑равно пусто – главная страница */
-        if (empty($products)) {
+        // Если всё‑равно пусто – главная страница
+        if (empty($all_products)) {
             return app()->view->full_view(HOME_LAYOUT, HOME_VIEW, []);
         }
 
+        /* -------------------------------------- */
+        $pagination = new Pagination();
+        $products = array_slice(
+            $all_products, $pagination->getOffset(), PAGINATION_SETTINGS['onPageRecords']
+        );
+
+        /* --------------------------------------- */
         // SEO‑заголовок для категории
         $title = (TABLE_NAME === 'cosmetics')
             ? self::getTitle_External($slug) . ' на Japan-in.Ru'
@@ -261,13 +257,11 @@ class CategoryController extends BaseController
         );
     }
 
-    /* -----------------------------------------------------------------
-    * Вспомогательные методы
-    * ----------------------------------------------------------------- */
+    /* ----------------------------------------------------------------- */
 
-    /**
+    /*
     * Получить товары из кеша (или из БД, если кеш пуст)
-    */
+    * -------------------------------------------------------- */
     private static function get_Products(string $slug): array
     {
         $cache    = cache()->getCache_db();
@@ -289,9 +283,9 @@ class CategoryController extends BaseController
         return $products;
     }
 
-    /**
+    /*
     *   SEO‑заголовок (внешний) для категории
-    */
+    * ------------------------------------------------------------ */
     private static function getTitle_External(string $key): string
     {
         if (isset(self::$titleExternal[$key])) {
@@ -308,9 +302,9 @@ class CategoryController extends BaseController
         return 'косметика' . ($link !== '' ? " {$link} " : ' ') . $categoryName;
     }
 
-    /**
+    /*
     *   Внутренний заголовок
-    */
+    * ------------------------------------------------------------- */
     private static function getTitle_Internal(string $key): string
     {
         if (isset(self::$titleInternal[$key])) {
@@ -327,9 +321,9 @@ class CategoryController extends BaseController
         return 'косметика' . ($link !== '' ? " {$link} " : ' ') . $categoryName;
     }
 
-    /**
+    /*
     *   Возвращает предлог/союз, используемый в заголовках
-    */
+    * ---------------------------------------------------------------------------- */
     private static function getLink_Word(string $key, string $categoryName): string
     {
         if ($key === 'aromatherapy' || $key === 'accessories') {
@@ -344,10 +338,10 @@ class CategoryController extends BaseController
         return 'для';
     }
 
-    /**
+    /*
     *   Детерминированное перемешивание массива (seed‑зависимое).
     *   Принимает любой массив – числовой или ассоциативный.
-    */
+    * ------------------------------------------------------------------ */
     private static function seeded_shuffle(array $arr, int $seed): array
     {
         // Сохраняем оригинальные ключи (если нужны дальше)

@@ -2,9 +2,9 @@
   <ul class="pagination">
 
     <?php if(!empty($first_page)): ?>
-    <li class="page-item">
-      <a class="page-link" href="<?= $first_page; ?>" aria-label="First page">
-        <span aria-hidden="true">最初</span>
+    <li class="page-item first" style="padding:0">
+      <a class="page-link first" href="<?= $first_page; ?>" aria-label="First page">
+        <span aria-hidden="true" style="font-size:2rem;color:#eba0a6!important">最初</span>
       </a>
     </li>
     <?php endif; ?>
@@ -34,9 +34,9 @@
     <?php endif; ?>
 
     <?php if(!empty($last_page)): ?>
-    <li class="page-item">
-      <a class="page-link" href="<?= $last_page; ?>" aria-label="Last page">
-        <span aria-hidden="true" style="font-size:1rem">最後</span>
+    <li class="page-item last">
+      <a class="page-link last" href="<?= $last_page; ?>" aria-label="Last page">
+        <span aria-hidden="true" style="font-size:2rem;color:#eba0a6!important">最後</span>
       </a>
     </li>
     <?php endif; ?>
