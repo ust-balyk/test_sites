@@ -83,7 +83,7 @@ define( 'MENU_CACHE_KEY', $MENU_CACHE_KEY );
 const PAGINATION_SETTINGS = [
    'onPageRecords'   => 12,  // количество товаров на странице
    'requestInterval' => 3,  // количество ссылок вокруг центральной 
-   'startPaging'     => 2,  // количество страниц с которых начинается paging
+   'startPaging'     => 2, // количество страниц с которых начинается paging
    'template'        => '/pagination/base',
 ];
 

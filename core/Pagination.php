@@ -4,7 +4,6 @@ namespace Master;
 class Pagination
 {
    protected string $uriPage;
-   //protected int $totalRecords;
    protected int $countPages;
    protected int $currentPage;
 
@@ -37,6 +36,7 @@ class Pagination
          $total_records = Application::$app->cache->countCache_ById() ??
             Application::$app->db->getColumn(TABLE_NAME);
       }
+
       return $total_records;
    
    }
@@ -45,7 +45,6 @@ class Pagination
    protected function getCountPages()
    {
       return (int)ceil($this->totalRecords / $this->onPageRecords) ?: 1; 
-         //Application::$app->abort->error(500);
 
    }
 
@@ -83,13 +82,10 @@ class Pagination
       $first_page   = '';
       $back         = '';
       $pages_left   = [];
-      //$current_page = $this->currentPage;
-      $current_page = '';
+      $current_page = ($this->countPages > 1) ? $this->currentPage : '';
       $pages_right  = [];
       $go           = '';
       $last_page    = '';
-
-      $current_page = ($this->countPages > 1) ? $this->currentPage : '';
 
       if ($this->currentPage > $this->requestInterval +1) {
          $first_page = $this->getLink(1);      

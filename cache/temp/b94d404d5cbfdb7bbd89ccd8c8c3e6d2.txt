@@ -1,1 +1,1 @@
-a:2:{s:32:"host_request_uri_category_makeup";a:2:{i:0;s:9:"localhost";i:1;s:17:"/cosmetics/makeup";}s:4:"time";i:1780441093;}
+a:2:{s:32:"host_request_uri_category_makeup";a:2:{i:0;s:9:"localhost";i:1;s:17:"/cosmetics/makeup";}s:4:"time";i:1780553339;}
