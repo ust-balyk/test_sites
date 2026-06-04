@@ -4,12 +4,13 @@ namespace Master;
 class Pagination
 {
    protected string $uriPage;
-   protected int $totalRecords;
+   //protected int $totalRecords;
    protected int $countPages;
    protected int $currentPage;
 
    public function __construct(
-      
+
+      protected int $totalRecords    = 0,
       protected int $onPageRecords   = PAGINATION_SETTINGS['onPageRecords'],
       protected int $requestInterval = PAGINATION_SETTINGS['requestInterval'],
       protected int $startPaging     = PAGINATION_SETTINGS['startPaging'],
@@ -25,17 +26,19 @@ class Pagination
    }
 
 
-   protected function getTotalRecords($tbl): int
+   protected function getTotalRecords($tbl): ?int
    {
-      if (PAGINATION_SETTINGS['totalRecords'] > 0) {
-         return PAGINATION_SETTINGS['totalRecords'];
-
-      }
       $slug = Application::$app->request->getPath($this->uriPage);
-          
-      return Application::$app->cache->countCache_ByCategory(basename($slug)) ??
-         Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($slug));
       
+      $total_records = Application::$app->cache->countCache_ByCategory(basename($slug)) ??
+         Application::$app->db->countDB_ByCategory(TABLE_NAME, basename($slug));
+
+      if ($total_records == null) {
+         $total_records = Application::$app->cache->countCache_ById() ??
+            Application::$app->db->getColumn(TABLE_NAME);
+      }
+      return $total_records;
+   
    }
 
 

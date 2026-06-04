@@ -1,4 +1,4 @@
-<?php dump($_SESSION) ?>
+<?//php dump($_SESSION) ?>
 <?php if (!empty($cosmetics)): ?>  
   <section class="category">
     <div class="container category">
@@ -189,26 +189,9 @@
             </div><!--row-->
           </div><!--container-->
 
-          <nav aria-label="navigation">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link disabled" href="#" aria-label="Previous">
-                  <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link active" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div><!--content-->
-      </div><!--row category-->
+          <?= $pagination; ?>
 
+      </div><!--row category-->
     </div><!--container category-->
   </section>
 <?php endif ?>

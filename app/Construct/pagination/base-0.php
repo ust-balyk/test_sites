@@ -1,12 +1,19 @@
-<nav aria-label="Page navigation">
+<nav aria-label="Page navigation example">
   <ul class="pagination">
 
     <?php if(!empty($first_page)): ?>
-    <li class="page-item first" style="padding:0">
-      <a class="page-link first" href="<?= $first_page; ?>" aria-label="First page">
-        <!--span aria-hidden="true" style="font-size:2rem;color:#eba0a6!important">最初</span-->
-        <span aria-hidden="true">最初</span>
+    <li class="page-item">
+      <a class="page-link" href="<?= $first_page; ?>" aria-label="First page">
+        <span aria-hidden="true">&laquo;</span>
       </a>
+    </li>
+    <?php endif; ?>
+
+    <?php if(!empty($back)): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $back; ?>" aria-label="Previous page">
+        <span aria-hidden="true">&lsaquo;</span>
+      </a>  
     </li>
     <?php endif; ?>
 
@@ -20,9 +27,7 @@
       <?php endforeach; ?>
     <?php endif; ?>
 
-    <?php if(!empty($current_page)): ?>
     <li class="page-item active"><a class="page-link"><?= $current_page; ?></a></li>
-    <?php endif; ?> 
 
     <?php if(!empty($pages_right)): ?>
       <?php foreach ($pages_right as $page_right): ?>
@@ -34,11 +39,18 @@
       <?php endforeach; ?>
     <?php endif; ?>
 
+    <?php if(!empty($go)): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $go; ?>" aria-label="Next page">
+        <span aria-hidden="true">&rsaquo;</span>
+      </a>
+    </li>
+    <?php endif; ?>
+
     <?php if(!empty($last_page)): ?>
-    <li class="page-item last">
-      <a class="page-link last" href="<?= $last_page; ?>" aria-label="Last page">
-        <!--span aria-hidden="true" style="font-size:2rem;color:#eba0a6!important">最後</span-->
-        <span aria-hidden="true">最後</span>
+    <li class="page-item">
+    <a class="page-link" href="<?= $last_page; ?>" aria-label="Last page">
+        <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
     <?php endif; ?>

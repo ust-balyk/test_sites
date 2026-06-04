@@ -96,7 +96,7 @@ html {
 
 body {
   font-size: 1.6rem; /* 16px */
-  font-family: 'SF Pro Text', sans-serif;
+  font-family: "SF Pro Text", "Roboto", system-ui, -apple-system, sans-serif;
   line-height: 1.625; /* ~26px */
   font-weight: 400;
   color: var(--grey-color);
@@ -1643,28 +1643,31 @@ div.breadcrumb {
     }
 }
 
+/* кнопка 'домой' */
 a.btn.back_link {
-    height: 3.4rem;
-    margin: 0.4rem 0px 1.5rem 0px;
-    padding: 0.1rem 0.5rem 0.2rem 0.5rem;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-color);
-    transition: all .350s;
+  height: 3.4rem;
+  margin: 0.4rem 0px 1.5rem 0px;
+  padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  transition: all .3s;
 }
-.btn.btn-outline-secondary.back_link span {
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: var(--grey-color);
-    margin-bottom: 0;
-    padding: 0px 2.5rem;
+.btn.back_link span {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--grey-color);
+  margin-bottom: 0;
+  padding: 0px 2.5rem;
 }
 a.btn.back_link:hover {
-    background-color: white;
-    border: 1px solid white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    h5 {
-        color: black;
-    }
+  background-color: white;
+  border: 1px solid white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+a.btn.back_link:hover span {
+  font-size: 1.9rem;
+  font-weight: 350;
+  color: black;
 }
 
 /* текущая директория */
@@ -2002,18 +2005,19 @@ li.page-item.active {
   text-align: center;
   background-color: #cce8ff;
   margin: 1.2rem;
-  a {
-    width: 6.2rem !important;
-    height: 3.4rem !important;
-    border: 1px solid var(--light-grey-color);
-    border-radius: 3px;
-    background-color: #cce8ff !important;
-    font-size: 1.8rem;
-    font-weight: 400;
-    padding: 0.1rem 0.7rem 0.5rem 0.7rem;
-    color: var(--color-grey);
-  } 
 }
+li.page-item.active a {
+width: 6.2rem !important;
+height: 3.4rem !important;
+border: 1px solid var(--light-grey-color);
+border-radius: 3px;
+background-color: #cce8ff !important;
+font-size: 1.8rem;
+font-weight: 400;
+padding: 0.1rem 0.7rem 0.5rem 0.7rem;
+color: var(--color-grey);
+} 
+
 li.page-item {
   width: 6rem !important;
   height: 3.2rem !important;
@@ -2021,45 +2025,62 @@ li.page-item {
   text-align: center;
   background-color: white;
   margin: 1.2rem;
-  a {
-    width: 6.2rem !important;
-    height: 3.4rem !important;
-    border: 1px solid var(--light-grey-color);
-    border-radius: 3px;
-    background-color: white !important;
-    font-size: 1.8rem;
-    font-weight: 400;
-    padding: 0.1rem 0.7rem 0.5rem 0.7rem; 
-    color: var(--color-grey);
-  }
+}
+li.page-item a {
+width: 6.2rem !important;
+height: 3.4rem !important;
+border: 1px solid var(--light-grey-color);
+border-radius: 3px;
+background-color: white !important;
+font-size: 1.8rem;
+font-weight: 400;
+padding: 0.1rem 0.7rem 0.5rem 0.7rem; 
+color: var(--color-grey);
 }
 
 li.page-item .first,
 li.page-item .last {
   padding: 0;
-  a {
-    margin-bottom: 0.4rem;
-  }
 }
-/*
-a.page-link.disabled {
-  width: 6.2rem;
-  height: 3.4rem;
-  background-color: var(--description-color);
+li.page-item .first a,
+li.page-item .last a {
+  margin-bottom: 0.4rem;
 }
 
-.pagination .page-link:hover {
-    border: 1px solid var(--light-grey-color);
-    border-radius: 3px;
-    background-color: var(--light-blue-color);
-    color: black;
+.page-item .first span,
+.page-item .last span {
+  font-size: 2rem;
+  color: #eba0a6 !important;
 }
+a.page-link.first:hover span,
+a.page-link.last:hover span { 
+  font-size: 2.1rem;
+  font-weight: 450;
+  color: #c3465b !important; 
+}
+
+.pagination .page-link:hover,
 .pagination .page-link:focus {
-    box-shadow: none;
-    background-color: var(--light-blue-color);
-    color: black;
+  cursor: pointer;
+  border: 1px solid white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  font-size: 1.9rem;
+  font-weight: 450;
+  color: black;
 }
 
+.pagination .page-item.active .page-link:hover,
+.pagination .page-item.active .page-link:focus { 
+  cursor: default;
+  outline: none;
+  border: 1px solid var(--light-grey-color);
+  box-shadow: none;
+  font-size: 1.8rem;
+  color: var(--color-grey);
+}
+
+
+/*
 .page-item:first-child .page-link {
     border-radius: 3px;
 }

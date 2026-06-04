@@ -283,7 +283,7 @@ class Database
             "SELECT COUNT(*) AS total_count FROM `{$tbl}` WHERE `slug` = :value", ['value' => $slug]
         )->getOne();
         if ($total_count === null) return null;
-    
+
         $count = (int) ($total_count['total_count'] ?? 0);
         return $count === 0 ? null : $count;
 
@@ -298,7 +298,7 @@ class Database
     public function getColumn($tbl) // получить количество записей
     {
         $this->query("SELECT COUNT(*) FROM {$tbl}");
-        return $this->stmt->fetchColumn();
+        return (int)$this->stmt->fetchColumn();
     
     }
 

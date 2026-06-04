@@ -12,31 +12,39 @@ class PageController extends BaseController
         self::init(); // путь на страницу из login/registr
     
         $items_by_cache = cache()->getCache_db();
-        $cosmetics = $items_by_cache['by_id'] ?? [];
+        $all_cosmetics = $items_by_cache['by_id'] ?? [];
     
         // если нет в кэше — возьмём из БД
-        if (empty($cosmetics)) {
+        if (empty($all_cosmetics)) {
             $items_by_db = db()->query("SELECT * FROM ". TABLE_NAME)->getAssoc('id');
-            $cosmetics = $items_by_db ?? [];
+            $all_cosmetics = $items_by_db ?? [];
         }
 
-        if (! empty($cosmetics)) {
+        if (! empty($all_cosmetics)) {
             // если нет сохранённого порядка — перемешиваем и сохраняем
             if (empty($_SESSION['shuffled_keys'])) {
-                $cosmetics = shuffle_assoc($cosmetics); // внутри: $_SESSION['shuffled_keys'] = $keys;
+                $all_cosmetics = shuffle_assoc($all_cosmetics); // внутри: $_SESSION['shuffled_keys'] = $keys;
             } else {
-                $cosmetics = restore_order($cosmetics);
+                $all_cosmetics = restore_order($all_cosmetics);
             }
-    
+
+            //dump($all_cosmetics);
+            //
+            $pagination = new Pagination();
+            $cosmetics = array_slice(
+                $all_cosmetics, $pagination->getOffset(), PAGINATION_SETTINGS['onPageRecords']
+            );
+
             return app()->view->full_view(
                 CATEGORY_LAYOUT,
                 'cosmetics',
                 [
-                    'cosmetics' => $cosmetics, 
-                    'title'     =>'', 
-                    'short_description'=>'', 
-                    'full_url'  =>'', 
-                    'image_url' =>''
+                    'cosmetics'  => $cosmetics, 
+                    'title'      => 'Купить японскую косметику со скидкой на Japan-in.Ru!', 
+                    'short_description' => '', 
+                    'full_url'   => '', 
+                    'image_url'  => '',
+                    'pagination' => $pagination,
                 ]
             );
         }
@@ -59,7 +67,6 @@ class PageController extends BaseController
         usort($discounted_products, function($a, $b) {return $b['id'] <=> $a['id'];});
         
         if (empty($discounted_products)) {
-
             $discounted_products = db()->
                 query("SELECT * FROM ". TABLE_NAME ." WHERE price = '' ORDER BY id DESC")->get();
 
