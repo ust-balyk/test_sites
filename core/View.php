@@ -24,7 +24,8 @@ class View
       
       }
       
-      ob_start();
+      // Когда PHP выполняет include, файл layout видит все переменные текущего скрипта, 
+      // поэтому $view_file и $data будут доступны внутри layout.php.
       
       $layout_file = LAYOUT . "/{$layout}.php";
       if (!is_file($layout_file)) $layout_file = DEF_LAYOUT;
