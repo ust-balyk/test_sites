@@ -1,10 +1,10 @@
 <?= db()->user_back(); ?>
-<?php if (session()->get('role') === 'master'): ?>
+<?php if (session()->get('user.role') === 'master'): ?>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
       <span class="badge bg-warning text-dark">ADMIN MODE</span>
-      <button class="btn btn-sm btn-primary" onclick="toggleEditMode()">📝 Редактировать</button>
-      <button class="btn btn-sm btn-success" onclick="prepareNewProduct()">➕ Новый товар</button>
+      <button class="btn btn-sm btn-primary" onclick="toggleEditMode()">📝 РЕДАКТИРОВАТЬ</button>
+      <button class="btn btn-sm btn-success" onclick="prepareNewProduct()">➕ НОВЫЙ ТОВАР</button>
         
       <div id="format-tools" class="d-none border-start ps-3 ms-2">
         <button class="btn btn-sm btn-outline-light" onclick="format('bold')"><b>B</b></button>
@@ -13,7 +13,7 @@
         <button class="btn btn-sm btn-warning" onclick="format('removeFormat')" title="Сбросить оформление">
           <i class="fa-solid fa-eraser"></i> Ластик
         </button>
-        <button class="btn btn-sm btn-danger ms-3" onclick="saveAllChanges()">💾 Сохранить ВСЁ</button>
+        <button class="btn btn-sm btn-danger ms-3" onclick="saveAllChanges()">💾 СОХРАНИТЬ</button>
       </div>
     </div>
   </div>
@@ -50,6 +50,7 @@
     transition: 0.3s; 
   }
   .edit-image-hover:hover::after { opacity: 1; }
+  .navbar.fixed-top{top:40px}
   </style>
 <?php endif; ?>
 
@@ -242,6 +243,7 @@
       </div><!--description-->
     </div><!--container product-->
   </section>
+  <input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
 <?php endif; ?>
 
 <?php if (!empty($related_products)): ?>

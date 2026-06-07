@@ -81,9 +81,9 @@ class Router
                                        'data' => 'Security error']);
                      die;
                   } else {
-                     //session()->setFlash('error', 'ошибка безопастности.');
+                     session()->setFlash('error', 'ошибка безопастности.');
                      //response()->redirect();
-                     Application::$app->abort->error(419);
+                     //Application::$app->abort->error(419);
                   }
                }
             }  

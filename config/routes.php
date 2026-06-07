@@ -12,6 +12,7 @@ use \App\Controller\PageController;
 use \App\Controller\CartController;
 use \App\Controller\UserController;
 use \App\Controller\AccountController;
+use \App\Controller\EditorController;
 use \App\Controller\AdminController;
 
 //$app->router->add('/', [HomeController::class, 'index'], ['POST', 'GET']);
@@ -35,7 +36,9 @@ $app->router->get('/login', [UserController::class, 'login'])->closed_for(['fren
 $app->router->post('/login', [UserController::class, 'enter'])->withoutCsrfToken();
 $app->router->get('/logout', [UserController::class, 'logout'])->closed_for(['guest']);
 $app->router->get('/account', [AccountController::class])->closed_for(['guest']);
+$app->router->post('/editor', [EditorController::class])->closed_for(['all']);
 $app->router->get('/home', [AdminController::class])->closed_for(['all']);
+$app->router->post('/home', [AdminController::class])->closed_for(['all']);
 
 $app->router->get('/author', function() { 
    return '<pre><br><h3 style="color:grey;font-size:18px">     &copy; исламов вадим ханифович</h3></pre>'; 

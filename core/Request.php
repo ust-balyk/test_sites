@@ -5,8 +5,10 @@ class Request
 {
    public string $formatted_uri;  // отформатированая строка запроса
 
-   public function __construct ($uri) 
-   {   
+   public function __construct ($uri)
+   {
+      // $uri = trim(urldecode($uri));
+      //
       $uri = (string) $uri;
       // на path и query
       $parts = parse_url($uri);

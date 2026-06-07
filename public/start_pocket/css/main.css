@@ -2362,7 +2362,7 @@ div.product-buttons {
 
 ul.product-desc-tabs {
     border: 0;
-    margin: 0;
+    margin-bottom: 4rem;
     display: flex;
     justify-content: flex-end;
 }
