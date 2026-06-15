@@ -3,6 +3,7 @@
   <head>
     <base href="<?= base_url('/'); ?>">
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="<?= hsc(session()->get('csrf_token')) ?>">
     <meta name="referrer" content="no-referrer-when-downgrade">
     <title><?= $title ?? 'Японский уход и косметика на Japan-in.Ru' ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -131,6 +132,27 @@
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
+          <div class="toast-container position-fixed bottom-0 start-0" 
+            style="z-index: 9999; margin:2.4rem 4.4rem">
+          </div>
+          <!-- Шаблон тоста (чертеж для JS) -->
+          <template id="toast-template">
+            <div class="toast custom-toast border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex p-3 align-items-center">
+                <div class="toast-body d-flex align-items-center w-100">
+                  <!-- Контейнер для штампа -->
+                  <div class="jp-stamp-wrapper">
+                    <span class="jp-icon"></span>
+                  </div>
+                  <!-- Контейнер для текста -->
+                  <div class="ms-4">
+                    <span class="d-block fw-bold jp-status-label"></span>
+                    <span class="d-block small opacity-75 jp-detail-text"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
       </main>
       <!---------------- FOOTER ---------------->
@@ -199,7 +221,7 @@
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
-    <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
     <script src="<?= base_url(POCKET_STYLE .'/js/category.js'); ?>"></script>
+    <script type="module" src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
   </body>
 </html>

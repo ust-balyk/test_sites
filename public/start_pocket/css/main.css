@@ -845,7 +845,8 @@ div .product-card:hover {
     }
     .discounted_product {
         left: -0.3%;
-        border-color: rgba(235, 160, 166, 1); /*rgba(229, 143, 53, 0.6); /*#aeffaa;*/
+        text-shadow: 1px 1px 5px rgba(224, 131, 147, 1), -1px 1px 5px rgba(224, 131, 147, 1);
+        border-color: rgba(235, 160, 166, 1);
         border-left: none;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;

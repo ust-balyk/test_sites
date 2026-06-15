@@ -1,3 +1,43 @@
+/****************** Cart *******************/ 
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { initCart, showToast } = await import('./functions/cart.js');
+  initCart(); // навешивает обработчики на document.body
+});
+
+/*
+import { initActions } from './cart.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  initActions();
+});
+*/
+
+/*
+import { bindAddToCart } from './cart.js';
+document.addEventListener('DOMContentLoaded', () => bindAddToCart(document.body));
+*/
+
+// при необходимости вызвать тост вручную
+// showBSCoreToast('Тест', 'success');
+
+/**************** topButton *****************/
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { initTopButton } = await import('./functions/top_btn.js');
+  initTopButton({ buttonId: "top_btn", showAfter: 1000, mobileMax: 768 });
+});
+
+/********************** Editor **********************/
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { default: initEditorProduct } = await import('./functions/editor.js');
+  initEditorProduct();
+});
+
+/*********************************************** */
+
+/*
 function showBSCoreToast(detailMessage, type = 'success') {
   const container = document.querySelector('.toast-container');
   const template = document.getElementById('toast-template');
@@ -163,7 +203,7 @@ $(document).ready(function() {
         }, 300);
       }
     });
-  });
+  });*/
 
 
 
@@ -288,7 +328,8 @@ $(document).ready(function() {
         });
     
     });*/
-    
+   
+$(document).ready(function() {
   /* ------------- modal cart ------------- */
 
   (function () {
@@ -402,8 +443,9 @@ $(document).ready(function() {
   /* ---------------------------------------- */
     
   /* ----- получить кнопку "вернуться наверх" ----- */
-    
-  top_btn = document.getElementById("top_btn");
+
+  /*
+  const top_btn = document.getElementById("top_btn");
   window.onscroll = function() { scrollFunction() };
   function scrollFunction() {
     if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {

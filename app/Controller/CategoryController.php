@@ -1,6 +1,7 @@
 <?php
 //declare(strict_types=1);
 namespace App\Controller;
+use App\Cart\Cart;
 use Master\Pagination;
 
 class CategoryController extends BaseController
@@ -34,7 +35,7 @@ class CategoryController extends BaseController
         'for-oral-cavity'  => "волшебство улыбки",
         'for-hair'         => "блеск твоих волос",
         'for-hands'        => "очарование на кончиках пальцев",
-        'for-feet'         => "красота твоих ножек",
+        'for-feet'         => "прелесть походки",
         'gift-set'         => "косметика в подарочных наборах",
     ];
 
@@ -338,15 +339,10 @@ class CategoryController extends BaseController
         return 'для';
     }
 
-    /*
-    *   Детерминированное перемешивание массива (seed‑зависимое).
-    *   Принимает любой массив – числовой или ассоциативный.
-    * ------------------------------------------------------------------ */
+    
     private static function seeded_shuffle(array $arr, int $seed): array
     {
-        // Сохраняем оригинальные ключи (если нужны дальше)
         $originalKeys = array_keys($arr);
-        // Приводим к числовому массиву без «дырок»
         $values = array_values($arr);
 
         $n     = count($values);
@@ -357,13 +353,11 @@ class CategoryController extends BaseController
             return $min + ($state % ($max - $min + 1));
         };
 
-        // Шаффл числового массива
         for ($i = $n - 1; $i > 0; $i--) {
             $j = $rand(0, $i);
             [$values[$i], $values[$j]] = [$values[$j], $values[$i]];
         }
 
-        // Если нужно вернуть ассоциативный массив – восстанавливаем старые ключи
         if (!empty($originalKeys)) {
             $shuffled = [];
             foreach ($values as $index => $value) {
@@ -372,7 +366,6 @@ class CategoryController extends BaseController
             return $shuffled;
         }
 
-        // Иначе просто возвращаем числовой массив
         return $values;
     }
 

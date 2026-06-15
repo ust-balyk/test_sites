@@ -3,6 +3,7 @@
   <head>
     <base href="<?=base_url('/');?>">
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="<?= hsc(session()->get('csrf_token')) ?>">
     <meta name="robots" content="index, follow">
     <!--title>Japan-in.Ru &mdash; японская косметика и витамины по доступной цене!</title-->
     <title>Всё для Твоей красоты и здоровья из Японии!</title>

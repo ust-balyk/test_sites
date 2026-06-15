@@ -1,1 +1,1 @@
-a:2:{s:30:"host_request_uri_product_10054";a:2:{i:0;s:9:"localhost";i:1;s:33:"/cosmetics/for-face/product/10054";}s:4:"time";i:1780870394;}
+a:2:{s:30:"host_request_uri_product_10054";a:2:{i:0;s:9:"localhost";i:1;s:33:"/cosmetics/for-face/product/10054";}s:4:"time";i:1781253595;}

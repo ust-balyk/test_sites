@@ -1,13 +1,14 @@
 <?php
 namespace App\Controller;
-use App\Widgets\Cart\Cart;
+use App\Cart\Cart;
 
 
 class CartController
 {
     private static function checkCsrf(): bool
     {
-        // Надёжный способ получить заголовки (фермы PHP могут отличаться)
+        // Если да — массив заголовков и оттуда берёте X-CSRF-TOKEN.
+        // Если нет — брать токен из $_SERVER['HTTP_X_CSRF_TOKEN'] или из тела запроса.
         $headers = function_exists('getallheaders') ? getallheaders() : [];
         $token = null;
 
@@ -40,7 +41,7 @@ class CartController
             response()->json([
                 'status'  => 'error',
                 'type'    => 'danger',
-                'message' => 'Ошибка идентификации продукта'
+                'message' => 'Ошибка идентификации сеанса'
             ], 419); // 419/401/403 — по желанию; 419 распространён для expired CSRF
             return;
         }

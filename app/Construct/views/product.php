@@ -1,18 +1,17 @@
-<?php /* product_editable.html — вставьте в место вывода товара */ ?>
 <?php if (session()->get('user.role') === 'master'): ?>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
-      <span class="badge bg-warning text-dark">ADMIN MODE</span>
-      <button class="btn btn-sm btn-primary" id="toggle-edit-btn">📝 Редактировать</button>
-      <button class="btn btn-sm btn-success" id="new-product-btn">➕ Новый товар</button>
+      <span class="badge bg-warning text-dark">ADMIN</span>
+      <button class="btn btn-sm btn-primary" id="toggle-edit-btn">📝 РЕДАКТИРОВАТЬ ТОВАР</button>
+      <button class="btn btn-sm btn-success" id="new-product-btn">➕ ДОБАВИТЬ ТОВАР</button>
       <div id="format-tools" class="d-none border-start ps-3 ms-2">
-        <button class="btn btn-sm btn-outline-light" data-cmd="bold"><b>B</b></button>
-        <button class="btn btn-sm btn-outline-light" data-cmd="italic"><i>I</i></button>
+        <button class="btn btn-sm btn-outline-light" data-cmd="bold"><b>Bold</b></button>
+        <button class="btn btn-sm btn-outline-light" data-cmd="italic"><i>Italic</i></button>
         <button class="btn btn-sm btn-outline-light" data-cmd="insertUnorderedList">• Список</button>
         <button class="btn btn-sm btn-warning" data-cmd="removeFormat" title="Сбросить оформление">
           <i class="fa-solid fa-eraser"></i>
         </button>
-        <button class="btn btn-sm btn-danger ms-3" id="save-all-btn">💾 Сохранить ВСЁ</button>
+        <button class="btn btn-sm btn-danger ms-3" id="save-all-btn">💾 СОХРАНИТЬ</button>
       </div>
     </div>
   </div>

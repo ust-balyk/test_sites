@@ -1,7 +1,7 @@
 <?php
 //declare(strict_types=1);
 namespace App\Controller;
-use App\Widgets\Cart\Cart;
+use App\Cart\Cart;
 use App\Helper\Text\Text;
 
 
@@ -13,7 +13,7 @@ class ProductController extends BaseController
         self::init(); // запись URL
 
         [$slug, $id] = request()->getSLUG_or_ID() ?? [];
-        $id         = (string)request()->getSLUG_or_ID()[1] ?? null;        
+        $id          = (string)request()->getSLUG_or_ID()[1] ?? null;        
         $cache = cache()->getCache_db();
         $product = $cache['by_id'][$id] ?? null;
         

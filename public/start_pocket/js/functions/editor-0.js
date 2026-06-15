@@ -1,5 +1,4 @@
-// Подключите этот файл после загрузки DOM (например внизу страницы)
-(function(){
+export default function initEditorProduct(){
   const toggleBtn = document.getElementById('toggle-edit-btn');
   const newBtn = document.getElementById('new-product-btn');
   const saveBtn = document.getElementById('save-all-btn');
@@ -16,7 +15,6 @@
       el.contentEditable = state ? 'true' : 'false';
       if (state) el.classList.add('editable'); else el.classList.remove('editable');
     });
-    // reviews edit toggle
     document.querySelectorAll('.editable-review-author, .editable-review-text').forEach(el=>{
       el.contentEditable = state ? 'true' : 'false';
     });
@@ -107,7 +105,6 @@
       fd.append('image', file.files[0]);
     }
 
-    // Собираем отзывы в массив
     const reviews = [];
     document.querySelectorAll('#reviews-list .review').forEach(r=>{
       const author = (r.querySelector('.card-title')||{innerText:''}).innerText.trim();
@@ -118,7 +115,6 @@
     });
     fd.append('reviews', JSON.stringify(reviews));
 
-    
     try {
       const resp = await fetch('/editor', {
         method: 'POST',
@@ -144,7 +140,6 @@
     }
   }
 
-  // Events
   document.addEventListener('click', function(e){
     const cmd = e.target.closest('[data-cmd]');
     if (cmd){
@@ -156,6 +151,5 @@
   if (newBtn) newBtn.addEventListener('click', prepareNewProduct);
   if (saveBtn) saveBtn.addEventListener('click', saveAllChanges);
 
-  // expose for console/debug if needed
   window.adminProduct = { toggleEditMode, prepareNewProduct, saveAllChanges };
-})();
+}

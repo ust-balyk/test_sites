@@ -249,7 +249,7 @@
       <main>
         <div class="container">
           <!-- Модал корзины -->
-          <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+          <!--div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -264,7 +264,165 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div-->
+          <!-- Кнопка для открытия модалки -->
+
+          <!-- Модальное окно корзины -->
+          <!--div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="cartModalLabel">Корзина</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Список товаров -->
+                  <!--div class="list-group" id="cart-items">
+                    <!-- Пример товара -->
+                    <!--div class="list-group-item d-flex gap-3 align-items-start" data-item-id="1">
+                      <div style="width:120px; flex-shrink:0;">
+                        <img src="https://via.placeholder.com/120" alt="Товар" class="img-fluid rounded" />
+                      </div>
+
+                      <div class="flex-grow-1 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start">
+                          <div>
+                            <h6 class="mb-1">Название товара</h6>
+                            <small class="text-muted">Краткое описание</small>
+                          </div>
+                          <div class="text-end">
+                            <div class="fw-semibold">Цена: <span class="item-price" data-base-price="199.99">199.99</span> ₽</div>
+                          </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-between align-items-center">
+                          <div class="input-group" style="width:140px;">
+                            <button class="btn btn-outline-secondary btn-decrease" type="button">−</button>
+                            <input type="number" class="form-control text-center item-qty" value="1" min="1" />
+                            <button class="btn btn-outline-secondary btn-increase" type="button">+</button>
+                          </div>
+
+                          <div class="fw-bold">
+                            Итог: <span class="item-total">199.99</span> ₽
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Кнопки справа: удалить -->
+                      <!--div class="ms-3 text-end">
+                        <button class="btn btn-sm btn-outline-danger btn-delete" title="Удалить товар" type="button">&times;</button>
+                      </div>
+                    </div>
+                    <!-- /пример товара -->
+                  <!--/div>
+                </div>
+
+                <div class="modal-footer d-flex flex-column align-items-stretch">
+                  <div class="d-flex justify-content-between w-100 mb-2">
+                    <div>Товаров: <span id="cart-count">1</span></div>
+                    <div class="fw-bold">Итого: <span id="cart-total">199.99</span> ₽</div>
+                  </div>
+
+                  <div class="d-flex justify-content-between w-100">
+                    <div>
+                      <button type="button" class="btn btn-outline-danger" id="clearCartBtn">Очистить корзину</button>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Продолжить покупки</button>
+                      <button type="button" class="btn btn-primary" id="checkoutBtn">Оформить заказ</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div-->
+
+          <!-- Модальное окно корзины -->
+          <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="cartModalLabel">Корзина</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+
+                <div class="modal-body">
+                  <!-- Список товаров -->
+                  <div class="list-group" id="cart-items">
+
+                    <div class="list-group-item d-flex flex-column flex-md-row gap-3 align-items-start" data-item-id="1">
+                      <div class="item-img" style="width:120px; flex-shrink:0;">
+                        <img src="" alt="Товар" class="img-fluid rounded" />
+                      </div>
+
+                      <div class="flex-grow-1 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
+                          <div>
+                            <h6 class="mb-1">Название товара</h6>
+                            <small class="text-muted">Краткое описание</small>
+                          </div>
+
+                          <div class="text-end mt-2 mt-md-0">
+                            <div class="fw-semibold">Цена: <span class="item-price" data-base-price="199.99">199.99</span> ₽</div>
+                          </div>
+                        </div>
+
+                        <div class="mt-3 d-flex align-items-center gap-2 flex-column flex-sm-row">
+                          <div class="d-flex align-items-center w-100 justify-content-between">
+                            <!-- Цена за шт. (левая) -->
+                            <!--div class="text-muted">
+                              <small>Цена за шт.</small>
+                            </div-->
+
+                            <!-- Количество (средний блок на десктопе) -->
+                            <div class="ms-auto ms-sm-0 me-sm-3 order-2 order-sm-2">
+                              <div class="input-group" style="width:140px;">
+                                <button class="btn btn-outline-secondary btn-decrease" type="button">−</button>
+                                <input type="number" class="form-control text-center item-qty" value="1" min="1" />
+                                <button class="btn btn-outline-secondary btn-increase" type="button">+</button>
+                              </div>
+                            </div>
+
+                            <!-- Итог по товару (правая) -->
+                            <div class="fw-bold ms-3 order-3">
+                              Итог: <span class="item-total">999.99</span> ₽
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="ms-md-3 mt-3 mt-md-0 text-end">
+                        <button class="btn btn-sm btn-outline-danger btn-delete" title="Удалить товар" type="button">&times;</button>
+                      </div>
+                    </div>
+
+                  </div> <!-- /#cart-items (list-group) -->
+                </div> <!-- /.modal-body -->
+
+                <div class="modal-footer d-flex flex-column align-items-stretch">
+                  <div class="d-flex justify-content-between w-100 mb-2">
+                    <div>Товаров: <span id="cart-count">1</span></div>
+                    <div class="fw-bold">Итого: <span id="cart-total">199.99</span> ₽</div>
+                  </div>
+
+                  <div class="d-flex justify-content-between w-100">
+                    <div>
+                      <button type="button" class="btn btn-outline-danger" id="clearCartBtn">Очистить корзину</button>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Продолжить покупки</button>
+                      <button type="button" class="btn btn-primary" id="checkoutBtn">Оформить заказ</button>
+                    </div>
+                  </div>
+                </div> <!-- /.modal-footer -->
+
+              </div> <!-- /.modal-content -->
+            </div> <!-- /.modal-dialog -->
+          </div> <!-- /.modal -->
+
+
+
+
           <?= $view_file; ?>
           <button id="top_btn" title="Перейти к началу"> 
             <i class="fa-solid fa-chevron-up"></i>
@@ -277,7 +435,8 @@
             </button>
           </form>
           <div class="toast-container position-fixed bottom-0 start-0" 
-              style="z-index: 9999; margin:2.4rem 4.4rem"></div>
+              style="z-index: 9999; margin:2.4rem 4.4rem">
+          </div>
           <!-- Шаблон тоста (чертеж для JS) -->
           <template id="toast-template">
             <div class="toast custom-toast border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
@@ -386,6 +545,7 @@
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
-    <script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
+    <!--script src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script-->
+    <script type="module" src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
   </body>
 </html>

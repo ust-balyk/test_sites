@@ -373,6 +373,7 @@ class Database
             [$user_id, $hash_token] = explode(':', $token, 2);
             $user_id = (int)$user_id;
 
+            // зайти как админ можно только через пароль ( <> 1 )
             $user = $this->query('SELECT * FROM `users` WHERE `id` = :id AND id <> 1; LIMIT 1',
                 ['id' => $user_id])->getOne();
 

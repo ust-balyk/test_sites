@@ -1,14 +1,13 @@
 <?php
 namespace App\Controller;
-use App\Widgets\Cart\Cart;
+use App\Cart\Cart;
 
 class HomeController extends BaseController
 {
 
     static function index()
     {
-
-        //cache()->refreshCache();
+        cache()->refreshCache();
 
         self::init(); // запись URL
 
