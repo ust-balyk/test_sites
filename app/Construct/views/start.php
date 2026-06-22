@@ -217,7 +217,7 @@
       </a>
     </div>
   </section><!--/categories-->
-<?php dump($_SESSION); ?>
+<?//php dump($_SESSION); ?>
 <?php if (!empty($discounted_products)): ?>
   <section class="carousel-promo popular">
     <div class="container">

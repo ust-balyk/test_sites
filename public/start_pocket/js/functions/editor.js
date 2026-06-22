@@ -1,46 +1,46 @@
-// editor.js
-export default function initEditorProduct(){
+/* * * editor.js * * */
+export default function initEditorProduct() {
   const toggleBtn = document.getElementById('toggle-edit-btn');
   const newBtn = document.getElementById('new-product-btn');
   const saveBtn = document.getElementById('save-all-btn');
   const formatTools = document.getElementById('format-tools');
   const fileInputId = 'admin-file-input-temp';
-  let isEditMode = false;
-  let isNew = false;
 
-  function setEditable(state){
-    const fields = ['edit-title','edit-description','edit-price'];
-    fields.forEach(id=>{
-      const el = document.getElementById(id);
-      if (!el) return;
+  const productRoot = document.querySelector('.product[data-slug]');
+
+  const isEditableNow = () => document.querySelector('[contenteditable="true"]') !== null;
+
+  function getSlug() {
+    return productRoot?.dataset.slug?.trim() || '';
+  }
+
+  function setEditable(state) {
+    document.querySelectorAll('#edit-title, #edit-description, #edit-price').forEach(el => {
       el.contentEditable = state ? 'true' : 'false';
-      if (state) el.classList.add('editable'); else el.classList.remove('editable');
+      el.classList.toggle('editable', state);
     });
-    // reviews edit toggle
-    document.querySelectorAll('.editable-review-author, .editable-review-text').forEach(el=>{
+
+    document.querySelectorAll('.editable-review-author, .editable-review-text').forEach(el => {
       el.contentEditable = state ? 'true' : 'false';
     });
+
     const imgContainer = document.getElementById('image-container');
-    if (imgContainer){
-      if (state){
-        imgContainer.classList.add('edit-image-hover');
-        imgContainer.addEventListener('click', onImageClick);
-      } else {
-        imgContainer.classList.remove('edit-image-hover');
-        imgContainer.removeEventListener('click', onImageClick);
-      }
+    if (imgContainer) {
+      imgContainer.classList.toggle('edit-image-hover', state);
+      imgContainer.removeEventListener('click', onImageClick);
+      if (state) imgContainer.addEventListener('click', onImageClick);
     }
+
     if (formatTools) formatTools.classList.toggle('d-none', !state);
   }
 
-  function toggleEditMode(){
-    isEditMode = !isEditMode;
-    setEditable(isEditMode);
+  function toggleEditMode() {
+    setEditable(!isEditableNow());
   }
 
-  function prepareNewProduct(){
-    isNew = true;
-    if (!isEditMode) toggleEditMode();
+  function prepareNewProduct() {
+    setEditable(true);
+
     const title = document.getElementById('edit-title');
     const desc = document.getElementById('edit-description');
     const price = document.getElementById('edit-price');
@@ -52,11 +52,12 @@ export default function initEditorProduct(){
     if (price) price.innerText = '0';
     if (img) img.src = '/images/onerror.webp';
     if (idInput) idInput.value = 'new';
+    if (productRoot) productRoot.dataset.slug = 'new';
   }
 
-  function onImageClick(){
+  function onImageClick() {
     let fi = document.getElementById(fileInputId);
-    if (!fi){
+    if (!fi) {
       fi = document.createElement('input');
       fi.type = 'file';
       fi.accept = 'image/*';
@@ -68,121 +69,85 @@ export default function initEditorProduct(){
     fi.click();
   }
 
-  function onFileChange(e){
-    const f = e.target.files && e.target.files[0];
+  function onFileChange(e) {
+    const f = e.target.files?.[0];
     if (!f) return;
+
     const reader = new FileReader();
-    reader.onload = function(ev){
+    reader.onload = ev => {
       const img = document.getElementById('main-product-image');
       if (img) img.src = ev.target.result;
     };
     reader.readAsDataURL(f);
   }
 
-  function format(cmd){
-    if (!isEditMode) return;
+  function format(cmd) {
+    if (!isEditableNow()) return;
     document.execCommand(cmd, false, null);
   }
 
-  async function saveAllChanges(){
+  async function saveAllChanges() {
     const idInput = document.getElementById('admin-product-id');
-    const outer = idInput ? idInput.value : 'new';
+    const outer = idInput?.value || 'new';
+    const slug = getSlug();
+
     const titleEl = document.getElementById('edit-title');
     const priceEl = document.getElementById('edit-price');
     const descEl = document.getElementById('edit-description');
 
-    if (!titleEl || !priceEl || !descEl){
+    if (!titleEl || !priceEl || !descEl) {
       alert('Поля не найдены.');
       return;
     }
 
     const fd = new FormData();
+    fd.append('slug', slug);
     fd.append('outer_id', outer);
     fd.append('title', titleEl.innerText.trim());
     fd.append('price', priceEl.innerText.trim());
     fd.append('description', descEl.innerHTML.trim());
 
     const file = document.getElementById(fileInputId);
-    if (file && file.files && file.files[0]){
-      fd.append('image', file.files[0]);
-    }
+    if (file?.files?.[0]) fd.append('image', file.files[0]);
 
-    // Собираем отзывы в массив
-    const reviews = [];
-    document.querySelectorAll('#reviews-list .review').forEach(r=>{
-      const author = (r.querySelector('.card-title')||{innerText:''}).innerText.trim();
-      const date = (r.querySelector('.text-muted')||{innerText:''}).innerText.trim();
-      const rating = (r.querySelector('.star-rating')||{innerText:''}).innerText.trim();
-      const text = (r.querySelector('.card-text')||{innerText:''}).innerText.trim();
-      reviews.push({author,date,rating,text});
-    });
+    const reviews = [...document.querySelectorAll('#reviews-list .review')].map(r => ({
+      author: (r.querySelector('.card-title')?.innerText || '').trim(),
+      date: (r.querySelector('.text-muted')?.innerText || '').trim(),
+      rating: (r.querySelector('.star-rating')?.innerText || '').trim(),
+      text: (r.querySelector('.card-text')?.innerText || '').trim(),
+    }));
     fd.append('reviews', JSON.stringify(reviews));
 
     try {
-      const resp = await fetch('/editor', {
-        method: 'POST',
-        body: fd,
-        credentials: 'same-origin'
-      });
+      const resp = await fetch('/editor', { method: 'POST', body: fd, credentials: 'same-origin' });
+      const txt = await resp.text();
 
       if (!resp.ok) {
-        const txt = await resp.text();
         alert('Ошибка сохранения: ' + resp.status + ' ' + txt);
         return;
       }
 
-      // безопасный разбор ответа: сначала текст (логируем), затем пытаемся распарсить JSON
-      const txt = await resp.text();
-      console.log('Response text:', txt);
+      let res;
+      try { res = JSON.parse(txt); } catch { alert('Неверный ответ от сервера.'); return; }
 
-      let res = null;
-      try {
-        res = JSON.parse(txt);
-      } catch(parseErr){
-        // попытаться вырезать JSON-объект из начала текста (если после JSON добавлен дамп/HTML)
-        const m = txt.match(/^\s*(\{[\s\S]*?\})/);
-        if (m){
-          try {
-            res = JSON.parse(m[1]);
-          } catch(e){
-            console.error('JSON parse failed after extraction', e);
-            alert('Неверный ответ от сервера. Смотрите консоль.');
-            return;
-          }
-        } else {
-          console.error('No JSON object found in response');
-          alert('Неверный ответ от сервера. Смотрите консоль.');
-          return;
-        }
-      }
-
-      // обработка результата
-      if (res && res.success){
+      if (res?.success) {
         alert('Сохранено');
-        if (res.redirect) window.location.href = res.redirect; else location.reload();
+        if (res.redirect) location.href = res.redirect;
+        else location.reload();
       } else {
-        alert('Сохранение не удалось: ' + (res && res.error ? res.error : 'неизвестная ошибка'));
+        alert('Сохранение не удалось: ' + (res?.error || 'неизвестная ошибка'));
       }
-
-    } catch (err){
-      console.error(err);
-      alert('Ошибка : ' + (err && err.message ? err.message : err));
+    } catch (err) {
+      alert('Ошибка: ' + (err?.message || err));
     }
   }
 
-  // Events
-  document.addEventListener('click', function(e){
+  toggleBtn?.addEventListener('click', toggleEditMode);
+  newBtn?.addEventListener('click', prepareNewProduct);
+  saveBtn?.addEventListener('click', saveAllChanges);
+
+  document.addEventListener('click', e => {
     const cmd = e.target.closest('[data-cmd]');
-    if (cmd){
-      format(cmd.getAttribute('data-cmd'));
-    }
+    if (cmd) format(cmd.getAttribute('data-cmd'));
   });
-
-  if (toggleBtn) toggleBtn.addEventListener('click', toggleEditMode);
-  if (newBtn) newBtn.addEventListener('click', prepareNewProduct);
-  if (saveBtn) saveBtn.addEventListener('click', saveAllChanges);
-
-  // expose for console/debug if needed
-  window.adminProduct = { toggleEditMode, prepareNewProduct, saveAllChanges };
 }
-

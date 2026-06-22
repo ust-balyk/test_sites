@@ -37,7 +37,7 @@ class Session
 
       if (!isset($_SESSION['info'])) {
          $this->logFirstVisit();
-         $_SESSION['info'] = 'created';
+         $_SESSION['info'] = 'visit';
       }
    }
 

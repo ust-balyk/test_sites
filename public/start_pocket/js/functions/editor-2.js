@@ -60,6 +60,7 @@ export default function initEditorProduct(){
       fi.type = 'file';
       fi.accept = 'image/*';
       fi.id = fileInputId;
+      fi.name = 'image';
       fi.style.display = 'none';
       document.body.appendChild(fi);
       fi.addEventListener('change', onFileChange);
@@ -117,22 +118,20 @@ export default function initEditorProduct(){
     fd.append('reviews', JSON.stringify(reviews));
 
     try {
+      if (saveBtn) saveBtn.disabled = true;
       const resp = await fetch('/editor', {
-        method: 'GET',
+        method: 'POST',
         body: fd,
         credentials: 'same-origin'
       });
+      if (saveBtn) saveBtn.disabled = false;
+
       if (!resp.ok) {
         const txt = await resp.text();
         alert('Ошибка сохранения: ' + resp.status + ' ' + txt);
         return;
       }
       const res = await resp.json();
-      /*
-      const text = await resp.text();
-      console.log('status', resp.status, 'content-type', resp.headers.get('content-type'), 'body[0..200]', text.slice(0,200));
-      const res = JSON.parse(text);
-      */
       if (res.success){
         alert('Сохранено');
         if (res.redirect) window.location.href = res.redirect; else location.reload();
@@ -141,8 +140,9 @@ export default function initEditorProduct(){
       }
 
     } catch (err){
+      if (saveBtn) saveBtn.disabled = false;
       console.error(err);
-      alert('Test.js/Ошибка : ' + err.message);
+      alert('Ошибка: ' + (err.message || err));
     }
   }
 
@@ -159,3 +159,4 @@ export default function initEditorProduct(){
 
   window.adminProduct = { toggleEditMode, prepareNewProduct, saveAllChanges };
 }
+

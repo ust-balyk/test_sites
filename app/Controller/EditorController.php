@@ -1,7 +1,12 @@
 <?php
 namespace App\Controller;
+
 use App\Helper\Text\Text;
+use App\Helper\Image\Image as ImageHelper;
+use RuntimeException;
+use Exception;
 use finfo;
+use PDO;
 
 class EditorController
 {
@@ -23,9 +28,9 @@ class EditorController
                 throw new RuntimeException('Доступ запрещен'); 
             }
 
+            $slug = isset($_POST['slug']) ? trim($_POST['slug']) : 'new';
             $outer_id = isset($_POST['outer_id']) ? trim($_POST['outer_id']) : 'new';
             $title = isset($_POST['title']) ? trim($_POST['title']) : '';
-
             $price = isset($_POST['price']) ? trim($_POST['price']) : '';
             $old_price = '';
             $new_price = '';          
@@ -37,15 +42,10 @@ class EditorController
                 $old_price = '';
                 $new_price = '';
             }
-
             $descriptionRaw = isset($_POST['description']) ? $_POST['description'] : '';
             $reviewsJson = isset($_POST['reviews']) ? $_POST['reviews'] : null;
 
             /*-------------------*/
-
-            if ($title === '') {
-                throw new RuntimeException('Пустое название товара');
-            }
 
             // Очистка/санитайз описания
             $description = Text::clean($descriptionRaw);
@@ -68,18 +68,56 @@ class EditorController
                 $finfo = new finfo(FILEINFO_MIME_TYPE);
                 $mime = $finfo->file($file['tmp_name']);
                 $map = ['image/jpeg'=>'jpg','image/pjpeg'=>'jpg','image/png'=>'png','image/webp'=>'webp'];
-                if (!isset($map[$mime])) throw new RuntimeException('Недопустимый тип файла');
+                if (!isset($map[$mime])) {
+                    throw new RuntimeException('Недопустимый тип файла');
+                }
                 $ext = $map[$mime];
-                $base = ($outer_id === 'new') ? 'new' : preg_replace('/[^a-z0-9_-]/i','_', $outer_id);
-                $fileName = $base . '_' . time() . '.' . $ext;
-                $target = rtrim($uploadDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $fileName;
-                if (!move_uploaded_file($file['tmp_name'], $target)) 
-                    throw new RuntimeException('Не удалось сохранить файл');
-                $imagePublicPath = __DIR__ .'/../../images/'. $fileName;
+                $fileNameTmp = $outer_id . '.' . $ext;
+                $target = rtrim($uploadDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $fileNameTmp;
+                if (!move_uploaded_file($file['tmp_name'], $target)) {
+                    throw new RuntimeException('Не удалось сохранить файл во временную папку');
+                }
+                // Загружаем исходник в GdImage по расширению
+                $srcImg = null;
+                switch ($ext) {
+                    case 'jpg':
+                        $srcImg = @imagecreatefromjpeg($target);
+                        break;
+                    case 'png':
+                        $srcImg = @imagecreatefrompng($target);
+                        break;
+                    case 'webp':
+                        $srcImg = @imagecreatefromwebp($target);
+                        break;
+                    default:
+                        if (file_exists($target)) @unlink($target);
+                        throw new RuntimeException('Неподдерживаемое расширение изображения');
+                }
+                if ($srcImg === false || $srcImg === null) {
+                    if (file_exists($target)) @unlink($target);
+                    throw new RuntimeException('Не удалось открыть загруженное изображение');
+                }
+
+                $imagePublicUrl = __DIR__ ."/../../public/images/{$slug}/{$outer_id}";
+                //$imagePath = __DIR__ ."/../../public/images/new/{$outer_id}";
+                $imageHelper = new ImageHelper();
+                $newImage = $imageHelper->changeImg($srcImg, $imagePublicUrl);
+                if (!$newImage) {
+                    imagedestroy($srcImg);
+                    throw new RuntimeException('Обработка изображения не удалась');
+                }
+                // удаляем исходный временный файл из uploadDir(/public/temporary)
+                if (file_exists($target)) @unlink($target);
+
+                $imageDbPath = "/images/{$slug}/{$outer_id}.webp";
+            
             }
 
             // DB
-            $pdo = db(); // ваша функция db() должна вернуть PDO
+            $pdo = db();
+            if (!$pdo) {
+                throw new RuntimeException('DB not connection');
+            }
             $pdo->beginTransaction();
             // новый продукт
             if ($outer_id === 'new') {
@@ -88,17 +126,17 @@ class EditorController
                     outer_id, title, price, old_price, new_price, description, image, created_at) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, NOW()
                 )";
-                $img = $imagePublicPath ?? '/images/no-image.png';
+                $img = $imageDbPath ?? null;
                 db()->query($sql, [$new_outer, $title, $price, $old_price, $new_price, $description, $img]);
                 $savedOuter = $new_outer;
             // редактируемый продукт
             } else {
-                if ($imagePublicPath) {
+                if (isset($newImage)) {
                     $sql = "UPDATE " . TABLE_NAME . 
                         " SET title = ?, price = ?, old_price = ?, new_price = ?,
                         description = ?, image = ? WHERE outer_id = ?";
                     db()->query($sql, [$title, $price, $old_price, $new_price, 
-                        $description, $imagePublicPath, $outer_id]);
+                        $description, $imageDbPath, $outer_id]);
                 } else {
                     $sql = "UPDATE " . TABLE_NAME . 
                         " SET title = ?, price = ?, old_price = ?, new_price = ?,
@@ -125,18 +163,15 @@ class EditorController
 
             $response['success'] = true;
             $response['outer_id'] = $savedOuter;
-            if ($imagePublicPath) $response['image'] = $imagePublicPath;
+            if ($imageDbPath) $response['image'] = $imageDbPath;
 
-            // можно вернуть redirect: '/cosmetics/' . $slug
         } catch (Exception $e) {
             if (isset($pdo) && $pdo instanceof PDO && $pdo->inTransaction()) $pdo->rollBack();
             $response['error'] = $e->getMessage();
         }
 
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
-
-        cache()->refreshCache();
-
+        //cache()->refreshCache();
 
     }
 

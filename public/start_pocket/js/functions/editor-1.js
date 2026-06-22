@@ -1,4 +1,4 @@
-/***    editor.js   ***/
+// editor.js
 export default function initEditorProduct(){
   const toggleBtn = document.getElementById('toggle-edit-btn');
   const newBtn = document.getElementById('new-product-btn');
@@ -16,6 +16,7 @@ export default function initEditorProduct(){
       el.contentEditable = state ? 'true' : 'false';
       if (state) el.classList.add('editable'); else el.classList.remove('editable');
     });
+    // reviews edit toggle
     document.querySelectorAll('.editable-review-author, .editable-review-text').forEach(el=>{
       el.contentEditable = state ? 'true' : 'false';
     });
@@ -48,7 +49,7 @@ export default function initEditorProduct(){
 
     if (title) title.innerText = 'Название нового товара';
     if (desc) desc.innerHTML = '<p>Введите описание...</p>';
-    if (price) price.innerText = '0.00';
+    if (price) price.innerText = '0';
     if (img) img.src = '/images/onerror.webp';
     if (idInput) idInput.value = 'new';
   }
@@ -106,6 +107,7 @@ export default function initEditorProduct(){
       fd.append('image', file.files[0]);
     }
 
+    // Собираем отзывы в массив
     const reviews = [];
     document.querySelectorAll('#reviews-list .review').forEach(r=>{
       const author = (r.querySelector('.card-title')||{innerText:''}).innerText.trim();
@@ -118,34 +120,57 @@ export default function initEditorProduct(){
 
     try {
       const resp = await fetch('/editor', {
-        method: 'GET',
+        method: 'POST',
         body: fd,
         credentials: 'same-origin'
       });
+
       if (!resp.ok) {
         const txt = await resp.text();
         alert('Ошибка сохранения: ' + resp.status + ' ' + txt);
         return;
       }
-      const res = await resp.json();
-      /*
-      const text = await resp.text();
-      console.log('status', resp.status, 'content-type', resp.headers.get('content-type'), 'body[0..200]', text.slice(0,200));
-      const res = JSON.parse(text);
-      */
-      if (res.success){
+
+      // безопасный разбор ответа: сначала текст (логируем), затем пытаемся распарсить JSON
+      const txt = await resp.text();
+      console.log('Response text:', txt);
+
+      let res = null;
+      try {
+        res = JSON.parse(txt);
+      } catch(parseErr){
+        // попытаться вырезать JSON-объект из начала текста (если после JSON добавлен дамп/HTML)
+        const m = txt.match(/^\s*(\{[\s\S]*?\})/);
+        if (m){
+          try {
+            res = JSON.parse(m[1]);
+          } catch(e){
+            console.error('JSON parse failed after extraction', e);
+            alert('Неверный ответ от сервера. Смотрите консоль.');
+            return;
+          }
+        } else {
+          console.error('No JSON object found in response');
+          alert('Неверный ответ от сервера. Смотрите консоль.');
+          return;
+        }
+      }
+
+      // обработка результата
+      if (res && res.success){
         alert('Сохранено');
         if (res.redirect) window.location.href = res.redirect; else location.reload();
       } else {
-        alert('Сохранение не удалось: ' + (res.error || 'неизвестная ошибка'));
+        alert('Сохранение не удалось: ' + (res && res.error ? res.error : 'неизвестная ошибка'));
       }
 
     } catch (err){
       console.error(err);
-      alert('Test.js/Ошибка : ' + err.message);
+      alert('Ошибка : ' + (err && err.message ? err.message : err));
     }
   }
 
+  // Events
   document.addEventListener('click', function(e){
     const cmd = e.target.closest('[data-cmd]');
     if (cmd){
@@ -157,5 +182,7 @@ export default function initEditorProduct(){
   if (newBtn) newBtn.addEventListener('click', prepareNewProduct);
   if (saveBtn) saveBtn.addEventListener('click', saveAllChanges);
 
+  // expose for console/debug if needed
   window.adminProduct = { toggleEditMode, prepareNewProduct, saveAllChanges };
 }
+

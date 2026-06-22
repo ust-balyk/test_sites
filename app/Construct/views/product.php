@@ -16,17 +16,43 @@
     </div>
   </div>
   <style>
-    .admin-toolbar{position:fixed;top:0;left:0;width:100%;background:#212529;z-index:1050;padding:8px 0;color:#fff}
-    [contenteditable="true"]{outline:2px dashed #0d6efd;background:rgba(13,110,253,0.05)}
-    .edit-image-hover{cursor:pointer;position:relative}
-    .edit-image-hover::after{content:"Сменить фото";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;transition:.3s}
-    .edit-image-hover:hover::after{opacity:1}
+    .admin-toolbar { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      background: #212529; 
+      z-index: 1050; 
+      padding: 8px 0; 
+      color: white; 
+    }
+    [contenteditable="true"] { 
+      outline: 2px dashed #0d6efd !important; 
+      background: rgba(13, 110, 253, 0.05); 
+    }
+    .edit-image-hover { cursor: pointer; position: relative; }
+    .edit-image-hover::after { 
+      content: "Сменить фото"; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: rgba(0,0,0,0.5); 
+      color: white; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      opacity: 0; 
+      transition: 0.3s; 
+    }
+    .edit-image-hover:hover::after { opacity: 1; }
     .navbar.fixed-top{top:40px}
   </style>
 <?php endif; ?>
 
 <?php if (!empty($product)): ?>
-  <section class="product">
+  <section class="product" data-slug="<?= hsc($product['slug']) ?>">
     <div class="container product">
       <div class="container justify-content-between breadcrumb">
         <nav class="breadcrumb" aria-label="breadcrumb">
@@ -41,7 +67,9 @@
               <a href="/cosmetics">косметика</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="/cosmetics/<?= $product['slug'] ?>"><?= hsc($product['category']) ?></a>
+              <a href="/cosmetics/<?= $product['slug'] ?>">
+                <?= hsc($product['category']) ?>
+              </a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               арт.<?= hsc($product['outer_id']) ?>
@@ -76,7 +104,8 @@
                 <a href="#" class="product_review_count">(12) отзывов</a>
               </div>
               <h1 class="product-title" id="edit-title" 
-                data-outer="<?= hsc($product['outer_id']) ?>"><?= hsc($product['title']) ?></h1>
+                data-outer="<?= hsc($product['outer_id']) ?>"><?= hsc($product['title']) ?>
+              </h1>
               <div class="distance"></div>
               <div class="product-price" id="edit-price">
                 <?php if ($product['price']): ?>
