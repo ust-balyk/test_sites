@@ -1,1 +1,1 @@
-a:2:{s:35:"host_request_uri_category_for-hands";a:2:{i:0;s:9:"localhost";i:1;s:20:"/cosmetics/for-hands";}s:4:"time";i:1782151158;}
+a:2:{s:35:"host_request_uri_category_for-hands";a:2:{i:0;s:9:"localhost";i:1;s:19:"/cosmetics/for-feet";}s:4:"time";i:1782160166;}
