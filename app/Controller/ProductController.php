@@ -16,6 +16,12 @@ class ProductController extends BaseController
         $id          = (string)request()->getSLUG_or_ID()[1] ?? null;        
         $cache = cache()->getCache_db();
         $product = $cache['by_id'][$id] ?? null;
+
+        // вернуть список категорий для редактора
+        $data = [];
+        if (session()->get('user.role') === 'master' || session()->get('user.role') === 'assistant') {
+            $data = db()->query("SELECT * FROM start")->get();
+        }
         
         if (empty($product) && !empty($id)) {
             $product = db()->query("SELECT * FROM " . TABLE_NAME . " WHERE outer_id = ? AND in_stock = 1", 
@@ -138,10 +144,10 @@ class ProductController extends BaseController
             $cleanPrice = preg_replace('/[^\d.]/', '', $cleanPrice);
             $cleanPrice = rtrim($cleanPrice, '.');
             $numericPrice = $cleanPrice === '' ? 0 : (float)$cleanPrice;
-
+            
             // image -> массив
-            if (!empty($product['image']) && (strpos($product['image'], 
-                'http://') === 0 || strpos($product['image'], 'https://') === 0)) {
+            if (!empty($product['image']) && (strpos($product['image'], 'http://') === 0 || 
+                strpos($product['image'], 'https://') === 0)) {
                 $imageUrl = $product['image'];
             } else {
                 $imagePath = ltrim((string)($product['image'] ?? ''), '/');
@@ -222,17 +228,15 @@ class ProductController extends BaseController
                 }
             }
             
-            /*
-            Из кэша (если кэш хранит рейтинг и количество отзывов):
+            // Из кэша (если кэш хранит рейтинг и количество отзывов):
 
             $reviewCount = (int)($cache['by_id'][$id]['review_count'] ?? 0);
 
-            Из отдельного запроса (если данные о рейтингах хранятся в другой таблице):
+            // Из отдельного запроса (если данные о рейтингах хранятся в другой таблице):
 
             $reviewData = db()->query("SELECT rating, review_count FROM reviews WHERE product_id = ?", [$id])->get();
             $ratingValue = (float)($reviewData['rating'] ?? 0);
             $reviewCount = (int)($reviewData['review_count'] ?? 0);
-            */
 
             // --------------------------------------------------
             // Получаем рейтинг и количество отзывов (если есть)
@@ -329,6 +333,7 @@ class ProductController extends BaseController
                 //'description'      => $description,
                 'product'          => $product,
                 'related_products' => $related_products,
+                'data'             => $data, // для редактора
 
             ]);
         }
@@ -343,6 +348,7 @@ class ProductController extends BaseController
                 //shuffle($products);
                 shuffle_assoc($products);
                 return app()->view->full_view(CATEGORY_LAYOUT, CATEGORY_VIEW, [
+                    'data'     => $data, // для редактора
                     'products' => $products,
                     'category' => $products[0]['category'] ?? 'Каталог',
                     'slug'     => $slug
@@ -355,6 +361,5 @@ class ProductController extends BaseController
 
         }
     }
-
 
 }

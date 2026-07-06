@@ -1,14 +1,24 @@
-<?php if (session()->get('user.role') === 'master'): ?>
+<?php if (session()->get('user.role') === 'master' || session()->get('user.role') === 'assistant'): ?>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
-      <span class="badge bg-warning text-dark">ADMIN</span>
-      <button class="btn btn-sm btn-primary" id="toggle-edit-btn">📝 РЕДАКТИРОВАТЬ ТОВАР</button>
       <button class="btn btn-sm btn-success" id="new-product-btn">➕ ДОБАВИТЬ ТОВАР</button>
+      <button class="btn btn-sm btn-primary" id="toggle-edit-btn">📝 РЕДАКТИРОВАТЬ ТОВАР</button>
+
+      <select id="category-select" name="category_mode" class="form-select d-inline-block w-auto d-none">
+        <option value="current">Текущая категория</option>
+        <?php foreach ($data as $value): ?>
+        <option value="<?= hsc($value['slug']) ?>">
+          <?= hsc($value['category']) ?>
+        </option>
+        <?php endforeach; ?>
+      </select>
+      <input type="hidden" name="slug-category" id="admin-slug-category" value="" autocomplete="off">
+      
       <div id="format-tools" class="d-none border-start ps-3 ms-2">
-        <button class="btn btn-sm btn-outline-light" data-cmd="bold"><b>Bold</b></button>
-        <button class="btn btn-sm btn-outline-light" data-cmd="italic"><i>Italic</i></button>
-        <button class="btn btn-sm btn-outline-light" data-cmd="insertUnorderedList">• Список</button>
-        <button class="btn btn-sm btn-warning" data-cmd="removeFormat" title="Сбросить оформление">
+        <button class="btn btn-sm btn-outline-light" id="bold" data-cmd="bold"><b>Bold</b></button>
+        <button class="btn btn-sm btn-outline-light" id="italic" data-cmd="italic"><i>Italic</i></button>
+        <button class="btn btn-sm btn-outline-light" id="list" data-cmd="insertUnorderedList">• Список</button>
+        <button class="btn btn-sm btn-warning" id="remove" data-cmd="removeFormat" title="Сбросить оформление">
           <i class="fa-solid fa-eraser"></i>
         </button>
         <button class="btn btn-sm btn-danger ms-3" id="save-all-btn">💾 СОХРАНИТЬ</button>
@@ -32,7 +42,7 @@
     }
     .edit-image-hover { cursor: pointer; position: relative; }
     .edit-image-hover::after { 
-      content: "Сменить фото"; 
+      content: "СМЕНИТЬ ИЗОБРАЖЕНИЕ"; 
       position: absolute; 
       top: 0; 
       left: 0; 
@@ -46,11 +56,47 @@
       opacity: 0; 
       transition: 0.3s; 
     }
+    #toggle-edit-btn {
+      font-family: "Arial", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #fff;
+      background-color: green;
+      border-color: #444;
+    }
+    #new-product-btn {
+      font-family: "Arial", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #fff;
+      background-color: orange;
+      border-color: #444;
+    }
+    #category-select,
+    #bold, #italic, #list, #remove {
+      font-family: "Arial", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #fff;
+      background-color: #212529;
+      border-color: #444;
+    }
+    #category-select option{
+      color: #000; /* часто зависит от браузера/ОС */
+    }
+    #save-all-btn {
+      font-family: "Arial", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #fff;
+      background-color: blue;
+      border-color: #444;
+    }
     .edit-image-hover:hover::after { opacity: 1; }
-    .navbar.fixed-top{top:40px}
+    .navbar.fixed-top{ top:4.5rem; }
+    section.product { margin-top: 14rem !important; }
   </style>
 <?php endif; ?>
-
 <?php if (!empty($product)): ?>
   <section class="product" data-slug="<?= hsc($product['slug']) ?>">
     <div class="container product">
@@ -206,7 +252,7 @@
     </div>
   </section>
   <!-- hidden inputs managed by JS -->
-  <input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>">
+  <input type="hidden" id="admin-product-id" value="<?= hsc($product['outer_id']) ?>" autocomplete="off">
 <?php endif; ?>
 
 <?php if (!empty($related_products)): ?>

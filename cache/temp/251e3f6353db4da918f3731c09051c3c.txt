@@ -1,1 +1,1 @@
-a:2:{s:38:"host_request_uri_category_aromatherapy";a:2:{i:0;s:9:"localhost";i:1;s:19:"/cosmetics/for-feet";}s:4:"time";i:1782155180;}
+a:2:{s:38:"host_request_uri_category_aromatherapy";a:2:{i:0;s:9:"localhost";i:1;s:23:"/cosmetics/aromatherapy";}s:4:"time";i:1782327812;}

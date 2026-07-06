@@ -1,1 +1,1 @@
-a:2:{s:30:"host_request_uri_product_12167";a:2:{i:0;s:9:"localhost";i:1;s:40:"/cosmetics/for-oral-cavity/product/12167";}s:4:"time";i:1781893887;}
+a:2:{s:30:"host_request_uri_product_12167";a:2:{i:0;s:9:"localhost";i:1;s:40:"/cosmetics/for-oral-cavity/product/12167";}s:4:"time";i:1782506049;}

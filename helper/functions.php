@@ -35,6 +35,28 @@ function array_value_search($arr, $index, $value)
    return null;
 }
 
+function generateId($pdo) {
+   $maxAttempts = 100;
+   $attempt = 0;
+   
+   while ($attempt < $maxAttempts) {
+       // Генерируем 6-значное число: 100000 - 999999
+       $id = mt_rand(100000, 999999);
+       
+       // Проверяем, существует ли такой ID в базе
+       $exists = db()->query('SELECT outer_id FROM '.TABLE_NAME.' WHERE outer_id = ?', ['outer_id' => $id])->get();
+       
+       // Если не существует — возвращаем ID
+       if (!$exists) {
+           return $id;
+       }
+       
+       $attempt++;
+   }
+   
+   // Если не удалось за 100 попыток, выбрасываем исключение
+   throw new Exception('Не удалось сгенерировать уникальный ID');
+}
 
 // сохранить порядок ключей в сессии
 
@@ -135,7 +157,6 @@ function abort($code=404)
 }
 
 function base_url($path = '/'): string
-//function base_url($path = '/'): string
 {
    //return rtrim(PATH, '/') .'/path';
    return PATH . $path;

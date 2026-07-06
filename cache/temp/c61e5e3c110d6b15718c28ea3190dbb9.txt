@@ -1,0 +1,1 @@
+a:2:{s:30:"host_request_uri_product_12084";a:2:{i:0;s:9:"localhost";i:1;s:37:"/cosmetics/aromatherapy/product/12084";}s:4:"time";i:1782328059;}

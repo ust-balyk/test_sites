@@ -30,9 +30,9 @@ class CategoryController extends BaseController
 
     private static array $titleInternal = [
         'makeup'           => "декоративная косметика",
-        'for-body'         => "манящая безупречность тела",
+        'for-body'         => "безупречность тела",
         'for-face'         => "сияние твоего лица",
-        'for-oral-cavity'  => "притяжение улыбки",
+        'for-oral-cavity'  => "волшебство улыбки",
         'for-hair'         => "блеск твоих волос",
         'for-hands'        => "очарование на кончиках пальцев",
         'for-feet'         => "магия походки",
@@ -60,14 +60,17 @@ class CategoryController extends BaseController
 
         // Если ничего не найдено – ищем первую/случайную непустую категорию
         if (empty($all_products)) {
-            $slugs    = array_keys(self::$categories);
-            $new_slug = $slugs[array_rand($slugs)];
-
-            $all_products = self::get_Products($new_slug);
-            if (!empty($all_products)) {
-                $slug = $new_slug; // новый slug
+            $slugs = array_keys(self::$categories);
+            shuffle($slugs);
+        
+            foreach ($slugs as $slug) {
+                $products = self::get_Products($slug);
+                if (!empty($products)) {
+                    $all_products = $products;
+                    break;
+                }
             }
-        }
+        }        
 
         // Если всё‑равно пусто – главная страница
         if (empty($all_products)) {
@@ -277,7 +280,7 @@ class CategoryController extends BaseController
                 ->get();
 
             if (!empty($products)) {
-                cache()->refresh_Cache();
+                cache()->refreshCache();
             }
         }
 
@@ -367,6 +370,7 @@ class CategoryController extends BaseController
         }
 
         return $values;
+        
     }
 
 }

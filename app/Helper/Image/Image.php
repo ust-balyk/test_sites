@@ -1,155 +1,221 @@
 <?php
 namespace App\Helper\Image;
 
-define('IMG_TARGET_RATIO', 3/4);       // Пропорция сторон (3:4)
-define('IMG_OBJECT_FILL', 0.96);       // Объект занимает N% кадра
-define('IMG_BG_COLOR_HEX', '#fffffd'); // Новый цвет фона
-define('IMG_THRESHOLD', 35);           // Допуск прозрачности (чем выше, тем сильнее удаление)
-define('IMG_FINAL_HEIGHT', 1200);      // Итоговое разрешение по высоте
-
 class Image
 {
-    function changeImg($image, $loc_path_image) 
+    private const IMG_TARGET_RATIO = 3/4;       // Пропорция сторон (3:4)
+    private const IMG_OBJECT_FILL  = 0.96;      // Объект занимает N% кадра
+    private const IMG_BG_COLOR_HEX = '#fffffd'; // Новый цвет фона
+    private const IMG_THRESHOLD    = 35;        // Допуск прозрачности (чем выше, тем сильнее удаление)
+    private const IMG_FINAL_HEIGHT = 1200;      // Итоговое разрешение по высоте
+
+    public function changeImg($image, string $loc_path_image)
     {
-        // 1. подготовка
+        if (!$image) return false;
+
+        // 1) подготовка
         $image = imagescale($image, 1200); // Рабочий масштаб
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 2. HEX -> RGB из константы
-        $hex = str_replace("#", "", IMG_BG_COLOR_HEX);
+        if ($width < 2 || $height < 2) return false;
+
+        // 1.1) гарантируем alpha-режим на рабочем холсте
+        imagealphablending($image, false);
+        imagesavealpha($image, true);
+
+        // 2) HEX -> RGB из константы
+        $hex = str_replace("#", "", self::IMG_BG_COLOR_HEX);
         $newR = hexdec(substr($hex, 0, 2));
         $newG = hexdec(substr($hex, 2, 2));
         $newB = hexdec(substr($hex, 4, 2));
 
-        // 3. Автоопределение текущего фона (4 угла)
+        // 3) Автоопределение текущего фона (4 угла) — по RGB
         $sample = 5;
-        $corners = [[0,0], [$width-$sample, 0], [0, $height-$sample], [$width-$sample, $height-$sample]];
-        $tR = $tG = $tB = 0;
+        $corners = [
+            [0, 0],
+            [$width - $sample, 0],
+            [0, $height - $sample],
+            [$width - $sample, $height - $sample],
+        ];
+
+        $tR = 0; $tG = 0; $tB = 0;
+        $count = 0;
+
         foreach ($corners as $c) {
-            for ($x=$c[0]; $x<$c[0]+$sample; $x++) {
-                for ($y=$c[1]; $y<$c[1]+$sample; $y++) {
-                    $rgb = imagecolorsforindex($image, imagecolorat($image, $x, $y));
-                    $tR += $rgb['red']; $tG += $rgb['green']; $tB += $rgb['blue'];
+            $x0 = max(0, (int)$c[0]);
+            $y0 = max(0, (int)$c[1]);
+            $x1 = min($width - 1, $x0 + $sample - 1);
+            $y1 = min($height - 1, $y0 + $sample - 1);
+
+            for ($x = $x0; $x <= $x1; $x++) {
+                for ($y = $y0; $y <= $y1; $y++) {
+                    $idx = imagecolorat($image, $x, $y);
+                    $rgb = imagecolorsforindex($image, $idx);
+                    $tR += $rgb['red'];
+                    $tG += $rgb['green'];
+                    $tB += $rgb['blue'];
+                    $count++;
                 }
             }
         }
-        $target = ['r' => $tR/100, 'g' => $tG/100, 'b' => $tB/100];
 
-        // 4. Удаление фона (Flood Fill) — ЗАЩИТА ЗУБОВ
-        imagealphablending($image, false);
-        imagesavealpha($image, true);
+        if ($count === 0) return false;
+
+        $target = ['r' => $tR / $count, 'g' => $tG / $count, 'b' => $tB / $count];
+
+        // 4) Удаление фона (Flood Fill) — оптимизировано по памяти
         $transparent = imagecolorallocatealpha($image, 0, 0, 0, 127);
-        $thresholdSq = IMG_THRESHOLD * IMG_THRESHOLD;
+        $thresholdSq = self::IMG_THRESHOLD * self::IMG_THRESHOLD;
 
-        $stack = [[0,0], [$width-1, 0], [0, $height-1], [$width-1, $height-1]];
-        $visited = [];
+        // ВАЖНО: фиксируем худший случай по числу посещённых пикселей,
+        // чтобы не упираться в память/время на огромных областях.
+        $maxVisited = 3_000_000;
+        $visitedCount = 0;
+
+        // Плотный visited-буфер: array строк, каждая строка = $width байт (0/1)
+        $visited = array_fill(0, $height, str_repeat("\0", $width));
+
+        $stack = [
+            [0, 0],
+            [$width - 1, 0],
+            [0, $height - 1],
+            [$width - 1, $height - 1],
+        ];
+
         while (!empty($stack)) {
-            list($x, $y) = array_pop($stack);
-            if ($x < 0 || $y < 0 || $x >= $width || $y >= $height || isset($visited[$x][$y])) continue;
-            $visited[$x][$y] = true;
-            $c = imagecolorsforindex($image, imagecolorat($image, $x, $y));
-            $distSq = pow($c['red']-$target['r'],2) + 
-                pow($c['green']-$target['g'],2) + pow($c['blue']-$target['b'],2);
+            [$x, $y] = array_pop($stack);
+
+            if ($x < 0 || $y < 0 || $x >= $width || $y >= $height) continue;
+
+            $byte = ord($visited[$y][$x]);
+            if ($byte === 1) continue;
+
+            $visited[$y][$x] = "\1";
+            $visitedCount++;
+            if ($visitedCount > $maxVisited) break;
+
+            $idx = imagecolorat($image, $x, $y);
+            $c = imagecolorsforindex($image, $idx);
+
+            $distSq =
+                ($c['red'] - $target['r']) ** 2 +
+                ($c['green'] - $target['g']) ** 2 +
+                ($c['blue'] - $target['b']) ** 2;
+
+            // 0..127: 0 непрозрачный, 127 полностью прозр.
             if ($distSq <= $thresholdSq && $c['alpha'] < 127) {
                 imagesetpixel($image, $x, $y, $transparent);
-                $stack[]=[$x+1,$y]; $stack[]=[$x-1,$y]; $stack[]=[$x,$y+1]; $stack[]=[$x,$y-1];
+                $stack[] = [$x + 1, $y];
+                $stack[] = [$x - 1, $y];
+                $stack[] = [$x, $y + 1];
+                $stack[] = [$x, $y - 1];
             }
         }
-        /*
-        // 5. Поиск границ (Trim)
-        $top = $height; $bottom = 0; $left = $width; $right = 0; $found = false;
-        for ($y = 0; $y < $height; $y++) {
-            for ($x = 0; $x < $width; $x++) {
-                if (((imagecolorat($image, $x, $y) >> 24) & 0x7F) < 110) {
-                    if ($x < $left) $left = $x; if ($x > $right) $right = $x;
-                    if ($y < $top) $top = $y; if ($y > $bottom) $bottom = $y;
-                    $found = true;
-                }
-            }
-        }
-        */
-        // 5. Оптимизированный поиск границ (Trim)
+
+        // 5) Поиск границ (Trim) — по альфе через imagecolorsforindex
+        $alphaCut = 110;
+
         $top = 0; $bottom = $height - 1; $left = 0; $right = $width - 1; $found = false;
 
         // Сверху вниз
         for (; $top < $height; $top++) {
             for ($x = 0; $x < $width; $x++) {
-                if (((imagecolorat($image, $x, $top) >> 24) & 0x7F) < 110) { $found = true; break 2; }
+                $c = imagecolorsforindex($image, imagecolorat($image, $x, $top));
+                if ($c['alpha'] < $alphaCut) { $found = true; break 2; }
             }
         }
-        if (!$found) return false; // Если ничего не нашли, дальше можно не искать
+        if (!$found) return false;
 
         // Снизу вверх
         for (; $bottom > $top; $bottom--) {
+            $rowHas = false;
             for ($x = 0; $x < $width; $x++) {
-                if (((imagecolorat($image, $x, $bottom) >> 24) & 0x7F) < 110) { break 2; }
+                $c = imagecolorsforindex($image, imagecolorat($image, $x, $bottom));
+                if ($c['alpha'] < $alphaCut) { $rowHas = true; break; }
             }
+            if ($rowHas) break;
         }
 
         // Слева направо
         for (; $left < $width; $left++) {
+            $colHas = false;
             for ($y = $top; $y <= $bottom; $y++) {
-                if (((imagecolorat($image, $left, $y) >> 24) & 0x7F) < 110) { break 2; }
+                $c = imagecolorsforindex($image, imagecolorat($image, $left, $y));
+                if ($c['alpha'] < $alphaCut) { $colHas = true; break; }
             }
+            if ($colHas) break;
         }
 
         // Справа налево
         for (; $right > $left; $right--) {
+            $colHas = false;
             for ($y = $top; $y <= $bottom; $y++) {
-                if (((imagecolorat($image, $right, $y) >> 24) & 0x7F) < 110) { break 2; }
+                $c = imagecolorsforindex($image, imagecolorat($image, $right, $y));
+                if ($c['alpha'] < $alphaCut) { $colHas = true; break; }
             }
+            if ($colHas) break;
         }
-        
 
-        if (!$found) return false;
+        if ($right <= $left || $bottom <= $top) return false;
 
-        // 6. Расчет холста по константам RATIO и FILL
-        $objW = $right - $left + 1; $objH = $bottom - $top + 1;
-        $canvasW = (int)($objW / IMG_OBJECT_FILL);
-        $canvasH = (int)($objH / IMG_OBJECT_FILL);
+        // 6) Расчет холста по константам RATIO и FILL
+        $objW = $right - $left + 1;
+        $objH = $bottom - $top + 1;
 
-        if ($canvasW / $canvasH > IMG_TARGET_RATIO) {
-            $canvasH = (int)($canvasW / IMG_TARGET_RATIO);
+        $canvasW = (int)($objW / self::IMG_OBJECT_FILL);
+        $canvasH = (int)($objH / self::IMG_OBJECT_FILL);
+
+        if ($canvasW < 1 || $canvasH < 1) return false;
+
+        if ($canvasW / $canvasH > self::IMG_TARGET_RATIO) {
+            $canvasH = (int)($canvasW / self::IMG_TARGET_RATIO);
         } else {
-            $canvasW = (int)($canvasH * IMG_TARGET_RATIO);
+            $canvasW = (int)($canvasH * self::IMG_TARGET_RATIO);
         }
 
-        // 7. Сборка
-        
+        if ($canvasW < 1 || $canvasH < 1) return false;
+
+        // 7) Сборка
         $finalCanvas = imagecreatetruecolor($canvasW, $canvasH);
+
+        // важное: сохраняем alpha на finalCanvas
+        imagealphablending($finalCanvas, false);
+        imagesavealpha($finalCanvas, true);
+
+        // фон (непрозрачный)
         $fillColor = imagecolorallocate($finalCanvas, $newR, $newG, $newB);
-        imagefill($finalCanvas, 0, 0, $fillColor);
+        imagefilledrectangle($finalCanvas, 0, 0, $canvasW - 1, $canvasH - 1, $fillColor);
 
         imagealphablending($finalCanvas, true);
-        imagecopy($finalCanvas, $image, round(($canvasW-$objW)/2), round(($canvasH-$objH)/2), $left, $top, $objW, $objH);
+
+        $dstX = (int)round(($canvasW - $objW) / 2);
+        $dstY = (int)round(($canvasH - $objH) / 2);
+
+        imagecopy($finalCanvas, $image, $dstX, $dstY, $left, $top, $objW, $objH);
 
         // Финальное масштабирование
-        
-        $resultW = (int)(IMG_FINAL_HEIGHT * IMG_TARGET_RATIO);
-        
-        // Используем максимально качественный алгоритм BICUBIC
-        $result = imagescale($finalCanvas, $resultW, IMG_FINAL_HEIGHT, IMG_BICUBIC);
-        
+        $resultW = (int)(self::IMG_FINAL_HEIGHT * self::IMG_TARGET_RATIO);
+
+        $result = imagescale($finalCanvas, $resultW, self::IMG_FINAL_HEIGHT, IMG_BICUBIC);
+        if (!$result) return false;
+
         // МАТРИЦА РЕЗКОСТИ
-        // Эта матрица усиливает контраст центрального пикселя относительно соседних
         $sharpenMatrix = [
             [-1.0, -1.0, -1.0],
             [-1.0, 16.0, -1.0],
-            [-1.0, -1.0, -1.0]
+            [-1.0, -1.0, -1.0],
         ];
-        
-        // Вычисляем делитель (сумма всех чисел матрицы), чтобы яркость не изменилась
+
         $divisor = array_sum(array_map('array_sum', $sharpenMatrix));
-        
-        // Применяем фильтр резкости
+        if ($divisor == 0) $divisor = 1;
+
         imageconvolution($result, $sharpenMatrix, $divisor, 0);
 
-        // СОХРАНЕНИЕ
+        // СОХРАНЕНИЕ (WebP)
         // Для WebP или JPG качество 85-90 дает лучший баланс веса и четкости
-        //$new_img = imagejpeg($result, $loc_path_image, 90);
-        $new_img = imagewebp($result, $loc_path_image .".webp", 90);
-        //$new_img = imagewebp($result, $loc_path_image, 90);
+        // $new_img = imagejpeg($result, $loc_path_image . "jpg", 90);
+        $new_img = imagewebp($result, $loc_path_image . ".webp", 90);
 
         // Очистка памяти
         imagedestroy($image);
@@ -157,8 +223,6 @@ class Image
         imagedestroy($result);
 
         return $new_img;
-        
     }
-
-
 }
+

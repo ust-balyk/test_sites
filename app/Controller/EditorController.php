@@ -12,28 +12,34 @@ class EditorController
 {
     static function index()
     {
-        // Принимает multipart/form-data: outer_id, title, price, description, image(file), reviews(JSON)
-        // 
         header('Content-Type: application/json; charset=utf-8');
 
         $response = ['success' => false, 'error' => ''];
+
+        $pdo = null;
+        $pdo = db();
+        if (!$pdo) {
+            throw new RuntimeException('DB not connection');
+        }
 
         try {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 throw new RuntimeException('Неверный метод запроса');
             }
 
-            // не мастер (включая неавторизованных)
-            if (!session()->get('user.role') || session()->get('user.role') !== 'master') {
-                throw new RuntimeException('Доступ запрещен'); 
+            $role = session()->get('user.role');
+            if ($role !== 'master' && $role !== 'assistant') {
+                throw new RuntimeException('Доступ запрещен');
             }
 
-            $slug = isset($_POST['slug']) ? trim($_POST['slug']) : 'new';
-            $outer_id = isset($_POST['outer_id']) ? trim($_POST['outer_id']) : 'new';
-            $title = isset($_POST['title']) ? trim($_POST['title']) : '';
-            $price = isset($_POST['price']) ? trim($_POST['price']) : '';
+            $mode      = isset($_POST['mode']) ? trim($_POST['mode']) : '';
+            $slug      = isset($_POST['slug']) ? trim($_POST['slug']) : '';
+            $outer_id  = isset($_POST['outer_id']) ? trim($_POST['outer_id']) : '';
+            $title     = isset($_POST['title']) ? trim($_POST['title']) : '';
+            $price     = isset($_POST['price']) ? trim($_POST['price']) : '';
             $old_price = '';
-            $new_price = '';          
+            $new_price = '';
+
             if (preg_match_all('/\d[\d\s\.,\-]*руб/iuu', $price, $m) === 2) {
                 $old_price = $m[0][1];
                 $new_price = $m[0][0];
@@ -42,16 +48,13 @@ class EditorController
                 $old_price = '';
                 $new_price = '';
             }
+
             $descriptionRaw = isset($_POST['description']) ? $_POST['description'] : '';
-            $reviewsJson = isset($_POST['reviews']) ? $_POST['reviews'] : null;
+            //$reviewsJson = isset($_POST['reviews']) ? $_POST['reviews'] : null;
 
-            /*-------------------*/
-
-            // Очистка/санитайз описания
             $description = Text::clean($descriptionRaw);
 
-            // Файловая обработка
-            $uploadDir = realpath(__DIR__ .'/../../public/temporary') 
+            $uploadDir = realpath(__DIR__ .'/../../public/temporary')
                 ?: (__DIR__ .'/../../public/temporary');
             if (!is_dir($uploadDir)) {
                 if (!mkdir($uploadDir, 0775, true) && !is_dir($uploadDir)) {
@@ -59,25 +62,34 @@ class EditorController
                 }
             }
 
-            $imagePublicPath = null;
+            $imageDbPath = null;
+
             if (!empty($_FILES['image']['name'])) {
                 $file = $_FILES['image'];
                 if ($file['error'] !== UPLOAD_ERR_OK) {
                     throw new RuntimeException('Ошибка загрузки файла: ' . $file['error']);
                 }
+
                 $finfo = new finfo(FILEINFO_MIME_TYPE);
                 $mime = $finfo->file($file['tmp_name']);
+
                 $map = ['image/jpeg'=>'jpg','image/pjpeg'=>'jpg','image/png'=>'png','image/webp'=>'webp'];
                 if (!isset($map[$mime])) {
                     throw new RuntimeException('Недопустимый тип файла');
                 }
+
+                if ($outer_id === '') {
+                    $outer_id = generateId($pdo);
+                }
                 $ext = $map[$mime];
                 $fileNameTmp = $outer_id . '.' . $ext;
+
                 $target = rtrim($uploadDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $fileNameTmp;
+
                 if (!move_uploaded_file($file['tmp_name'], $target)) {
                     throw new RuntimeException('Не удалось сохранить файл во временную папку');
                 }
-                // Загружаем исходник в GdImage по расширению
+
                 $srcImg = null;
                 switch ($ext) {
                     case 'jpg':
@@ -93,87 +105,108 @@ class EditorController
                         if (file_exists($target)) @unlink($target);
                         throw new RuntimeException('Неподдерживаемое расширение изображения');
                 }
+
                 if ($srcImg === false || $srcImg === null) {
                     if (file_exists($target)) @unlink($target);
                     throw new RuntimeException('Не удалось открыть загруженное изображение');
                 }
 
+                // Путь в public/images/<category-slug>/<outer_id>
                 $imagePublicUrl = __DIR__ ."/../../public/images/{$slug}/{$outer_id}";
-                //$imagePath = __DIR__ ."/../../public/images/new/{$outer_id}";
+
                 $imageHelper = new ImageHelper();
                 $newImage = $imageHelper->changeImg($srcImg, $imagePublicUrl);
+
                 if (!$newImage) {
                     imagedestroy($srcImg);
                     throw new RuntimeException('Обработка изображения не удалась');
                 }
-                // удаляем исходный временный файл из uploadDir(/public/temporary)
+
                 if (file_exists($target)) @unlink($target);
 
-                $imageDbPath = "/images/{$slug}/{$outer_id}.webp";
-            
+                $imageDbPath = "/images/{$slug}/{$outer_id}.webp" ?: '';
+
             }
 
-            // DB
-            $pdo = db();
-            if (!$pdo) {
-                throw new RuntimeException('DB not connection');
-            }
+            ///////////////////////////////////////////////////////////////
+
             $pdo->beginTransaction();
-            // новый продукт
-            if ($outer_id === 'new') {
-                $new_outer = 'ART-' . time();
-                $sql = "INSERT INTO products (
-                    outer_id, title, price, old_price, new_price, description, image, created_at) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, NOW()
-                )";
-                $img = $imageDbPath ?? null;
-                db()->query($sql, [$new_outer, $title, $price, $old_price, $new_price, $description, $img]);
-                $savedOuter = $new_outer;
-            // редактируемый продукт
-            } else {
-                if (isset($newImage)) {
-                    $sql = "UPDATE " . TABLE_NAME . 
-                        " SET title = ?, price = ?, old_price = ?, new_price = ?,
-                        description = ?, image = ? WHERE outer_id = ?";
-                    db()->query($sql, [$title, $price, $old_price, $new_price, 
-                        $description, $imageDbPath, $outer_id]);
-                } else {
-                    $sql = "UPDATE " . TABLE_NAME . 
-                        " SET title = ?, price = ?, old_price = ?, new_price = ?,
-                        description = ? WHERE outer_id = ?";
-                    db()->query($sql, [$title, $price, $old_price, $new_price, $description, $outer_id]);
-                }
-                $savedOuter = $outer_id;
-            }
 
-            /*
-            // Сохранение отзывов (опционально) — в отдельной таблице или JSON-колонке
-            if ($reviewsJson) {
-                $reviews = json_decode($reviewsJson, true);
-                if (json_last_error() === JSON_ERROR_NONE && is_array($reviews)) {
-                    // пример: сохраняем в колонку reviews_json в products (если есть)
-                    $sql = "UPDATE " . TABLE_NAME . " SET reviews_json = ? WHERE outer_id = ?";
-                    //$stmt = $pdo->prepare($sql);
-                    //$stmt->execute([json_encode($reviews, JSON_UNESCAPED_UNICODE), $savedOuter]);
-                    db()->query($sql, [json_encode($reviews, JSON_UNESCAPED_UNICODE), $savedOuter]);
+            if ($mode === 'add') {
+
+                $arr_cat_id = [
+                    1 => 'makeup',
+                    2 => 'for-face',
+                    3 => 'for-oral-cavity',
+                    4 => 'for-hair',
+                    5 => 'for-body',
+                    6 => 'for-hands',
+                    7 => 'for-feet',
+                    8 => 'aromatherapy',
+                    9 => 'gift-set',
+                    10 =>'accessories',
+                ];
+                $category_id = array_search($slug, $arr_cat_id, true); // true — строгое сравнение
+                if ($category_id === false) {
+                    $response = ['success' => false, 'error' => 'invalid category slug'];
                 }
-            }*/
+
+                $arr_cat = [
+                    'декоративная косметика' => 'makeup',
+                    'для лица'               => 'for-face',
+                    'для полости рта'        => 'for-oral-cavity',
+                    'для волос'              => 'for-hair',
+                    'для тела'               => 'for-body',
+                    'для рук'                => 'for-hands',
+                    'для ног'                => 'for-feet',
+                    'ароматерапия'           => 'aromatherapy',
+                    'подарочные наборы'      => 'gift-set',
+                    'аксессуары'             => 'accessories',
+                ];
+                $category = array_search($slug, $arr_cat, true); // true — строгое сравнение
+                if ($category === false) {
+                    $response = ['success' => false, 'error' => 'invalid category category'];
+                }
+                
+                $in_stock = 1;
+
+                $sql = "INSERT INTO " . TABLE_NAME . " (
+                    outer_id, slug, category, title, price, old_price, new_price, description, image, category_id, in_stock
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                $pdo->query($sql, [
+                    $outer_id, $slug, $category, $title, $price, $old_price, $new_price, $description, $imageDbPath, $category_id, $in_stock
+                ]);
+
+            } elseif ($mode === 'edit') {
+
+                $sql = "UPDATE " . TABLE_NAME . "
+                    SET title = ?, price = ?, old_price = ?, new_price = ?, description = ?, image = ? WHERE outer_id = ?";
+                $pdo->query($sql, [
+                    $title, $price, $old_price, $new_price, $description, $outer_id, $imageDbPath
+                ]);
+
+            }
 
             $pdo->commit();
 
             $response['success'] = true;
-            $response['outer_id'] = $savedOuter;
+            $response['outer_id'] = $outer_id;
             if ($imageDbPath) $response['image'] = $imageDbPath;
 
         } catch (Exception $e) {
-            if (isset($pdo) && $pdo instanceof PDO && $pdo->inTransaction()) $pdo->rollBack();
+            if ($pdo instanceof PDO && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
             $response['error'] = $e->getMessage();
         }
 
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
-        //cache()->refreshCache();
-
+        cache()->refreshCache();
     }
-
-
 }
+
