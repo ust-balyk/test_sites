@@ -173,19 +173,27 @@ class EditorController
                 $sql = "INSERT INTO " . TABLE_NAME . " (
                     outer_id, slug, category, title, price, old_price, new_price, description, image, category_id, in_stock
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
                 $pdo->query($sql, [
                     $outer_id, $slug, $category, $title, $price, $old_price, $new_price, $description, $imageDbPath, $category_id, $in_stock
                 ]);
 
             } elseif ($mode === 'edit') {
 
-                $sql = "UPDATE " . TABLE_NAME . "
-                    SET title = ?, price = ?, old_price = ?, new_price = ?, description = ?, image = ? WHERE outer_id = ?";
-                $pdo->query($sql, [
-                    $title, $price, $old_price, $new_price, $description, $outer_id, $imageDbPath
-                ]);
-
+                if (empty($imageDbPath)) {
+                    $sql = "UPDATE " . TABLE_NAME . "
+                        SET title = ?, price = ?, old_price = ?, new_price = ?, description = ? WHERE outer_id = ?";
+                    $pdo->query($sql, [
+                        $title, $price, $old_price, $new_price, $description, $outer_id
+                    ]);
+                
+                } else {
+                    $sql = "UPDATE " . TABLE_NAME . "
+                        SET title = ?, price = ?, old_price = ?, new_price = ?, description = ?, image = ? WHERE outer_id = ?";
+                    $pdo->query($sql, [
+                        $title, $price, $old_price, $new_price, $description, $imageDbPath, $outer_id
+                    ]);
+                
+                }
             }
 
             $pdo->commit();

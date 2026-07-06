@@ -252,9 +252,9 @@ function get_validation_class($fieldname): string
    return isset($errors[$fieldname]) ? 'is-invalid' : 'is-valid';
 }
 
-function hsc($str): string
+function hsc(?string $str): string
 {
-   return htmlspecialchars($str, ENT_QUOTES);
+    return htmlspecialchars($str ?? '', ENT_QUOTES);
 }
 
 function old($fieldname): string

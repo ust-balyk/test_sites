@@ -3,7 +3,6 @@
  * Модуль для управления редактированием товаров
  */
 export default function initEditorProduct() {
-
   // ============================================
   // 1. ПОЛУЧЕНИЕ DOM-ЭЛЕМЕНТОВ
   // ============================================
@@ -13,14 +12,9 @@ export default function initEditorProduct() {
   const saveBtn = document.getElementById('save-all-btn');
   const formatTools = document.getElementById('format-tools');
 
-  const categorySelect = document.getElementById('category-select');        // видимый селект
-  const categorySlugInput = document.getElementById('admin-slug-category'); // hidden: slug категории (или текущей)
-
-  const listBtn = document.querySelector('[data-cmd="insertUnorderedList"]');
-
-  const fileInputId = 'admin-file-input-temp';
-
-  const productRoot = document.querySelector('.product[data-slug]'); 
+  const categorySelect = document.getElementById('category-select');
+  const categorySlugInput = document.getElementById('admin-slug-category');
+  const productRoot = document.querySelector('.product[data-slug]');
 
   // ============================================
   // 2. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
@@ -29,7 +23,7 @@ export default function initEditorProduct() {
   const isEditableNow = () => document.querySelector('[contenteditable="true"]') !== null;
 
   function getSlug() {
-    return productRoot?.dataset.slug?.trim() || syncCategorySlugInput();
+    return productRoot?.dataset.slug?.trim() ?? '';
   }
 
   function setEditable(state) {
@@ -51,7 +45,7 @@ export default function initEditorProduct() {
 
     if (formatTools) formatTools.classList.toggle('d-none', !state);
   }
-  
+
   // ============================================
   // 3. УПРАВЛЕНИЕ СОСТОЯНИЕМ TOOLBAR
   // ============================================
@@ -63,37 +57,24 @@ export default function initEditorProduct() {
     console.log('Переход в режим:', state);
 
     if (state === 'neutral') {
-      // Нейтральное состояние
       setEditable(false);
       newBtn?.classList.remove('d-none');
       toggleBtn?.classList.remove('d-none');
-
       if (categorySelect) categorySelect.classList.add('d-none');
       if (formatTools) formatTools.classList.add('d-none');
-      if (listBtn) listBtn.classList.remove('d-none');
-
     } else if (state === 'add') {
-      // Режим добавления товара
       setEditable(true);
       newBtn?.classList.remove('d-none');
       toggleBtn?.classList.add('d-none');
-
       if (categorySelect) categorySelect.classList.remove('d-none');
       if (formatTools) formatTools.classList.remove('d-none');
-      if (listBtn) listBtn.classList.remove('d-none');
-
-      // выставляем hidden согласно текущему выбору селекта
       syncCategorySlugInput();
-
     } else if (state === 'edit') {
-      // Режим редактирования товара
       setEditable(true);
       newBtn?.classList.add('d-none');
       toggleBtn?.classList.remove('d-none');
-
       if (categorySelect) categorySelect.classList.add('d-none');
       if (formatTools) formatTools.classList.remove('d-none');
-      if (listBtn) listBtn.classList.add('d-none');
     }
   }
 
@@ -123,60 +104,27 @@ export default function initEditorProduct() {
       clearNewProductForm();
     } else if (currentMode === 'add') {
       toggleAddMode();
-      return;
     }
   }
 
   // ============================================
-  // 5. КАТЕГОРИИ: режим "текущая" / "выбрать из списка"
+  // 5. КАТЕГОРИИ
   // ============================================
 
-  /**
-   * Синхронизирует значение slug категории между видимым селектом и скрытым полем ввода.
-   *
-   * Функция выполняет следующие действия:
-   * 1. Проверяет наличие необходимых DOM-элементов (селект категории и скрытое поле для slug)
-   * 2. Получает текущее значение из селекта (либо 'current', либо конкретный slug категории)
-   * 3. В зависимости от выбранного режима:
-   *    - Если выбран режим 'current':
-   *      * Берет slug текущего продукта из data-атрибута элемента productRoot
-   *      * Устанавливает это значение в скрытое поле categorySlugInput
-   *      * Выводит сообщение в консоль о текущей категории
-   *    - Если выбран конкретный slug категории:
-   *      * Устанавливает выбранный slug напрямую в скрытое поле categorySlugInput
-   *      * Выводит сообщение в консоль о выбранной категории
-   *
-   * Эта функция вызывается:
-   * - При инициализации страницы (в конце модуля)
-   * - При изменении выбора в селекте (через обработчик события 'change')
-   * - При переключении в режим добавления товара
-   *
-   * Важно: функция обеспечивает синхронизацию между UI (видимый селект) и внутренним представлением (скрытое поле),
-   * что необходимо для корректной работы механизма сохранения данных.
-   */
   function syncCategorySlugInput() {
-    // Проверка наличия необходимых элементов в DOM
     if (!categorySelect || !categorySlugInput) return;
 
-    // Получение текущего значения из селекта:
-    // - 'current' - использовать текущую категорию продукта
-    // - конкретный slug - использовать выбранную категорию
     const modeOrSlug = categorySelect.value;
-
     if (modeOrSlug === 'current') {
-        // Режим 'current' - берем slug из data-атрибута текущего продукта
-        const currentSlug = productRoot?.dataset.slug?.trim() || '';
-        // Устанавливаем slug текущего продукта в скрытое поле
-        categorySlugInput.value = currentSlug;
-        console.log('✓ Категория установлена:', currentSlug);
+      const currentSlug = productRoot?.dataset.slug?.trim() ?? '';
+      categorySlugInput.value = currentSlug;
+      console.log('✓ Категория установлена:', currentSlug);
     } else {
-        // Режим конкретной категории - используем выбранный slug напрямую
-        categorySlugInput.value = modeOrSlug;
-        console.log('✓ Выбрана категория:', modeOrSlug);
+      categorySlugInput.value = modeOrSlug;
+      console.log('✓ Выбрана категория:', modeOrSlug);
     }
   }
-  
-  // Очистка формы для нового товара
+
   function clearNewProductForm() {
     const title = document.getElementById('edit-title');
     const desc = document.getElementById('edit-description');
@@ -188,21 +136,14 @@ export default function initEditorProduct() {
     if (price) price.innerText = 'цена по запросу';
     if (img) img.src = '/images/onerror.webp';
 
-    // Устанавливаем селект в режим "Текущая категория"
     if (categorySelect) {
       categorySelect.value = 'current';
-      //categorySelect.value = categorySelect.querySelector('option[value="current"]')?.value || 'current';
-      syncCategorySlugInput(); // Синхронизируем скрытое поле
+      syncCategorySlugInput();
     }
   }
 
-
-  // обработчик выбора категории
   if (categorySelect) {
-    categorySelect.addEventListener('change', () => {
-      syncCategorySlugInput();
-      console.log('categorySelect.value =', categorySelect.value, 'hidden slug =', categorySlugInput?.value);
-    });
+    categorySelect.addEventListener('change', syncCategorySlugInput);
   }
 
   // ============================================
@@ -210,12 +151,12 @@ export default function initEditorProduct() {
   // ============================================
 
   function onImageClick() {
-    let fi = document.getElementById(fileInputId);
+    let fi = document.getElementById('admin-file-input-temp');
     if (!fi) {
       fi = document.createElement('input');
       fi.type = 'file';
       fi.accept = 'image/*';
-      fi.id = fileInputId;
+      fi.id = 'admin-file-input-temp';
       fi.style.display = 'none';
       document.body.appendChild(fi);
       fi.addEventListener('change', onFileChange);
@@ -228,12 +169,10 @@ export default function initEditorProduct() {
     if (!f) return;
 
     const reader = new FileReader();
-
     reader.addEventListener('load', ev => {
       const img = document.getElementById('main-product-image');
       if (img) img.src = ev.target.result;
     });
-
     reader.readAsDataURL(f);
   }
 
@@ -241,9 +180,125 @@ export default function initEditorProduct() {
   // 7. ФОРМАТИРОВАНИЕ ТЕКСТА
   // ============================================
 
-  function format(cmd) {
+  function format(cmd, options = {}) {
     if (!isEditableNow()) return;
-    document.execCommand(cmd, false, null);
+
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+
+    const range = selection.getRangeAt(0);
+    const selectedText = range.toString();
+
+    // Если ничего не выделено, выходим
+    if (!selectedText.trim()) return;
+
+    switch (cmd) {
+      case 'bold':
+        applyFormatting(range, 'strong');
+        break;
+      case 'italic':
+        applyFormatting(range, 'em');
+        break;
+      case 'underline':
+        applyFormatting(range, 'u');
+        break;
+      case 'strikethrough':
+        applyFormatting(range, 's');
+        break;
+      case 'code':
+        applyFormatting(range, 'code');
+        break;
+      case 'highlight':
+        applyFormatting(range, 'span', { backgroundColor: options.color || '#ffff00' });
+        break;
+      case 'textColor':
+        applyFormatting(range, 'span', { color: options.color || '#000000' });
+        break;
+      case 'h1':
+        wrapInHeading(range, 'h1');
+        break;
+      case 'h2':
+        wrapInHeading(range, 'h2');
+        break;
+      case 'h3':
+        wrapInHeading(range, 'h3');
+        break;
+      case 'unorderedList':
+        createList(range, options.marker || 'disc', options.color || '#000000');
+        break;
+      case 'orderedList':
+        createList(range, 'decimal');
+        break;
+      case 'link':
+        createLink(range, options.url || 'https://example.com');
+        break;
+      case 'blockquote':
+        wrapInBlockquote(range);
+        break;
+      case 'clear':
+        clearFormatting(range);
+        break;
+      default:
+        return;
+    }
+  }
+
+  function applyFormatting(range, tagName, styles = {}) {
+    const element = document.createElement(tagName);
+    Object.assign(element.style, styles);
+    range.surroundContents(element);
+  }
+
+  function wrapInHeading(range, headingTag) {
+    const heading = document.createElement(headingTag);
+    heading.textContent = range.toString();
+    range.deleteContents();
+    range.insertNode(heading);
+  }
+
+  function createList(range, listStyleType, markerColor) {
+    const text = range.toString();
+    if (!text.trim()) return;
+
+    const ul = document.createElement('ul');
+    ul.style.listStyleType = listStyleType;
+    if (markerColor) ul.style.color = markerColor;
+
+    const li = document.createElement('li');
+    li.textContent = text;
+
+    ul.appendChild(li);
+    range.deleteContents();
+    range.insertNode(ul);
+  }
+
+  function createLink(range, url) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.textContent = range.toString();
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    range.deleteContents();
+    range.insertNode(link);
+  }
+
+  function wrapInBlockquote(range) {
+    const blockquote = document.createElement('blockquote');
+    blockquote.textContent = range.toString();
+    range.deleteContents();
+    range.insertNode(blockquote);
+  }
+
+  function clearFormatting(range) {
+    const parent = range.commonAncestorContainer;
+    const elements = parent.querySelectorAll(
+      'strong, em, u, s, b, code, span[style*="background-color"], span[style*="color"], h1, h2, h3, ul, li, a, blockquote'
+    );
+
+    elements.forEach(el => {
+      const textNode = document.createTextNode(el.textContent);
+      el.parentNode.replaceChild(textNode, el);
+    });
   }
 
   // ============================================
@@ -252,134 +307,102 @@ export default function initEditorProduct() {
 
   async function saveAllChanges() {
     console.log('🔍 Начинаем сохранение...');
-    console.log('currentMode:', currentMode);
-    console.log('window.location.origin:', window.location.origin);
-
     const idInput = document.getElementById('admin-product-id');
-    // обнуляем 'id' если режим 'add'
     const id = currentMode === 'edit' ? idInput?.value : '';
 
     const titleEl = document.getElementById('edit-title');
     const priceEl = document.getElementById('edit-price');
     const descEl = document.getElementById('edit-description');
+
     if (!titleEl || !priceEl || !descEl) {
-        alert('Поля не найдены.');
-        return;
+      alert('Поля не найдены.');
+      return;
     }
 
-    console.log('✓ Elements найдены');
-    console.log('  title:', titleEl.innerText.trim());
-    console.log('  price:', priceEl.innerText.trim());
-    console.log('  description length:', descEl.innerHTML.trim().length);
-
     const fd = new FormData();
-    fd.append('mode', currentMode); // 'edit' или 'add'
+    fd.append('mode', currentMode);
+    fd.append('slug', getSlug());
     fd.append('outer_id', id);
     fd.append('title', titleEl.innerText.trim());
     fd.append('price', priceEl.innerText.trim());
     fd.append('description', descEl.innerHTML.trim());
 
-    console.log('✓ FormData базовые данные добавлены');
-
     if (currentMode === 'add' && categorySlugInput) {
-        syncCategorySlugInput();
-        fd.append('slug', categorySlugInput.value);
-        console.log('✓ Категория добавлена:', categorySlugInput.value);
+      syncCategorySlugInput();
+      fd.append('slug', categorySlugInput.value);
     }
 
-    const file = document.getElementById(fileInputId);
+    const file = document.getElementById('admin-file-input-temp');
     if (file?.files?.[0]) {
-        fd.append('image', file.files[0]);
-        console.log('✓ Файл изображения добавлен');
+      fd.append('image', file.files[0]);
     }
 
-    console.log('🔍 Начинаем собирать reviews...');
     try {
-        const reviewElements = document.querySelectorAll('#reviews-list .review');
-        console.log('  Found review elements:', reviewElements.length);
+      const resp = await fetch('/editor', {
+        method: 'POST',
+        body: fd,
+        credentials: 'same-origin'
+      });
 
-        const reviews = [];
-        reviewElements.forEach((r, idx) => {
-            try {
-                const author = (r.querySelector('.card-title')?.innerText || '').trim();
-                const date = (r.querySelector('.text-muted')?.innerText || '').trim();
-                const rating = (r.querySelector('.star-rating')?.innerText || '').trim();
-                const text = (r.querySelector('.card-text')?.innerText || '').trim();
+      if (!resp.ok) {
+        throw new Error(`Ошибка сохранения: ${resp.status}`);
+      }
 
-                console.log(`  Review ${idx}:`, { author, date, rating, text });
-
-                reviews.push({ author, date, rating, text });
-            } catch (e) {
-                console.warn(`  ⚠️ Ошибка при обработке review ${idx}:`, e);
-            }
-        });
-
-        console.log('✓ Reviews собраны:', reviews.length);
-        const reviewsJson = JSON.stringify(reviews);
-        console.log('✓ Reviews сериализованы, длина:', reviewsJson.length);
-        
-        fd.append('reviews', reviewsJson);
-        console.log('✓ Reviews добавлены в FormData');
+      const res = await resp.json();
+      if (res?.success) {
+        alert('Сохранено');
+        if (res.redirect) location.href = res.redirect;
+        else location.reload();
+      } else {
+        alert('Сохранение не удалось: ' + (res?.error || 'неизвестная ошибка'));
+      }
     } catch (err) {
-        console.error('❌ Ошибка при обработке reviews:', err);
-    }
-
-    console.log('🚀 Отправляем запрос...');
-
-    try {
-        const resp = await fetch('/editor', { 
-            method: 'POST', 
-            body: fd, 
-            credentials: 'same-origin' 
-        });
-        
-        console.log('✓ Ответ получен, статус:', resp.status);
-
-        const txt = await resp.text();
-        console.log('✓ Текст ответа получен, длина:', txt.length);
-
-        if (!resp.ok) {
-            alert('Ошибка сохранения: ' + resp.status + ' ' + txt);
-            return;
-        }
-
-        let res;
-        try { 
-            res = JSON.parse(txt);
-            console.log('✓ JSON распарсен:', res);
-        } catch { 
-            alert('Неверный ответ от сервера.'); 
-            return; 
-        }
-
-        if (res?.success) {
-            alert('Сохранено');
-            if (res.redirect) location.href = res.redirect;
-            else location.reload();
-        } else {
-            alert('Сохранение не удалось: ' + (res?.error || 'неизвестная ошибка'));
-        }
-    } catch (err) {
-        console.error('❌ Ошибка fetch:', err);
-        alert('Ошибка: ' + (err?.message || err));
+      console.error('❌ Ошибка:', err);
+      alert('Ошибка: ' + err.message);
     }
   }
 
-
   // ============================================
-  // 9. ПРИСОЕДИНЕНИЕ ОБРАБОТЧИКОВ СОБЫТИЙ
+  // 9. ПРИСОЕДИНЕНИЕ ОБРАБОТЧИКОВ
   // ============================================
 
   toggleBtn?.addEventListener('click', toggleEditMode);
   newBtn?.addEventListener('click', prepareNewProduct);
   saveBtn?.addEventListener('click', saveAllChanges);
 
+  // Обработчики для форматирования
   document.addEventListener('click', e => {
-    const cmd = e.target.closest('[data-cmd]');
-    if (cmd) format(cmd.getAttribute('data-cmd'));
+    const cmdBtn = e.target.closest('[data-cmd]');
+    if (cmdBtn) {
+      const cmd = cmdBtn.getAttribute('data-cmd');
+      const options = {};
+
+      if (cmd === 'textColor' || cmd === 'highlight') {
+        options.color = cmdBtn.dataset.color;
+      } else if (cmd === 'unorderedList') {
+        options.marker = cmdBtn.dataset.marker;
+      }
+
+      format(cmd, options);
+    }
   });
 
-  // начальная синхронизация hidden, если страница стартует сразу в add/или селект уже заполнен
+  // Обработчики для цветовых пикеров
+  document.addEventListener('input', e => {
+    if (e.target.id === 'text-color-picker') {
+      const color = e.target.value;
+      document.querySelectorAll('[data-cmd="textColor"]').forEach(btn => {
+        btn.dataset.color = color;
+      });
+    } else if (e.target.id === 'bg-color-picker') {
+      const color = e.target.value;
+      document.querySelectorAll('[data-cmd="highlight"]').forEach(btn => {
+        btn.dataset.color = color;
+      });
+    }
+  });
+
+  // Инициализация
   syncCategorySlugInput();
 }
 
