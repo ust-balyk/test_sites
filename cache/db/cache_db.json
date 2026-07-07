@@ -298,6 +298,20 @@
                 "new_price": "4500руб",
                 "category_id": 8,
                 "in_stock": 1
+            },
+            {
+                "id": 334,
+                "category": "подарочные наборы",
+                "slug": "gift-set",
+                "outer_id": 777024,
+                "title": "названия нет",
+                "description": "<p>описание..<\/p>",
+                "image": "",
+                "price": "цена по запросу",
+                "old_price": "",
+                "new_price": "",
+                "category_id": 9,
+                "in_stock": 1
             }
         ],
         "makeup": [
@@ -6516,6 +6530,20 @@
             "old_price": "",
             "new_price": "",
             "category_id": 10,
+            "in_stock": 1
+        },
+        "777024": {
+            "id": 334,
+            "category": "подарочные наборы",
+            "slug": "gift-set",
+            "outer_id": 777024,
+            "title": "названия нет",
+            "description": "<p>описание..<\/p>",
+            "image": "",
+            "price": "цена по запросу",
+            "old_price": "",
+            "new_price": "",
+            "category_id": 9,
             "in_stock": 1
         }
     }
