@@ -32,13 +32,17 @@ class EditorController
             }
 
             $mode      = isset($_POST['mode']) ? trim($_POST['mode']) : '';
+            
             $slug      = isset($_POST['slug']) ? trim($_POST['slug']) : '';
+            
             $outer_id  = isset($_POST['outer_id']) ? trim($_POST['outer_id']) : '';
+            if ($outer_id === '') $outer_id = generateId($pdo);
+
             $title     = isset($_POST['title']) ? trim($_POST['title']) : '';
+            
             $price     = isset($_POST['price']) ? trim($_POST['price']) : '';
             $old_price = '';
             $new_price = '';
-
             if (preg_match_all('/\d[\d\s\.,\-]*руб/iuu', $price, $m) === 2) {
                 $old_price = $m[0][1];
                 $new_price = $m[0][0];
@@ -61,8 +65,6 @@ class EditorController
                 }
             }
  
-            if ($outer_id === '') $outer_id = generateId($pdo);
-
             $imageDbPath = '';
             if (!empty($_FILES['image']['name'])) {
                 $file = $_FILES['image'];
