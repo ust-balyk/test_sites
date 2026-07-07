@@ -178,13 +178,11 @@
                   </div>
                   <div class="product-card-btns" style="height:4.3rem">
                     <?php if ($product['in_stock']): ?>
-                    <button class="btn btn btn-outline-secondary add-to-favorites" title="добавить в избранное"
-                      data-id="<?= $product['outer_id'] ?>">
-                      <i class="fa-solid fa-heart"></i>
+                    <button class="btn btn btn-outline-secondary add-to-favorites"
+                      data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-heart"></i>
                     </button>
-                    <button class="btn btn-outline-secondary add-to-cart" title="добавить в корзину"
-                      data-id="<?= $product['outer_id'] ?>">
-                      <i class="fa-solid fa-cart-shopping
+                    <button class="btn btn-outline-secondary add-to-cart"
+                      data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-cart-shopping
                       <?= \App\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
                       <div class="spinner-border loader d-none"
                         style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#90cdfb" role="status">
