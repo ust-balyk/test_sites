@@ -614,7 +614,10 @@ $(document).ready(function() {
     /* =========== tooltip =========== */
 
     $(function() {
-        $(".user_out").tooltip({ placement: 'left' });
+
+      $(".user_out").tooltip({ placement: 'left' });
+      $(".add-to-cart").tooltip({ placement: 'bottom' });
+      //$(".").tooltip({ placement: 'botton' });
         
     });
 

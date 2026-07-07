@@ -181,7 +181,7 @@
                     <button class="btn btn btn-outline-secondary add-to-favorites"
                       data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-heart"></i>
                     </button>
-                    <button class="btn btn-outline-secondary add-to-cart"
+                    <button class="btn btn-outline-secondary add-to-cart" title="カートに追加"
                       data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-cart-shopping
                       <?= \App\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
                       <div class="spinner-border loader d-none"
