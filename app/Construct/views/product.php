@@ -1,13 +1,16 @@
 <?php if (session()->get('user.role') === 'master' || session()->get('user.role') === 'assistant'): ?>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
-      <button class="btn btn-sm btn-success" id="new-product-btn">➕ ДОБАВИТЬ ТОВАР</button>
-      <button class="btn btn-sm btn-primary" id="toggle-edit-btn">📝 РЕДАКТИРОВАТЬ ТОВАР</button>
+      <button class="btn btn-sm btn-success" id="new-product-btn"
+        style="border:1px solid grey">&nbsp;ДОБАВИТЬ ТОВАР&nbsp;</button>
+      <button class="btn btn-sm btn-primary" id="toggle-edit-btn"
+        style="border:1px solid grey">&nbsp;РЕДАКТИРОВАТЬ ТОВАР&nbsp;</button>
 
-      <select id="category-select" name="category_mode" class="form-select d-inline-block w-auto d-none">
-        <option value="current">Текущая категория</option>
+      <select id="category-select" name="category_mode" class="form-select d-inline-block w-auto d-none"
+        style="border:1px solid grey">
+        <option value="current">&nbsp;&nbsp;&nbsp;ДАННАЯ КАТЕГОРИЯ</option>
         <?php foreach ($data as $value): ?>
-        <option value="<?= hsc($value['slug']) ?>">
+        <option value="<?= hsc($value['slug']) ?>" style="font-size: 2rem">
           <?= hsc($value['category']) ?>
         </option>
         <?php endforeach; ?>
@@ -17,74 +20,79 @@
       <!-- Панель форматирования -->
       <div id="format-tools" class="d-none border-start ps-3 ms-2">
         <!-- Основные стили -->
-        <div class="btn-group btn-group-sm me-2" role="group">
-          <button class="btn btn-sm btn-outline-light" id="bold" data-cmd="bold"><b>Bold</b></button>
-          <button class="btn btn-sm btn-outline-light" id="italic" data-cmd="italic"><i>Italic</i></button>
-          <button class="btn btn-sm btn-outline-light" id="underline" data-cmd="underline"><u>Underline</u></button>
-          <button class="btn btn-sm btn-outline-light" id="strikethrough" data-cmd="strikethrough"><s>Strike</s></button>
+        <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
+          <button class="btn btn-sm btn-outline-light" id="strong" data-cmd="strong">
+            <b>STRONG</b>
+          </button>
+          <button class="btn btn-sm btn-outline-light" id="italic" data-cmd="italic">
+            <i>ITALIC</i>
+          </button>
+          <button class="btn btn-sm btn-outline-light" id="underline" data-cmd="underline">
+            <u>UNDERLINE</u>
+          </button>
+          <button class="btn btn-sm btn-outline-light" id="strikethrough" data-cmd="strikethrough">
+            <s>STRIKE</s>
+          </button>
         </div>
 
         <!-- Цвета -->
-        <div class="btn-group btn-group-sm me-2" role="group">
-          <button class="btn btn-sm btn-outline-light dropdown-toggle" id="text-color-btn" data-bs-toggle="dropdown">
-            <i class="fas fa-font"></i> Цвет текста
+        <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
+          <button class="btn btn-sm btn-outline-light dropdown-toggle" 
+            id="text-color-btn" data-bs-toggle="dropdown">ЦВЕТ ТЕКСТА 
           </button>
-          <div class="dropdown-menu">
-            <input type="color" class="form-control form-control-color m-2" id="text-color-picker" value="#000000">
-            <button class="dropdown-item" data-cmd="textColor" data-color="#000000">Чёрный</button>
-            <button class="dropdown-item" data-cmd="textColor" data-color="#ff0000">Красный</button>
-            <button class="dropdown-item" data-cmd="textColor" data-color="#00ff00">Зелёный</button>
-            <button class="dropdown-item" data-cmd="textColor" data-color="#0000ff">Синий</button>
+          <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
+            <!--input type="color" class="form-control form-control-color m-2" id="text-color-picker" value="#000000"-->
+            <button class="dropdown-item" data-cmd="textColor" data-color="#000000">чёрный</button>
+            <button class="dropdown-item" data-cmd="textColor" data-color="#ff0000">красный</button>
+            <button class="dropdown-item" data-cmd="textColor" data-color="#00ff00">зелёный</button>
+            <button class="dropdown-item" data-cmd="textColor" data-color="#0000ff">синий</button>
           </div>
 
-          <button class="btn btn-sm btn-outline-light dropdown-toggle" id="bg-color-btn" data-bs-toggle="dropdown">
-            <i class="fas fa-highlighter"></i> Фон
+          <button class="btn btn-sm btn-outline-light dropdown-toggle" 
+            id="bg-color-btn" data-bs-toggle="dropdown">ФОН ТЕКСТА 
           </button>
-          <div class="dropdown-menu">
-            <input type="color" class="form-control form-control-color m-2" id="bg-color-picker" value="#ffff00">
-            <button class="dropdown-item" data-cmd="highlight" data-color="#ffff00">Жёлтый</button>
-            <button class="dropdown-item" data-cmd="highlight" data-color="#ffcccc">Светло-красный</button>
-            <button class="dropdown-item" data-cmd="highlight" data-color="#ccffcc">Светло-зелёный</button>
-            <button class="dropdown-item" data-cmd="highlight" data-color="#ccccff">Светло-синий</button>
+          <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
+            <!--input type="color" class="form-control form-control-color m-2" id="bg-color-picker" value="#ffff00"-->
+            <button class="dropdown-item" data-cmd="highlight" data-color="#ffff00">жёлтый</button>
+            <button class="dropdown-item" data-cmd="highlight" data-color="#ffcccc">светло-красный</button>
+            <button class="dropdown-item" data-cmd="highlight" data-color="#ccffcc">светло-зелёный</button>
+            <button class="dropdown-item" data-cmd="highlight" data-color="#ccccff">светло-синий</button>
           </div>
         </div>
 
         <!-- Заголовки -->
-        <div class="btn-group btn-group-sm me-2" role="group">
-          <button class="btn btn-sm btn-outline-light" id="h1" data-cmd="h1">H1</button>
-          <button class="btn btn-sm btn-outline-light" id="h2" data-cmd="h2">H2</button>
-          <button class="btn btn-sm btn-outline-light" id="h3" data-cmd="h3">H3</button>
+        <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
+          <button class="btn btn-sm btn-outline-light" id="h4" data-cmd="h4">H4</button>
+          <button class="btn btn-sm btn-outline-light" id="h5" data-cmd="h5">H5</button>
+          <button class="btn btn-sm btn-outline-light" id="h6" data-cmd="h6">H6</button>
         </div>
 
         <!-- Списки -->
-        <div class="btn-group btn-group-sm me-2" role="group">
+        <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
           <button class="btn btn-sm btn-outline-light dropdown-toggle" id="list-type-btn" data-bs-toggle="dropdown">
-            <i class="fas fa-list"></i> Список
+            СПИСОК
           </button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" data-cmd="unorderedList" data-marker="disc">• Диск</button>
-            <button class="dropdown-item" data-cmd="unorderedList" data-marker="circle">○ Круг</button>
-            <button class="dropdown-item" data-cmd="unorderedList" data-marker="square">■ Квадрат</button>
-            <button class="dropdown-item" data-cmd="unorderedList" data-marker="none">Без маркеров</button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" data-cmd="orderedList">1. Нумерованный</button>
+          <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
+            <button class="dropdown-item" data-cmd="unorderedList" data-marker="disc">• диск</button>
+            <button class="dropdown-item" data-cmd="unorderedList" data-marker="circle">○ круг</button>
+            <button class="dropdown-item" data-cmd="unorderedList" data-marker="square">■ квадрат</button>
+            <button class="dropdown-item" data-cmd="unorderedList" data-marker="none">без маркеров</button>
           </div>
         </div>
 
         <!-- Дополнительные функции -->
-        <div class="btn-group btn-group-sm me-2" role="group">
-          <button class="btn btn-sm btn-outline-light" id="code" data-cmd="code"><code>Code</code></button>
-          <button class="btn btn-sm btn-outline-light" id="blockquote" data-cmd="blockquote">« Цитата</button>
-          <button class="btn btn-sm btn-outline-light" id="link" data-cmd="link">🔗 Ссылка</button>
+        <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
+          <button class="btn btn-sm btn-outline-light" id="link" data-cmd="link">ССЫЛКА</button>
         </div>
 
         <!-- Очистка форматирования -->
-        <button class="btn btn-sm btn-warning" id="remove" data-cmd="clear" title="Сбросить оформление">
-          <i class="fa-solid fa-eraser"></i> Очистить
+        <button class="btn btn-sm btn-warning" id="remove" data-cmd="clear" style="border:1px solid grey">
+          <i class="fa-solid fa-eraser"></i>
         </button>
 
         <!-- Сохранение -->
-        <button class="btn btn-sm btn-danger ms-3" id="save-all-btn">💾 СОХРАНИТЬ</button>
+        <button class="btn btn-sm btn-danger ms-3" id="save-all-btn" 
+          style="border:1px solid grey">&nbsp;СОХРАНИТЬ</button>
       </div>
     </div>
   </div>
@@ -135,8 +143,8 @@
       background-color: orange;
       border-color: #444;
     }
-    #category-select,
-    #bold, #italic, #list, #remove {
+    #category-select, #underline, #strikethrough, #text-color-btn, #bg-color-btn,
+    #strong, #italic, #link, #list-type-btn, #h4, #h5, #h6, #remove {
       font-family: "Arial", sans-serif;
       font-size: 1.4rem;
       font-weight: 400;

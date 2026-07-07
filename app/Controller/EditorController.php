@@ -16,7 +16,6 @@ class EditorController
 
         $response = ['success' => false, 'error' => ''];
 
-        $pdo = null;
         $pdo = db();
         if (!$pdo) {
             throw new RuntimeException('DB not connection');
@@ -61,9 +60,10 @@ class EditorController
                     throw new RuntimeException('Не удалось создать каталог для загрузки');
                 }
             }
+ 
+            if ($outer_id === '') $outer_id = generateId($pdo);
 
-            $imageDbPath = null;
-
+            $imageDbPath = '';
             if (!empty($_FILES['image']['name'])) {
                 $file = $_FILES['image'];
                 if ($file['error'] !== UPLOAD_ERR_OK) {
@@ -78,9 +78,6 @@ class EditorController
                     throw new RuntimeException('Недопустимый тип файла');
                 }
 
-                if ($outer_id === '') {
-                    $outer_id = generateId($pdo);
-                }
                 $ext = $map[$mime];
                 $fileNameTmp = $outer_id . '.' . $ext;
 

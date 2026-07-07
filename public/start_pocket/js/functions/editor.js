@@ -1,6 +1,5 @@
 /**
  * editor.js
- * Модуль для управления редактированием товаров
  */
 export default function initEditorProduct() {
   // ============================================
@@ -193,7 +192,7 @@ export default function initEditorProduct() {
     if (!selectedText.trim()) return;
 
     switch (cmd) {
-      case 'bold':
+      case 'strong':
         applyFormatting(range, 'strong');
         break;
       case 'italic':
@@ -205,35 +204,26 @@ export default function initEditorProduct() {
       case 'strikethrough':
         applyFormatting(range, 's');
         break;
-      case 'code':
-        applyFormatting(range, 'code');
-        break;
       case 'highlight':
         applyFormatting(range, 'span', { backgroundColor: options.color || '#ffff00' });
         break;
       case 'textColor':
         applyFormatting(range, 'span', { color: options.color || '#000000' });
         break;
-      case 'h1':
-        wrapInHeading(range, 'h1');
+      case 'h4':
+        wrapInHeading(range, 'h4');
         break;
-      case 'h2':
-        wrapInHeading(range, 'h2');
+      case 'h5':
+        wrapInHeading(range, 'h5');
         break;
-      case 'h3':
-        wrapInHeading(range, 'h3');
+      case 'h6':
+        wrapInHeading(range, 'h6');
         break;
       case 'unorderedList':
         createList(range, options.marker || 'disc', options.color || '#000000');
         break;
-      case 'orderedList':
-        createList(range, 'decimal');
-        break;
       case 'link':
         createLink(range, options.url || 'https://example.com');
-        break;
-      case 'blockquote':
-        wrapInBlockquote(range);
         break;
       case 'clear':
         clearFormatting(range);
@@ -282,17 +272,10 @@ export default function initEditorProduct() {
     range.insertNode(link);
   }
 
-  function wrapInBlockquote(range) {
-    const blockquote = document.createElement('blockquote');
-    blockquote.textContent = range.toString();
-    range.deleteContents();
-    range.insertNode(blockquote);
-  }
-
   function clearFormatting(range) {
     const parent = range.commonAncestorContainer;
     const elements = parent.querySelectorAll(
-      'strong, em, u, s, b, code, span[style*="background-color"], span[style*="color"], h1, h2, h3, ul, li, a, blockquote'
+      'strong, em, u, s, b, code, span[style*="background-color"], span[style*="color"], h4, h5, h6, ul, li, a, blockquote'
     );
 
     elements.forEach(el => {
