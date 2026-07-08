@@ -230,8 +230,9 @@ ul, ol { list-style: none; }
 
 .tooltip .tooltip-arrow { display: none !important; }
 .tooltip .tooltip-inner { 
-  color: white;
-  background-color: blue !important;
+  color: blue;
+  font-weight: 600;
+  background-color: rgba(144, 205, 251, 0.7) !important; 
   padding: 0.6rem 1.6rem 0.8rem 1.6rem; 
 }
 
