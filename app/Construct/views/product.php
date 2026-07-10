@@ -10,7 +10,7 @@
         style="border:1px solid grey">
         <option value="current">&nbsp;&nbsp;&nbsp;ДАННАЯ КАТЕГОРИЯ</option>
         <?php foreach ($data as $value): ?>
-        <option value="<?= hsc($value['slug']) ?>" style="font-size: 2rem">
+        <option value="<?= hsc($value['slug']) ?>" style="font-size: 1.8rem">
           <?= hsc($value['category']) ?>
         </option>
         <?php endforeach; ?>
@@ -62,9 +62,9 @@
 
         <!-- Заголовки -->
         <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
+          <button class="btn btn-sm btn-outline-light" id="h3" data-cmd="h3">H3</button>
           <button class="btn btn-sm btn-outline-light" id="h4" data-cmd="h4">H4</button>
           <button class="btn btn-sm btn-outline-light" id="h5" data-cmd="h5">H5</button>
-          <button class="btn btn-sm btn-outline-light" id="h6" data-cmd="h6">H6</button>
         </div>
 
         <!-- Списки -->
@@ -144,7 +144,7 @@
       border-color: #444;
     }
     #category-select, #underline, #strikethrough, #text-color-btn, #bg-color-btn,
-    #strong, #italic, #link, #list-type-btn, #h4, #h5, #h6, #remove {
+    #strong, #italic, #link, #list-type-btn, #h3, #h4, #h5, #remove {
       font-family: "Arial", sans-serif;
       font-size: 1.4rem;
       font-weight: 400;

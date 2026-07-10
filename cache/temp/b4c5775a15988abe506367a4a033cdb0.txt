@@ -1,1 +1,0 @@
-a:2:{s:31:"host_request_uri_product_542708";a:2:{i:0;s:9:"localhost";i:1;s:34:"/cosmetics/for-feet/product/542708";}s:4:"time";i:1783327374;}

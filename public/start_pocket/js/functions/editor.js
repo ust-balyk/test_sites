@@ -10,7 +10,6 @@ export default function initEditorProduct() {
   const newBtn = document.getElementById('new-product-btn');
   const saveBtn = document.getElementById('save-all-btn');
   const formatTools = document.getElementById('format-tools');
-
   const categorySelect = document.getElementById('category-select');
   const categorySlugInput = document.getElementById('admin-slug-category');
   const productRoot = document.querySelector('.product[data-slug]');
@@ -210,20 +209,20 @@ export default function initEditorProduct() {
       case 'textColor':
         applyFormatting(range, 'span', { color: options.color || '#000000' });
         break;
+      case 'h3':
+        wrapInHeading(range, 'h3');
+        break;
       case 'h4':
         wrapInHeading(range, 'h4');
         break;
       case 'h5':
         wrapInHeading(range, 'h5');
         break;
-      case 'h6':
-        wrapInHeading(range, 'h6');
-        break;
       case 'unorderedList':
         createList(range, options.marker || 'disc', options.color || '#000000');
         break;
       case 'link':
-        createLink(range, options.url || 'https://example.com');
+        createLink(range, options.url || 'https://satomi-japan.com');
         break;
       case 'clear':
         clearFormatting(range);
@@ -268,22 +267,40 @@ export default function initEditorProduct() {
     link.textContent = range.toString();
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
+  
     range.deleteContents();
     range.insertNode(link);
   }
-
+  
   function clearFormatting(range) {
-    const parent = range.commonAncestorContainer;
-    const elements = parent.querySelectorAll(
-      'strong, em, u, s, b, code, span[style*="background-color"], span[style*="color"], h4, h5, h6, ul, li, a, blockquote'
-    );
-
+    const startEl = range.startContainer.nodeType === Node.ELEMENT_NODE
+      ? range.startContainer
+      : range.startContainer.parentElement;
+  
+    const root = startEl?.closest('#edit-description');
+    if (!root) return; // выделение не в описании
+  
+    const selector = [
+      'strong, em, u, s, b, code, h4, h5, h6, ul, li, a, blockquote',
+      'span[style*="background-color"]',
+      'span[style*="color"]',
+    ].join(',');
+  
+    const elements = Array.from(root.querySelectorAll(selector))
+      .filter(el => range.intersectsNode(el));
+  
+    // unwrap снизу вверх (чтобы DOM не ломался)
+    elements.sort((a, b) => (b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING ? 1 : -1));
+  
     elements.forEach(el => {
-      const textNode = document.createTextNode(el.textContent);
-      el.parentNode.replaceChild(textNode, el);
+      const parent = el.parentNode;
+      if (!parent) return;
+  
+      while (el.firstChild) parent.insertBefore(el.firstChild, el);
+      parent.removeChild(el);
     });
   }
-
+  
   // ============================================
   // 8. СОХРАНЕНИЕ ДАННЫХ
   // ============================================
@@ -348,7 +365,7 @@ export default function initEditorProduct() {
   // ============================================
   // 9. ПРИСОЕДИНЕНИЕ ОБРАБОТЧИКОВ
   // ============================================
-
+  
   toggleBtn?.addEventListener('click', toggleEditMode);
   newBtn?.addEventListener('click', prepareNewProduct);
   saveBtn?.addEventListener('click', saveAllChanges);

@@ -11,6 +11,7 @@ class HomeController extends BaseController
 
         self::init(); // запись URL
 
+        $all_products = [];
         if ($all_products = cache()->getCache_db()) {
             // аналог WHERE price = ''
             // dump($all_products['by_id']); тоесть во всех категориях

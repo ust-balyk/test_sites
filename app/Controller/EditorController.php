@@ -53,9 +53,11 @@ class EditorController
             }
 
             $descriptionRaw = isset($_POST['description']) ? $_POST['description'] : '';
-            //$reviewsJson = isset($_POST['reviews']) ? $_POST['reviews'] : null;
-
             $description = Text::clean($descriptionRaw);
+
+            //$description = isset($_POST['description']) ? $_POST['description'] : '';
+
+            //$reviewsJson = isset($_POST['reviews']) ? $_POST['reviews'] : null;
 
             $uploadDir = realpath(__DIR__ .'/../../public/temporary')
                 ?: (__DIR__ .'/../../public/temporary');
