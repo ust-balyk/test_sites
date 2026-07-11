@@ -52,10 +52,10 @@ class EditorController
                 $new_price = '';
             }
 
-            $descriptionRaw = isset($_POST['description']) ? $_POST['description'] : '';
-            $description = Text::clean($descriptionRaw);
+            //$descriptionRaw = isset($_POST['description']) ? $_POST['description'] : '';
+            //$description = Text::clean($descriptionRaw);
 
-            //$description = isset($_POST['description']) ? $_POST['description'] : '';
+            $description = isset($_POST['description']) ? $_POST['description'] : '';
 
             //$reviewsJson = isset($_POST['reviews']) ? $_POST['reviews'] : null;
 

@@ -226,8 +226,6 @@ u::after {
   content: none;
 }
 
-ul, ol { list-style: none; }
-
 .tooltip .tooltip-arrow { display: none !important; }
 .tooltip .tooltip-inner { 
   color: blue;

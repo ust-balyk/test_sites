@@ -41,7 +41,7 @@
             id="text-color-btn" data-bs-toggle="dropdown">ЦВЕТ ТЕКСТА 
           </button>
           <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
-            <!--input type="color" class="form-control form-control-color m-2" id="text-color-picker" value="#000000"-->
+            <input type="color" class="form-control form-control-color m-2" id="text-color-picker" value="#000000">
             <button class="dropdown-item" data-cmd="textColor" data-color="#000000">чёрный</button>
             <button class="dropdown-item" data-cmd="textColor" data-color="#ff0000">красный</button>
             <button class="dropdown-item" data-cmd="textColor" data-color="#00ff00">зелёный</button>
@@ -52,7 +52,7 @@
             id="bg-color-btn" data-bs-toggle="dropdown">ФОН ТЕКСТА 
           </button>
           <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
-            <!--input type="color" class="form-control form-control-color m-2" id="bg-color-picker" value="#ffff00"-->
+            <input type="color" class="form-control form-control-color m-2" id="bg-color-picker" value="#ffff00">
             <button class="dropdown-item" data-cmd="highlight" data-color="#ffff00">жёлтый</button>
             <button class="dropdown-item" data-cmd="highlight" data-color="#ffcccc">светло-красный</button>
             <button class="dropdown-item" data-cmd="highlight" data-color="#ccffcc">светло-зелёный</button>
@@ -67,6 +67,9 @@
           <button class="btn btn-sm btn-outline-light" id="h5" data-cmd="h5">H5</button>
         </div>
 
+        <!-- Перенос строки -->
+        <button class="btn btn-sm btn-outline-light me-2" id="br" data-cmd="br" style="border:1px solid grey">BR</button>
+
         <!-- Списки -->
         <div class="btn-group btn-group-sm me-2" role="group" style="border:1px solid grey">
           <button class="btn btn-sm btn-outline-light dropdown-toggle" id="list-type-btn" data-bs-toggle="dropdown">
@@ -77,6 +80,8 @@
             <button class="dropdown-item" data-cmd="unorderedList" data-marker="circle">○ круг</button>
             <button class="dropdown-item" data-cmd="unorderedList" data-marker="square">■ квадрат</button>
             <button class="dropdown-item" data-cmd="unorderedList" data-marker="none">без маркеров</button>
+            <!-- Цвет маркера (например, тот же цветпикер, но отдельный) -->
+            <input type="color" id="marker-color-picker" value="#000000">
           </div>
         </div>
 
@@ -92,7 +97,12 @@
 
         <!-- Сохранение -->
         <button class="btn btn-sm btn-danger ms-3" id="save-all-btn" 
-          style="border:1px solid grey">&nbsp;СОХРАНИТЬ</button>
+          style="border:1px solid grey">&nbsp;СОХРАНИТЬ
+        </button>
+        <!-- Удаление -->
+        <button class="btn btn-sm btn-danger d-none" id="delete-product-btn"
+          style="border:1px solid grey">&nbsp;УДАЛИТЬ
+        </button>
       </div>
     </div>
   </div>
@@ -144,7 +154,7 @@
       border-color: #444;
     }
     #category-select, #underline, #strikethrough, #text-color-btn, #bg-color-btn,
-    #strong, #italic, #link, #list-type-btn, #h3, #h4, #h5, #remove {
+    #strong, #italic, #link, #list-type-btn, #h3, #h4, #h5, #br, #remove {
       font-family: "Arial", sans-serif;
       font-size: 1.4rem;
       font-weight: 400;
@@ -161,6 +171,14 @@
       font-weight: 400;
       color: #fff;
       background-color: blue;
+      border-color: #444;
+    }
+    #delete-product-btn {
+      font-family: "Arial", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #fff;
+      background-color: red;
       border-color: #444;
     }
     .edit-image-hover:hover::after { opacity: 1; }
@@ -376,7 +394,7 @@
                 data-id="<?= hsc($related_['outer_id']) ?>">
                 <i class="fa-solid fa-heart"></i>
               </button>
-              <button class="btn btn-outline-secondary add-to-cart" data-id="<?= hsc($related_['outer_id']) ?>">
+              <button class="btn btn-outline-secondary add-to-cart" data-id="<?= hsc($related_['outer_id']) ?>" title="カートに追加">
                 <i class="fa-solid fa-cart-shopping
                 <?= \App\Widgets\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
                 <div class="spinner-border d-none"

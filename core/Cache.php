@@ -33,8 +33,8 @@ class Cache
 
       foreach ($products as &$product) {
          // Чистим описание прямо в исходном объекте/массиве
-         $product['title'] = Text::clean($product['title']);
-         $product['description'] = Text::clean($product['description']);
+         //$product['title'] = Text::clean($product['title']);
+         //$product['description'] = Text::clean($product['description']);
 
          // Распределяем уже чистые данные
          $cache['by_category'][$product['slug']][] = $product;

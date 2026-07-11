@@ -12,6 +12,8 @@ class ProductController extends BaseController
     {
         self::init(); // запись URL
 
+        cache()->refreshCache(); // убрать
+        ///////////////////////////////////////////////
         [$slug, $id] = request()->getSLUG_or_ID() ?? [];
         $id          = (string)request()->getSLUG_or_ID()[1] ?? null;        
         $cache = cache()->getCache_db();
@@ -29,7 +31,6 @@ class ProductController extends BaseController
     
         }
 
-        // Если товар найден (неважно, из кэша или базы)
         if (!empty($product)) {
 
             $arr_words = preg_split('~\s~', $product['title']);
@@ -331,7 +332,7 @@ class ProductController extends BaseController
                 'schemaData'       => $schemaData,
                 'title'            => $title,
                 //'description'      => $description,
-                'product'          => $product,
+                'product'          => $product, // все данные продукта
                 'related_products' => $related_products,
                 'data'             => $data, // для редактора
 

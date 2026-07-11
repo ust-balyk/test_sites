@@ -199,7 +199,7 @@
 
             <!-- Иконка корзины — справа, всегда поверх -->
             <div class="cart-wrap">
-              <ul class="d-flex align-items-center gap-3 mb-2 mb-lg-0">
+              <ul class="d-flex align-items-center gap-3 mb-2 mb-lg-0" style="list-style: none;">
                 <li>
                   <?php if (empty(session()->get('user.name'))) { ?>
                   <a href="/login">
