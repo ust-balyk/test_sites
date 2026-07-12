@@ -129,11 +129,41 @@ class EditorController
 
             }
 
-            ///////////////////////////////////////////////////////////////
+            // ====================================================== //
 
             $pdo->beginTransaction();
 
-            if ($mode === 'add') {
+            if ($mode === 'delete') {
+                if ($outer_id === '') {
+                    throw new RuntimeException('outer_id обязателен для delete');
+                }
+                if ($slug === '') {
+                    throw new RuntimeException('slug обязателен для delete (для удаления файла)');
+                }
+            
+                // Удаляем файл: public/images/<slug>/<outer_id>.webp
+                $publicImgPath = realpath(__DIR__ . '/../../public');
+                if ($publicImgPath === false) {
+                    throw new RuntimeException('Не удалось определить директорию public');
+                }
+            
+                $imgFiles = $publicImgPath . DIRECTORY_SEPARATOR . 'images'
+                    . DIRECTORY_SEPARATOR . $slug
+                    . DIRECTORY_SEPARATOR . $outer_id . '.webp';
+            
+                if (is_file($imgFiles)) {
+                    @unlink($imgFiles);
+                }
+
+                if ($publicImgPath === false) {
+                    throw new RuntimeException('Не удалось определить директорию public');
+                }
+
+                // Удаляем запись в БД
+                $del = "DELETE FROM " . TABLE_NAME . " WHERE outer_id = ?";
+                $pdo->query($del, [$outer_id]);
+
+            } elseif ($mode === 'add') {
 
                 $arr_cat_id = [
                     1 => 'makeup',
@@ -195,6 +225,8 @@ class EditorController
                     ]);
                 
                 }
+            } else {
+                throw new RuntimeException('Неверный режим');
             }
 
             $pdo->commit();

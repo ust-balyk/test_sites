@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <h1 class="text-center title_category"><?= $category_title ?></h1>
+      <h1 class="text-center title_category"><?= $category_title ?? '' ?></h1>
 
       <div class="row category">
 
@@ -197,7 +197,7 @@
             </div><!--row-->
           </div><!--container-->
 
-          <?= $pagination; ?>
+          <?= $pagination ?? '' ?><!-- PAGINATION -->
           
         </div><!--content-->
       </div><!--row category-->

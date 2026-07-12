@@ -58,6 +58,7 @@ const CATEGORY_VIEW   = 'category';
 const PRODUCT_LAYOUT  = 'product';
 const PRODUCT_VIEW    = 'product';
 ##
+const DEFAULT_LAYOUT  = 'default';
 
 $POCKET_STYLE = 'start';
 if ( $POCKET_STYLE  == false || $POCKET_STYLE  === 'main' ) {

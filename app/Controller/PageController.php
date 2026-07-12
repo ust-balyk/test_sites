@@ -76,7 +76,7 @@ class PageController extends BaseController
 
             return app()->view->full_view(
                 
-                CATEGORY_LAYOUT,
+                DEFAULT_LAYOUT,
                 'discount',
                 [
                     'title'               => 'Купить японскую косметику со скидкой на Japan-in.Ru!',

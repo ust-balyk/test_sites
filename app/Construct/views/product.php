@@ -41,7 +41,8 @@
             id="text-color-btn" data-bs-toggle="dropdown">ЦВЕТ ТЕКСТА 
           </button>
           <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
-            <input type="color" class="form-control form-control-color m-2" id="text-color-picker" value="#000000">
+            <!--input type="color" class="form-control form-control-color m-2" 
+              id="text-color-picker" value="#000000"-->
             <button class="dropdown-item" data-cmd="textColor" data-color="#000000">чёрный</button>
             <button class="dropdown-item" data-cmd="textColor" data-color="#ff0000">красный</button>
             <button class="dropdown-item" data-cmd="textColor" data-color="#00ff00">зелёный</button>
@@ -52,7 +53,8 @@
             id="bg-color-btn" data-bs-toggle="dropdown">ФОН ТЕКСТА 
           </button>
           <div class="dropdown-menu edit" style="border:1px solid grey; font-size: 2rem">
-            <input type="color" class="form-control form-control-color m-2" id="bg-color-picker" value="#ffff00">
+            <!--input type="color" class="form-control form-control-color m-2" 
+              id="bg-color-picker" value="#ffff00"-->
             <button class="dropdown-item" data-cmd="highlight" data-color="#ffff00">жёлтый</button>
             <button class="dropdown-item" data-cmd="highlight" data-color="#ffcccc">светло-красный</button>
             <button class="dropdown-item" data-cmd="highlight" data-color="#ccffcc">светло-зелёный</button>
@@ -81,7 +83,7 @@
             <button class="dropdown-item" data-cmd="unorderedList" data-marker="square">■ квадрат</button>
             <button class="dropdown-item" data-cmd="unorderedList" data-marker="none">без маркеров</button>
             <!-- Цвет маркера (например, тот же цветпикер, но отдельный) -->
-            <input type="color" id="marker-color-picker" value="#000000">
+            <!--input type="color" id="marker-color-picker" value="#000000"-->
           </div>
         </div>
 
@@ -97,11 +99,11 @@
 
         <!-- Сохранение -->
         <button class="btn btn-sm btn-danger ms-3" id="save-all-btn" 
-          style="border:1px solid grey">&nbsp;СОХРАНИТЬ
+          style="border:1px solid grey">&nbsp;СОХРАНИТЬ&nbsp;
         </button>
         <!-- Удаление -->
-        <button class="btn btn-sm btn-danger d-none" id="delete-product-btn"
-          style="border:1px solid grey">&nbsp;УДАЛИТЬ
+        <button class="btn btn-sm btn-danger d-none ms-3" id="delete-product-btn"
+          style="border:1px solid grey">&nbsp;УДАЛИТЬ&nbsp;
         </button>
       </div>
     </div>

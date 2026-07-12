@@ -60,6 +60,56 @@ export default function initEditorProduct() {
   }
 
   // ============================================
+  // delete
+  // ============================================
+
+  let deleteHandlerBound = false;
+
+  function setupDeleteHandler() {
+    if (deleteHandlerBound) return;
+    deleteHandlerBound = true;
+
+    if (!deleteBtn) return;
+
+    deleteBtn.addEventListener('click', async () => {
+      if (currentMode !== 'edit') return;
+
+      const outerId = idInput?.value?.trim();
+      if (!outerId) {
+        alert('Не найден outer_id для удаления.');
+        return;
+      }
+
+      const ok = confirm('ПОДТВЕРДИТЬ УДАЛЕНИЕ ПРОДУКТА?');
+      if (!ok) return;
+
+      const fd = new FormData();
+      fd.append('mode', 'delete');
+      fd.append('outer_id', outerId);
+      fd.append('slug', getSlug());
+
+      try {
+        const resp = await fetch('/editor', {
+          method: 'POST',
+          body: fd,
+          credentials: 'same-origin'
+        });
+
+        if (!resp.ok) throw new Error(`Ошибка удаления: ${resp.status}`);
+
+        const res = await resp.json();
+        if (res?.success) location.reload();
+        else alert(res?.error || 'Удаление не удалось');
+      } catch (err) {
+        console.error('❌ Ошибка:', err);
+        alert('Ошибка: ' + err.message);
+      }
+    });
+  }
+  // вызови один раз после того как заполнены idInput/deleteBtn
+  setupDeleteHandler();  
+
+  // ============================================
   // 3) Управление состоянием toolbar (modes)
   // ============================================
 
@@ -558,6 +608,8 @@ export default function initEditorProduct() {
     fd.append('price', priceEl.innerText.trim());
     fd.append('description', sanitizeDescription(descEl.innerHTML).trim());
 
+    fd.append('delete', deleteBtn);
+
     // Для add берем slug из выпадающего списка (если он используется)
     if (currentMode === 'add' && categorySlugInput) {
       syncCategorySlugInput();
@@ -619,6 +671,7 @@ export default function initEditorProduct() {
     format(cmd, options);
   });
 
+  /*
   // Пикеры цвета: обновляют dataset color у кнопок в dropdown
   document.addEventListener('input', e => {
     if (e.target.id === 'text-color-picker') {
@@ -633,6 +686,7 @@ export default function initEditorProduct() {
       });
     }
   });
+  */
 
   // ============================================
   // 10) Инициализация стартового режима

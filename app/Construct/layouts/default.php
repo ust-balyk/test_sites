@@ -22,19 +22,6 @@
     <link rel="stylesheet" href="<?= base_url('/library/owlcarousel/owl.theme.default.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/media.css'); ?>">
-    <!--meta property="og:type" content="website"-->
-    <meta property="og:type" content="product.group">
-    <meta property="og:title" content="<?= hsc($title ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:description" content="<?= hsc($short_description ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:url" content="<?= hsc($full_url ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:image" content="<?= hsc($image_url ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:site_name" content="<?= hsc(SITE_NAME, ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:locale" content="<?= hsc(LOCALE, ENT_QUOTES, 'UTF-8') ?>">
-    <?php if (!empty($schema_data)): ?>
-      <script type="application/ld+json">
-        <?= json_encode($schema_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
-      </script>
-    <?php endif; ?>
   </head>
   <body>
     <div style="height:1px;border-bottom:1px dotted #744474;clear:both"></div>
