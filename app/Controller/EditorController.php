@@ -152,36 +152,12 @@ class EditorController
 
             } elseif ($mode === 'add') {
 
-                $arr_cat_id = [
-                    1 => 'makeup',
-                    2 => 'for-face',
-                    3 => 'for-oral-cavity',
-                    4 => 'for-hair',
-                    5 => 'for-body',
-                    6 => 'for-hands',
-                    7 => 'for-feet',
-                    8 => 'aromatherapy',
-                    9 => 'gift-set',
-                    10 =>'accessories',
-                ];
-                $category_id = array_search($slug, $arr_cat_id, true); // true — строгое сравнение
+                $category_id = array_search($slug, ARR_CATEGORY_ID, true); // true — строгое сравнение
                 if ($category_id === false) {
                     $response = ['success' => false, 'error' => 'invalid category slug'];
                 }
 
-                $arr_cat = [
-                    'декоративная косметика' => 'makeup',
-                    'для лица'               => 'for-face',
-                    'для полости рта'        => 'for-oral-cavity',
-                    'для волос'              => 'for-hair',
-                    'для тела'               => 'for-body',
-                    'для рук'                => 'for-hands',
-                    'для ног'                => 'for-feet',
-                    'ароматерапия'           => 'aromatherapy',
-                    'подарочные наборы'      => 'gift-set',
-                    'аксессуары'             => 'accessories',
-                ];
-                $category = array_search($slug, $arr_cat, true); // true — строгое сравнение
+                $category = array_search($slug, ARR_CATEGORY_SLUG, true); // true — строгое сравнение
                 if ($category === false) {
                     $response = ['success' => false, 'error' => 'invalid category category'];
                 }
