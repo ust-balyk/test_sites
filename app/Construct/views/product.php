@@ -1,3 +1,5 @@
+<?php// dump($_SESSION); ?>  
+<?php //dump($_SERVER['REQUEST_URI']) ?>
 <?php if (session()->get('user.role') === 'master' || session()->get('user.role') === 'assistant'): ?>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
@@ -470,5 +472,5 @@
         </div>
       </div>
     </section>
-    <script>localStorage.setItem('location', window.location.href);</script>
+  <script>localStorage.setItem('location', window.location.href);</script>
 
