@@ -143,7 +143,8 @@ export default function initEditorProduct() {
         if (!resp.ok) throw new Error(`Ошибка удаления: ${resp.status}`);
 
         const res = await resp.json();
-        if (res?.success) history.back(); else alert(res?.error || 'Удаление не удалось');
+        if (res?.success) history.back(); 
+        else alert(res?.error || 'Удаление не удалось');
 
       } catch (err) {
         console.error('❌ Ошибка:', err);
@@ -685,12 +686,24 @@ export default function initEditorProduct() {
       if (!resp.ok) throw new Error(`Ошибка сохранения: ${resp.status}`);
 
       const res = await resp.json();
+      
       if (res?.success) {
         alert('Сохранено');
-        history.go(1); // остаёмся на странице добавленного товара
+        // обновить “арт. ...” в хлебных крошках
+        const breadcrumbArt = document.querySelector('.breadcrumb .breadcrumb-item.active');
+        if (breadcrumbArt) breadcrumbArt.textContent = `арт.${res.outer_id ?? ''}`;
+        // обновить URL
+        if (res.slug && res.outer_id) {
+          const newUrl = `/cosmetics/${res.slug}/product/${res.outer_id}`;
+          history.pushState({}, '', newUrl);
+        }
+        // вернуть нейтральный режим
+        setToolbarState('neutral');   
+        
       } else {
         alert('Сохранение не удалось: ' + (res?.error || 'неизвестная ошибка'));
       }
+
     } catch (err) {
       console.error('❌ Ошибка:', err);
       alert('Ошибка: ' + err.message);

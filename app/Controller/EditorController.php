@@ -125,7 +125,7 @@ class EditorController
 
                 if (file_exists($target)) @unlink($target);
 
-                $imageDbPath = "/images/{$slug}/{$outer_id}.webp" ?: '';
+                $imageDbPath = "/images/{$slug}/{$outer_id}.webp";
 
             }
 
@@ -196,6 +196,7 @@ class EditorController
             $pdo->commit();
 
             $response['success'] = true;
+            $response['slug'] = $slug;
             $response['outer_id'] = $outer_id;
             if ($imageDbPath) $response['image'] = $imageDbPath;
 
