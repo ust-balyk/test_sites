@@ -504,16 +504,21 @@ export default function initEditorProduct() {
     }
     toRemove.forEach(n => n.remove());
 
-    // Убираем вложенные span-обёртки вида:
-    // <span style="..."><span style="...">...</span></span>
     function mergeNestedSpans(root) {
+      // Убираем вложенные span-обёртки вида:
+      // <span style="..."><span style="...">...</span></span>
+      // удалить пустые <p></p> и <h></h> (включая пустые с пробелами/переносами)
+      root.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(el => {
+        if (el.textContent.trim() === '' && el.children.length === 0) el.remove();
+      });
+    
       const spans = Array.from(root.querySelectorAll('span'));
-
+    
       for (const outer of spans) {
         // Ищем единственный элемент-span внутри outer (остальное — только пробелы/текст)
         const elementChildren = Array.from(outer.childNodes).filter(n => n.nodeType === Node.ELEMENT_NODE);
         if (elementChildren.length !== 1) continue;
-
+    
         const inner = elementChildren[0];
         if (!inner || inner.tagName !== 'SPAN') continue;
 
@@ -522,23 +527,24 @@ export default function initEditorProduct() {
         const hasOtherMeaningfulNodes = Array.from(outer.childNodes).some(n => {
           if (n === inner) return false;
           if (n.nodeType === Node.TEXT_NODE) return n.textContent.trim() !== '';
-          return true; // другой элемент
+          return true;
         });
         if (hasOtherMeaningfulNodes) continue;
-
+    
         // Сливаем style: внешний + внутренний (внутренний обычно побеждает при конфликте)
         const outerStyle = outer.getAttribute('style');
         const innerStyle = inner.getAttribute('style');
-
+    
         if (outerStyle && innerStyle) {
           inner.setAttribute('style', `${outerStyle}; ${innerStyle}`);
         } else if (outerStyle && !innerStyle) {
           inner.setAttribute('style', outerStyle);
         }
-
+    
         outer.replaceWith(inner);
       }
     }
+    
 
     // Нормализуем style у span: убираем дубликаты свойств (например color) и лишние ;;
     function cleanSpanStyles(root) {

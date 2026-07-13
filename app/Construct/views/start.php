@@ -220,7 +220,7 @@
 <?//php dump($_SESSION); ?>
 <?php if (!empty($discounted_products)): ?>
   <section class="carousel-promo popular">
-    <div class="container">
+    <div class="container popular">
       <div class="slider-header">
         <a href="/cosmetics/discount" class="btn btn-sm btn-outline-secondary popular">
           <span>товары по акции</span>

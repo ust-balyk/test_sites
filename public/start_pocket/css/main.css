@@ -485,7 +485,6 @@ button.cart-button {
 }
 
 /* луна */
-
 .theme-btn {
   background-color: transparent;
   margin-left: 0.8rem;
@@ -680,7 +679,6 @@ p.counter-text { padding: 0; margin: 0; }
 }
 
 /* линия */
-
 .achievement-item {
   position: relative;
     /*border: none;
@@ -715,7 +713,6 @@ p.counter-text { padding: 0; margin: 0; }
 }
 
 /* --- Медиа-запросы для адаптации --- */
-
 @media (max-width: 768px) {
     .counter-num {
         font-size: 1.2rem; /* Уменьшаем шрифт на планшетах/телефонах */
@@ -875,7 +872,7 @@ div .product-card:hover {
     
 }
 
-/* товары по акции */
+/* флажок товары по акции */
 .product-card .discounted_product {
     position: absolute;
     left: -2.5%;
@@ -894,7 +891,7 @@ div .product-card:hover {
     padding: 0px 0px 0.2rem 0px;
 }
 
-/* нет в наличии  */
+/* флажок нет в наличии  */
 .product-card .product_expected {
     position: absolute;
     left: -2.5%;
@@ -912,7 +909,7 @@ div .product-card:hover {
     padding: 0px 0px 0.2rem 0px;
 }
 
-/* рекоменованный товар */
+/* флажок рекоменованный товар */
 .product-card .popular_product {
     position: absolute;
     left: -2.5%;
@@ -1013,7 +1010,6 @@ button.add-to-cart:hover {
 }
 
 /* стили подсказок TOOLTIP */
-
 div.tooltip-inner {
     border-radius: 3px !important;
     background-color: var(--grey-color) !important;
@@ -1037,6 +1033,7 @@ div.tooltip-arrow::before {
 /* =================== /Carousel_Promo============= */
 
 /* =================== Carousel Popular =========== */
+/* товары со скидкой */
 
 div.container .popular {
   padding: 0px !important;
@@ -1052,24 +1049,25 @@ a.btn.btn-sm.btn-outline-secondary.popular {
   background-color: white; /*var(--bg-color);*/
   transition: all .350s;
 }
-
-a.btn.popular span {
-  margin-top: 10px;
+a.btn-sm.btn-outline-secondary.popular:hover {
+    border: 1px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+.btn.popular span {
   padding: 4px 20px;
   font-size: 2rem;
   color: var(--grey-color);
   letter-spacing: 0.1rem;
 }
 
-a.btn.popular:hover {
-  border: 1px solid white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  span { color: black; } 
+.btn.popular span:hover {
+  color: black; 
 }
 
 /* =================== /Carousel Popular =========== */
 
 /* =================== Categories ================= */
+/* главная страница */
 
 section.categories {
     margin-top: 9rem;
@@ -1577,12 +1575,14 @@ div.container.category {
     padding: 0px 1.5rem 0px 1.3rem;
 }
 
-div.row.category {
+/* колонка с карточками не растягивается */
+div.row.category > .col-md-10.content {
+    align-self: flex-start !important;
+    height: auto !important;
     margin-bottom: 4rem;
 }
 
 /* link_category */
-
 div.category_link {
     margin: 0;
     padding: 0;
@@ -1611,7 +1611,6 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
 }
     
 /* ======= хлебные крошки ======= */
-
 .breadcrumb-item + .breadcrumb-item::before {
   content: none;
 }
@@ -1691,7 +1690,6 @@ h1.text-center.title_category {
 
 
 /* sidebar */
-
 div.sidebar {
   padding: 0px 10px;
 }
@@ -1716,7 +1714,6 @@ a.btn.btn-outline-primary {
 }
 
 /* filters */
-
 div.filters {
   margin: 2.1rem 0px 1rem 0px;
 }
@@ -1739,7 +1736,6 @@ div.filters {
 }
 
 /* кнопка "применить фильтры" */
-
 div#btn_activate_filters {
   padding: 0;
   margin: 2rem 0px 2.2rem 0px;
@@ -1777,7 +1773,6 @@ h6#selector_text.activate_filters:hover {
 }
 
 /* кнопки фильтров */
-
 div.accordion-item {
     border: 1px solid var(--light-grey-color);
 }
@@ -1799,14 +1794,12 @@ button.accordion-button:focus {
 }
 
 /* переопределение стилей, когда аккордеон открыт */
-
 .accordion-button:not(.collapsed) {
   background-color: var(--light-blue-color) !important;
   border-bottom: 1px solid var(--light-grey-color) !important;
 }
 
 /* стилизовать иконку (стрелку) */
-
 .accordion-button.collapsed::after {
     background-image: url("../favicon/filter.svg");
     background-size: cover;
@@ -1823,7 +1816,6 @@ div.accordion-body {
 }
 
 /* filter_price */
-
 .filter_price {
     display: flex;
     justify-content: space-between;
@@ -1911,7 +1903,6 @@ div#slider-range {
 }
 
 /* списки выбора фильтра */
-
 ul.filters_list {
   list-style-type: none; /* убирает маркеры */
   padding-left: 0;
@@ -1919,7 +1910,6 @@ ul.filters_list {
 }
 
 /* индикатор выбора фильтра */
-
 .form-check-input {
     border-color: var(--light-grey-color);
 }
@@ -1938,7 +1928,6 @@ ul.filters_list {
 }
 
 /* строка описания фильтра */
-
 label.form-check-label {
     /* строка переносится */
     word-break: break-word;
@@ -1950,7 +1939,6 @@ label.form-check-label {
 
 
 /* ukiyo_e */
-
 div.ukiyo_e {
     height: auto;
     margin-top: auto;
@@ -1966,7 +1954,6 @@ div.ukiyo_e {
 }
 
 /* content */
-
 div.content {
     margin: 0;
     padding: 0;
@@ -1981,7 +1968,6 @@ div#category_content.row {
     margin: 0;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /*test*/
 }
-
 div.product-card {
     margin: 10px;
     grid-template-rows: subgrid; /*test*/
@@ -1997,7 +1983,7 @@ div.product-card {
     }
 }*/
 
-/*====  pagination ====*/
+/*=========================  pagination ========================*/
 
 ul.pagination {
   margin-top: 3.2rem;
