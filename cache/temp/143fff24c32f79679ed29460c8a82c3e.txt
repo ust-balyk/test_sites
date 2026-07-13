@@ -1,1 +1,1 @@
-a:2:{s:31:"host_request_uri_product_367500";a:2:{i:0;s:9:"localhost";i:1;s:34:"/cosmetics/for-feet/product/367500";}s:4:"time";i:1783969043;}
+a:2:{s:31:"host_request_uri_product_367500";a:2:{i:0;s:9:"localhost";i:1;s:34:"/cosmetics/for-feet/product/367500";}s:4:"time";i:1783981853;}
