@@ -151,7 +151,6 @@ class EditorController
                 $pdo->query("DELETE FROM " . TABLE_NAME . " WHERE outer_id = ?", [$outer_id]);
 
             } elseif ($mode === 'add') {
-
                 $category_id = array_search($slug, ARR_CATEGORY_ID, true); // true — строгое сравнение
                 if ($category_id === false) {
                     $response = ['success' => false, 'error' => 'invalid category slug'];
@@ -172,7 +171,6 @@ class EditorController
                 ]);
 
             } elseif ($mode === 'edit') {
-
                 if (empty($imageDbPath)) {
                     $sql = "UPDATE " . TABLE_NAME . "
                         SET title = ?, price = ?, old_price = ?, new_price = ?, description = ? WHERE outer_id = ?";
@@ -188,8 +186,11 @@ class EditorController
                     ]);
                 
                 }
+            
             } else {
-                throw new RuntimeException('Неверный режим');
+
+                throw new RuntimeException('Неизвестный режим модификации');
+            
             }
 
             $pdo->commit();
