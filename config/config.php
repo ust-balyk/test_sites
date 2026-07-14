@@ -7,7 +7,7 @@ const LOCALE      =       'ru_RU';
 const ADMIN       = PATH .'/entry';
 const APP         = ROOT .'/app';
 const CORE        = ROOT .'/core';
-const ROUTES      = ROOT .'/config/routes.php';
+const ROUTES      = ROOT .'/routes/routes.php';
 const ASSISTANT   = ROOT .'/assistant/functions.php';
 const AUTO_LOAD   = ROOT .'/vendor/autoload.php';
 const WWW         = ROOT .'/public';
@@ -42,15 +42,19 @@ const CLOSED_FOR = [
    'all'   => \Master\Administrator::class,
 ];
 
-########
-const ADMIN_A = [
-  'test@test.ru',
-];
+######## administrator
+const EMAIL    = 'ust.balyk@gmail.com';
+const PASSWORD = 'vjqZpsr8Ytvfzhs,f';
 
 ######## сложность password 
 const TIME_COST = 0.200;
 
-########
+######## assistant
+const ADMIN_A = [
+   'test@test.ru',
+];
+
+######## 
 const HOME_LAYOUT     = 'start';
 const HOME_VIEW       = 'start';
 const CATEGORY_LAYOUT = 'category';

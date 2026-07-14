@@ -201,7 +201,6 @@ class Database
 
     function createMasterUser() {
 
-        $name = NAME;
         $email = EMAIL;
         $password = PASSWORD;
 
@@ -229,7 +228,7 @@ class Database
         
         try {
             $stmt->execute([
-                ':name'     => $name,
+                ':name'     => 'master',
                 ':email'    => $email,
                 ':password' => $hashedPassword,
                 ':role'     => 'master'

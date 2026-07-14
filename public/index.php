@@ -6,8 +6,7 @@ if (PHP_MAJOR_VERSION < 8) {
        "<br>Требуется версия >= 8</pre>");
 }
 
-//include "../config/initial.php";
-include __DIR__ ."../../config/initial.php";
+include "../config/config.php";
 include AUTO_LOAD;
 include ASSISTANT;
 
