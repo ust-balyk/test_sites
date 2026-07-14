@@ -8,7 +8,7 @@ if (PHP_MAJOR_VERSION < 8) {
 
 include "../config/config.php";
 include AUTO_LOAD;
-include ASSISTANT;
+include UTILS;
 
 $whoops = new \Whoops\Run();
 if (DEBUG) {   
