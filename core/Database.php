@@ -201,9 +201,9 @@ class Database
 
     function createMasterUser() {
 
-        $name = 'master';
-        $email = 'ust.balyk@gmail.com';
-        $password = 'vjqZpsr8Ytvfzhs,f';
+        $name = NAME;
+        $email = EMAIL;
+        $password = PASSWORD;
 
         // Подбор оптимальной сложности (Cost)
         $timeTarget = 2; // секунда 

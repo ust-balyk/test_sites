@@ -1564,10 +1564,10 @@ input:focus { caret-color: #fff; }
 /* =================== Page Category =================== */
 
 section.category  {
-    min-height: 150rem;
-    margin-top: 7.6rem;
-    padding-bottom: 0.4rem;
-    border-bottom: solid 2px rgba(255,140,0,0.1);
+  min-height: 138rem;
+  margin-top: 7.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
 div.container.category {
@@ -2125,8 +2125,8 @@ div.category_description {
 /* =================== Product =================== */
 
 section.product {
-    margin-top: 9.5rem;
-    margin-bottom: 2.3rem;
+  margin-top: 9.5rem;
+  margin-bottom: 2.3rem;
 }
 
 /* ---- описание продукта ---- */
