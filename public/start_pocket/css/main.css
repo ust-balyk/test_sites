@@ -813,7 +813,7 @@ a.btn.btn-outline-secondary.promo span:hover {
     transform: scale(1.2); 
 }
 
-/* превью карточка продукта */
+/*********************** карточка продукта ***********************/
 
 div .product-card {
     position: relative;
@@ -871,13 +871,8 @@ div .product-card:hover {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }
-    .product-card-price {
-        color: var(--black-color);
-    } 
-    i.fa-solid.fa-heart {
-        font-size: 2.5rem;
-        color: #ff5d44;
-    }  
+    .product-card-price { color: var(--black-color); }
+    .fa-solid.fa-heart { color: #ff5d44; }
 }
 
 /* флажок товары по акции */
@@ -983,38 +978,31 @@ h6.product-card-title {
 }
 
 button.add-to-favorites {
-    border: none;
-    margin-top: 0.5rem;
-    margin-right: 0.5rem;
+  margin: 0.8rem;
+  border: none;
 }
 i.fa-solid.fa-heart {
-    font-size: 2.4rem;
-    color: #eba0a6;
+  font-size: 2.4rem;
+  color: #eba0a6;
 }
-button.add-to-favorites:hover {
-    background-color: white;
-    i.fa-solid.fa-heart {
-        color: red;
-    }
+button.add-to-favorites:hover { background-color: white; }
+i.fa-solid.fa-heart:hover { color: #ff5d44; }
+i.fa-solid.fa-cart-shopping.in_cart::before { /* в излюбленном */
+  color: #ff5d44;
 }
 
 button.add-to-cart {
-    margin-top: 0.5rem;
-    margin-right: 1rem;
-    border: none;
+  margin: 0.8rem 0.8rem 0.8rem 0.2rem;
+  border: none;
 }
 i.fa-solid.fa-cart-shopping {
-    font-size: 2.4rem;
-    color: #90cdfb;
+  font-size: 2.4rem;
+  color: #90cdfb;
 }
+button.add-to-cart:hover { background-color: white; }
+i.fa-solid.fa-cart-shopping:hover { color: #337eff; }
 i.fa-solid.fa-cart-shopping.in_cart::before { /* в корзине */
     color: #337eff;
-}
-button.add-to-cart:hover {
-    background-color: white;
-    i.fa-solid.fa-cart-shopping {
-        color: #337eff;
-    }
 }
 
 /*
@@ -1061,8 +1049,7 @@ a.btn-sm.btn-outline-secondary.popular:hover {
 
 /* =================== /Carousel Popular =========== */
 
-/* =================== Categories ================= */
-/* главная страница */
+/* =================== Page Home ================= */
 
 section.categories {
     margin-top: 9rem;
@@ -1199,7 +1186,7 @@ div.writer a {
     color: var(--light-grey-color);
 }
 
-/* =================== /Categories ================= */
+/* =================== /home ================= */
 
 /* ==================== Toast Container ====================== */
 
@@ -1485,7 +1472,6 @@ i.fa-solid.fa-chevron-up:hover {
 
 /* =================== Search Form ================= */
 
-
 #search.search-form {
     position: relative;
 }
@@ -1602,7 +1588,7 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
     color: black;
 }
     
-/* ======= хлебные крошки ======= */
+/* хлебные крошки */
 .breadcrumb-item + .breadcrumb-item::before {
   content: none;
 }
@@ -1623,20 +1609,24 @@ a.btn.btn-outline-secondary.cat_link h5:hover {
 div.breadcrumb {
     margin: 1rem 0px 1.5rem 0px;
     background-color: var(--bg-color);
-
-    nav.breadcrumb {
-        margin: 0;
-        background-color: var(--bg-color);
-    }
-    ol.breadcrumb {
-        background-color: var(--bg-color);
-    }
-    .link_to_home {
-        height: 1.8rem;
-        width: 1.8rem;
-        margin-right: 0.2rem;
-        margin-bottom: 0.2rem;
-    }
+}
+nav.breadcrumb {
+    margin: 0;
+    background-color: var(--bg-color);
+}
+ol.breadcrumb {
+    background-color: var(--bg-color);
+}
+/* На inline-block корректно работают width/height, 
+и часто именно это чинит “плавающее” вертикальное выравнивание в Safari. */
+.link_to_home {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0.2rem;
+    margin-bottom: 0.2rem;
+    object-fit: contain;
 }
 
 /* кнопка 'домой' */
@@ -2114,7 +2104,7 @@ div.category_description {
 
 /* =================== /Page Category =================== */
 
-/* =================== Product =================== */
+/* =================== Page Product =================== */
 
 section.product {
   margin-top: 9.5rem;
@@ -2122,7 +2112,6 @@ section.product {
 }
 
 /* ---- описание продукта ---- */
-
 .row.product {
   padding: 0;
   margin-bottom: 2rem;
@@ -2188,15 +2177,13 @@ div.product_image img{
   */
 
 /* ----- описание общие правила ----- */
-
 div.row .description {
   padding: 0px 0px 4.5rem 0px;
   margin: 0px 0px 0.5rem 0px;
   border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
-/* ----- описание ------ */
-
+/* ----- детальное описание продукта ------ */
 div.product-details {
   height: 60rem;
   display: flex;  
@@ -2243,7 +2230,6 @@ div.product-price {
 }
 
 /* ----- rating stars ----- */
-
 i.fa-solid.fa-star {
   color: #9fa9b5; /*#b2bac4; /*#818f9f; /*var(--light-grey-color);*/
 }
@@ -2258,7 +2244,6 @@ i.fa-solid.fa-star.active {
 }
 
 /* ----- название продукта ----- */
-
 h1.product-title {
   margin-top: 2rem;
   font-size: 2.6rem;
@@ -2272,7 +2257,6 @@ h1.product-title {
 }
 
 /* ----- цена и кнопки купить/полюбить ----- */
-
 div.product-price {
     margin-bottom: 3.5rem;
     font-size: 2.2rem;
@@ -2374,7 +2358,6 @@ div.product-buttons {
 }
 
 /* ----- кнопки описание/отзывы ----- */
-
 ul.product-desc-tabs {
     border: 0;
     margin-bottom: 4rem;
@@ -2544,7 +2527,6 @@ div.description ul li:nth-child(3n+3)::before { background:#556270; }
 
 
 /* ----- оставленые отзывы ----- */
-
 div.my_card.review {
     height: max-content;
     background-color: white;
@@ -2555,7 +2537,6 @@ div.my_card.review {
 }
 
 /* ----- оставить отзыв ------ */
-
 .stars {
     position: relative;
     text-align: left;

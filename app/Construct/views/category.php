@@ -177,10 +177,11 @@
                   <?php endif; ?>
                   </div>
                   <div class="product-card-btns" style="height:4.3rem">
-                    <?php if ($product['in_stock']): ?>
+                    <?php //if ($product['in_stock']): ?>
                     <button class="btn btn btn-outline-secondary add-to-favorites"
                       data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-heart"></i>
                     </button>
+                    <?php if ($product['in_stock']): ?>
                     <button class="btn btn-outline-secondary add-to-cart" title="カートに追加"
                       data-id="<?= $product['outer_id'] ?>">
                       <i class="fa-solid fa-cart-shopping
