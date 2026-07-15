@@ -182,8 +182,10 @@
                       data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-heart"></i>
                     </button>
                     <button class="btn btn-outline-secondary add-to-cart" title="カートに追加"
-                      data-id="<?= $product['outer_id'] ?>"><i class="fa-solid fa-cart-shopping
-                      <?= \App\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>"></i>
+                      data-id="<?= $product['outer_id'] ?>">
+                      <i class="fa-solid fa-cart-shopping
+                        <?= \App\Cart\Cart::hasProductInCart(hsc($product['outer_id']))?'in_cart':'' ?>">
+                      </i>
                       <div class="spinner-border loader d-none"
                         style="width:2.2rem;height:2.2rem;margin-left:0.8rem;color:#90cdfb" role="status">
                         <span class="visually-hidden">Loading...</span>

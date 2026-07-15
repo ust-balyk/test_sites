@@ -28,7 +28,7 @@ class UserController extends BaseController
         // удалить из строки все скобки () вместе с их содержимым
         $test = preg_replace('#\(((?>[^()]+)|(?R))*\)#', '', $Name);
 
-        $name_taken = ['vadim islamov','islamov vadim','исламов вадим','вадим исламов'];
+        $name_taken = ['master, vadim islamov','islamov vadim','исламов вадим','вадим исламов'];
         $test = str_replace($name_taken, '', $test);
         
         $dross = [

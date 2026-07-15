@@ -108,9 +108,12 @@ class Logon
       
       $query = "insert into {$this->table} ($field_names) values ($placeholders)";
          
-      Application::$app->db->query($query, $attributes);
-
-      return true;
+      if (Application::$app->db->query($query, $attributes)) {
+         
+         return true;
+      
+      }
+      return false;
 
    }
 

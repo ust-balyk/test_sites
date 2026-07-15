@@ -228,7 +228,8 @@ u::after {
 
 .tooltip .tooltip-arrow { display: none !important; }
 .tooltip .tooltip-inner { 
-  color: blue;
+  color: var(--grey-color);
+  font-size: 1.6rem;
   font-weight: 600;
   background-color: rgba(144, 205, 251, 0.7) !important; 
   padding: 0.6rem 1.6rem 0.8rem 1.6rem; 
@@ -270,6 +271,9 @@ button:active,
 button:focus {
   background-color: transparent;
 }
+
+/* отображение иконок в safari */
+.fa-solid::before { content: var(--fa) !important; } 
 
 input, textarea {
   caret-color: var(--grey-color);
@@ -765,7 +769,7 @@ a.btn.promo {
     color: var(--grey-color);
     border: 1px solid var(--border-color);
     background-color: white;
-    transition: all .350s;
+    transition: all .3s;
 }
 a.btn.promo:hover {
     border: 1px solid white;
@@ -841,6 +845,7 @@ div .product-card:hover {
     transform: translateY(-2px);
     border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    
     .product-card-title a {
         color: var(--black-color);
     }
@@ -868,8 +873,11 @@ div .product-card:hover {
     }
     .product-card-price {
         color: var(--black-color);
-    }
-    
+    } 
+    i.fa-solid.fa-heart {
+        font-size: 2.5rem;
+        color: #ff5d44;
+    }  
 }
 
 /* флажок товары по акции */
@@ -999,27 +1007,14 @@ i.fa-solid.fa-cart-shopping {
     font-size: 2.4rem;
     color: #90cdfb;
 }
-i.fa-solid.fa-cart-shopping.in_cart {
-  color: blue !important;
+i.fa-solid.fa-cart-shopping.in_cart::before { /* в корзине */
+    color: #337eff;
 }
 button.add-to-cart:hover {
     background-color: white;
     i.fa-solid.fa-cart-shopping {
-        color: blue;
+        color: #337eff;
     }
-}
-
-/* стили подсказок TOOLTIP */
-div.tooltip-inner {
-    border-radius: 3px !important;
-    background-color: var(--grey-color) !important;
-    font-size: 1.7rem !important;
-    /* высота блока уменьшается
-    padding: 0px 10px !important;*/
-}
-div.tooltip-arrow::before {
-    border-top-color: var(--grey-color) !important;
-    border-bottom-color: var(--grey-color) !important;
 }
 
 /*
@@ -1047,7 +1042,7 @@ a.btn.btn-sm.btn-outline-secondary.popular {
   color: var(--grey-color);
   border: 1px solid #989ea4;
   background-color: white; /*var(--bg-color);*/
-  transition: all .350s;
+  transition: all .3s;
 }
 a.btn-sm.btn-outline-secondary.popular:hover {
     border: 1px solid white;
@@ -1218,25 +1213,22 @@ div.writer a {
 .bg-danger {
     background-color: #f3c8cc !important;
     color: #d94a56 !important; /* печать */
-    /*border: 2px solid #d94a56 !important;*/
     border: 1px solid #989ea4 !important;
 }
 
 .bg-warning {
   background-color: #ffed9e !important;
   color: #ff8e22 !important; /* печать */
-  /*border: 2px solid #ff8e22 !important;*/
   border: 1px solid #989ea4 !important;
 }
 /* Здесь кнопку закрытия (btn-close) нужно сделать черной */
 
 
 /* Основные стили тоста */
-
 .custom-toast {
     /*min-height: 5rem !important; /* Подберите значение под ваш дизайн */
     width: 32vw;
-    min-width: 320px; 
+    min-width: 32rem; 
     display: flex !important;
     align-items: center; /* Центрирует содержимое по вертикали */
     border-radius: 4px;
@@ -2041,7 +2033,7 @@ li.page-item .last a {
 .page-item .first span,
 .page-item .last span {
   font-size: 2rem;
-  color: #eba0a6 !important;
+  color: #eba0b2 !important;
 }
 a.page-link.first:hover span,
 a.page-link.last:hover span { 

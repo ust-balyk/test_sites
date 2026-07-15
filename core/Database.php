@@ -205,7 +205,7 @@ class Database
         $password = PASSWORD;
 
         // Подбор оптимальной сложности (Cost)
-        $timeTarget = 2; // секунда 
+        $timeTarget = 3; // секунда 
         $cost = 10;
     
         do {
