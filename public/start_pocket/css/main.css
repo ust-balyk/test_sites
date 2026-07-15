@@ -2029,7 +2029,7 @@ a.page-link.first:hover span,
 a.page-link.last:hover span { 
   font-size: 2.1rem;
   font-weight: 450;
-  color: #c3465b !important; 
+  color: #ff5d44 !important; 
 }
 
 .pagination .page-link:hover,
@@ -2068,7 +2068,7 @@ a.page-link.last:hover span {
 .pagination i.fa-solid.fa-chevron-right {
     font-size: 1.4rem;
     padding-left: 0px;
-}
+}*/
 
 /* ==== info block ==== */
 
