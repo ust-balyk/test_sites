@@ -1,25 +1,9 @@
 /****************** Cart *******************/ 
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const { initCart, showToast } = await import('./functions/cart.js');
-  initCart(); // навешивает обработчики на document.body
+  const { initCart } = await import('./functions/cart.js');
+  initCart();
 });
-
-/*
-import { initActions } from './cart.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-  initActions();
-});
-*/
-
-/*
-import { bindAddToCart } from './cart.js';
-document.addEventListener('DOMContentLoaded', () => bindAddToCart(document.body));
-*/
-
-// при необходимости вызвать тост вручную
-// showBSCoreToast('Тест', 'success');
 
 /**************** topButton *****************/
 
@@ -35,7 +19,31 @@ document.addEventListener('DOMContentLoaded', async () => {
   initEditorProduct();
 });
 
-/*********************************************** */
+/*********************** Tooltip ************************/
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { initTooltips } = await import('./functions/tooltip.js');
+  initTooltips();
+});
+
+/*********************** Sliders *************************/
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const { initSliders } = await import("./functions/slider.js");
+  initSliders();
+});
+
+/********************** Achievement **********************/
+document.addEventListener("DOMContentLoaded", async () => {
+  const { initAchievement } = await import("./functions/achievement.js");
+  initAchievement();
+});
+
+/********************************************/
+
+/**********************************************************/
+
+
 
 /*
 function showBSCoreToast(detailMessage, type = 'success') {
@@ -480,7 +488,8 @@ $(document).ready(function() {
   });
 
   /* достижения */
-    
+
+  /*
   let achievementItems = $('.achievement-item');
 
   if (achievementItems.length) {
@@ -500,13 +509,13 @@ $(document).ready(function() {
         $item.addClass('visible');
       }, baseDelay + (orderIndex * step)); 
     });
-  }
+  }*/
 
   /* ----------- Slider Promo ------------ */
-    
-  $("#slider-promo").owlCarousel({
-    autoplay: false, //true,
-    loop: false, //true,
+  /* 
+  $("#slider-promo, #slider-popular").owlCarousel({
+    autoplay: true,
+    loop: true,
     slideTransition: 'linear', // эффект бегущей строки (autoplayTimeout===autoplaySpeed)
     autoplayTimeout: 3000,    // пауза между переходами
     autoplaySpeed: 3000,     // скорость анимации
@@ -540,7 +549,7 @@ $(document).ready(function() {
 
     /* ----------------------------------------- */
     /* ----------- кнопки управления ------------ */
-
+  /*
     $('.prev-btn').click(function() {
         $('.owl-carousel').trigger('prev.owl.carousel');
     
@@ -551,10 +560,10 @@ $(document).ready(function() {
     });
     
     /* -------- Slider-Popular & Slider-Product -------- */
-
-    $("#slider-popular, #slider-product").owlCarousel({
-        autoplay: false, //true,
-        loop: false, //true,
+  /*
+    $("#slider-product").owlCarousel({
+        autoplay: true,
+        loop: true,
         autoplayTimeout: 5000,
         autoplaySpeed: 3000,
         smartSpeed: 1000,
@@ -612,7 +621,7 @@ $(document).ready(function() {
 
 
     /* =========== tooltip =========== */
-
+    /*
     $(function() {
 
       $(".user_out").tooltip({ placement: 'left' });

@@ -1,6 +1,4 @@
 // cart.js
-// show — глагол, явно обозначает действие (показать тост).
-// Toast — явно тип уведомления.
 export function showToast(detailMessage, type = 'success') {
     const container = document.querySelector('.toast-container');
     const template = document.getElementById('toast-template');

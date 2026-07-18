@@ -819,8 +819,7 @@ div .product-card {
     position: relative;
     flex: 1 1 auto;
     height: auto;
-    max-width: 25vw; 
-    /*margin: 0.8rem 0.6rem 1.5rem 0.6rem; /* для тени */
+    max-width: (25vw, 100%);
     padding: 1rem 2rem;
     border: 1px solid #989ea4; /*#a7acb1;*/
     border-radius: 3px;
@@ -828,18 +827,18 @@ div .product-card {
     transition: all .3s;
     a { text-decoration: none; }
 }
-/*
 @media screen and (orientation: portrait) and (max-width: 767.9px) {
     div .product-card {
         max-width: 100% !important;
+        margin-left: 1.2rem !important;
     }
 }
-/*
 @media screen and (orientation: portrait) and (min-width: 767.9px) and (max-width: 1300px) {
     div .product-card {
         min-width: 35% !important;
+        margin-left: 1.2rem !important;
     }
-}*/
+}
 
 div .product-card:hover {
     transform: translateY(-2px);
@@ -1542,14 +1541,14 @@ input:focus { caret-color: #fff; }
 /* =================== Page Category =================== */
 
 section.category  {
-  min-height: 138rem;
+  min-height: 137rem;
   margin-top: 7.6rem;
   padding-bottom: 0.4rem;
   border-bottom: solid 2px rgba(255,140,0,0.1);
 }
 
 div.container.category {
-    margin: 0px;
+    margin: 0rem 0rem 0rem 0.2rem;
     padding: 0px 1.5rem 0px 1.3rem;
 }
 
@@ -1935,9 +1934,9 @@ div.ukiyo_e {
     background-size: contain;
 }
 
-/* content */
+/* content расположение карточек в строке */
 div.content {
-    margin: 0;
+    /*margin: 0;*/
     padding: 0;
     /*box-orient: horizontal;*/
     display: flex;

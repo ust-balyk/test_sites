@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница не найдена - 404</title>
+    <title>Страница не найдена</title>
     <!--link rel="stylesheet" href="<?= base_url(POCKET_STYLE.'/css/main.css'); ?>"-->
     <style>
         html {
@@ -19,8 +19,8 @@
             align-items: center;
             min-height: 100vh;
             background-color: #fffffd;
-            /*background-image: url('/start_pocket/assets/errors/404.webp');*/
-            background-image: url('/start_pocket/assets/errors/404.png');
+            background-image: url('/start_pocket/assets/errors/404.webp');
+            /*background-image: url('/start_pocket/assets/errors/404.png');*/
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -28,38 +28,24 @@
         }
 
         .container {
+            position: absolute;
+            top: 26vh;
             text-align: center;
-            padding: 20px;
         }
 
         .error-wrapper {
             max-width: 600px;
             background-color: rgba(255, 255, 255, 0.9); /* Добавлена подложка для читаемости текста */
-            padding: 40px;
+            padding: 30px 42px 40px 42px;
             border-radius: 6px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-
-        .error-code {
-            font-size: 80px;
-            margin: 0;
-            font-weight: 800;
-            color: #2c3e50;
-            line-height: 1;
-        }
-
-        /*
-        .error-message {
-            font-size: 28px;
-            margin: 10px 0;
-            color: #e74c3c;
-        }*/
 
         .error-description {
             font-size: 20px;
             font-weight: 600;
             color: #e74c3c;
-            margin-bottom: 30px;
+            margin: 0px 0px 30px 0px;
         }
 
         /* Стили формы поиска */
@@ -129,8 +115,6 @@
 <body>
     <div class="container">
         <div class="error-wrapper">
-            <h1 class="error-code">404</h1>
-            <!--h2 class="error-message">Упс! Страница не найдена</h2-->
             <p class="error-description">
                 Извините, но запрашиваемая страница перемещена или удалена. Попробуйте воспользоваться поиском.
             </p>
