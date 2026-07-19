@@ -90,72 +90,22 @@ body {
 /* ================== General ==================== */
 
 html {
-  /* 62.5% от 16px (стандарт браузера) = 10px */
-  font-size: 62.5% !important;
-}
-
-body {
-  font-size: 1.6rem; /* 16px */
-  font-family: "SF Pro Text", "Roboto", system-ui, -apple-system, sans-serif;
-  line-height: 1.625; /* ~26px */
-  font-weight: 400;
-  color: var(--grey-color);
-  margin: 0;
-}
-
-/* базовые размеры (относительно body = 16px) */
-h1 { font-size: 2.8em; }  /* 44px */
-h2 { font-size: 2.4em; }  /* 38.4px */
-h3 { font-size: 1.5em; }  /* 24px */
-h4 { font-size: 1.25em; } /* 20px */
-h5 { font-size: 1.0em; }  /* 16px */
-h6 { font-size: 0.875em;} /* 14px */
-p  { font-size: 1em; }    /* 16px */
-
-h1,h2,h3,h4,h5,h6,p { margin: 0 0 1rem 0; }
-
-/* ПЛАНШЕТЫ (пример: 768px — 1023px) */
-@media (max-width: 1023px) and (min-width: 768px) {
-  body { font-size: 1.5rem; } /* 15px (немного меньше) */
-  h1 { font-size: 2.6em; }    /* 39px */
-  h2 { font-size: 2.2em; }    /* 33px */
-  h3 { font-size: 1.4em; }    /* 21px */
-  h4 { font-size: 1.15em; }   /* 17px */
-  h5 { font-size: 0.95em; }   /* 14.25px */
-  h6 { font-size: 0.85em; }   /* ~12.75px */
-  p  { font-size: 0.95em; }   /* ~14.25px */
-}
-
-/* ТЕЛЕФОНЫ (пример: до 767px) */
-@media (max-width: 767px) {
-  body { font-size: 1.4rem; } /* 14px */
-  h1 { font-size: 2.2em; }    /* 30.8px */
-  h2 { font-size: 1.9em; }    /* 26.6px */
-  h3 { font-size: 1.25em; }   /* 17.5px */
-  h4 { font-size: 1.05em; }   /* 14.7px */
-  h5 { font-size: 0.95em; }   /* 13.3px */
-  h6 { font-size: 0.85em; }   /* 11.9px */
-  p  { font-size: 0.95em; }   /* ~13.3px */
-
-  /* уменьшить отступы между заголовками и текстом на узких экранах */
-  h1,h2,h3,h4,h5,h6,p { margin-bottom: 0.8rem; }
-}
-
-/*
-html {
-    /* 62.5% от 16px (стандарт браузера) = 10px *//*
+    /* 62.5% от 16px (стандарт браузера) = 10px */
     font-size: 62.5% !important;
 }
 
 body {
-    /* Все размеры будут зависеть от базового размера шрифта в браузере (обычно это 16px)
-    /* Возвращаем обычный текст к 16px для чтения *//*
-    font-size: 1.6rem !important;
-    font-family: 'SF Pro Text', sans-serif;
-    line-height: 26px;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--grey-color);
+  width: auto;
+  min-width: 320px;
+  margin: 0;
+  /* Все размеры будут зависеть от базового размера шрифта в браузере (обычно это 16px)
+  /* Возвращаем обычный текст к 16px для чтения */
+  font-size: 1.6rem !important; /* 16px */
+  font-family: "SF Pro Text", "Roboto", system-ui, -apple-system, sans-serif;
+  line-height: 1.625; /* ~26px */
+  font-weight: 400;
+  font-style: normal;
+  color: var(--grey-color);
 }
 /*
 Теперь 1rem = 10px. Переводить значения из макета (дизайна) в код становится элементарно:
@@ -164,17 +114,17 @@ body {
 120px → 12rem
 */
 
-/* Для планшетов чуть уменьшаем всё разом *//*
+/* Для планшетов чуть уменьшаем всё разом */
 @media (max-width: 1024px) {
     html {
-        font-size: 55% !important; /* Теперь 1rem ≈ 8.8px. Все отступы и шрифты сжались *//*
+        font-size: 55% !important; /* Теперь 1rem ≈ 8.8px. Все отступы и шрифты сжались */
     }
 }
 
-/* Для мобильных еще сильнее *//*
+/* Для мобильных еще сильнее */
 @media (max-width: 480px) {
     html {
-        font-size: 50% !important; /* Теперь 1rem = 8px. Всё стало в 2 раза меньше оригинала *//*
+        font-size: 50% !important; /* Теперь 1rem = 8px. Всё стало в 2 раза меньше оригинала */
     }
 }
 
@@ -190,17 +140,7 @@ body {
 
 */
 
-html,
-body {
-  /*height: 100%; ломает автоскрол */
-  width: auto;
-  min-width: 320px;
-    /*background-color: var( --bg-color);*/
-  transition: background-color 0.3s, color 0.3s; /* Плавный переход */
-  margin-left: -0.3rem;
-  margin-right: auto;
-    /*overflow-x: hidden;*//* ломает кнопку to_top */
-}
+
 /* устраняет шатание */
 @media all and (max-width: 768px) {
   html, body { overflow-x: hidden; }
@@ -819,9 +759,9 @@ div .product-card {
     position: relative;
     flex: 1 1 auto;
     height: auto;
-    max-width: (25vw, 100%);
+    max-width: 25vw;
     padding: 1rem 2rem;
-    border: 1px solid #989ea4; /*#a7acb1;*/
+    border: 1px solid #989ea4;
     border-radius: 3px;
     background-color: white;
     transition: all .3s;
@@ -835,7 +775,7 @@ div .product-card {
 }
 @media screen and (orientation: portrait) and (min-width: 767.9px) and (max-width: 1300px) {
     div .product-card {
-        min-width: 35% !important;
+        min-width: 37vw !important;
         margin-left: 1.2rem !important;
     }
 }
@@ -1986,7 +1926,7 @@ border-radius: 3px;
 background-color: #cce8ff !important;
 font-size: 1.8rem;
 font-weight: 400;
-padding: 0.1rem 0.7rem 0.5rem 0.7rem;
+padding: 0.2rem 0.7rem 0.4rem 0.7rem;
 color: var(--color-grey);
 } 
 
@@ -2006,7 +1946,7 @@ border-radius: 3px;
 background-color: white !important;
 font-size: 1.8rem;
 font-weight: 400;
-padding: 0.1rem 0.7rem 0.5rem 0.7rem; 
+padding: 0.2rem 0.7rem 0.4rem 0.7rem; 
 color: var(--color-grey);
 }
 
@@ -2014,9 +1954,10 @@ li.page-item .first,
 li.page-item .last {
   padding: 0;
 }
-li.page-item .first a,
-li.page-item .last a {
-  margin-bottom: 0.4rem;
+
+a.page-link.first,
+a.page-link.last {
+  padding: auto;
 }
 
 .page-item .first span,

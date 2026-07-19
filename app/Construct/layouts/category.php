@@ -221,7 +221,7 @@
     <script src="<?= base_url('/library/owlcarousel/owl.carousel.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.spincrement.min.js'); ?>"></script>
     <script src="<?= base_url('/library/js/jquery.maskedinput.min.js'); ?>"></script>
-    <script src="<?= base_url(POCKET_STYLE .'/js/category.js'); ?>"></script>
-    <script type="module" src="<?= base_url(POCKET_STYLE .'/js/main.js'); ?>"></script>
+    <script src="<?= base_url('/js/category.js'); ?>"></script>
+    <script type="module" src="<?= base_url('/js/main.js'); ?>"></script>
   </body>
 </html>
