@@ -1,7 +1,4 @@
-<?php// dump($_SESSION); ?>  
-<?php //dump($_SERVER['REQUEST_URI']) ?>
-<?php if (session()->get('user.role') === 'master' || session()->get('user.role') === 'assistant'): ?>
-  <?php $role = $_SESSION['user']['role'] ?? null; ?>
+<?php $role = session()->get('user.role'); if ($role === 'master' || $role === 'assistant'): ?>
   <script>window.__ROLE__ = <?= json_encode($role); ?></script>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
