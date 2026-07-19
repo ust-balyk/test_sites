@@ -1,6 +1,8 @@
 <?php// dump($_SESSION); ?>  
 <?php //dump($_SERVER['REQUEST_URI']) ?>
 <?php if (session()->get('user.role') === 'master' || session()->get('user.role') === 'assistant'): ?>
+  <?php $role = $_SESSION['user']['role'] ?? null; ?>
+  <script>window.__ROLE__ = <?= json_encode($role); ?></script>
   <div id="admin-toolbar" class="admin-toolbar shadow-sm">
     <div class="container d-flex align-items-center gap-3">
       <button class="btn btn-sm btn-success" id="new-product-btn"

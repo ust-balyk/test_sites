@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 /********************** Editor **********************/
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const { default: initEditorProduct } = await import('./functions/editor.js');
-  initEditorProduct();
+  if (window.__ROLE__ === 'master' || window.__ROLE__ === 'assistant') {
+    const { default: initEditorProduct } = await import('./functions/editor.js');
+    initEditorProduct();
+  }
 });
 
 /*********************** Tooltip ************************/
@@ -39,7 +41,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   initAchievement();
 });
 
-/********************************************/
+/********************* Search Form ***********************/
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { initSearchForm } = await import('./functions/search_form.js');
+  initSearchForm({ formId: 'search', inputId: 'input' });
+});
 
 /**********************************************************/
 
@@ -466,10 +473,11 @@ $(document).ready(function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ------- развернуть форму поиска ------- *//*
-    
+  /* ------- развернуть форму поиска ------- */
+ 
+  /*
   $('#submit').on('click', function(e) {
-    .preventDefault();        
+    e.preventDefault();        
     let form = $(this).parent();
     let inputSearch = form.find('#input');
     inputSearch.toggleClass('hide').focus();
@@ -479,6 +487,11 @@ $(document).ready(function() {
     }
 
   });
+  */
+
+
+
+
 
   /* --- спрятать кнопку поиска при scroll --- *//*
   

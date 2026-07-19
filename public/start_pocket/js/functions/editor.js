@@ -63,56 +63,6 @@ export default function initEditorProduct() {
   // delete
   // ============================================
 
-  /*
-  let deleteHandlerBound = false;
-
-  function setupDeleteHandler() {
-    if (deleteHandlerBound) return;
-    deleteHandlerBound = true;
-
-    if (!deleteBtn) return;
-
-    deleteBtn.addEventListener('click', async () => {
-      if (currentMode !== 'edit') return;
-
-      const outerId = idInput?.value?.trim();
-      if (!outerId) {
-        alert('Не найден outer_id для удаления.');
-        return;
-      }
-
-      const ok = confirm('ПОДТВЕРДИТЬ УДАЛЕНИЕ ПРОДУКТА?');
-      if (!ok) return;
-
-      const fd = new FormData();
-      fd.append('mode', 'delete');
-      fd.append('outer_id', outerId);
-      fd.append('slug', getSlug());
-
-      try {
-        const resp = await fetch('/editor', {
-          method: 'POST',
-          body: fd,
-          credentials: 'same-origin'
-        });
-
-        if (!resp.ok) throw new Error(`Ошибка удаления: ${resp.status}`);
-
-        const res = await resp.json();
-        if (res?.success) location.reload();
-        else alert(res?.error || 'Удаление не удалось');
-      } catch (err) {
-        console.error('❌ Ошибка:', err);
-        alert('Ошибка: ' + err.message);
-      }
-    });
-  }
-  // вызови один раз после того как заполнены idInput/deleteBtn
-  setupDeleteHandler();  
-  */
-
-  // предполагаем: deleteBtn, currentMode, idInput определены где-то выше
-
   function setupDeleteHandler() {
     if (!deleteBtn) return;
 
@@ -169,7 +119,7 @@ export default function initEditorProduct() {
 
   function setToolbarState(state) {
     currentMode = state;
-    console.log('Переход в режим:', state);
+    console.log('Переход в режим:', state); // test
 
     // outer_id (id) доступен только в режиме edit (обычно)
     const hasOuterId = !!idInput?.value?.trim();
